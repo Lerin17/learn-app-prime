@@ -22,15 +22,19 @@ const socket = io('http://localhost:3022')
   const [callEnded, setcallEnded] = React.useState<boolean>(false);
   const [name, setname] = React.useState('');
 
+  const [Peers, setPeers] = React.useState<any>([]);
+  const [PeersID, setPeersID] = React.useState<any>();
+ 
+
   const myVideo = React.useRef<any>()
   const userVideo = React.useRef<any>()
   const connectionRef = React.useRef<any>()
-  let peerConnection:any
+  // let peerConnection:any
 
-  const [peer, setpeer] = React.useState<any>();
+  // const [peer, setpeer] = React.useState<any>();
 
 
-  const [userToCallID, setuserToCallID] = React.useState();
+  // const [userToCallID, setuserToCallID] = React.useState();
 
   React.useEffect(() => {
     const callx = () => {
@@ -55,52 +59,27 @@ const socket = io('http://localhost:3022')
   
     socket.on('me', (id) => setMe(id))
 
-
-
-
     socket.on('callUser', ({from, name: callerName,  signal}) => {
-      // console.log('cow')
       setCall({isReceivedCall: true, from, name: callerName, signal})
     })
 
-   
-
-
   }, []);
 
-  if(peer){
-    console.log(peer.iceConnectionState, 'pinapple')
-  }
-
-
+  React.useEffect(() => {
+    socket.emit('allUsers', {})
+    
+  }, [Me]);
 
   React.useEffect(() => {
-    console.log('cex')
-    if(peer){
-      socket.on('callAccepted', async ({answer, candidate})=>{
-        
-        peer.setRemoteDescription(new RTCSessionDescription(answer))
-  
-        setcallAccepted(true)
-      })
-    }
+    socket.on('userJoined', (payload:any) => {
+      const id = payload.userID
+      const peer = addxPeer({id, Me, stream})
 
-    socket.on('iceSend', async ({iceCandidates}) => {
-      console.log('ice nOt real')
-      if(iceCandidates){
-        console.log('ice real')
-            // try {
-            //   await peerConnection.addIceCandidate(iceCandidates);
-            // } catch (error) {
-            //   console.error('Error adding received ice candidate', error)
-            // }
-          }
+      setPeers((prev:any) => [...prev, peer])
     })
 
-
-  }, [peer]);
-
-
+  
+  }, []);
 
 
  const leaveCall = () => {
@@ -114,118 +93,150 @@ const socket = io('http://localhost:3022')
     'credential': 'muazkh',
      'username': 'webrtc@live.com'}]}
 
-    setpeer( new RTCPeerConnection(configuration))
+    const peer = new RTCPeerConnection(configuration)
+    const userToCallID = id
+
+
+        stream.getTracks().forEach((track:any) => {
+          // console.log('addedx')
+          peer.addTrack(track, stream)} );
+
+          
+        peer.addEventListener('track', 
+        (event:any) => {
+         const remoteStream = event.streams;
+         if(userVideo.current){
+           console.log('eeede UserVideo')
+           userVideo.current.srcObject = remoteStream[0];
+         }
+         
+     });
+
+        peer.addEventListener('icecandidate', async (event:any) => {
+          if(event.candidate){
+            
+            const candidate = event.candidate
+
+            socket.emit('iceCandidate', {to: userToCallID, candidate})   
+          }
+        })
+        
+        
+        socket.on('iceSend', async ({candidate}) => {
+          if(candidate){
+                try {
+                  console.log(candidate)
+                  await peer.addIceCandidate(candidate);
+  
+                } catch (error) {
+                  console.error('Error adding received ice candidate', error)
+                }
+              }
+          // seticeCandidates(candidate)
+        })
+
+        socket.on('callAccepted', async ({answer, candidate})=>{
+          peer.setRemoteDescription(new RTCSessionDescription(answer))
+          setcallAccepted(true)
+        })
+
+              
+        const offer = await peer.createOffer()
+      await peer.setLocalDescription(offer);
+
+      socket.emit('callUser', {
+        userToCall: userToCallID, signalData: offer, from: Me, name
+      })       
+    // setpeer( new RTCPeerConnection(configuration))
     
-    setuserToCallID(id)   
+    // setuserToCallID(id)   
     }
 
+  const addxPeer = ({userID, Me, stream}:any) => {
+    createPeer({userID, Me, stream})
+  }
 
+  const addPeer = () => {
+    socket.emit('join room', {id:Me})
 
-    React.useEffect(() => {
-    
-      const createConnection = async () => {
-        if(peer && userToCallID ){
-          console.log('cow run multiple')
+    socket.on('allUsers', ({users}) => {
+      const peers = []
+      console.log(users)
 
-          stream.getTracks().forEach((track:any) => {
-            // console.log('addedx')
-            peer.addTrack(track, stream)} );
+      const eachUserID = users
 
-            
-          peer.addEventListener('track', 
-          (event:any) => {
-           const remoteStream = event.streams;
-           if(userVideo.current){
-             console.log('eeede UserVideo')
-             userVideo.current.srcObject = remoteStream[0];
-           }
-           
-       });
+      users.forEach((userID:any) => {
+        const peer = createPeer({eachUserID, Me, stream })
+        setPeersID((prev:any) => [...prev, peer])
+        // peersid.push(users)
+      })
 
-          peer.addEventListener('icecandidate', async (event:any) => {
-            if(event.candidate){
-              
-              const candidate = event.candidate
-  
-              socket.emit('iceCandidate', {to: userToCallID, candidate})   
-            }
-          })
+    })
+  }
 
+  const createPeer = async ({userID, Me, stream}:any) => {
+    // const peer = 
+    const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
+    'credential': 'muazkh',
+     'username': 'webrtc@live.com'}]}
 
-          const getStatx =  () => peer.getStats(null).then((stats:any) => {
-            stats.forEach((report:any) => {
-              console.log(report, 'stats')
-            })
-          })   
-          
-          
-          socket.on('iceSend', async ({candidate}) => {
-            if(candidate){
-            const Appollo = setInterval(getStatx(), 1000);     
+     const  peerConnection = new RTCPeerConnection(configuration);
 
-            
-            setTimeout(() => {
-              clearInterval(Appollo)
-            }, 10000);
+     stream.getTracks().forEach((track:any) => {
+      // console.log('addedx')
+      peerConnection.addTrack(track, stream)} );
 
-
-                  try {
-                    console.log(candidate)
-                    await peer.addIceCandidate(candidate);
-    
-                  } catch (error) {
-                    console.error('Error adding received ice candidate', error)
-                  }
-                }
-            // seticeCandidates(candidate)
-          })
-
-                
-
-
-        //   peer.addEventListener('connectionstatechange', (event:any) => {
-        //     console.log('cow magics')
-        //     if (peer.connectionState === 'connected') {
-              
-        //       setTimeout(() => {
-        //         peer.getStats(stream).then((stats:any) => {
-        //           console.log(stats, 'stats')
-
-        //         })
-                
-        //       }, 400);
-
-        //       console.log('its our block now')
-        //         // Peers connected!
-        //     }
-        // });
-
+      peerConnection.addEventListener('track', 
+      (event:any) => {
+       const remoteStream = event.streams;
+       if(userVideo.current){
+         console.log('eeede UserVideo')
+         userVideo.current.srcObject = remoteStream[0];
+       }
        
+   });
 
-         
-
-        
+      peerConnection.addEventListener('icecandidate', async (event:any) => {
+        if(event.candidate){
           
+          const candidate = event.candidate
 
-          const offer = await peer.createOffer()
-        await peer.setLocalDescription(offer);
-
-        socket.emit('callUser', {
-          userToCall: userToCallID, signalData: offer, from: Me, name
-        })
-  
-  
+          socket.emit('iceCandidate', {to:userID, candidate})   
         }
-        
-      }
-
-      if(peer  && userToCallID){
-        createConnection()
-      }
+      })
       
-    }, [peer, userToCallID]);
+      
+      socket.on('iceSend', async ({candidate}) => {
+        if(candidate){
+              try {
+                console.log(candidate)
+                await peerConnection.addIceCandidate(candidate);
 
-    // console.log('reload')
+              } catch (error) {
+                console.error('Error adding received ice candidate', error)
+              }
+            }
+        // seticeCandidates(candidate)
+      })
+
+      socket.on('callAccepted', async ({answer, candidate})=>{
+        peerConnection.setRemoteDescription(new RTCSessionDescription(answer))
+        setcallAccepted(true)
+      })
+
+            
+      const offer = await peerConnection.createOffer()
+    await peerConnection.setLocalDescription(offer);
+
+    socket.emit('callUser', {
+      userToCall: userID, signalData: offer, from: Me, name
+    })     
+    
+    return peerConnection
+
+  }
+
+
 
     const answerCall = async () => {
       const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
@@ -237,8 +248,7 @@ const socket = io('http://localhost:3022')
 
         peerConnection.setRemoteDescription(new RTCSessionDescription(Call.signal))
 
-  
-      
+    
 
         stream.getTracks().forEach((track:any) => {
           // console.log('addedxrec')
@@ -259,9 +269,7 @@ const socket = io('http://localhost:3022')
 
         socket.emit('answerCall', {to:Call.from ,answer})
 
-        
-        
-
+ 
         peerConnection.addEventListener('icecandidate', async (event:any) => {
           if(event.candidate){
             // console.log(event.candidate, 'event candidate 2')
