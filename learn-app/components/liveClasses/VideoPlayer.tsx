@@ -25,7 +25,7 @@ if(userVideo.current){
    
     <div className='flex justify-center' >
         {stream && (
-            <Paper className='mr-8' >
+            <Paper className='mr-8 bg-black' >
             <video style={{
                 width: '600px',
                 height: '500px'
@@ -37,7 +37,7 @@ if(userVideo.current){
         
        
                <Paper>
-               <video style={{
+               <video className='bg-black' style={{
                    width: '600px',
                    height: '500px'
                }}
