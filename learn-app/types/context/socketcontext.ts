@@ -13,5 +13,7 @@ export interface Isocketcontext {
     Me:any
     Call: any
     name: any | undefined
+    JoinClass: () => any
+    CreateClass: () => any
 
 }

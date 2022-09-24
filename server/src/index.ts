@@ -13,21 +13,53 @@ console.log('hello worl')
 import  express from "express";
 const app = express()
 
+// app.use((req,res, next)=>{
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+//     res.header(
+//       "Access-Control-Allow-Headers",
+//       "Content-Type,"
+//     );
+//     next();
+// })
+// import TeacherRouter from '../routes/teacher'
+
+// const TeacherRouter = require('../routes/teacher')
+
 const server = require('http').createServer(app)
 const cors = require('cors')
 const wrtc = require('wrtc')
-const bodyparser = require('body-parser')
+const bodyParser = require('body-parser')
 // import express from 'express'
+
 
 
 const io = require('socket.io')(server, {
     cors: {
         origin: '*',
-        methods: ['GET', "POST"]
+        methods: ['GET', "POST"],
+        // credentials: true
     }
 })
 
-app.use(cors())
+
+// app.all('/',(req,res, next)=>{
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+//     res.header(
+//       "Access-Control-Allow-Headers",
+//       "Content-Type,"
+//     );
+//     next();
+// })
+
+app.use(bodyParser.json()) // handle json data
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(cors({
+    origin: '*',
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}))
 
 const PORT = process.env.PORT || 3022;
 
@@ -36,6 +68,11 @@ return res.send('server is listening')
 })
 
 let senderStream:any
+let peer:any
+let candidates:any
+let answer:any
+
+// app.use('/', TeacherRouter)
 
 app.post('/consumer', async ({body}, res) => {
     const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
@@ -44,7 +81,7 @@ app.post('/consumer', async ({body}, res) => {
 
     const peer = new wrtc.RTCPeerConnection(configuration)
 
-    const desc = new wrtc.RTCSessionDescription(body.sdp)
+    const desc = new wrtc.RTCSessionDescription(body.offer)
 
     await peer.setRemoteDescription(desc)
 
@@ -54,9 +91,21 @@ app.post('/consumer', async ({body}, res) => {
         peer.addTrack(track, senderStream)} );
 
 
-    const answer = await peer.createAnswer()
+     answer = await peer.createAnswer()
 
     await peer.setLocalDescription(answer)
+
+    await peer.addIceCandidate(body.candidates)
+
+    peer.addEventListener('icecandidate', async (event:any) => {
+        if(event.candidate){
+          // console.log(event.candidate, 'event candidate 2')
+
+         candidates = event.candidate
+
+        //   socket.emit('iceCandidate', {to:Call.from, candidate})  
+        }
+      })
 
     const payload = {
         sdp: peer.localDescription
@@ -65,34 +114,79 @@ app.post('/consumer', async ({body}, res) => {
     res.json(payload)
 })
 
-app.post('/broadcast', async ({body}, res) => {
+// console.log(answer, 'answerpunk')
+
+//REAL ONE
+
+app.post('/api/broadcast', async (req, res) => {
     const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
     'credential': 'muazkh',
      'username': 'webrtc@live.com'}]}
 
+     console.log(req.body)
+    //  console.log(req, 'that Nigga')
+
     const peer = new wrtc.RTCPeerConnection(configuration)
 
-    peer.ontrack = (e:any) => handleTrackEvent({e, peer})
 
+    const desc = new wrtc.RTCSessionDescription(req.body.signalData.offer)
 
-
-    const desc = new wrtc.RTCSessionDescription(body.sdp)
 
     await peer.setRemoteDescription(desc)
 
-    const answer = await peer.createAnswer()
+      answer = await peer.createAnswer()
 
     await peer.setLocalDescription(answer)
 
-    const payload = {
-        sdp: peer.localDescription
-    }
+    
 
-    res.json(payload)
+    // await peer.addIceCandidate(req.body.signalData.candidates)
+    
+    peer.ontrack = (e:any) => handleTrackEvent({e, peer})
+
+    // peer.addEventListener('icecandidate', async (event:any) => {
+    //     if(event.candidate){
+    //       // console.log(event.candidate, 'event candidate 2')
+
+    //      candidates = event.candidate 
+    //     }
+    //   })
+
+     
+    // res.json('sticks')
+
+    res.json({answer, candidates})
+
 })
 
+// app.post('/broadcast', async ({body}, res) => {
+//     const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
+//     'credential': 'muazkh',
+//      'username': 'webrtc@live.com'}]}
+
+//     const peer = new wrtc.RTCPeerConnection(configuration)
+
+//     peer.ontrack = (e:any) => handleTrackEvent({e, peer})
+
+
+
+//     const desc = new wrtc.RTCSessionDescription(body.sdp)
+
+//     await peer.setRemoteDescription(desc)
+
+//     const answer = await peer.createAnswer()
+
+//     await peer.setLocalDescription(answer)
+
+//     const payload = {
+//         sdp: peer.localDescription
+//     }
+
+//     res.json(payload)
+// })
+
 function handleTrackEvent({e, peer}:any){
-     senderStream = e.streams[0]
+    senderStream = e.streams[0]
 }
 
 server.listen(PORT, ()=> {
@@ -120,10 +214,23 @@ io.on('connection', (socket:any) => {
         io.to(to).emit('iceSend', {candidate})
     })
 
+    socket.on('iceCandidateBroadcast', ({candidates}:any) => {
+
+    })
+
     socket.on('join room', ({id}:any)=> {
         const userID = socket.id
         io.to(id).emit('allUsers', {userID})
     })
+
+   socket.on('sendServerDetails', (Me:any) => {
+    io.to(Me).emit('allUsers', {answer, candidates})
+   })
+
+   socket.on('sendConsumerDetails', (Me:any)=> {
+    io.to(Me.emit('allUsers'), {answer, candidates})
+   })
+  
 })
 
 // app.post('/api/data', (req, res) => {
