@@ -7,7 +7,7 @@ import { Isocketcontext } from '../../types/context/socketcontext'
 import VideoNotifications from './VideoNotifications'
 
 const VideoOptions = () => {
-  const {Me, callAccepted, name, setname, callEnded, leaveCall, callUser} = React.useContext(SocketContext) as Isocketcontext
+  const {Me, callAccepted, name, setname, callEnded, leaveCall, callUser, JoinClass, CreateClass} = React.useContext(SocketContext) as Isocketcontext
 
   const [idToCall, setidToCall] = React.useState('');
 
@@ -22,6 +22,14 @@ const VideoOptions = () => {
           copy your ID
         </Button>
       </CopyToClipboard>
+
+      <Button onClick={()=>CreateClass()} >
+        CrCL
+      </Button>
+
+      <Button onClick={()=>JoinClass()} >
+        JoCL
+      </Button>
 
       <TextField variant='outlined' size='small' label='ID to Call' value={idToCall} onChange= {(e) => setidToCall(e.target.value)} />
       <CopyToClipboard text={Me}>
