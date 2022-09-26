@@ -263,13 +263,18 @@ const socket = io('http://localhost:3022', {
     
        const  peerConnection = new RTCPeerConnection(configuration);
       //  setmyPeer(new RTCPeerConnection(configuration))
+
+      
+      //Get tracks
+      stream.getTracks().forEach((track:any) => {
+        peerConnection.addTrack(track, stream)} );
        
+      //Negotiation
         offer = await peerConnection.createOffer()
        await peerConnection.setLocalDescription(offer);
 
-  
-       stream.getTracks().forEach((track:any) => {
-        peerConnection.addTrack(track, stream)} );
+     
+
 
   if(isConsumer){
        peerConnection.addEventListener('track', 
@@ -283,59 +288,44 @@ const socket = io('http://localhost:3022', {
   }
      
 
-  
+  //ICE CANDIDATES OPTIONAL
         peerConnection.addEventListener('icecandidate', async (event:any) => {
+          console.log('maybe')
           if(event.candidate){
             
              candidates = event.candidate
-             console.log(candidates, 'candidates')
+            //  console.log(candidates, 'candidates')
   
             socket.emit('iceCandidateBroadcast', { candidates})   
           }
         })
         
-        
-        // socket.on('iceSend', async ({candidate}) => {
-        //   if(candidate){
-        //         try {
-        //           console.log(candidate)
-        //           await peerConnection.addIceCandidate(candidate);
-  
-        //         } catch (error) {
-        //           console.error('Error adding received ice candidate', error)
-        //         }
-        //       }
-        // })
-  
-        // socket.on('callAccepted', async ({answer, candidate})=>{
-        //   peerConnection.setRemoteDescription(new RTCSessionDescription(answer))
-        //   setcallAccepted(true)
-        // })
-  
-
-
-  
-      // socket.emit('callUser', {
-      //   userToCall: userID, signalData: offer, from: Me, name
-      // })     
+          
 
       //IMPORTANT
 
-      socket.on('allUsers', async ({answer, candidates}) => {
-        peerConnection.setRemoteDescription(new RTCSessionDescription(answer))
+      socket.on('allUsers',  ({canz, candidates}) => {
+        console.log(canz, 'toProve')
+        console.log(candidates, 'sock')
 
-        if(candidates){
-          try {
-            console.log(candidates)
-            await peerConnection.addIceCandidate(candidates);
+        const ans =  new RTCSessionDescription(canz)
 
-          } catch (error) {
-            console.error('Error adding received ice candidate', error)
-          }
-        }
+        peerConnection.setRemoteDescription(ans)
+
+        // if(candidates){
+        //   try {
+        //     console.log(candidates)
+        //     await peerConnection.addIceCandidate(candidates);
+
+        //   } catch (error) {
+        //     console.error('Error adding received ice candidate', error)
+        //   }
+        // }
       })
+
+      const anzs = peerConnection.localDescription
       
-      return {candidates, offer}
+      return {offer:anzs}
     }
 
     
@@ -348,15 +338,20 @@ const socket = io('http://localhost:3022', {
     // axios.post('http://localhost:3022/broadcast', {})
 
     //IMPORTANT
-    // axios({
-    //   method: 'post',
-    //   url: 'http://localhost:3022/api/broadcast',
-    //   data: {
-    //     signalData: Class
+    axios({
+      method: 'post',
+      url: 'http://localhost:3022/api/broadcast',
+      data: {
+        signalData: Class
 
-    //   },
-    //   // headers: {'Authorization': 'Bearer ...'}
-    // });
+      },
+      // headers: {'Authorization': 'Bearer ...'}
+    }).then((res) => {
+            console.log(res)
+      socket.emit('sendServerDetails', Me)
+    }).catch((e) => {
+      console.log(e)
+    })
 
     // axios.post(`http://localhost:3022/api/broadcast`, {
     //     offer: Class,
