@@ -28,6 +28,7 @@ const socket = io('http://localhost:3022', {
   const [Peers, setPeers] = React.useState<any>([]);
   const [PeersID, setPeersID] = React.useState<any>();
   const [myPeer, setmyPeer] = React.useState<any>();
+  const [first, setfirst] = React.useState(1);
  
 
   const myVideo = React.useRef<any>()
@@ -61,16 +62,16 @@ const socket = io('http://localhost:3022', {
     }, 30);
     
   
-    socket.on('me', (id) => setMe(id))
+    // socket.on('me', (id) => setMe(id))
 
-    socket.on('callUser', ({from, name: callerName,  signal}) => {
-      setCall({isReceivedCall: true, from, name: callerName, signal})
-    })
+    // socket.on('callUser', ({from, name: callerName,  signal}) => {
+    //   setCall({isReceivedCall: true, from, name: callerName, signal})
+    // })
 
   }, []);
 
   React.useEffect(() => {
-    socket.emit('allUsers', {})
+    // socket.emit('allUsers', {})
     
   }, [Me]);
 
@@ -252,6 +253,84 @@ const socket = io('http://localhost:3022', {
 
     }
 
+   
+
+    // const CreateClass = () => {
+    //   const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
+    //   'credential': 'muazkh',
+    //    'username': 'webrtc@live.com'}]}
+
+    //   //  const peer = new RTCPeerConnection(configuration)
+
+    //   setmyPeer(new RTCPeerConnection(configuration))
+
+    // }
+
+  
+
+
+    // React.useEffect(() => {
+    //   const broadcast = async () => {
+
+    //     const dc = myPeer.createDataChannel("my channel")
+
+
+    //     const Offer = await myPeer.createOffer()
+
+    //     myPeer.setLocalDescription(Offer)
+
+    //     console.log(myPeer, 'myPeer')
+ 
+    //     stream.getTracks().forEach((track:any) => myPeer.addTrack(track, stream));
+
+    
+   
+
+    //     axios({
+    //       method: 'post',
+    //       url: 'http://localhost:3022/api/broadcast',
+    //       data: {
+    //         offer: Offer
+    //       }
+    //     }).then(async (res) => {
+
+    //       console.log(res.data.anz)
+    //       const desc = new RTCSessionDescription(res.data.anz)
+
+    //       await myPeer.setRemoteDescription(desc)
+    //     }).then(() => {
+    //       console.log(myPeer, 'mpxxw')
+
+    //       myPeer.onicecandidate = (e:any) => {
+    //         if(e.candidate){
+    //           const candidates = e.candidate
+    //           console.log(e.candidate)
+    //           socket.emit('newCandidate', {candidates})
+    //         }
+         
+    //       }
+
+    //     //   myPeer.addEventListener('icecandidate',  (event:any) => {         
+    //     //     // console.log(event.candidate, 'event candidate 2')
+    //     //     // console.log(event.candidate)
+    //     //     console.log('cso')
+    //     //   const candidates = event.candidate  
+    //     //   console.log(candidates)
+    //     //     socket.emit('newCandidate', {candidates}) 
+    //     // })
+     
+    //     })
+
+    //     setfirst(prev => prev + 1)
+
+    //   }
+
+    //   if(myPeer){
+    //     broadcast()
+    //   }
+      
+    // }, [myPeer]);
+
     const createPeer = async ({ stream, isConsumer}:any) => {
       // const peer = 
       const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
@@ -294,7 +373,7 @@ const socket = io('http://localhost:3022', {
           if(event.candidate){
             
              candidates = event.candidate
-            //  console.log(candidates, 'candidates')
+             console.log(candidates, 'candidates')
   
             socket.emit('iceCandidateBroadcast', { candidates})   
           }
@@ -328,8 +407,6 @@ const socket = io('http://localhost:3022', {
       return {offer:anzs}
     }
 
-    
-
     const CreateClass =  async () => {
       const Class = await createPeer({stream, isConsumer: false})
 
@@ -343,33 +420,16 @@ const socket = io('http://localhost:3022', {
       url: 'http://localhost:3022/api/broadcast',
       data: {
         signalData: Class
-
       },
       // headers: {'Authorization': 'Bearer ...'}
     }).then((res) => {
-            console.log(res)
+      console.log(res)
       socket.emit('sendServerDetails', Me)
     }).catch((e) => {
       console.log(e)
     })
 
-    // axios.post(`http://localhost:3022/api/broadcast`, {
-    //     offer: Class,
-    //     distance: 'sticks'
-    // }).then((res)=>{
-    //   console.log(res)
-    //   socket.emit('sendServerDetails', Me)
-    // }).catch((error)=> {
-    //   console.log(error);
-    // })
-
-      // try {
-      //   const res = await axios.post('http://localhost:3022/broadcast', Class)
-      //   // socket.emit('sendServerDetails', Me)
-
-      // } catch (error) {
-      //   console.log(error)
-      // }
+    
     
     }
 
