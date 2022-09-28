@@ -10,23 +10,21 @@
 
 console.log('hello worl')
 
+import { Socket } from "dgram";
 // import { Socket } from "dgram";
 import  express from "express";
-import ioClient from 'socket.io-client'
+import {io} from 'socket.io-client'
 const app = express()
 
-// app.use((req,res, next)=>{
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-//     res.header(
-//       "Access-Control-Allow-Headers",
-//       "Content-Type,"
-//     );
-//     next();
-// })
-// import TeacherRouter from '../routes/teacher'
+let senderStream:any
+// let peer:any
+let candidates:any = []
+let answer:any
+let peer:any
+let canz:any
+let num:any
+let candid:any = []
 
-// const TeacherRouter = require('../routes/teacher')
 
 const server = require('http').createServer(app)
 const cors = require('cors')
@@ -35,23 +33,51 @@ const bodyParser = require('body-parser')
 
 // import express from 'express'
 
+const socket = io('http://localhost:3023')
 
+// const io = require('socket.io')(server, {
+//     cors: {
+//         origin: '*',
+//         methods: ['GET', "POST"],
+//     }
+// })
+const PORT = process.env.PORT || 3022;
 
-const io = require('socket.io')(server, {
-    cors: {
-        origin: '*',
-        methods: ['GET', "POST"],
-    }
+server.listen(PORT, ()=> {
+    console.log('App listening at loclh')
 })
 
-const Clientsocket = ioClient('http://localhost:3023')
 
 
 
-    Clientsocket.on('me', id => {
+    socket.on('me', id => {
         console.log(id)
     })
-    
+
+   //ADD ICE
+   socket.on('iceCandidateReceive', async ({candidates}) => {
+    console.log(candidates, 'candx')
+    // console.log(peer, 'what is peer if candidate')
+    // candid.push(candidates)
+    if(candidates.candidate && peer){
+        // candid.push(candidates)
+        console.log(candidates, 'candidatesGotthrough')
+        await peer.addIceCandidate(candidates);
+    }
+
+    socket.on('offerBroadcastReceive', async ({anz}) => {
+        if(anz && peer){
+            
+        }
+    })
+
+    // if(peer){
+    //     candid.map(async (item:any) => {
+    //         await peer.addIceCandidate(item);
+    //     })
+    // }
+
+   })
 
 
 
@@ -64,20 +90,12 @@ app.use(cors({
     methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
 }))
 
-const PORT = process.env.PORT || 3022;
+
 
 app.get('/', (req, res) => {
 return res.send('server is listening')
 })
 
-let senderStream:any
-// let peer:any
-let candidates:any = []
-let answer:any
-let peer:any
-let canz:any
-let num:any
-let candid:any = []
 
 // app.use('/', TeacherRouter)
 
@@ -136,7 +154,7 @@ app.post('/api/broadcast', async (req, res) => {
     'credential': 'muazkh',
      'username': 'webrtc@live.com'}]}
 
-     console.log(req.body)
+    //  console.log(req.body)
 
 
      peer = new wrtc.RTCPeerConnection(configuration)
@@ -152,26 +170,35 @@ app.post('/api/broadcast', async (req, res) => {
 
      await peer.setLocalDescription(answer)
 
+     const anz = peer.localDescription
+//SEND ANSWER
+
+     socket.emit('SanswerBroadcast', {anz})
 
 
+//GET REMOTE TRACKS
     peer.addEventListener('track', 
     (event:any) => {
      const remoteStream = event.streams;
      console.log(remoteStream)
-   });7
+   });
 
-    //ice IMPOERTANT?
+
+
+    //SEND ICE OUT?
     peer.addEventListener('icecandidate', async (event:any) => {
-        console.log('cow wanexe')
+        // console.log('cow wanexe')
         if(event.candidate){
        candidates = event.candidate 
 
-       console.log(candidates)
-       console.log('cow wan')
+       socket.emit('SiceCandidateBroadcast', {candidates})
+
+    //    console.log(candidates)
+    //    console.log('cow wan')
         }
       })
 
-    const anz = peer.localDescription
+ 
 
     canz = peer.localDescription
     // res.json('sticks')
@@ -211,73 +238,71 @@ function handleTrackEvent({e, peer}:any){
     console.log(senderStream, 'dam')
 }
 
-server.listen(PORT, ()=> {
-        console.log('App listening at loclh')
-    })
 
-io.on('connection', (socket:any) => {
-    socket.emit('me', socket.id)
 
-    socket.on('disconnect', () => {
-        socket.broadcast.emit('callended')
-    });
+// io.on('connection', (socket:any) => {
+//     socket.emit('me', socket.id)
 
-    socket.on('callUser', ({userToCall, signalData, from, name}:any) => {
-        // console.log('supa bounce')
-        io.to(userToCall).emit('callUser', {signal: signalData, from, name})
-    })
+//     socket.on('disconnect', () => {
+//         socket.broadcast.emit('callended')
+//     });
 
-    socket.on('answerCall', ({to, answer}:any) => {
-        io.to(to).emit('callAccepted', {answer})
-    })
+//     socket.on('callUser', ({userToCall, signalData, from, name}:any) => {
+//         // console.log('supa bounce')
+//         io.to(userToCall).emit('callUser', {signal: signalData, from, name})
+//     })
 
-    socket.on('iceCandidate', ({to, candidate}:any) => {
-        console.log(candidate, 'candidate')
-        io.to(to).emit('iceSend', {candidate})
-    })
+//     socket.on('answerCall', ({to, answer}:any) => {
+//         io.to(to).emit('callAccepted', {answer})
+//     })
 
-    socket.on('iceCandidateBroadcast', async ({candidates}:any) => {
+//     socket.on('iceCandidate', ({to, candidate}:any) => {
+//         console.log(candidate, 'candidate')
+//         io.to(to).emit('iceSend', {candidate})
+//     })
+
+//     socket.on('iceCandidateBroadcast', async ({candidates}:any) => {
       
-        // console.log(candidates, 'candidatesalll')
+//         // console.log(candidates, 'candidatesalll')
 
-        if(candidates.candidate){
-            candid.push(candidates)
-        }
-        // console.log(peer, 'what is peer')
+//         if(candidates.candidate){
+//             candid.push(candidates)
+//         }
+//         // console.log(peer, 'what is peer')
 
-        if(peer){
-            // console.log(candidates, 'cannnnnxxxe')
-            console.log(candid, 'candid')
+//         if(peer){
+//             // console.log(candidates, 'cannnnnxxxe')
+//             console.log(candid, 'candid')
 
-            candid.map(async (candidates:any) =>  {await  peer.addIceCandidate(candidates)})
+//             candid.map(async (candidates:any) =>  {await  peer.addIceCandidate(candidates)})
 
                  
-        }
+//         }
 
-    })
+//     })
 
-    socket.on('newCandidate', ({candidates}:any) => {
-        // console.log(senderStream, 'senderStream')
-        console.log(candidates)
-        // console.log(peer, 'peernaple')
-        // await peer.addIceCandidate(candidates)
-    })
+//     socket.on('newCandidate', ({candidates}:any) => {
+//         // console.log(senderStream, 'senderStream')
+//         console.log(candidates)
+//         // console.log(peer, 'peernaple')
+//         // await peer.addIceCandidate(candidates)
+//     })
 
-    socket.on('join room', ({id}:any)=> {
-        const userID = socket.id
-        io.to(id).emit('allUsers', {userID})
-    })
+//     socket.on('join room', ({id}:any)=> {
+//         const userID = socket.id
+//         io.to(id).emit('allUsers', {userID})
+//     })
 
-   socket.on('sendServerDetails', (Me:any) => {
-    io.to(Me).emit('allUsers', {canz, candidates})
-   })
+// //    socket.on('sendServerDetails', (Me:any) => {
+// //     io.to(Me).emit('allUsers', {canz, candidates})
+// //    })
 
-   socket.on('sendConsumerDetails', (Me:any)=> {
-    // console.log(canz, 'canx')
-    io.to(Me.emit('allUsers'), {canz, candidates})
-   })
+//    socket.on('sendConsumerDetails', (Me:any)=> {
+//     // console.log(canz, 'canx')
+//     io.to(Me.emit('allUsers'), {canz, candidates})
+//    })
   
-})
+// })
 
 // app.post('/api/data', (req, res) => {
 // console.log(req.body);

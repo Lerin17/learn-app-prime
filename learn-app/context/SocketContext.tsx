@@ -10,11 +10,15 @@ import axios from 'axios'
 
 
 
+//OLD SOCKET CONNECT
+// const socket = io('http://localhost:3022', {
+//   // withCredentials: true
+// })
 
-const socket = io('http://localhost:3022', {
+//NEW SOCKET CONNECT
+const socket = io('http://localhost:3023', {
   // withCredentials: true
 })
-
 
 
  const SocketContextProvider = (props:any) => {
@@ -340,19 +344,31 @@ const socket = io('http://localhost:3022', {
        'username': 'webrtc@live.com'}]}
   
        let candidates 
-       let offer
+      //  let offer
+
+      console.log('run once run again')
     
        const  peerConnection = new RTCPeerConnection(configuration);
       //  setmyPeer(new RTCPeerConnection(configuration))
 
       
-      //Get tracks
+      //SEND TRACK
       stream.getTracks().forEach((track:any) => {
         peerConnection.addTrack(track, stream)} );
        
       //Negotiation
-        offer = await peerConnection.createOffer()
-       await peerConnection.setLocalDescription(offer);
+      const  offer = await peerConnection.createOffer()
+
+      try {
+        await peerConnection.setLocalDescription(offer);
+        const anzs = peerConnection.localDescription
+      
+        // return {offer:anzs}
+        socket.emit('offerBroadcast', {anzs})
+      } catch (error) {
+        
+      }
+ 
 
      
 
@@ -369,44 +385,59 @@ const socket = io('http://localhost:3022', {
   }
      
 
-  //ICE CANDIDATES OPTIONAL
-        peerConnection.addEventListener('icecandidate', async (event:any) => {
-          // console.log('maybe')
-          if(event.candidate){
-            
-             candidates = event.candidate
-             console.log(candidates, 'candidates')
-  
-            socket.emit('iceCandidateBroadcast', { candidates})   
-          }
-        })
+  //ICE CANDIDATES SEND
+
+    peerConnection.addEventListener('icecandidate', async (event:any) => {
+      // console.log('maybe')
+      if(event.candidate){
+        
+         candidates = event.candidate
+         console.log(candidates, 'candidates')
+
+         
+          socket.emit('iceCandidateBroadcast', {candidates})   
+      }
+    })
+
         
           
 
-      //IMPORTANT
+      //ADD ICE CANDIDATE
 
-      socket.on('allUsers',  ({canz, candidates}) => {
-        console.log(canz, 'toProve')
-        console.log(candidates, 'sock')
-
-        const ans =  new RTCSessionDescription(canz)
-
-        peerConnection.setRemoteDescription(ans)
-
-        // if(candidates){
-        //   try {
-        //     console.log(candidates)
-        //     await peerConnection.addIceCandidate(candidates);
-
-        //   } catch (error) {
-        //     console.error('Error adding received ice candidate', error)
-        //   }
-        // }
+      socket.on('SiceCandidateReceive', async ({candidates}) => {
+        console.log(candidates, 'candidatesReceived')
+        await peerConnection.addIceCandidate(candidates);
       })
 
-      const anzs = peerConnection.localDescription
       
-      return {offer:anzs}
+  //ADD ANSWER
+      socket.on('SanswerReceive', ({anz}) => {
+        const ans =  new RTCSessionDescription(anz)
+
+        // console.log(ans, 'ansReceived')
+        peerConnection.setRemoteDescription(ans)
+      })
+
+      // socket.on('allUsers',  ({canz, candidates}) => {
+      //   console.log(canz, 'toProve')
+      //   console.log(candidates, 'sock')
+
+      //   const ans =  new RTCSessionDescription(canz)
+
+      //   peerConnection.setRemoteDescription(ans)
+
+      //   // if(candidates){
+      //   //   try {
+      //   //     console.log(candidates)
+      //   //     await peerConnection.addIceCandidate(candidates);
+
+      //   //   } catch (error) {
+      //   //     console.error('Error adding received ice candidate', error)
+      //   //   }
+      //   // }
+      // })
+
+
     }
 
     const CreateClass =  async () => {
@@ -426,7 +457,7 @@ const socket = io('http://localhost:3022', {
       // headers: {'Authorization': 'Bearer ...'}
     }).then((res) => {
       console.log(res)
-      socket.emit('sendServerDetails', Me)
+      // socket.emit('sendServerDetails', Me)
     }).catch((e) => {
       console.log(e)
     })
