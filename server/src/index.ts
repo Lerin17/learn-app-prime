@@ -10,8 +10,9 @@
 
 console.log('hello worl')
 
-import { Socket } from "dgram";
+// import { Socket } from "dgram";
 import  express from "express";
+import ioClient from 'socket.io-client'
 const app = express()
 
 // app.use((req,res, next)=>{
@@ -40,9 +41,18 @@ const io = require('socket.io')(server, {
     cors: {
         origin: '*',
         methods: ['GET', "POST"],
-        // credentials: true
     }
 })
+
+const Clientsocket = ioClient('http://localhost:3023')
+
+
+
+    Clientsocket.on('me', id => {
+        console.log(id)
+    })
+    
+
 
 
 
@@ -62,10 +72,12 @@ return res.send('server is listening')
 
 let senderStream:any
 // let peer:any
-let candidates:any
+let candidates:any = []
 let answer:any
 let peer:any
 let canz:any
+let num:any
+let candid:any = []
 
 // app.use('/', TeacherRouter)
 
@@ -96,7 +108,9 @@ app.post('/consumer', async ({body}, res) => {
         if(event.candidate){
           // console.log(event.candidate, 'event candidate 2')
 
-         candidates = event.candidate
+        const cand = event.candidate
+
+         candidates.push(cand)
 
         //   socket.emit('iceCandidate', {to:Call.from, candidate})  
         }
@@ -111,6 +125,8 @@ app.post('/consumer', async ({body}, res) => {
     res.json(payload)
 })
 
+// console.log(peer, 'perxxw')
+
 // console.log(answer, 'answerpunk')
 
 //REAL ONE
@@ -120,45 +136,37 @@ app.post('/api/broadcast', async (req, res) => {
     'credential': 'muazkh',
      'username': 'webrtc@live.com'}]}
 
-    //  console.log(req.body)
+     console.log(req.body)
 
 
      peer = new wrtc.RTCPeerConnection(configuration)
 
+     const dc = peer.createDataChannel("my channel")
+     
 
     const desc = new wrtc.RTCSessionDescription(req.body.signalData.offer)
 
-
     await peer.setRemoteDescription(desc)
 
-      answer = await peer.createAnswer()
+     answer = await peer.createAnswer()
 
-    await peer.setLocalDescription(answer)
+     await peer.setLocalDescription(answer)
 
-    
-    
-    // await peer.addIceCandidate(req.body.signalData.candidates)
-    
-    // peer.ontrack = (e:any) => handleTrackEvent({e, peer})
+
 
     peer.addEventListener('track', 
     (event:any) => {
      const remoteStream = event.streams;
      console.log(remoteStream)
-
-    //  io.on('')
-     
-    //  if(userVideo.current){
-    //    console.log('eeede UserVideo')
-    //    userVideo.current.srcObject = remoteStream[0];
-    //  }  
-   });
+   });7
 
     //ice IMPOERTANT?
     peer.addEventListener('icecandidate', async (event:any) => {
         console.log('cow wanexe')
         if(event.candidate){
        candidates = event.candidate 
+
+       console.log(candidates)
        console.log('cow wan')
         }
       })
@@ -229,9 +237,30 @@ io.on('connection', (socket:any) => {
     })
 
     socket.on('iceCandidateBroadcast', async ({candidates}:any) => {
-        console.log(senderStream, 'senderStream')
-        // console.log(candidates, 'candidates')
-      await  peer.addIceCandidate(candidates)
+      
+        // console.log(candidates, 'candidatesalll')
+
+        if(candidates.candidate){
+            candid.push(candidates)
+        }
+        // console.log(peer, 'what is peer')
+
+        if(peer){
+            // console.log(candidates, 'cannnnnxxxe')
+            console.log(candid, 'candid')
+
+            candid.map(async (candidates:any) =>  {await  peer.addIceCandidate(candidates)})
+
+                 
+        }
+
+    })
+
+    socket.on('newCandidate', ({candidates}:any) => {
+        // console.log(senderStream, 'senderStream')
+        console.log(candidates)
+        // console.log(peer, 'peernaple')
+        // await peer.addIceCandidate(candidates)
     })
 
     socket.on('join room', ({id}:any)=> {

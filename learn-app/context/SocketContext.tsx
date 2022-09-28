@@ -15,6 +15,8 @@ const socket = io('http://localhost:3022', {
   // withCredentials: true
 })
 
+
+
  const SocketContextProvider = (props:any) => {
 
   const [stream, setstream] = React.useState<any>(null);
@@ -62,7 +64,7 @@ const socket = io('http://localhost:3022', {
     }, 30);
     
   
-    // socket.on('me', (id) => setMe(id))
+    socket.on('me', (id) => setMe(id))
 
     // socket.on('callUser', ({from, name: callerName,  signal}) => {
     //   setCall({isReceivedCall: true, from, name: callerName, signal})
@@ -369,7 +371,7 @@ const socket = io('http://localhost:3022', {
 
   //ICE CANDIDATES OPTIONAL
         peerConnection.addEventListener('icecandidate', async (event:any) => {
-          console.log('maybe')
+          // console.log('maybe')
           if(event.candidate){
             
              candidates = event.candidate
