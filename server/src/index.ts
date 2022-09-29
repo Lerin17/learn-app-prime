@@ -10,9 +10,11 @@
 
 console.log('hello worl')
 
+import { constants } from "buffer";
 import { Socket } from "dgram";
 // import { Socket } from "dgram";
 import  express from "express";
+import { off } from "process";
 import {io} from 'socket.io-client'
 const app = express()
 
@@ -56,28 +58,39 @@ server.listen(PORT, ()=> {
 
    //ADD ICE
    socket.on('iceCandidateReceive', async ({candidates}) => {
-    console.log(candidates, 'candx')
+    // console.log(candidates, 'candx')
     // console.log(peer, 'what is peer if candidate')
     // candid.push(candidates)
     if(candidates.candidate && peer){
         // candid.push(candidates)
-        console.log(candidates, 'candidatesGotthrough')
+        // console.log(candidates, 'candidatesGotthrough')
         await peer.addIceCandidate(candidates);
     }
 
-    socket.on('offerBroadcastReceive', async ({anz}) => {
-        if(anz && peer){
+  
+   })
+
+//    socket.on('offerReceive', async ({offer}) => {
+//         if(offer && peer){
+//                 const desc = new wrtc.RTCSessionDescription(offer)
+
+//              await peer.setRemoteDescription(desc)
+//         }
+
+//    })
+
+     // socket.on('offerBroadcastReceive', async ({anz}) => {
+    //     if(anz && peer){
             
-        }
-    })
+    //     }
+    // })
 
     // if(peer){
     //     candid.map(async (item:any) => {
     //         await peer.addIceCandidate(item);
     //     })
-    // }
+    
 
-   })
 
 
 
@@ -159,33 +172,37 @@ app.post('/api/broadcast', async (req, res) => {
 
      peer = new wrtc.RTCPeerConnection(configuration)
 
-     const dc = peer.createDataChannel("my channel")
+     
+   peer.ontrack = (e:any) => {
+    console.log(e.streams)
+    console.log(e.streams)
+    console.log('please')
+   }
+
+   peer.addEventListener('track', (e:any)=>{
+    console.log(e.streams[0])
+   })
+
+     console.log(peer.signalingState)
+    //  const dc = peer.creatjjjjeDataChannel("my channel")
      
 
     const desc = new wrtc.RTCSessionDescription(req.body.signalData.offer)
 
     await peer.setRemoteDescription(desc)
 
-     answer = await peer.createAnswer()
+   const  answer = await peer.createAnswer()
 
-     await peer.setLocalDescription(answer)
+   console.log(peer.signalingState, 'get answer')
 
+     peer.setLocalDescription(answer).then(() => {
+             //WAS USING ANZ PREVIOUSLY AS SENT ANSWER
      const anz = peer.localDescription
-//SEND ANSWER
-
-     socket.emit('SanswerBroadcast', {anz})
-
-
-//GET REMOTE TRACKS
-    peer.addEventListener('track', 
-    (event:any) => {
-     const remoteStream = event.streams;
-     console.log(remoteStream)
-   });
-
-
-
-    //SEND ICE OUT?
+     //SEND ANSWER
+     
+          socket.emit('SanswerBroadcast', {anz})
+     }).then(() => {
+            //SEND ICE OUT?
     peer.addEventListener('icecandidate', async (event:any) => {
         // console.log('cow wanexe')
         if(event.candidate){
@@ -198,12 +215,32 @@ app.post('/api/broadcast', async (req, res) => {
         }
       })
 
+     })
+
+
+
+    // setInterval(()=>{
+    // console.log(peer, 'peer currently')
+    // }, 3000)
+
+//GET REMOTE TRACKS
+//     peer.addEventListener('track', 
+//     (event:any) => {
+//      const remoteStream = event.streams;
+//      console.log(remoteStream)
+//    });
+
+
+
+
  
 
     canz = peer.localDescription
     // res.json('sticks')
 
-    res.json({anz, candidates})
+    // res.json({anz, candidates})
+
+    res.json({messages: 'what'})
 
 })
 

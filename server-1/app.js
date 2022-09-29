@@ -55,6 +55,10 @@ io.on('connection', (socket) => {
         socket.on('SanswerBroadcast', ({anz}) => {
             io.emit('SanswerReceive', {anz})
         })
+
+        socket.on('offerBroadcast', ({offer}) => {
+            io.emit('offerReceive', {offer})
+        })
         
 
         // socket.on('sendConsumerDetails', ({Me}) => {
