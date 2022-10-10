@@ -112,40 +112,43 @@ return res.send('server is listening')
 
 // app.use('/', TeacherRouter)
 
-app.post('/consumer', async ({body}, res) => {
+app.post('/api/consumer', async (req, res) => {
     const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
     'credential': 'muazkh',
      'username': 'webrtc@live.com'}]}
 
-    const peer = new wrtc.RTCPeerConnection(configuration)
+     peer = new wrtc.RTCPeerConnection(configuration)
+   
+     console.log(req.body.signalData.offer)
 
-    const desc = new wrtc.RTCSessionDescription(body.offer)
+    const desc = new wrtc.RTCSessionDescription(req.body.signalData.offer)
 
     await peer.setRemoteDescription(desc)
 
-    
+    //ADD STREAM   
     senderStream.getTracks().forEach((track:any) => {
-        console.log('addedx')
+        // console.log('addedx')
         peer.addTrack(track, senderStream)} );
 
 
-     answer = await peer.createAnswer()
+   const answer = await peer.createAnswer()
 
-    await peer.setLocalDescription(answer)
+    await peer.setLocalDescription(answer).then(() => {
+        const anz = peer.localDescription
 
-    await peer.addIceCandidate(body.candidates)
+        socket.emit('SanswerBroadcast', {anz})
+    }).then(() => {
+        peer.addEventListener('icecandidate', async (event:any) => {
+            if(event.candidate){
+                socket.emit('SiceCandidateBroadcast', {candidates})
+           //   socket.emit('iceCandidate', {to:Call.from, candidate})  
+            }
+          })
+    })
 
-    peer.addEventListener('icecandidate', async (event:any) => {
-        if(event.candidate){
-          // console.log(event.candidate, 'event candidate 2')
+    // await peer.addIceCandidate(body.candidates)
 
-        const cand = event.candidate
 
-         candidates.push(cand)
-
-        //   socket.emit('iceCandidate', {to:Call.from, candidate})  
-        }
-      })
 
     const payload = {
         sdp: peer.localDescription
@@ -170,23 +173,11 @@ app.post('/api/broadcast', async (req, res) => {
     //  console.log(req.body)
 
 
-     peer = new wrtc.RTCPeerConnection(configuration)
+    peer = new wrtc.RTCPeerConnection(configuration)
 
      
-   peer.ontrack = (e:any) => {
-    console.log(e.streams)
-    console.log(e.streams)
-    console.log('please')
-   }
-
-   peer.addEventListener('track', (e:any)=>{
-    console.log(e.streams[0])
-   })
-
-     console.log(peer.signalingState)
-    //  const dc = peer.creatjjjjeDataChannel("my channel")
+   peer.ontrack = handleTrackEvent
      
-
     const desc = new wrtc.RTCSessionDescription(req.body.signalData.offer)
 
     await peer.setRemoteDescription(desc)
@@ -218,22 +209,6 @@ app.post('/api/broadcast', async (req, res) => {
      })
 
 
-
-    // setInterval(()=>{
-    // console.log(peer, 'peer currently')
-    // }, 3000)
-
-//GET REMOTE TRACKS
-//     peer.addEventListener('track', 
-//     (event:any) => {
-//      const remoteStream = event.streams;
-//      console.log(remoteStream)
-//    });
-
-
-
-
- 
 
     canz = peer.localDescription
     // res.json('sticks')
@@ -270,11 +245,10 @@ app.post('/api/broadcast', async (req, res) => {
 //     res.json(payload)
 // })
 
-function handleTrackEvent({e, peer}:any){
+function handleTrackEvent(e:any){
     senderStream = e.streams[0]
     console.log(senderStream, 'dam')
 }
-
 
 
 // io.on('connection', (socket:any) => {
