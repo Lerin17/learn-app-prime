@@ -16,6 +16,7 @@ import { Socket } from "dgram";
 import  express from "express";
 import { off } from "process";
 import {io} from 'socket.io-client'
+import { number, object, string } from "zod";
 const app = express()
 
 let senderStream:any
@@ -26,6 +27,9 @@ let peer:any
 let canz:any
 let num:any
 let candid:any = []
+let senderStreamArray:{id: string,
+    Mediastream:any
+}[] = [] //perharps define type explicitly
 
 
 const server = require('http').createServer(app)
@@ -112,7 +116,7 @@ return res.send('server is listening')
 
 // app.use('/', TeacherRouter)
 
-app.post('/api/consumer', async (req, res) => {
+app.post('/api/consumer/:id', async (req, res) => {
     const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
     'credential': 'muazkh',
      'username': 'webrtc@live.com'}]}
@@ -125,10 +129,22 @@ app.post('/api/consumer', async (req, res) => {
 
     await peer.setRemoteDescription(desc)
 
+    //Find broadcaster Stream and Add to consumer
+    const classSessionID = req.params.id 
+
+    const broadcasterObj = senderStreamArray.find((item:any) => item.id == classSessionID)
+
+    const Stream = broadcasterObj?.Mediastream
+
+   Stream.getTracks().forEach((track:any) => {
+    console.log('broadcaster stream received')
+    peer.addTrack(track, Stream )
+   })
+
     //ADD STREAM   
-    senderStream.getTracks().forEach((track:any) => {
-        // console.log('addedx')
-        peer.addTrack(track, senderStream)} );
+    // senderStream.getTracks().forEach((track:any) => {
+    //     // console.log('addedx')
+    //     peer.addTrack(track, senderStream)} );
 
 
    const answer = await peer.createAnswer()
@@ -165,19 +181,37 @@ app.post('/api/consumer', async (req, res) => {
 
 //REAL ONE
 
-app.post('/api/broadcast', async (req, res) => {
+app.post('/api/broadcast/:id', async (req, res) => {
     const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
     'credential': 'muazkh',
      'username': 'webrtc@live.com'}]}
 
     //  console.log(req.body)
 
+    const classSessionID = req.params.id 
+
+    // senderStreamArray
+
 
     peer = new wrtc.RTCPeerConnection(configuration)
 
+    peer.ontrack = (e:any) => {
+        senderStream = e.streams[0]
+
+        const mediaStream = e.streams[0]
+
+        console.log('Broadcaster Track obtained')
+
+        const streamObj = {
+            Mediastream: mediaStream,
+            id: classSessionID
+        }
+
+        senderStreamArray.push(streamObj)
+    }
      
-   peer.ontrack = handleTrackEvent
-     
+//    peer.ontrack = handleTrackEvent
+
     const desc = new wrtc.RTCSessionDescription(req.body.signalData.offer)
 
     await peer.setRemoteDescription(desc)
@@ -209,8 +243,8 @@ app.post('/api/broadcast', async (req, res) => {
      })
 
 
-
-    canz = peer.localDescription
+     //Ashed this out #1
+    // canz = peer.localDescription
     // res.json('sticks')
 
     // res.json({anz, candidates})

@@ -36,11 +36,13 @@ const socket = io('http://localhost:3023', {
   const [PeersID, setPeersID] = React.useState<any>();
   const [myPeer, setmyPeer] = React.useState<any>();
   const [first, setfirst] = React.useState(1);
- 
+
 
   const myVideo = React.useRef<any>()
   const userVideo = React.useRef<any>()
   const connectionRef = React.useRef<any>()
+
+  const [classSessionID, setclassSessionID] = React.useState(555);
   // let peerConnection:any
 
   // const [peer, setpeer] = React.useState<any>();
@@ -457,7 +459,7 @@ const socket = io('http://localhost:3023', {
     //IMPORTANT
     axios({
       method: 'post',
-      url: 'http://localhost:3022/api/broadcast',
+      url: `http://localhost:3022/api/broadcast/${classSessionID}`,
       data: {
         signalData: Class
       },
@@ -468,9 +470,7 @@ const socket = io('http://localhost:3023', {
     }).catch((e) => {
       console.log(e)
     })
-
-    
-    
+      
     }
 
     const JoinClass =  async () => {
@@ -479,7 +479,7 @@ const socket = io('http://localhost:3023', {
     //IMPORTANT
     axios({
       method: 'post',
-      url: 'http://localhost:3022/api/consumer',
+      url: `http://localhost:3022/api/consumer/${classSessionID}`,
       data: {
         signalData: Class
       },
