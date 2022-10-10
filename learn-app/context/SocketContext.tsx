@@ -188,8 +188,6 @@ const socket = io('http://localhost:3023', {
 
  
 
-
-
     const answerCall = async () => {
       const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
      'credential': 'muazkh',
@@ -361,6 +359,19 @@ const socket = io('http://localhost:3023', {
         console.log('added')
         peerConnection.addTrack(track, stream)} );
 
+    //GET STREAM   
+  if(isConsumer){
+    peerConnection.addEventListener('track', 
+     (event:any) => {
+      const remoteStream = event.streams;
+      if(userVideo.current){
+        console.log('eeede UserVideo')
+        console.log(remoteStream)
+        userVideo.current.srcObject = remoteStream[0];
+      }  
+    });
+}
+
       
   //ICE CANDIDATES SEND
 
@@ -431,21 +442,6 @@ const socket = io('http://localhost:3023', {
  
 
 
-
-  if(isConsumer){
-       peerConnection.addEventListener('track', 
-        (event:any) => {
-         const remoteStream = event.streams;
-         if(userVideo.current){
-           console.log('eeede UserVideo')
-           userVideo.current.srcObject = remoteStream[0];
-         }  
-       });
-  }
-     
-
-
-
       const anzs = offer
       
       return {offer:anzs}
@@ -478,15 +474,30 @@ const socket = io('http://localhost:3023', {
     }
 
     const JoinClass =  async () => {
-      const Class = createPeer({stream, isConsumer: true})
+      const Class = await createPeer({stream, isConsumer: true})
 
-      try {
-        const res = await axios.post('http://localhost:3022/consumer', Class)
+    //IMPORTANT
+    axios({
+      method: 'post',
+      url: 'http://localhost:3022/api/consumer',
+      data: {
+        signalData: Class
+      },
+      // headers: {'Authorization': 'Bearer ...'}
+    }).then((res) => {
+      console.log(res)
+      // socket.emit('sendServerDetails', Me)
+    }).catch((e) => {
+      console.log(e)
+    })
 
-        socket.emit('sendConsumerDetails', Me)
-      } catch (error) {
-        console.log(error)
-      }
+      // try {
+      //   const res = await axios.post('http://localhost:3022/api/consumer', Class)
+
+      //   socket.emit('sendConsumerDetails', Me)
+      // } catch (error) {
+      //   console.log(error)
+      // }
     }
 
 
