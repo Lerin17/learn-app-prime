@@ -6,12 +6,14 @@ import VideoOptions from '../components/liveClasses/VideoOptions'
 
  const liveclasses = () => {
   return (
-    <div className='text-white' >
-      liveclasses
+    <div className='text-white h-full relative' >
+      {/* liveclasses */}
 
-      <div>
-        <VideoPlayer/>
-        <VideoOptions/>
+      <div  className='px-10 h-full relative flex flex-col' >
+        <div className='relative' >
+         <VideoPlayer/>
+        </div>
+  
       </div>
     </div>
   )

@@ -6,19 +6,26 @@ import theme from '../theme'
 
 import { CalendarContextProvider } from '../context/CalenderContext'
 import { SocketContextProvider } from '../context/SocketContext'
+import { StudentContextProvider } from '../context/StudentContext'
 import { StyledEngineProvider, ThemeProvider } from '@mui/material'
+import { UtilityContextProvider } from '../context/UtilityContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme} >
     <StyledEngineProvider injectFirst >
-    <CalendarContextProvider>
-    <SocketContextProvider>
-        <Layout>
-              <Component {...pageProps} />
-          </Layout>
-    </SocketContextProvider>     
+      <UtilityContextProvider>
+      <StudentContextProvider>
+      <CalendarContextProvider>
+        <SocketContextProvider>
+            <Layout>
+                  <Component {...pageProps} />
+              </Layout>
+        </SocketContextProvider>     
       </CalendarContextProvider>
+      </StudentContextProvider>
+      </UtilityContextProvider>
+
     </StyledEngineProvider>
 
     </ThemeProvider>

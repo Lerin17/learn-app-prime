@@ -40,7 +40,7 @@ export const Nav = () => {
 
         <NavOption
         text = 'Students'
-        locationURL= '/'
+        locationURL= '/students'
         />
 
         <NavOption

@@ -6,6 +6,11 @@ import { SocketContext } from '../../context/SocketContext'
 import { Isocketcontext } from '../../types/context/socketcontext'
 import VideoNotifications from './VideoNotifications'
 
+import {RiSignalTowerFill} from 'react-icons/ri'
+import {MdWifiCalling2, MdCallEnd,} from 'react-icons/md'
+
+
+
 const VideoOptions = () => {
   const {Me, callAccepted, name, setname, callEnded, leaveCall, callUser, JoinClass, CreateClass} = React.useContext(SocketContext) as Isocketcontext
 
@@ -14,25 +19,30 @@ const VideoOptions = () => {
   console.log(idToCall, 'idtocall')
 
   return (
-    <div className='bg-white w-1/2'>Options
+    <div className=''>
+      {/* Options */}
 
-      <TextField variant='outlined' size='small' label='Name' value={name} onChange= {(e) => setname(e.target.value)} />
+      {/* <TextField variant='outlined' size='small' label='Name' value={name} onChange= {(e) => setname(e.target.value)} />
       <CopyToClipboard text={Me}>
         <Button>
           copy your ID
         </Button>
-      </CopyToClipboard>
+      </CopyToClipboard> */}
 
-      <Button onClick={()=>CreateClass()} >
-        CrCL
+      <Button className='text-2xl text-lime-400 p-0 hover:scale-110 transition-all' onClick={()=>CreateClass()} >
+        <RiSignalTowerFill/>
       </Button>
 
-      <Button onClick={()=>JoinClass()} >
-        JoCL
+      <Button className='text-2xl text-lime-400 p-0 hover:scale-110 transition-all' onClick={()=>JoinClass()} >
+       <MdWifiCalling2/>
       </Button>
 
-      <TextField variant='outlined' size='small' label='ID to Call' value={idToCall} onChange= {(e) => setidToCall(e.target.value)} />
-      <CopyToClipboard text={Me}>
+      <Button className='text-2xl opacity-75 text-blue-200 bg-gradient-to-r from-blue-100 via-transparent to-blue-500 rounded-full p-0 hover:scale-110  transition-all'>
+        <MdCallEnd/>
+      </Button>
+
+      {/* <TextField variant='outlined' size='small' label='ID to Call' value={idToCall} onChange= {(e) => setidToCall(e.target.value)} /> */}
+      {/* <CopyToClipboard text={Me}>
         {callAccepted && !callEnded ? (
             <Button onClick={()=>leaveCall()} >
             Hang up
@@ -42,7 +52,7 @@ const VideoOptions = () => {
             Call
         </Button>
         )}
-      </CopyToClipboard>
+      </CopyToClipboard> */}
       <VideoNotifications/>
     </div>
   )

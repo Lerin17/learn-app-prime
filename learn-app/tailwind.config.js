@@ -11,7 +11,8 @@ module.exports = {
         header2: 'UPHEAVAL',
         header3: 'ALDO',
         header4: 'PLA',
-        header5: 'NEM'
+        header5: 'NEM',
+        header6: 'NIN'
       },
       animation: {
         "slideDown": "fadeSlideDown .4s ease-in-out",

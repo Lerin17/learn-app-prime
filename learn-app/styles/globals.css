@@ -196,6 +196,11 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
   src: url('../public/fonts/nemesia/Nemesia-regular.ttf');
 }
 
+@font-face {
+  font-family: 'NIN';
+  src: url('../public/fonts/Louis/Louis\ George\ Cafe.ttf');
+}
+
 .next{
   background-image: url('../images/transparent-square-tiles.png');
   /* background-color: #006edc; */
@@ -203,6 +208,50 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
 
 .eggshell{
   background-image: url('../images/shattered-dark.png');
+}
+
+.noise{
+  background-image: url('../images/noise-lines.png')
+}
+
+.grid{
+  background-image: url('../images/transparent-square-tiles.png');
+}
+
+.conic{
+  background-image: repeating-conic-gradient(#010101 0% 25%, #d8d7d7 0% 50%);
+background-position: 0 0, 100px 100px;
+background-size: 200px 200px;
+background-color: #ffffff;
+}
+
+.innershadow{
+  box-shadow: 10px 10px 26px 0px rgba(0,0,0,0.75) inset;
+-webkit-box-shadow: 10px 10px 26px 0px rgba(0,0,0,0.75) inset;
+-moz-box-shadow: 10px 10px 26px 0px rgba(0,0,0,0.75) inset;
+}
+
+.rhombusx{
+  background-color: #f9f9f9;
+  opacity: 0.8;
+  background-image:  linear-gradient(135deg, #9bb3e1 25%, transparent 25%), linear-gradient(225deg, #9bb3e1 25%, transparent 25%), linear-gradient(45deg, #9bb3e1 25%, transparent 25%), linear-gradient(315deg, #9bb3e1 25%, #f9f9f9 25%);
+  background-position:  4px 0, 4px 0, 0 0, 0 0;
+  background-size: 4px 4px;
+  background-repeat: repeat;
+}
+
+.rhombus{
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image:  linear-gradient(135deg, #000000 25%, transparent 25%), linear-gradient(225deg, #000000 25%, transparent 25%), linear-gradient(45deg, #000000 25%, transparent 25%), linear-gradient(315deg, #000000 25%, #e5e5f7 25%);
+  background-position:  4px 0, 4px 0, 0 0, 0 0;
+  background-size: 4px 4px;
+  background-repeat: repeat;
+}
+
+.dot{
+  background: radial-gradient(circle, transparent 20%, #000000 20%, #000000 80%, transparent 80%, transparent) 0% 0% / 22px 22px, radial-gradient(circle, transparent 20%, #000000 20%, #000000 80%, transparent 80%, transparent) 11px 11px / 22px 22px, linear-gradient(#ffffff 1.5px, transparent 1.5px) 0px -0.75px / 11px 11px, linear-gradient(90deg, #ffffff 1.5px, #000000 1.5px) -0.75px 0px / 11px 11px #000000;
+background-color: #000000;
 }
 /* html,
 body {
