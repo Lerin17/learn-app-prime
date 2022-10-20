@@ -7,7 +7,7 @@ import { Istudentcontext } from '../../types/context/studentcontext'
 // import {SlUserFemale} from 'react-icons/si'
 import {CgProfile} from 'react-icons/cg'
 // TextField
-
+import Switch from '@mui/material'
 
 const CPoptionsGUI = () => {
 
@@ -19,20 +19,30 @@ const CPoptionsGUI = () => {
             <div className=' ' >
 
 
-                <div className='text-red-600 flex flex-col px-4'>
+                <div className=' flex flex-col px-4'>
                 <input placeholder='Name'
-                className='text-red-600 bg-transparent my-2 border-b-4 border-blue-500  py-2'
+                className='text-red-600 bg-transparent my-2 border-b-2 border-black border-dotted  py-2'
                 />
                 
                 <div className='flex' >
-                <input placeholder='Age'
-                className='text-red-600 w-2/3 mr-2 bg-transparent my-2  border-b-4 border-blue-500'
+                    <div className=' border-b-2 border-black border-dotted' >
+                    <div className='mr-2 text-bold text-white' >Age</div>
+                     <input placeholder=''
+                     className='text-red-600 w-2/3 mr-2 bg-transparent my-2 border-l rounded border-black border-dotted bg-amber-600'
                 />
+                    </div>
+                
 
-                <input placeholder='Age'
-                className='text-white w-1/3 bg-transparent my-2  border-b-4 border-blue-500'
-                />
-                </div>
+            <div className='flex items-center ' >
+                <div className='mr-2 text-bold text-white' >Age</div>
+                    <input placeholder='Age'
+                            
+                            className='text-white w-1/3 bg-transparent my-2  border-b-2 border-dotted'
+                            />
+            </div>
+            </div>
+                
+
              
               
                 </div>
@@ -85,9 +95,9 @@ const CPoptionsGUI = () => {
     <div>
         <div className='relative' >
             <GetGUI/>
-            <div className='text-white   border w-52 h-52 hidden' >
+            {/* <div className='text-white   border w-52 h-52 hidden' >
                 d
-            </div>
+            </div> */}
         </div>
     </div>
   )
