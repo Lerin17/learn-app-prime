@@ -12,6 +12,8 @@ export interface Istudentcontext {
     }>>
     panel1Student: Ipanel1Student,
     panel1ref:React.MutableRefObject<null>
+    isAssesmentopen:boolean
+    openAssesmentPanel:()=>void
 
 }
 

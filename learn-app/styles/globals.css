@@ -201,6 +201,15 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
   src: url('../public/fonts/Louis/Louis\ George\ Cafe.ttf');
 }
 
+@font-face {
+  font-family: 'ROBOT';
+  src: url('../public/fonts/reoboto/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'OBO';
+  src: url('../public/fonts/oboto/MADEOkineSansPERSONALUSE-Regular.otf');
+}
 .next{
   background-image: url('../images/transparent-square-tiles.png');
   /* background-color: #006edc; */
@@ -226,7 +235,7 @@ background-color: #ffffff;
 }
 
 .innershadow{
-  box-shadow: 10px 10px 26px 0px rgba(0,0,0,0.75) inset;
+  box-shadow: 10px 10px 26px 0px rgba(0, 0, 0, 0.75) inset;
 -webkit-box-shadow: 10px 10px 26px 0px rgba(0,0,0,0.75) inset;
 -moz-box-shadow: 10px 10px 26px 0px rgba(0,0,0,0.75) inset;
 }
@@ -241,12 +250,11 @@ background-color: #ffffff;
 }
 
 .rhombus{
-  background-color: #e5e5f7;
-  opacity: 0.8;
-  background-image:  linear-gradient(135deg, #000000 25%, transparent 25%), linear-gradient(225deg, #000000 25%, transparent 25%), linear-gradient(45deg, #000000 25%, transparent 25%), linear-gradient(315deg, #000000 25%, #e5e5f7 25%);
-  background-position:  4px 0, 4px 0, 0 0, 0 0;
-  background-size: 4px 4px;
-  background-repeat: repeat;
+background-color: #b28b4e;
+opacity: 0.8;
+background-image:  repeating-linear-gradient(45deg, #734606 25%, transparent 25%, transparent 75%, #734606 75%, #734606), repeating-linear-gradient(45deg, #734606 25%, #b28b4e 25%, #b28b4e 75%, #734606 75%, #734606);
+background-position: 0 0, 4px 4px;
+background-size: 8px 8px;
 }
 
 .dot{

@@ -10,11 +10,13 @@ import StudentCP from '../components/students/StudentCP'
 
 const students = () => {
   return (
-    <div className=' px-20 font-header4 h-full' >
+    <div className=' px-20 font-header6 bg-green-400 h-full' >
         
         students
         <div className='flex justify-between' >
-            <div className='w-5/12 h-full'>
+            <div  style={{
+      overflow: 'auto'
+    }} className='w-5/12 h-full'>
                 <StudentLibary/>
             </div>
 

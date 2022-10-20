@@ -14,7 +14,7 @@ import {motion} from 'framer-motion'
 const StudentCP = () => {
 
 
-    const {currentCPoption,  setcurrentCPOP, panel1Student, setpanel1Student, panel1ref} = React.useContext(StudentContext) as Istudentcontext
+    const {currentCPoption,  setcurrentCPOP, panel1Student, setpanel1Student, panel1ref, openAssesmentPanel} = React.useContext(StudentContext) as Istudentcontext
 
 
     const ControlPanelOptionBtn = (props:any) => {
@@ -53,16 +53,16 @@ const StudentCP = () => {
         <div className='  flex flex-col'  >
             <motion.div animate={panel1Student.ispanel && { x: -10}} transition={{type:'tween', duration: 0.5}} onClick={()=>{
                 setcurrentCPOP('New student')
-                toggleControlPanelOption()}} className={`text-white ${panel1Student.ispanel?'text-lg':'text-6xl font-bold'}  uppercase cursor-pointer `} >
+                toggleControlPanelOption()}} className={`text-white ${panel1Student.ispanel?'text-lg':'text-6xl font-bold'}  cursor-pointer `} >
                 New Student +
             </motion.div>
 
 
-            <motion.div  animate={ panel1Student.ispanel && { x: -10}} transition={{type:'tween', duration: 0.6}} className={`text-white ${panel1Student.ispanel?'text-lg':'text-6xl font-bold'}  uppercase cursor-pointer `} >
-                Messages
+            <motion.div onClick={()=>openAssesmentPanel()} animate={ panel1Student.ispanel && { x: -10}} transition={{type:'tween', duration: 0.6}} className={`text-white ${panel1Student.ispanel?'text-lg':'text-6xl font-bold mt-4'}   cursor-pointer `} >
+                Assesment
             </motion.div>
 
-            <motion.div transition={{type:'tween', duration: 0.7}} animate={ panel1Student.ispanel && { x: -10}} initial={ panel1Student.ispanel && { x: 20}}  className={`text-white ${panel1Student.ispanel?'text-lg':'text-6xl font-bold'}  uppercase cursor-pointer  `} >
+            <motion.div transition={{type:'tween', duration: 0.7}} animate={ panel1Student.ispanel && { x: -10}} initial={ panel1Student.ispanel && { x: 20}}  className={`text-white ${panel1Student.ispanel?'text-lg':'text-6xl font-bold'}   cursor-pointer  `} >
                 Courses
             </motion.div>
 
@@ -77,7 +77,7 @@ const StudentCP = () => {
 
         <div   style={{
                         boxShadow: `10px 10px 20px 0px rgba(0,0,0,0.57) inset}`,
-        }} className='absolute top-0 w-full z-0 h-full innershadow border-r-4 border-slate-700' >
+        }} className='absolute top-0 w-full z-0 h-full   bg-white' >
         {/* New Student */}
         <CPoptionsGUI/>
         </div>

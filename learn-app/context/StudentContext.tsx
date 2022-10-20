@@ -14,12 +14,15 @@ const StudentContextProvider = (props:any) => {
   const panel1ref = React.useRef<any>(null)
 
     const [isNewStudentint, setisNewStudentint] = React.useState(false);
+    const [isAssesmentopen, setisAssesmentopen] = React.useState(false);
 
     const [currentCPoption, setcurrentCPoption] = React.useState('');
 
     const toggleisNewStudentint = () => {
         setisNewStudentint(prev => !prev)
     }
+
+
 
     const setcurrentCPOP = (option:string) => {
         setcurrentCPoption(option)
@@ -30,6 +33,12 @@ const StudentContextProvider = (props:any) => {
       panelX: 0,
       panelY: 0
     });
+
+    const openAssesmentPanel = () => {
+        setisAssesmentopen(prev => !prev)
+
+
+    }
 
     // const [panel1width, setpanel1width] = React.useState();
 
@@ -55,7 +64,7 @@ const StudentContextProvider = (props:any) => {
 
 
   return (
-    <StudentContext.Provider value={{isNewStudentint, toggleisNewStudentint, currentCPoption, setcurrentCPOP, setpanel1Student, panel1Student,  panel1ref}}>
+    <StudentContext.Provider value={{isNewStudentint, toggleisNewStudentint, currentCPoption, setcurrentCPOP, setpanel1Student, panel1Student,  panel1ref, isAssesmentopen, openAssesmentPanel}}>
         {props.children}
     </StudentContext.Provider>
   )

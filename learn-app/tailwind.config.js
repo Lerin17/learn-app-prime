@@ -12,7 +12,7 @@ module.exports = {
         header3: 'ALDO',
         header4: 'PLA',
         header5: 'NEM',
-        header6: 'NIN'
+        header6: 'OBO'
       },
       animation: {
         "slideDown": "fadeSlideDown .4s ease-in-out",
