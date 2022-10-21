@@ -45,7 +45,7 @@ export const Nav = () => {
 
         <NavOption
         text = 'Courses'
-        locationURL= '/'
+        locationURL= '/courses'
         />
         
         <NavOption

@@ -7,42 +7,79 @@ import { Istudentcontext } from '../../types/context/studentcontext'
 // import {SlUserFemale} from 'react-icons/si'
 import {CgProfile} from 'react-icons/cg'
 // TextField
-import Switch from '@mui/material'
+import Switch from '@mui/material/Switch'
+import Radio from '@mui/material/Radio'
+// import Select from '@mui/material/Select'
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+
+import MenuItem from '@mui/material/MenuItem'
+// import SwitchBase from '@mui/material/internal/SwitchBase'
 
 const CPoptionsGUI = () => {
 
-    const {currentCPoption} = React.useContext(StudentContext) as Istudentcontext
+    const {currentCPoption, setcurrentStudentAge, currentStudentAge} = React.useContext(StudentContext) as Istudentcontext
+
+    const handleChangeAge = (e:any) => {
+        setcurrentStudentAge(e.target.value)
+    }
 
     const newStudentGUI = () => {
-        return <div className=' h-full'>
+        return <div className=' h-full w-full '>
             {/* <div>Search</div> */}
-            <div className=' ' >
+            <div className='w-full' >
 
 
-                <div className=' flex flex-col px-4'>
-                <input placeholder='Name'
-                className='text-red-600 bg-transparent my-2 border-b-2 border-black border-dotted  py-2'
-                />
+                <div className=' px-4'>
+                   
+                    <input placeholder='Name'
+                    className='text-red-600 bg-transparent my-2 border-b-2 border-black border-dotted  py-2 w-full'
+                    />
                 
-                <div className='flex' >
-                    <div className=' border-b-2 border-black border-dotted' >
-                    <div className='mr-2 text-bold text-white' >Age</div>
-                     <input placeholder=''
-                     className='text-red-600 w-2/3 mr-2 bg-transparent my-2 border-l rounded border-black border-dotted bg-amber-600'
-                />
+                 
+                
+                <div className='flex w-full' >
+                    <div className=' ' >
+                        <div>
+                        <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
+                <Select 
+                    className='bg-amber-600 rounded-none'
+                     labelId="demo-simple-select-filled-label"
+                    id="demo-simple-select-filled"
+          value={currentStudentAge}
+          onChange={handleChangeAge}
+             >
+                <MenuItem value="">
+                 <em>None</em>
+                </MenuItem>
+                <MenuItem value={'Male'}>Male</MenuItem>
+                <MenuItem value={'Female'}>Female</MenuItem>
+              <MenuItem value={'Other'}>Other</MenuItem>
+                 </Select>
+              </FormControl>
+                        </div>
+                
                     </div>
                 
 
-            <div className='flex items-center ' >
-                <div className='mr-2 text-bold text-white' >Age</div>
-                    <input placeholder='Age'
-                            
-                            className='text-white w-1/3 bg-transparent my-2  border-b-2 border-dotted'
-                            />
-            </div>
+                    <div className='w-full  ' >
+                        <div className='mr-2 text-bold text-white' >Email</div>
+                            <input placeholder='Age'
+                                    
+                                    className='text-white w-full bg-transparent my-2  border-b-2 border-black border-dotted '
+                                    />
+                    </div>
             </div>
                 
 
+            <div>
+                Courses
+                <div>
+
+                </div>
+            </div>
              
               
                 </div>
@@ -92,12 +129,9 @@ const CPoptionsGUI = () => {
     }
 
   return (
-    <div>
-        <div className='relative' >
+    <div className='w-full'>
+        <div className='w-full' >
             <GetGUI/>
-            {/* <div className='text-white   border w-52 h-52 hidden' >
-                d
-            </div> */}
         </div>
     </div>
   )

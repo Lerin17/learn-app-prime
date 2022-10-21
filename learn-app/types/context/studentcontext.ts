@@ -1,19 +1,24 @@
 import { Interface } from "readline"
 
 export interface Istudentcontext {
-    isNewStudentint: boolean
-    toggleisNewStudentint:()=>void
+    isNewStudentOpen: boolean
+    // toggleisNewStudentint:()=>void
     currentCPoption: string
     setcurrentCPOP:(option:string)=>void
-    setpanel1Student: React.Dispatch<React.SetStateAction<{
+    setlargePanelStudent: React.Dispatch<React.SetStateAction<{
         ispanel: boolean;
         panelX: number;
         panelY: number;
     }>>
-    panel1Student: Ipanel1Student,
+    largePanelStudent: Ipanel1Student,
+    smallPanelStudent:Ipanel1Student
+    midpanelStudent:Ipanel1Student
     panel1ref:React.MutableRefObject<null>
     isAssesmentopen:boolean
     openAssesmentPanel:()=>void
+    toggleNewStudentPanel:()=>void
+    setcurrentStudentAge:React.Dispatch<React.SetStateAction<string | undefined>>
+    currentStudentAge:string | undefined
 
 }
 

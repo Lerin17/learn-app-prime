@@ -3,9 +3,11 @@ import { Nav } from './Nav'
 import mesh1 from '../images/mesh-gradient-1.png'
 
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 export const Layout = (prop:any) => {
 
+  console.log(useRouter().asPath, 'as path')
 
   return (
     <div style={{
