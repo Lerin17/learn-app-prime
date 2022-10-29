@@ -87,16 +87,16 @@ const StudentCP = () => {
         <div className='  flex flex-col'  >
             <motion.div animate={isNewStudentOpen? { x: -10}:{x:5}} transition={{type:'tween', duration: 0.5}} onClick={()=>{
                 setcurrentCPOP('New student')
-                toggleNewStudentPanel()}} className={`text-white ${ isNewStudentOpen?'text-lg':'text-6xl font-bold'}  cursor-pointer `} >
+                toggleNewStudentPanel()}} className={`text-white ${ isNewStudentOpen?'text-lg':'text-6xl'}  cursor-pointer `} >
                 New Student +
             </motion.div>
 
 
-            <motion.div onClick={()=>openAssesmentPanel()} animate={  isNewStudentOpen? { x: -10}:{x:5}} transition={{type:'tween', duration: 0.6}} className={`text-white ${  isNewStudentOpen?'text-lg':'text-6xl font-bold mt-4'}   cursor-pointer pr-4`} >
+            <motion.div onClick={()=>openAssesmentPanel()} animate={  isNewStudentOpen? { x: -10}:{x:5}} transition={{type:'tween', duration: 0.6}} className={`text-white ${  isNewStudentOpen?'text-lg':'text-6xl  mt-4'}   cursor-pointer pr-4`} >
                 Assesment
             </motion.div>
 
-            <motion.div transition={{type:'tween', duration: 0.7}} animate={  isNewStudentOpen?{ x: -10}:{x:5}}   className={`text-white ${ isNewStudentOpen?'text-lg':'text-6xl font-bold'}   cursor-pointer  pr-4`} >
+            <motion.div transition={{type:'tween', duration: 0.7}} animate={  isNewStudentOpen?{ x: -10}:{x:5}}   className={`text-white ${ isNewStudentOpen?'text-lg':'text-6xl'}   cursor-pointer  pr-4`} >
                 Courses
             </motion.div>
 

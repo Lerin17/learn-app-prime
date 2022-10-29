@@ -9,12 +9,14 @@ import { SocketContextProvider } from '../context/SocketContext'
 import { StudentContextProvider } from '../context/StudentContext'
 import { StyledEngineProvider, ThemeProvider } from '@mui/material'
 import { UtilityContextProvider } from '../context/UtilityContext'
+import { CourseContextProvider } from '../context/CourseContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme} >
     <StyledEngineProvider injectFirst >
       <UtilityContextProvider>
+        <CourseContextProvider>
       <StudentContextProvider>
       <CalendarContextProvider>
         <SocketContextProvider>
@@ -24,6 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </SocketContextProvider>     
       </CalendarContextProvider>
       </StudentContextProvider>
+      </CourseContextProvider>
       </UtilityContextProvider>
 
     </StyledEngineProvider>
