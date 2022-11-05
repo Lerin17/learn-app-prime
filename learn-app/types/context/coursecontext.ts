@@ -41,8 +41,12 @@ export interface IinputCourseGroupDetailsArg {
     name:string
     abv:string
     desc:string
-    e: React.MouseEvent<HTMLDivElement, MouseEvent> 
+    // e: React.MouseEvent<HTMLDivElement, MouseEvent> 
 } 
+
+export interface IinputCourseDetailsArg {
+    name:string
+}
 
 export interface IsaveCurrentCourseArg {
     currentCourseName:string

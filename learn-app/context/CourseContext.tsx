@@ -121,10 +121,15 @@ const CourseContextProvider = (props:any) => {
 
     
 
-    const inputCourseGroupDetails = ({e, name, abv, desc}:IinputCourseGroupDetailsArg) => {
+    const inputCourseGroupDetails = ({ name, abv, desc}:IinputCourseGroupDetailsArg) => {
+      // console.log(currentCourseGroupAbv)
       setcurrentCourseGroupAbv(abv)
       setcurrentCourseGroupDesc(desc)
       setcurrentCourseGroupName(name)
+    }
+
+    const inputCourseDetails =  ({name}:any) => {
+
     }
 
   
