@@ -23,7 +23,7 @@ export const Layout = (prop:any) => {
               <Nav/>
             </div>
 
-            <div className='h-full' >
+            <div className='h-full ' >
               {prop.children} 
             </div>
           </div>

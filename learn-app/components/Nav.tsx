@@ -16,7 +16,7 @@ export const Nav = () => {
     return (
       <div className={`px-2 py-1  lg:px-4 md:px-4 lg:text-base md:text-base text-sm  hover:text-black transition-all text-white font-header1 font-normal`} >
         <Link  href= {props.locationURL} >
-            <div className={`cursor-pointer ${props.one?'text-5xl font-bold font-header2 uppercase':''}`} >
+            <div className={`cursor-pointer ${props.one?'text-5xl font-black font-header9  uppercase ':'font-header6'}`} >
               {props.text}
             </div>
         </Link>

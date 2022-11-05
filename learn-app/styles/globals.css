@@ -208,8 +208,29 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
 
 @font-face {
   font-family: 'OBO';
-  src: url('../public/fonts/oboto/MADEOkineSansPERSONALUSE-Regular.otf');
+  src: url('../public/fonts/oboto/MADEOkineSansPERSONALUSE-Light.otf');
 }
+
+@font-face {
+  font-family: 'OBO-B';
+  src: url('../public/fonts/oboto/MADEOkineSansPERSONALUSE-Medium.otf');
+}
+
+@font-face {
+  font-family: 'OBO-L';
+  src: url('../public/fonts/oboto/MADEOkineSansPERSONALUSE-Thin.otf');
+}
+
+@font-face {
+  font-family: 'OBO-X';
+  src: url('../public/fonts/oboto/MADEOkineSansPERSONALUSE-Bold.otf');
+}
+/* 
+@font-face {
+  font-family: 'OBO-T';
+  src: url('../public/fonts/oboto/');
+} */
+
 .next{
   background-image: url('../images/transparent-square-tiles.png');
   /* background-color: #006edc; */
@@ -260,6 +281,14 @@ background-size: 8px 8px;
 .dot{
   background: radial-gradient(circle, transparent 20%, #000000 20%, #000000 80%, transparent 80%, transparent) 0% 0% / 22px 22px, radial-gradient(circle, transparent 20%, #000000 20%, #000000 80%, transparent 80%, transparent) 11px 11px / 22px 22px, linear-gradient(#ffffff 1.5px, transparent 1.5px) 0px -0.75px / 11px 11px, linear-gradient(90deg, #ffffff 1.5px, #000000 1.5px) -0.75px 0px / 11px 11px #000000;
 background-color: #000000;
+}
+
+.choc{
+  /* background-color: #92400e;
+  opacity: 1;
+  background-image:  linear-gradient(30deg, #b2b1ad 12%, transparent 12.5%, transparent 87%, #b2b1ad 87.5%, #b2b1ad), linear-gradient(150deg, #b2b1ad 12%, transparent 12.5%, transparent 87%, #b2b1ad 87.5%, #b2b1ad), linear-gradient(30deg, #b2b1ad 12%, transparent 12.5%, transparent 87%, #b2b1ad 87.5%, #b2b1ad), linear-gradient(150deg, #b2b1ad 12%, transparent 12.5%, transparent 87%, #b2b1ad 87.5%, #b2b1ad), linear-gradient(60deg, #b2b1ad77 25%, transparent 25.5%, transparent 75%, #b2b1ad77 75%, #b2b1ad77), linear-gradient(60deg, #b2b1ad77 25%, transparent 25.5%, transparent 75%, #b2b1ad77 75%, #b2b1ad77);
+  background-size: 8px 14px;
+  background-position: 0 0, 0 0, 4px 7px, 4px 7px, 0 0, 4px 7px; */
 }
 /* html,
 body {

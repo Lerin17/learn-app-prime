@@ -1,15 +1,20 @@
+import type { NextPage } from 'next'
 import { Button } from '@mui/material'
 import CourseList from '../components/courses/courseList'
 import CreateCourse from '../components/courses/createCourse'
 import React from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { type } from 'os'
 import { CourseContext } from '../context/CourseContext'
 import { Icoursecontext } from '../types/context/coursecontext'
+import SelectedCourseInfo from '../components/courses/courseList/selectedCourseInfo'
+import CreateCourseGroup from '../components/courses/courseList/createCourseGroup'
 
-const courses = () => {
+import {TiPlus} from 'react-icons/ti'
 
-  const {isNewCoursePanelOpen, toggleNewCoursePanel} = React.useContext(CourseContext) as Icoursecontext
+const courses: NextPage = () => {
+
+  const {isNewCoursePanelOpen, toggleNewCoursePanel, coursesArray, courseListSelectedCourse, isCourseList, setisCourseList, isCreateCourseGroupOpen, setisCreateCourseGroupOpen} = React.useContext(CourseContext) as Icoursecontext
 
   const parentVariant = {
     move: {
@@ -79,21 +84,69 @@ const childrenVariant1 = {
   }
 }
 
+console.log(courseListSelectedCourse, 'courseListSelectedCourse')
+
   return (
-    <div className='px-20 h-full font-header6' >
+    <div className='xl:px-16 lg:px-14 px-0 h-full font-header6' >
         {/* <div>Courses</div> */}
         <div className='flex justify-center' >
-            <div className='w-7/12 ' >
+            <div className='xl:w-7/12 lg:w-9/12 w-11/12' >
               <div >
-                <div  className='bg-amber-600 text-3xl flex justify-between'>
-                  <div>courses</div>
-                  <div onClick={()=>toggleNewCoursePanel()} className='px-2 cursor-pointer hover:scale-110 transition-all'>[+]</div>
+                <div  className='bg-amber-600 text-xl flex justify-between'>
+                  <div>courses/createCourse</div>
+                  {Boolean(coursesArray.length)  && 
+                  <div className='flex'>
+      <motion.div initial={{y:20 ,opacity:0.4}} animate={{y:0, opacity:1}} onClick={()=>{
+        setisCourseList(false)
+        toggleNewCoursePanel()}} >
+        <div className='px-2 cursor-pointer hover:scale-110 transition-all text-2xl hover:text-gray-300 flex items-center '>
+        [ <svg className='hover:text-gray-300 fill-current' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>]
+        </div>
+       </motion.div>
+
+      <motion.div initial={{y:20 ,opacity:0.4}} animate={{y:0, opacity:1}}  >
+        <div onClick={()=>{
+          setisCourseList(false)
+          setisCreateCourseGroupOpen(true)}} className='px-4 cursor-pointer hover:scale-110 transition-all text-2xl hover:text-gray-300 flex items-center'>
+        [ <svg className='hover:text-gray-300 fill-current' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg> 
+        <svg className='hover:text-gray-300 fill-current' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg> 
+        <svg className='hover:text-gray-300 fill-current' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>]
+        </div>   
+      </motion.div>
                   </div>
+                  
+                  }
+                  
+                  </div>
+
+          
+                  {/* {isCourseList &&
+              <AnimatePresence>
+                       <motion.div transition={{duration:0.3, type:'tween'}} 
+              exit={{scale:0.5, opacity:0.4}}
+              initial={{y:100, opacity:0.4}} animate={{y:0, opacity:1}}> */}
+                <CourseList/>
+              {/* </motion.div> 
+              </AnimatePresence>
+                  } */}
              
-                <motion.div className={`${isNewCoursePanelOpen?'hidden':'block'}`}>
-                  <motion.div>
-                     <CourseList/>
-                  </motion.div> 
+               
+
+                <motion.div 
+               
+                className={`${courseListSelectedCourse?'h-full block':""}`} >
+                  {courseListSelectedCourse && (
+                    <motion.div 
+                    transition={{duration:0.5, type:'tween'}}
+                    initial={{y:-400}}
+                    animate={{y:0}} >
+                    <SelectedCourseInfo/>
+                    </motion.div>
+                  )
+
+                  }
+                  
+
                 </motion.div>
 
                 <motion.div variants={parentVariant} initial='static' animate='move' >
@@ -101,7 +154,9 @@ const childrenVariant1 = {
                      <CreateCourse/>
                   </motion.div> 
                 </motion.div>
-          
+
+                <CreateCourseGroup/>
+                  
 
               </div>
 

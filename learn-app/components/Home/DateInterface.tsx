@@ -10,7 +10,8 @@ export const DateInterface = () => {
    
     const {DateInfo} = React.useContext(CalendarContext) as Icalendarcontext
 
-    console.log(DateInfo.Day, 'noyjing')
+    // console.log(DateInfo.Day, 'noyjing')
+    console.log(DateInfo, 'dateinfo')
 
   return (
     <div>
