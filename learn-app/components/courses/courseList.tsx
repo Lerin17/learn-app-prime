@@ -210,8 +210,8 @@ const CourseList = () => {
 
 
         if( coursesArray.length === 0){
-            return <div className={`${isCreateCourseGroupOpen?'hidden':''}`} >
-                <div className='text-lg' >Course list</div>
+            return <div className={`${isCreateCourseGroupOpen?'hidden':'mt-6'}`} >
+                {/* <div className='text-lg' >Course list</div> */}
                 <div className='text-5xl ' >
                     No Courses Created Yet,
                     <div className='flex pt-2 cursor-pointer' >

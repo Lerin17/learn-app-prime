@@ -90,9 +90,13 @@ console.log(courseListSelectedCourse, 'courseListSelectedCourse')
     <div className='xl:px-16 lg:px-14 px-0 h-full font-header6' >
         {/* <div>Courses</div> */}
         <div className='flex justify-center' >
-            <div className='xl:w-7/12 lg:w-9/12 w-11/12' >
+            <div className='xl:w-7/12 lg:w-9/12 w-11/12 ' >
               <div >
-                <div  className='bg-amber-600 text-xl flex justify-between'>
+                <div 
+                style={{
+                 background:'radial-gradient(circle, rgba(235,225,225,1) 18%, rgba(215,218,222,1) 26%, rgba(206,210,217,1) 39%, rgba(235,237,241,1) 49%, rgba(204,204,214,0.9876283276982668) 64%, rgba(167,159,159,1) 90%)'
+                }}
+                className='bg-amber-600 text-xl flex justify-between px-3 rounded border border-black'>
                   <div>courses/createCourse</div>
                   {Boolean(coursesArray.length)  && 
                   <div className='flex'>
@@ -125,7 +129,10 @@ console.log(courseListSelectedCourse, 'courseListSelectedCourse')
                        <motion.div transition={{duration:0.3, type:'tween'}} 
               exit={{scale:0.5, opacity:0.4}}
               initial={{y:100, opacity:0.4}} animate={{y:0, opacity:1}}> */}
-                <CourseList/>
+              <div className=''>
+              <CourseList/>
+              </div>
+              
               {/* </motion.div> 
               </AnimatePresence>
                   } */}
