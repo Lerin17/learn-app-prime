@@ -9,6 +9,8 @@ import DowCarousel from './createCourse/DowCarousel'
 import DaysofWeekdisplay from './createCourse/DaysofWeekdisplay'
 import ParentCourse from './createCourse/ParentCourse'
 
+import Select from '@mui/material/Select'
+
 
 const CreateCourse = () => {
 
@@ -77,8 +79,8 @@ const CreateCourse = () => {
             {/* xx */}
                 </div> 
                 <div className='flex flex-col py-8' >
-                    <div className=''  >
-                        <div className='text-2xl bg-amber-800 border' onClick={()=>{setisParentCourse((prev) => !prev)}} >
+                    <div className='mb-4'  >
+                        <div className='text-2xl bg-amber-800 font-header9' onClick={()=>{setisParentCourse((prev) => !prev)}} >
                         Parent Course [+]
                         </div>
                         {isParentCourse && 
