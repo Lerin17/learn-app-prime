@@ -27,7 +27,7 @@ const CreateCourse = () => {
     // console.log(array2 === Array1, 'reals')
     
 
-    const {isTopicPanelOpen, toggleTopicPanel, currentCourseName, currentCodeDesc, currentCourseCode, setcurrentCodeDesc, setcurrentCourseName, setcurrentCourseCode, currentNoWeeks, setcurrentNoWeeks, saveCurrentCourse, setisNewCoursePanelOpen, isDowCarousel,toggleisDowCarousel, setisDowCarousel, addDayOfWeek, currentDayOfWeek,isCourseList, setisCourseList, isParentCourse,setisParentCourse} = React.useContext(CourseContext) as Icoursecontext
+    const {isTopicPanelOpen, toggleTopicPanel, currentCourseName, currentCodeDesc, currentCourseCode, setcurrentCodeDesc, setcurrentCourseName, setcurrentCourseCode, currentNoWeeks, setcurrentNoWeeks, saveCurrentCourse, setisNewCoursePanelOpen, isNewCoursePanelOpen ,isDowCarousel,toggleisDowCarousel, setisDowCarousel, addDayOfWeek, currentDayOfWeek,isCourseList, setisCourseList, isParentCourse,setisParentCourse} = React.useContext(CourseContext) as Icoursecontext
 
     const parentVariant = {
         move: {
@@ -65,10 +65,15 @@ const CreateCourse = () => {
 
   return (
     <div>
-        {setisNewCoursePanelOpen && 
+        {isNewCoursePanelOpen && 
 
             <AnimatePresence>
-                      <motion.div onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>)=>{
+                      <motion.div 
+                      initial={{y:200}}
+                 animate={{y:0}}
+                 transition={{type:"spring", stiffness:100}}
+                 exit={{ opacity:0.1, y:400, display:'none'}} 
+                      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>)=>{
                 if(isDowCarousel && e.target.id !== 'dowCarousel' || !e){
         
              
@@ -78,11 +83,15 @@ const CreateCourse = () => {
                <div className='text-xl' >
             {/* xx */}
                 </div> 
-                <div className='flex flex-col py-8' >
-                    <div className='mb-4'  >
-                        <div className='text-2xl bg-amber-800 font-header9' onClick={()=>{setisParentCourse((prev) => !prev)}} >
-                        Parent Course [+]
+                <div className='flex flex-col py-4' >
+                    <div className='mb-4 flex justify-between'  >
+                        <div className='text-2xl bg-amber-800 font-header8 font-bold cursor-pointer flex' onClick={()=>{setisParentCourse((prev) => !prev)}} >
+                        Add Parent Course 
+                        <div>
+                            [+++]
+                        </div> 
                         </div>
+
                         {isParentCourse && 
                         <motion.div transition={{type:'spring', stiffness:50}} initial={{y:20}} animate={{y:0}}>
                              <ParentCourse/>
@@ -92,7 +101,7 @@ const CreateCourse = () => {
         
                     </div>
         
-                    <div className='bg-amber-700 text-white  font-header7 flex' ><div className='flex bg-yellow-600 px-2'>
+                    <div className='bg-amber-800 border text-white  font-header7 flex' ><div className='flex bg-yellow-600 px-2'>
                     Basic information
                         </div></div>
                     <div className='flex w-full ' >
@@ -128,7 +137,7 @@ const CreateCourse = () => {
                     </div>
         
                     <div className='flex flex-col my-4 ' >
-                        <div  className='bg-amber-900 text-white  font-header7 flex'>
+                        <div  className='bg-amber-800 text-white border   font-header7 flex'>
                             <div className='bg-yellow-600 w-36 px-2'>
                             Duration
                             </div>
@@ -220,6 +229,7 @@ const CreateCourse = () => {
         
                         <div onClick={()=>{setisNewCoursePanelOpen(false)
                         setisCourseList(true)
+                        setisParentCourse(false)
                         }} className='flex justify-end capitalize cursor-pointer' >
                             go back
                         </div>
