@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { Icoursecontext, Icourseobject, IsaveCurrentCourseArg, IcourseGroupObject, IinputCourseGroupDetailsArg } from '../types/context/coursecontext';
+import { Icoursecontext, Icourseobject, IsaveCurrentCourseArg, IcourseGroupObject, IinputCourseGroupDetailsArg, IsaveCurrentCourseGroupArg } from '../types/context/coursecontext';
 
 const CourseContext = React.createContext<Icoursecontext | null>(null)
 
@@ -95,15 +95,20 @@ const CourseContextProvider = (props:any) => {
       }
     }
 
-    const returnNewCourseGroupObject = () => {
+    const returnNewCourseGroupObject = (payload:any) => {
       return {
-
-      }
+        courseGroupName: payload.currentCourseGroupName,
+        courseGroupDesc:payload.currentCourseGroupDesc,
+        courseGroupAbv:payload.currentCourseGroupAbv,
+        courseGroupCourseArray:[],
+        courseGroupId:Date.now()
     }
+      }
+    
 
     interface Istate {
       coursesArray:Icourseobject[]
-      courseGroupArray:object
+      courseGroupArray:IcourseGroupObject[]
     }
 
     type Iaction = {type:'SAVE1', payload:IsaveCurrentCourseArg} | {type:'SAVE2', payload:any}
@@ -113,7 +118,7 @@ const CourseContextProvider = (props:any) => {
         case ACTIONS.SAVE_NEW_COURSE:
           return {...state ,coursesArray: [...state.coursesArray, returnNewCourse(action.payload)]}
           case 'SAVE2':
-          return {...state, courseGroupArray: [] }
+          return {...state, courseGroupArray: [...state.courseGroupArray, returnNewCourseGroupObject(action.payload) ] }
         default:
           return state  
       }
@@ -140,6 +145,7 @@ const CourseContextProvider = (props:any) => {
     console.log(state, 'state')
 
     const coursesArray = state.coursesArray
+    const courseGroupArray = state.courseGroupArray
 
   // const [state, dispatch] = React.useReducer<any, ()=>void>(reducer, [])
 
@@ -149,6 +155,13 @@ const CourseContextProvider = (props:any) => {
       setcurrentCourseCode('')
       setcurrentNoWeeks('')
       dispatch({type:ACTIONS.SAVE_NEW_COURSE, payload: {...Obj}})
+    }
+
+    const saveCurrentCourseGroup = (Obj:IsaveCurrentCourseGroupArg) => {
+      setcurrentCourseGroupDesc('')
+      setcurrentCourseGroupAbv('')
+      setcurrentCourseGroupName('')
+      dispatch({type:ACTIONS.SAVE_NEW_COURSEGROUP, payload:Obj})
     }
 
     
@@ -161,7 +174,7 @@ const CourseContextProvider = (props:any) => {
 
   return (
     <CourseContext.Provider value={{CourseObject, CoursesArray, toggleNewCoursePanel, isNewCoursePanelOpen, setisNewCoursePanelOpen, isTopicPanelOpen, toggleTopicPanel, currentCourseName,currentCodeDesc,currentCourseCode,currentNoWeeks, setcurrentCourseName, setcurrentCodeDesc, setcurrentCourseCode, setcurrentNoWeeks, saveCurrentCourse,  coursesArray, toggleisDowCarousel, isDowCarousel, setisDowCarousel, addDayOfWeek, currentDayOfWeek, setcurrentDayOfWeek, courseListSelectedCourse, setcourseListSelectedCourse, setisCourseList, isCourseList, isParentCourse, setisParentCourse, isCreateCourseGroupOpen, setisCreateCourseGroupOpen,currentCourseGroupName,currentCourseGroupAbv,
-currentCourseGroupDesc,currentCourseGroupCourseArray,inputCourseGroupDetails 
+currentCourseGroupDesc,currentCourseGroupCourseArray,inputCourseGroupDetails,saveCurrentCourseGroup, courseGroupArray
      }}>
         {props.children}
     </CourseContext.Provider>

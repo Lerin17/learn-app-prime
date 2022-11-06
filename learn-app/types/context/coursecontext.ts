@@ -35,6 +35,8 @@ isCreateCourseGroupOpen:boolean
  currentCourseGroupDesc:string
  currentCourseGroupCourseArray:Icourseobject[]
  inputCourseGroupDetails: (Arg:IinputCourseGroupDetailsArg)=>void
+ saveCurrentCourseGroup:(obj:IsaveCurrentCourseGroupArg)=>void
+ courseGroupArray:IcourseGroupObject[]
 }
 
 export interface IinputCourseGroupDetailsArg {
@@ -55,6 +57,12 @@ export interface IsaveCurrentCourseArg {
     currentNoWeeks:string
 }
 
+export interface IsaveCurrentCourseGroupArg {
+currentCourseGroupDesc:string
+currentCourseGroupAbv:string
+currentCourseGroupName:string
+}
+
 
 export interface Icourseobject {
     courseName: string
@@ -69,6 +77,7 @@ export interface IcourseGroupObject {
     courseGroupDesc:string,
     courseGroupAbv:string,
     courseGroupCourseArray:[]
+    courseGroupId:string
 }
 
 

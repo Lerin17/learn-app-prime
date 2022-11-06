@@ -207,6 +207,7 @@ const CourseList = () => {
     const CourseListDisplay = () => {
 
         console.log(coursesArray, 'jaws')
+  
 
 
         if( coursesArray.length === 0){
@@ -215,13 +216,15 @@ const CourseList = () => {
                 <div className='text-5xl ' >
                     No Courses Created Yet,
                     <div className='flex pt-2 cursor-pointer' >
-                        Create Course Group 
-                        <div  onClick={()=>setisCreateCourseGroupOpen(true)} className=' hover:scale-110 transition-all' >
+                        Create Course Group
+                        <div  onClick={()=>{setisCreateCourseGroupOpen(true)
+                        setisCourseList(false)
+                        }} className=' hover:scale-110 transition-all' >
                         <button className='text-5xl text-black flex items-center  justify-center'>
                             
                             [<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>]
-                            </button></div>
+                            </button></div>,
                     </div>
 
                     <div className='flex pt-2 cursor-pointer' >
