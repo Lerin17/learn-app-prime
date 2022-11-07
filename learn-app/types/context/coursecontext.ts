@@ -37,6 +37,8 @@ isCreateCourseGroupOpen:boolean
  inputCourseGroupDetails: (Arg:IinputCourseGroupDetailsArg)=>void
  saveCurrentCourseGroup:(obj:IsaveCurrentCourseGroupArg)=>void
  courseGroupArray:IcourseGroupObject[]
+ currentCourseGroup:object
+ setcurrentCourseGroup:React.Dispatch<React.SetStateAction<any>>
 }
 
 export interface IinputCourseGroupDetailsArg {

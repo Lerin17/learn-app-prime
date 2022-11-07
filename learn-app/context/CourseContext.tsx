@@ -21,6 +21,8 @@ const CourseContextProvider = (props:any) => {
 
     const [currentDayOfWeek, setcurrentDayOfWeek] = React.useState<string[]>([]);
 
+    const [currentCourseGroup, setcurrentCourseGroup] = React.useState({});
+
     // const [courseGroupArray, setcourseGroupArray] = React.useState([]);
 
     const [courseGroupObject, setcourseGroupObject] = React.useState<IcourseGroupObject>();
@@ -174,7 +176,7 @@ const CourseContextProvider = (props:any) => {
 
   return (
     <CourseContext.Provider value={{CourseObject, CoursesArray, toggleNewCoursePanel, isNewCoursePanelOpen, setisNewCoursePanelOpen, isTopicPanelOpen, toggleTopicPanel, currentCourseName,currentCodeDesc,currentCourseCode,currentNoWeeks, setcurrentCourseName, setcurrentCodeDesc, setcurrentCourseCode, setcurrentNoWeeks, saveCurrentCourse,  coursesArray, toggleisDowCarousel, isDowCarousel, setisDowCarousel, addDayOfWeek, currentDayOfWeek, setcurrentDayOfWeek, courseListSelectedCourse, setcourseListSelectedCourse, setisCourseList, isCourseList, isParentCourse, setisParentCourse, isCreateCourseGroupOpen, setisCreateCourseGroupOpen,currentCourseGroupName,currentCourseGroupAbv,
-currentCourseGroupDesc,currentCourseGroupCourseArray,inputCourseGroupDetails,saveCurrentCourseGroup, courseGroupArray
+currentCourseGroupDesc,currentCourseGroupCourseArray,inputCourseGroupDetails,saveCurrentCourseGroup, courseGroupArray,currentCourseGroup, setcurrentCourseGroup
      }}>
         {props.children}
     </CourseContext.Provider>

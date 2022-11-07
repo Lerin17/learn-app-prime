@@ -84,24 +84,26 @@ const CreateCourse = () => {
             {/* xx */}
                 </div> 
                 <div className='flex flex-col py-4' >
-                    <div className='mb-4 flex justify-between'  >
-                        <div className='text-2xl bg-amber-800 font-header8 font-bold cursor-pointer flex' onClick={()=>{setisParentCourse((prev) => !prev)}} >
+                    <div className='mb-4'  >
+                        {/* <div className='text-2xl bg-amber-800 font-header8 font-bold cursor-pointer flex' onClick={()=>{setisParentCourse((prev) => !prev)}} >
                         Add Parent Course 
                         <div>
                             [+++]
                         </div> 
-                        </div>
+                        </div> */}
 
-                        {isParentCourse && 
+
+                        <ParentCourse/>
+                        {/* {isParentCourse && 
                         <motion.div transition={{type:'spring', stiffness:50}} initial={{y:20}} animate={{y:0}}>
                              <ParentCourse/>
                          </motion.div>
-                        }
+                        } */}
                        
         
                     </div>
         
-                    <div className='bg-amber-800 border text-white  font-header7 flex' ><div className='flex bg-yellow-600 px-2'>
+                    <div className='bg-yellow-600  border text-white  font-header7 flex' ><div className='flex bg-yellow-600 px-2'>
                     Basic information
                         </div></div>
                     <div className='flex w-full ' >
@@ -110,7 +112,7 @@ const CreateCourse = () => {
                             placeholder='Name' 
                             value={currentCourseName} 
                             onChange={(e)=>{setcurrentCourseName(e.target.value)}}
-                            className='w-full  text-3xl border-b my-1  bg-amber-800 font-header8 text-white' 
+                            className='w-full  text-3xl border-b border-gray-400 my-1  bg-amber-800 font-header8 text-white' 
                             />
                             {/* <input
                             placeholder='Name' 
@@ -137,8 +139,8 @@ const CreateCourse = () => {
                     </div>
         
                     <div className='flex flex-col my-4 ' >
-                        <div  className='bg-amber-800 text-white border   font-header7 flex'>
-                            <div className='bg-yellow-600 w-36 px-2'>
+                        <div  className='bg-amber-800 text-white border   font-header7 flex bg-yellow-600 '>
+                            <div className='w-36 px-2'>
                             Duration
                             </div>
                         </div>
