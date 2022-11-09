@@ -80,10 +80,8 @@ const CreateCourse = () => {
                     setisDowCarousel(false)
                 }
             }}>
-               <div className='text-xl' >
-            {/* xx */}
-                </div> 
-                <div className='flex flex-col py-4' >
+            
+                <div className='flex flex-col py-4 mx-4' >
                     <div className='mb-4'  >
                         {/* <div className='text-2xl bg-amber-800 font-header8 font-bold cursor-pointer flex' onClick={()=>{setisParentCourse((prev) => !prev)}} >
                         Add Parent Course 
@@ -103,16 +101,19 @@ const CreateCourse = () => {
         
                     </div>
         
-                    <div className='bg-yellow-600  border text-white  font-header7 flex' ><div className='flex bg-yellow-600 px-2'>
-                    Basic information
+                    <div className='bg-yellow-600  border text-white  font-header9 flex ' ><div className='flex bg-yellow-600 px-2'>
+                    BASIC INFORMATION
                         </div></div>
-                    <div className='flex w-full ' >
-                        <div className='w-3/4 mr-2' >
+                    <div className='flex w-full mx-8' >
+                        <div className='w-3/4 mr-2 flex items-center' >
+                            {/* <div className='font-header9 text-3xl '>
+                                NAME
+                            </div> */}
                             <InputBase
-                            placeholder='Name' 
+                            placeholder='NAME' 
                             value={currentCourseName} 
                             onChange={(e)=>{setcurrentCourseName(e.target.value)}}
-                            className='w-full  text-3xl border-b border-gray-400 my-1  bg-amber-800 font-header8 text-white' 
+                            className='w-full  text-3xl border-b border-gray-400   bg-amber-800 font-header8 text-black' 
                             />
                             {/* <input
                             placeholder='Name' 
@@ -120,16 +121,16 @@ const CreateCourse = () => {
                             onChange={(e)=>{setcurrentCourseName(e.target.value)}}
                             className='w-full  text-3xl border-b my-1  bg-amber-800' /> */}
                             </div>
-                        <div className='w-1/4 ' >
+                        <div className='w-1/4 mx-8' >
                             <InputBase 
-                            placeholder='code'
+                            placeholder='CODE'
                             value={currentCourseCode}
                             onChange={(e)=>{setcurrentCourseCode(e.target.value)}}
-                            className='w-full  border-b my-1 bg-amber-800 text-3xl font-header8 text-white'  />
+                            className='w-full  border-b my-1 bg-amber-800 text-3xl font-header8 text-black'  />
                             </div>
                     </div>
         
-                    <div  className=''>
+                    <div  className='mx-4'>
                         <textarea 
                         placeholder='description'
                         value={currentCodeDesc}
@@ -139,13 +140,13 @@ const CreateCourse = () => {
                     </div>
         
                     <div className='flex flex-col my-4 ' >
-                        <div  className='bg-amber-800 text-white border   font-header7 flex bg-yellow-600 '>
+                        <div  className='bg-amber-800 text-white border   font-header9 flex bg-yellow-600 '>
                             <div className='w-36 px-2'>
-                            Duration
+                            DURATION
                             </div>
                         </div>
                       
-                      <div className='flex flex-col lg:flex-row l mt-2  lg:items-center py-4' >
+                      <div className='flex flex-col lg:flex-row l mt-2 mx-4 lg:items-center py-4' >
                
                             <div className={`text-xl ${!isDowCarousel?'w-9/12':'w-4/12'} flex items-center`}>
                                 <span className='font-bold cursor-pointer  transition-all  font-header7'>
@@ -225,14 +226,14 @@ const CreateCourse = () => {
         
         <div className='flex flex-col lg:mt-8 mt-14' >
             <div className='flex justify-end '>          
-                        <Button onClick={()=>saveCurrentCourse({currentCourseName, currentCodeDesc, currentCourseCode, currentNoWeeks})} className='font-header7 capitalize text-black text-4xl hover:scale-110 transition-all px-0 ' >[Save]
+                        <Button onClick={()=>saveCurrentCourse({currentCourseName, currentCodeDesc, currentCourseCode, currentNoWeeks})} className='font-header8 capitalize text-black  text-4xl hover:scale-110 transition-all px-0 font-extralight' >[ <span className='px-6 text-base font-header9'>SAVE</span> ]
                         </Button>
                     </div>
         
                         <div onClick={()=>{setisNewCoursePanelOpen(false)
                         setisCourseList(true)
                         setisParentCourse(false)
-                        }} className='flex justify-end capitalize cursor-pointer' >
+                        }} className='flex justify-end capitalize cursor-pointer ' >
                             go back
                         </div>
             </div>

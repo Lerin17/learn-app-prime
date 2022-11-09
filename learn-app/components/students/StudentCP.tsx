@@ -22,7 +22,7 @@ const StudentCP = () => {
     const ControlPanelOptionBtn = (props:any) => {
         return (
             <div onClick={()=>setcurrentCPOP(props.text)}>                
-            <Button className={`${props.it?'text-7xl font-bold font-header6':'text-lg'} ${props.text == 'Search'?'pb-4':''} flex text-white capitalize font-header6 font-extralight`} >
+            <Button className={`${props.it?'text-4xl font-bold font-header6':'text-lg'} ${props.text == 'Search'?'pb-4':''} flex text-white capitalize font-header6 font-extralight`} >
                 <BiSearchAlt/>
                     {props.text == 'Search' && <input
                     placeholder='Search'
@@ -73,82 +73,42 @@ const StudentCP = () => {
         <div className='w-full' >
 
       
-        <div className='flex items-end w-full bg-amber-800 border-b border-amber-700' >
-        <input placeholder='Search' className='text-6xl w-full  text-white bg-amber-800' />
-        <div className='self-bottom text-white text-4xl' >
-            <HiSearchCircle/>
-        </div>
-        </div>
+        
 
 <motion.div initial="static"
     animate="move" variants={parentVariant} className= '  ' >
     <motion.div className={`flex  justify-between w-full`} variants={childrenVariant} >
     <div className={``}>
-        <div className='  flex flex-col'  >
-            <motion.div animate={isNewStudentOpen? { x: -10}:{x:5}} transition={{type:'tween', duration: 0.5}} onClick={()=>{
+        <div  className='  flex flex-col'  >
+            <motion.div 
+style={{
+    // color:'#BFD5ED',
+    // backgroundColor:'#BFD5ED'
+  }}
+            animate={isNewStudentOpen? { x: -10}:{x:5}} transition={{type:'tween', duration: 0.5}} onClick={()=>{
                 setcurrentCPOP('New student')
-                toggleNewStudentPanel()}} className={`text-white ${ isNewStudentOpen?'text-lg':'text-6xl'}  cursor-pointer `} >
-                New Student +
+                toggleNewStudentPanel()}} className={`text-black ${ isNewStudentOpen?'':'text-4xl'} font-header8 cursor-pointer flex items-center`} >
+                [<span className='text-base font-header9 px-4' >NEW STUDENT +</span>]
             </motion.div>
 
 
-            <motion.div onClick={()=>openAssesmentPanel()} animate={  isNewStudentOpen? { x: -10}:{x:5}} transition={{type:'tween', duration: 0.6}} className={`text-white ${  isNewStudentOpen?'text-lg':'text-6xl  mt-4'}   cursor-pointer pr-4`} >
-                Assesment
+            <motion.div 
+            style={{
+                // color:'#89ABD0'
+                // backgroundColor:'#BFD5ED'
+              }}
+            onClick={()=>openAssesmentPanel()} animate={  isNewStudentOpen? { x: -10}:{x:5}} transition={{type:'tween', duration: 0.6}} className={`text-black ${  isNewStudentOpen?'text-lg':'text-4xl  mt-4'}   cursor-pointer pr-4 font-header8 flex items-center`} >
+               [<span className='text-base font-header9 px-4' > ASSESMENT</span>]
             </motion.div>
 
-            <motion.div transition={{type:'tween', duration: 0.7}} animate={  isNewStudentOpen?{ x: -10}:{x:5}}   className={`text-white ${ isNewStudentOpen?'text-lg':'text-6xl'}   cursor-pointer  pr-4`} >
-                Courses
+            <motion.div transition={{type:'tween', duration: 0.7}} animate={  isNewStudentOpen?{ x: -10}:{x:5}}   className={`text-black ${ isNewStudentOpen?'text-lg':'text-4xl mt-4'}   cursor-pointer  pr-4 flex items-center font-header8`} >
+              [<span className='text-base font-header9 px-4' > COURSES</span> ]
             </motion.div>
 
         </div>
 
     </div>
 
-    <div style={{
-        height: '500px'
-        }}  className={`w-full flex flex-col  bg-gradient-to-r from-gray-100 to-gray-300 relative h-full`} >
-
-
-        <div   style={{
-                        boxShadow: `10px 10px 20px 0px rgba(0,0,0,0.57) inset}`,
-        }} className={`absolute top-0 w-full z-0 h-full ${currentCPoption?'':'hidden'}`} >
-        <CPoptionsGUI/>
-        </div>
-
-        
-        <motion.div ref={panel1ref} className='absolute top-0 w-full z-10 h-2/6  bg-amber-800' animate={ largePanelStudent.ispanel ? {x: largePanelStudent.panelX, scaleX: 0}:{x:0}} 
-        transition={{type:'tween', duration: 2}}
-        initial={{scaleX: 1}}>
-        <div className='h-full  w-full text-black' >
-            {/* New student */}
-        </div>
-       
-        </motion.div> 
-
-        <motion.div style={{
-            top: '33.333%'
-        }} className='absolute  w-full z-10 h-2/6  bg-amber-800' animate={  midpanelStudent.ispanel ? {x:  largePanelStudent.panelX, scaleX: 0}:{x:0}} 
-        transition={{type:'tween', duration: 2}}
-        initial={{scaleX: 1}}>
-        <div className='h-full  w-full text-black' >
-            {/* New studentd */}
-        </div>
-       
-        </motion.div>  
-
-        
-        <motion.div style={{
-            // top: '150'
-        }} className='absolute w-full z-10 h-2/6  bg-amber-800 bottom-0 ' animate={  smallPanelStudent.ispanel ? {x:  largePanelStudent.panelX, scaleX: 0}:{x:0}} 
-        transition={{type:'tween', duration: 2}}
-        initial={{scaleX: 1}}>
-        <div className='  w-full  h-full text-white text-lg px-4 font-bold ' >
-            send form to student <FaArrowRight/>
-        </div>
-       
-        </motion.div>  
-        
-    </div>
     </motion.div>
 
 

@@ -4,7 +4,7 @@ import mesh1 from '../images/mesh-gradient-1.png'
 
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-
+import Mavbar from './GeneralPurpose/Mavbar'
 export const Layout = (prop:any) => {
 
   console.log(useRouter().asPath, 'as path')
@@ -21,6 +21,10 @@ export const Layout = (prop:any) => {
           <div className='flex  flex-col h-full' >
             <div className='pb-4' >
               <Nav/>
+            </div>
+
+            <div className='flex justify-center'>
+            <Mavbar/>
             </div>
 
             <div className='h-full ' >

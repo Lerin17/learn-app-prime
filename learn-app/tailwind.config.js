@@ -15,7 +15,7 @@ module.exports = {
         header6: 'OBO',
         header7:'OBO-B',
         header8:'OBO-L',
-        header9:'OBO-X'
+        header9:'OBO-N'
       },
       animation: {
         "slideDown": "fadeSlideDown .4s ease-in-out",

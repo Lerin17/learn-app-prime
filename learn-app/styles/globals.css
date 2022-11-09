@@ -225,6 +225,21 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
   font-family: 'OBO-X';
   src: url('../public/fonts/oboto/MADEOkineSansPERSONALUSE-Bold.otf');
 }
+
+@font-face {
+  font-family: 'OBO-N';
+  src: url('../public/fonts/N2/n27-regular-webfont.woff');
+}
+
+.nylon{
+  background-image: url('../images/nylon.png');
+}
+
+.nylon2{
+  background-image: url('../images/nylon1.png');
+  opacity: '50%';
+}
+
 /* 
 @font-face {
   font-family: 'OBO-T';
@@ -271,11 +286,12 @@ background-color: #ffffff;
 }
 
 .rhombus{
-background-color: #b28b4e;
-opacity: 0.8;
-background-image:  repeating-linear-gradient(45deg, #734606 25%, transparent 25%, transparent 75%, #734606 75%, #734606), repeating-linear-gradient(45deg, #734606 25%, #b28b4e 25%, #b28b4e 75%, #734606 75%, #734606);
-background-position: 0 0, 4px 4px;
-background-size: 8px 8px;
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image:  linear-gradient(135deg, #92400e 25%, transparent 25%), linear-gradient(225deg, #92400e 25%, transparent 25%), linear-gradient(45deg, #92400e 25%, transparent 25%), linear-gradient(315deg, #92400e 25%, #e5e5f7 25%);
+  background-position:  15px 0, 15px 0, 0 0, 0 0;
+  background-size: 15px 15px;
+  background-repeat: repeat;
 }
 
 .dot{

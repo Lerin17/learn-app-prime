@@ -50,7 +50,7 @@ export const Nav = () => {
         
         <NavOption
         text = 'Assesment'
-        locationURL= '/'
+        locationURL= '/assesment'
         />
 
         
