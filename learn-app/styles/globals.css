@@ -286,12 +286,11 @@ background-color: #ffffff;
 }
 
 .rhombus{
-  background-color: #e5e5f7;
+  background-color: #090701;
   opacity: 0.8;
-  background-image:  linear-gradient(135deg, #92400e 25%, transparent 25%), linear-gradient(225deg, #92400e 25%, transparent 25%), linear-gradient(45deg, #92400e 25%, transparent 25%), linear-gradient(315deg, #92400e 25%, #e5e5f7 25%);
-  background-position:  15px 0, 15px 0, 0 0, 0 0;
-  background-size: 15px 15px;
-  background-repeat: repeat;
+  background-image:  repeating-linear-gradient(45deg, #92400e 25%, transparent 25%, transparent 75%, #92400e 75%, #92400e), repeating-linear-gradient(45deg, #92400e 25%, #090701 25%, #090701 75%, #92400e 75%, #92400e);
+  background-position: 0 0, 12px 12px;
+  background-size: 24px 24px;
 }
 
 .dot{

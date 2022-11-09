@@ -13,7 +13,10 @@ const StudentLibaryDisplay = StudentArray.map(item => <motion.div animate={isAss
     height: '100px',
     width: '100px'
 }} className={`text-white border-x-2 mr-1 mb-1 border-y-2 border-r-none bg-gradient-to-b from-black via-black to-gray-800 bg-gradient-to-r rhombus  ${isAssesmentopen?'mx-8 mt-14':''}`} >
+  <span className='font-header8 text-xl text-white'>
     *
+  </span>
+   
 </motion.div>)
 
   return (
