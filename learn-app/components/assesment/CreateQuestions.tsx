@@ -1,97 +1,101 @@
 import { InputBase, TextareaAutosize } from '@mui/material'
 import React from 'react'
 import { AssesmentContext } from '../../context/AssesmentContext';
-
 import { DuttonLarge,DuttonMid, DuttonSmall } from '../GeneralPurpose/dutton';
 
 import { Iassesmentcontext } from '../../types/context/assesmentcontext';
+import { motion } from 'framer-motion';
+import e from 'express';
 
 const CreateQuestions = () => {
   // const [questionsRaw, setquestionsRaw] = React.useState('');
-  const {isCreateQuestionsOpen, setisCreateQuestionsOpen, questionsRaw, setquestionsRaw, setisProcessData,questionProcessedArray,currentProcessedQuestion,setcurrentProcessedQuestion,setquestionProcessedArray,isProcessData,} = React.useContext(AssesmentContext) as Iassesmentcontext
+  const {isCreateQuestionsOpen, setisCreateQuestionsOpen, currentquestionsRaw, setcurrentquestionsRaw, setisProcessData,questionProcessedArray,currentProcessedQuestion,setcurrentProcessedQuestion,setquestionProcessedArray,isProcessData, processQuestionRaw, questionsArray, currentQuestion,setcurrentQuestion, currentAnswers, setcurrentAnswers} = React.useContext(AssesmentContext) as Iassesmentcontext
 
 
   const [isTextRaw, setisTextRaw] = React.useState(false);
 
-  const jam:any = []
-let questionAndOptionsArray
+  const [AnimateSave, setAnimateSave] = React.useState(false);
+
+const [lunch, setlunch] = React.useState('');
 
 
-  console.log(questionProcessedArray, 'the truth')
-  // console.log(questionAndOptionsArray, 'the eha')
+  // const inputQuestions = ({e,props}:any) => {
+  //   {(e:any)=>{setcurrentAnswers((prev:any) => ({B:e.target.value, ...prev}))}}
+  // }
 
-    React.useEffect(() => {
-    if(questionsRaw){
-     questionAndOptionsArray =  questionsRaw.split('\n')
+  // console.log(lunch)
 
-     console.log(questionAndOptionsArray, 'questionsOptions')
+  const inputvalue = ({e,props}:any) => {
 
-     jam.push(1)
-      console.log(jam,'')
+    e.preventDefault()
 
-      const array:any= []
+    // setlunch(e.target.value)
 
-     questionAndOptionsArray = questionAndOptionsArray.map((item:String) => {
-      if(item){
-
-        const itemSymbols = item.split('')
-        const lastDigitIndex = itemSymbols.length-1
-
-        console.log(item)
-        console.log(itemSymbols)
-        console.log(Boolean())
-
-       
-
-
-        if(itemSymbols[lastDigitIndex] == '.'  ){
-
-          
-        console.log(item, '...item')
-
-
-          // setcurrentProcessedQuestion(([...currentProcessedQuestion, item]))
-          console.log(array)
-          // console.log(currentProcessedQuestion,'relyyy')
-          // setquestionProcessedArray((prev:any) => ([...prev,[...currentProcessedQuestion, item]]))
-          
-          
-          // array = []
+      const value = e.target.value
+      setcurrentAnswers((prevState: { A: string; B: string; C: string; D: string; })=>{
+      
+        if(props == 'A'){
+          return {  ...prevState, A:value}
+        }else if(props == 'B'){
+          return {  ...prevState, B:value}
+        }else if(props== 'C'){
+          return {  ...prevState, C:value}
         }else{
-          console.log(item, 'item')
-          // array.push(item)
-
-          array.push(item)
-        
-          // setcurrentProcessedQuestion((prev:any)=> ([...prev,item]))
-
-          // console.log(currentProcessedQuestion, 'behave')
+          return {...prevState, D:value}
         }
         
-
-      }
-     })
-
- 
-    // console.log(questionAndOptionsArray)
-    }
-  }, [isProcessData]);
-
-  console.log(currentProcessedQuestion)
-  console.log(questionProcessedArray)
-
+      })
+   
+  }
 
   const Optioninput = (props:any) => {
+
+
+    const txt = props.text
+
+    console.log(props.inputValue)
+
+    const change =(e:any)=> props.inputValue(e)
+
+
     return (
       <div className='flex text-xl'>
       <div className='px-2 w-8 bg-white'>{
         props.text
       }</div>
-      <input className='border-2 border-gray-400  w-full' />
+      <input 
+        onChange={e=>{props.inputValue}}
+        value={props.valuex} 
+        className='border-2 border-gray-400  w-full' />
     </div>
     )
- 
   }
+
+  const SingleQuestion = (props:any) => {
+    return (
+      <div className='text-sm' >
+        {props.question}
+      </div>
+    )
+  }
+
+  console.log(questionsArray)
+
+  const questionsSideBarList = questionsArray.length? questionsArray.map((item:any) => {
+    return (
+      <SingleQuestion
+      question={item.question}
+      />
+    )
+ 
+  }):<div>
+    No questions Created Yet
+  </div>
+
+  // setTimeout(() => {
+  //   setAnimateSave(true)
+  // }, 3000);
+
 
   return (
     <div className='flex  justify-between'>
@@ -116,66 +120,201 @@ let questionAndOptionsArray
     }
     handleClick={()=>setisTextRaw(prev => !prev)}
     />
-
-  {/* <div onClick={()=>setisTextRaw(prev => !prev)}>
-  [D]
- </div> */}
 </div>
-{!isTextRaw &&   <div>
-<div>
+
+
+{Boolean(AnimateSave && isTextRaw)  &&
+  <motion.div style={{
+    height:100,
+    width:280
+  }} className='absolute mt-16  z-10 left-0 rounded-3xl text-lg  flex justify-end'>
+    <div className='flex flex-col' >
+      <div className=' rounded-full bg-amber-800 text-green-600 flex justify-center  items-center' style={{
+        width:50,
+        height:50
+      }} >
+          ?
+      </div>
+
+  
+    </div>
+
+
+  </motion.div>
+
+}
+
+{Boolean(  AnimateSave && !isTextRaw)
+ &&
+  <motion.div style={{
+    height:200,
+    width:260
+  }} className='absolute mt-10  z-10 left-0 rounded-3xl text-sm  flex justify-end'>
+
+<div className='flex flex-col' >
+      <div className='rounded-full bg-amber-800 text-amber-800 items-center' style={{
+        width:100,
+        height:20
+      }} >
+          x
+      </div>
+
+      <div className='rounded-full bg-amber-800 text-sm text-amber-800 flex items-center mt-1' style={{
+        width:100,
+        height:20
+      }} >
+          x
+      </div>
+    </div>
+
+  </motion.div>
+
+}
+
+
+{isTextRaw &&   
+<motion.div  transition={{type:'tween', duration:0.3}} animate={AnimateSave && {x:-50}} >
+<motion.div>
 <textarea
-onChange={(e)=>{setquestionsRaw(e.target.value)}}  
-className='w-full text-lg bg-white text-black mt-4 p-2'
-value={questionsRaw}
+onChange={(e)=>{setcurrentQuestion(e.target.value)}}  
+className='w-full text-base bg-white text-black mt-4 p-2'
+value={currentQuestion}
 // maxRows={4}
 // aria-label="maximum height"
 // placeholder="Maximum 4 rows"
 defaultValue=""
-style={{ height: 300 }}
+style={{ height: 400 }}
 />
-</div>
-</div>}
+</motion.div>
+</motion.div>}
 
-{isTextRaw &&   <div>
+{!isTextRaw &&   <motion.div  transition={{type:'tween', duration:0.2}} animate={AnimateSave && {x:-70}}>
 
 <div className='border border-gray-400 my-4'>
 <textarea
-onChange={(e)=>{setquestionsRaw(e.target.value)}}  
+onChange={(e)=>{setcurrentquestionsRaw(e.target.value)}}  
 className='w-full text-lg bg-white  text-black  p-2 border border-gray-400'
 placeholder='Enter Question'
-value={questionsRaw}
+value={currentquestionsRaw}
 defaultValue=""
 style={{ height: 100,
 outline:'none' }}
 />
 </div>
 
+
+
 <div className='border-4 flex flex-col'>
-  <Optioninput
-  text='A'
+
+<div className='flex text-xl'>
+      <div className='px-2 w-8 bg-white'>A</div>
+      <input 
+        onChange= {e=>{console.log(e.target.value)
+          setcurrentAnswers((prev) => ({...prev, A:e.target.value}))
+          }}
+        value={currentAnswers.A} 
+        className='border-2 border-gray-400  w-full' />
+    </div>
+
+    <div className='flex text-xl'>
+      <div className='px-2 w-8 bg-white'>B</div>
+      <input 
+        onChange= {e=>{console.log(e.target.value)
+          setcurrentAnswers((prev) => ({...prev, B:e.target.value}))
+          }}
+        value={currentAnswers.B} 
+        className='border-2 border-gray-400  w-full' />
+    </div>
+
+    <div className='flex text-xl'>
+      <div className='px-2 w-8 bg-white'>C</div>
+      <input 
+        onChange= {e=>{console.log(e.target.value)
+          setcurrentAnswers((prev) => ({...prev, C:e.target.value}))
+          }}
+        value={currentAnswers.C} 
+        className='border-2 border-gray-400  w-full' />
+    </div>
+
+    <div className='flex text-xl'>
+      <div className='px-2 w-8 bg-white'>D</div>
+      <input 
+        onChange= {e=>{console.log(e.target.value)
+          setcurrentAnswers((prev) => ({...prev, D:e.target.value}))
+          }}
+        value={currentAnswers.D} 
+        className='border-2 border-gray-400  w-full' />
+    </div>
+
+{/*     
+
+
+  <input
+  value={currentAnswers.A}
+  onChange= {e=>{console.log(e.target.value)
+  setcurrentAnswers((prev) => ({...prev, A:e.target.value}))
+  }}
   />
 
-<Optioninput
+<input
+className=''
+  value={currentAnswers.A}
+  onChange= {e=>{console.log(e.target.value)
+  setcurrentAnswers((prev) => ({...prev, D:e.target.value}))
+  }}
+  />
+
+<input
+  value={currentAnswers.A}
+  onChange= {e=>{console.log(e.target.value)
+  setcurrentAnswers((prev) => ({...prev, C:e.target.value}))
+  }}
+  />
+
+<input
+  value={currentAnswers.A}
+  onChange= {e=>{console.log(e.target.value)
+  setcurrentAnswers((prev) => ({...prev, D:e.target.value}))
+  }}
+  /> */}
+
+
+
+  {/* <Optioninput
+  valuex  = {currentAnswers.B}
   text='B'
+  inputValue = {(e:any)=>{setcurrentAnswers((prev:any) => ({C:e.target.value, ...prev}))}}
+  /> */}
+
+{/* <Optioninput
+  valuex ={currentAnswers.B}
+  text = 'B'
+  inputValue = {(e:any)=>{setcurrentAnswers((prev:any) => ({C:e.target.value, ...prev}))}}
   />
 
 <Optioninput
+  valuex ={currentAnswers.C}
   text='C'
+  inputValue = {(e:any)=>{setcurrentAnswers((prev:any) => ({C:e.target.value, ...prev}))}}
   />
 
 <Optioninput
+  valuex ={currentAnswers.D}
   text='D'
-  />
+  inputValue = {(e:any)=>{
+    console.log(e.target.value)
+    setcurrentAnswers((prev:any) => ({D:e.target.value, ...prev}))}}
+  /> */}
 
 </div>
 
 
-</div>}
+</motion.div>}
 
 <div className='mt-4 flex justify-end'>
 <DuttonMid
 icon='Save'
-handleClick={()=>setisProcessData(prev => !prev)}
+handleClick={()=>processQuestionRaw()}
 />
   </div>
   </div>
@@ -186,10 +325,13 @@ handleClick={()=>setisProcessData(prev => !prev)}
     overflowY:'auto',
     overflowX:'hidden',
     wordWrap:'break-word'
-  }} className='text-sm text-wrap text-black mt-8 p-2  hidden lg:block md:block font-bold rounded-3xl '>
-    <div className='opacity-100 polkachild'>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum nesciunt cum cupiditate quaerat similique et esse iste nostrum. Rerum quam voluptatibus blanditiis aliquid numquam, ullam error vel tenetur iure ex! ddddddddddddddddd 
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum nesciunt cum cupiditate quaerat similique et esse iste nostrum. Rerum quam voluptatibus blanditiis aliquid numquam, ullam error vel tenetur iure ex! ddddddddddddddddd deeeeeeeeeeeeeeeeeeeeeeeeeeeee
+  }} className='text-sm text-wrap text-black mt-8 p-2  hidden lg:block md:block font-bold  rounded-3xl '>
+    <div className='opacity-100 polkachild border'>
+      Questions
+    </div>
+
+    <div>
+      {questionsSideBarList}
     </div>
 
     </div>
