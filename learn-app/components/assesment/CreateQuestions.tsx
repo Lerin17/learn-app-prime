@@ -72,19 +72,33 @@ const [lunch, setlunch] = React.useState('');
   }
 
   const SingleQuestion = (props:any) => {
+    console.log(props.n)
+
     return (
-      <div className='text-sm' >
-        {props.question}
+      <div className='text-sm items-center my-2 flex' >
+        <div className='pr-2'>
+          {parseInt(props.index)+ 1}
+        </div>
+        <div>
+          <span style={{
+            wordWrap:'break-word'
+          }} className='bg-amber-700 w-fit inline'>
+          {props.question}
+          </span>
+        </div>
+     
+       
       </div>
     )
   }
 
   console.log(questionsArray)
 
-  const questionsSideBarList = questionsArray.length? questionsArray.map((item:any) => {
+  const questionsSideBarList = questionsArray.length? questionsArray.map((item:any, n:any) => {
     return (
       <SingleQuestion
       question={item.question}
+      index={n}
       />
     )
  
@@ -176,9 +190,9 @@ const [lunch, setlunch] = React.useState('');
 <motion.div  transition={{type:'tween', duration:0.3}} animate={AnimateSave && {x:-50}} >
 <motion.div>
 <textarea
-onChange={(e)=>{setcurrentQuestion(e.target.value)}}  
+onChange={(e)=>{setcurrentquestionsRaw(e.target.value)}}  
 className='w-full text-base bg-white text-black mt-4 p-2'
-value={currentQuestion}
+value={currentquestionsRaw}
 // maxRows={4}
 // aria-label="maximum height"
 // placeholder="Maximum 4 rows"
@@ -192,10 +206,10 @@ style={{ height: 400 }}
 
 <div className='border border-gray-400 my-4'>
 <textarea
-onChange={(e)=>{setcurrentquestionsRaw(e.target.value)}}  
+onChange={(e)=>{setcurrentQuestion(e.target.value)}}  
 className='w-full text-lg bg-white  text-black  p-2 border border-gray-400'
 placeholder='Enter Question'
-value={currentquestionsRaw}
+value={currentQuestion}
 defaultValue=""
 style={{ height: 100,
 outline:'none' }}
@@ -246,65 +260,7 @@ outline:'none' }}
         className='border-2 border-gray-400  w-full' />
     </div>
 
-{/*     
 
-
-  <input
-  value={currentAnswers.A}
-  onChange= {e=>{console.log(e.target.value)
-  setcurrentAnswers((prev) => ({...prev, A:e.target.value}))
-  }}
-  />
-
-<input
-className=''
-  value={currentAnswers.A}
-  onChange= {e=>{console.log(e.target.value)
-  setcurrentAnswers((prev) => ({...prev, D:e.target.value}))
-  }}
-  />
-
-<input
-  value={currentAnswers.A}
-  onChange= {e=>{console.log(e.target.value)
-  setcurrentAnswers((prev) => ({...prev, C:e.target.value}))
-  }}
-  />
-
-<input
-  value={currentAnswers.A}
-  onChange= {e=>{console.log(e.target.value)
-  setcurrentAnswers((prev) => ({...prev, D:e.target.value}))
-  }}
-  /> */}
-
-
-
-  {/* <Optioninput
-  valuex  = {currentAnswers.B}
-  text='B'
-  inputValue = {(e:any)=>{setcurrentAnswers((prev:any) => ({C:e.target.value, ...prev}))}}
-  /> */}
-
-{/* <Optioninput
-  valuex ={currentAnswers.B}
-  text = 'B'
-  inputValue = {(e:any)=>{setcurrentAnswers((prev:any) => ({C:e.target.value, ...prev}))}}
-  />
-
-<Optioninput
-  valuex ={currentAnswers.C}
-  text='C'
-  inputValue = {(e:any)=>{setcurrentAnswers((prev:any) => ({C:e.target.value, ...prev}))}}
-  />
-
-<Optioninput
-  valuex ={currentAnswers.D}
-  text='D'
-  inputValue = {(e:any)=>{
-    console.log(e.target.value)
-    setcurrentAnswers((prev:any) => ({D:e.target.value, ...prev}))}}
-  /> */}
 
 </div>
 

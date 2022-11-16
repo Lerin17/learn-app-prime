@@ -256,7 +256,7 @@ body::-webkit-scrollbar-thumb {
 
 body {
   scrollbar-width: thin;          /* "auto" or "thin" */
-  scrollbar-color: rgb(255, 255, 255) #92400e;   /* scroll thumb and track */ 
+  scrollbar-color: rgb(184, 184, 184) #92400e;   /* scroll thumb and track */ 
 }
 
 .polka{
