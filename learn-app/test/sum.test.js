@@ -8,9 +8,3 @@ describe('example tests', ()=> {
     })
 })
 
-// describe('truthy or falsy', ()=> {
-//     it('adds two numbers', () => {
-//         const result = Add(1,2)
-//         expect(result).toEqual(3)
-//     })
-// })

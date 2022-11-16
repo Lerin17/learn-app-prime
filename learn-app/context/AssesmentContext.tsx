@@ -42,6 +42,7 @@ const AssesmentContextProvider = (props:any) => {
 let arrayBatch:string[] = []
 
 const processQuestionRaw = () => {
+  // 
   const splitQuestion =  currentquestionsRaw.split('\n')
   // setisCreateQuestionsOpen([])
   setquestionProcessedArray([])
@@ -49,6 +50,8 @@ const processQuestionRaw = () => {
   setTimeout(() => {
     splitQuestion.map(item => {
       const last = item.length - 1
+
+      // console.log('ssssssssssssssssssssssssssssssssssssssssssssssss')
   
       if(item[last] == '.'){
         
@@ -57,7 +60,9 @@ const processQuestionRaw = () => {
         let array = arrayBatch
         arrayBatch = []
   
+        console.log(array,'dddzszszzszszszzsszz')
         setquestionProcessedArray((prev:any) => ([...prev, array]))
+
   
       }else{
         arrayBatch.push(item)
@@ -116,13 +121,13 @@ setquestionsArray(xx)
   }
 
   
-  console.log(xx, 'whatebver')
+  // console.log(xx, 'whatebver')
 }, [questionProcessedArray]);
 
 
 
 
-console.log(questionProcessedArray, 'Array')
+// console.log(questionProcessedArray, 'Array')
 
 
 
