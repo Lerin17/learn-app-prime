@@ -1,7 +1,8 @@
 import React from 'react'
 import { FaWeebly } from 'react-icons/fa';
 import { Iassesmentcontext } from '../types/context/assesmentcontext';
-import { Iquestion } from '../types/question';
+import { Iquestion } from '../types/context/assesmentcontext';
+import uniqid from 'uniqid'
 
 const AssesmentContext = React.createContext< Iassesmentcontext | null>(null)
 
@@ -11,35 +12,71 @@ const AssesmentContextProvider = (props:any) => {
 
     const [isCreateQuestionsOpen, setisCreateQuestionsOpen] = React.useState<Boolean>(false);
     
+    //the raw questions and answers in their least processed form
     const [currentquestionsRaw, setcurrentquestionsRaw] = React.useState('');
 
+    //questionProcessArray, namechange pending. is a rough array of the questions and answers from the raw inpiut mehtod after they have been partially processed
+    const [questionProcessedArray, setquestionProcessedArray] = React.useState<any>([]);
+
+    //the two below respectively are, current question through normal input method, current Answers object throught normal input mehtod
     const [currentQuestion, setcurrentQuestion] = React.useState('');
 
-    
-
     const [currentAnswers, setcurrentAnswers] = React.useState({
-      A:'A',
-      B:'B',
-      C:'C',
-      D:'D'
+      A:'',
+      B:'',
+      C:'',
+      D:''
     });
+
+    const [currentCorrectAnswer, setcurrentCorrectAnswer] = React.useState('');
 
     // const [, set] = useState();
 
-    const [isProcessData, setisProcessData] = React.useState<Boolean>(false);
 
-    const [questionProcessedArray, setquestionProcessedArray] = React.useState<any>([]);
+ //questions array contains the sum questions set from either raw or normal input method, further subdivisions should be provided enventually
+  const [currentQuestionBatchArray, setcurrentQuestionsBatchArray] = React.useState<Iquestion[] | []>([]);
 
   const [questionsArray, setquestionsArray] = React.useState([]);
 
-    const [currentProcessedQuestion, setcurrentProcessedQuestion] = React.useState<string[]>([]);
 
+const [isOpenSideBarQuestion, setisOpenSideBarQuestion] = React.useState<boolean>(false);
+
+const [currentQuestionBatchTagsArray, setcurrentQuestionBatchTagsArray] = React.useState<string[]>(['All']);
+
+
+// const [currentQuestionBatch, setcurrentQuestionBatch] = React.useState([]);
+// const [Que, setQue] = useState();
 //
 
 // const Add = (a:number, b:number) => {
 //   return a +b
 // }
-let arrayBatch:string[] = []
+
+const addNewTag = () => {
+  setcurrentQuestionBatchTagsArray(prev => [...prev, 'Anything'])
+}
+
+let array:string[] = []
+
+const processQuestionsInput = () => {
+  console.log(currentAnswers)
+  console.log(currentQuestion)
+
+  let findcorrectAnswersArray =['A', 'B', 'C', 'D']
+
+ const answers = [currentAnswers.A, currentAnswers.B, currentAnswers.C, currentAnswers.D]
+
+const correctAnswerIndex = findcorrectAnswersArray.indexOf(currentCorrectAnswer) 
+
+// setcurrentQuestionBatch((prev) => ([]))
+
+  setcurrentQuestionsBatchArray((prev) => ([...prev, {
+    question:currentQuestion,
+    correctanswer:answers[correctAnswerIndex],
+    answers:[currentAnswers.A, currentAnswers.B, currentAnswers.C, currentAnswers.D],
+    id: uniqid()
+  }]))
+}
 
 const processQuestionRaw = () => {
   // 
@@ -51,26 +88,30 @@ const processQuestionRaw = () => {
     splitQuestion.map(item => {
       const last = item.length - 1
 
-      // console.log('ssssssssssssssssssssssssssssssssssssssssssssssss')
+
   
       if(item[last] == '.'){
         
-        arrayBatch.push(item)
+        array.push(item)
   
-        let array = arrayBatch
-        arrayBatch = []
+        let arrayBatch = array
+        array = []
   
-        console.log(array,'dddzszszzszszszzsszz')
-        setquestionProcessedArray((prev:any) => ([...prev, array]))
+        console.log(arrayBatch,'dddzszszzszszszzsszz')
+        setquestionProcessedArray((prev:any) => ([...prev, arrayBatch]))
 
   
       }else{
-        arrayBatch.push(item)
+        array.push(item)
       }
     })
   }, 10);
 
 }
+
+React.useEffect(() => {
+  
+}, []);
 
 React.useEffect(() => {
   let processArray
@@ -85,23 +126,26 @@ React.useEffect(() => {
       return filtred
   
     })
-
-
-
   }
 
-  let xx
+  let getProcessedArray:Iquestion[] | []
 
   if(processArray){
     
- xx =  processArray.map((item:any) => {
-  let question
+ getProcessedArray
+    =  processArray.map((item:any) => {
+  let question:string=''
   let answers:string[] = []
+  let correctanswer:string=''
 
 
   if(item){
     item.map((text:any) => {
-      
+      console.log(text[text.length-1])
+      if(text[text.length-1] == '/'){
+        correctanswer = text
+      }
+
       if(item[0] == text){
         question = text
       }else{
@@ -112,13 +156,28 @@ React.useEffect(() => {
     return {
       question,
       answers,
-      id:Date.now()
+      correctanswer,
+      id:uniqid()
     }
   }
 }) 
 
-setquestionsArray(xx)
+const presentIds:any[] = currentQuestionBatchArray.length? currentQuestionBatchArray.map(item => (item.question)):[]
+
+// presentIds.includes('e')
+// console.log(getProcessedArray, 'getProcessedArray')
+
+const itemNotPresent = getProcessedArray.filter((item:any) => {
+  if(!presentIds.includes(item.question)){
+    return item
   }
+})
+
+// console.log(wor, 'work')
+
+setcurrentQuestionsBatchArray((prev:Iquestion[]) => ([...prev,...itemNotPresent]))
+
+}
 
   
   // console.log(xx, 'whatebver')
@@ -126,31 +185,8 @@ setquestionsArray(xx)
 
 
 
-
-// console.log(questionProcessedArray, 'Array')
-
-
-
-// export default Add
-
-
-  // React.useEffect(() => {
-  //   console.log(currentProcessedQuestion, 'currently')
-  //   setcurrentProcessedQuestion([]) 
-  // }, [questionProcessedArray]);
-
-
-  // React.useEffect(()=> {
-
-  //   let processed
-
-  //   processed = que
-
-  // }, [])
-  // module.exports = Add
-
   return (
-    <AssesmentContext.Provider value={{isCreateQuestionsOpen,questionProcessedArray , currentProcessedQuestion,setcurrentProcessedQuestion,isProcessData,setquestionProcessedArray,setisCreateQuestionsOpen, setcurrentquestionsRaw, currentquestionsRaw, setisProcessData, processQuestionRaw, questionsArray,currentQuestion,setcurrentQuestion,setcurrentAnswers,currentAnswers }}>
+    <AssesmentContext.Provider value={{isCreateQuestionsOpen,questionProcessedArray , setquestionProcessedArray,setisCreateQuestionsOpen, setcurrentquestionsRaw, currentquestionsRaw,processQuestionRaw, currentQuestionBatchArray, currentQuestion,setcurrentQuestion,setcurrentAnswers,currentAnswers, processQuestionsInput, isOpenSideBarQuestion,setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,currentQuestionBatchTagsArray,setcurrentQuestionBatchTagsArray,addNewTag }}>
         {props.children}
     </AssesmentContext.Provider>
   )

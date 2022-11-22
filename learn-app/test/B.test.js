@@ -31,13 +31,13 @@ const TestingAssesmentContextKeyFunctions = () => {
 
 describe('example tests', ()=> {
 
-    beforeEach(()=>{
-        expectedProps= {
-            jack:'dom'
-        }
-    })
+    // beforeEach(()=>{
+    //     expectedProps {
+    //         jack:'dom'
+    //     }
+    // })
 
-    const {getByTestId} = render(
+    const {getByTestId, getByText} = render(
         <AssesmentContextProvider>
             <TestingComponent/>
         </AssesmentContextProvider>

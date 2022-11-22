@@ -4,14 +4,10 @@ export interface Iassesmentcontext {
     setisCreateQuestionsOpen:React.Dispatch<React.SetStateAction<Boolean>>
     setcurrentquestionsRaw:React.Dispatch<React.SetStateAction<string>>
     currentquestionsRaw:string
-    isProcessData:Boolean
-    setisProcessData:React.Dispatch<React.SetStateAction<Boolean>>
     questionProcessedArray:any
     setquestionProcessedArray:React.Dispatch<React.SetStateAction<any>>
-    currentProcessedQuestion:any
-    setcurrentProcessedQuestion:React.Dispatch<React.SetStateAction<any>>
     processQuestionRaw:()=>void
-    questionsArray:Iquestion[]
+    currentQuestionBatchArray:Iquestion[] | []
     currentQuestion:string
     setcurrentQuestion:React.Dispatch<React.SetStateAction<any>>
     currentAnswers:{
@@ -26,6 +22,15 @@ export interface Iassesmentcontext {
         C: string;
         D: string;
     }>>
+    processQuestionsInput:()=>void
+    isOpenSideBarQuestion:boolean
+    setisOpenSideBarQuestion:React.Dispatch<React.SetStateAction<boolean>>
+    setcurrentCorrectAnswer:React.Dispatch<React.SetStateAction<string>>
+    currentCorrectAnswer:string
+    currentQuestionBatchTagsArray:string[]
+    setcurrentQuestionBatchTagsArray:React.Dispatch<React.SetStateAction<string[]>>
+    addNewTag:()=>void
+
 
 }
 
@@ -34,4 +39,5 @@ export interface Iquestion {
     answers:string[]
     correctanswer?:string
     id:string
+    tags?:[]
 }

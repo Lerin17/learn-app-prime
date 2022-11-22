@@ -1,6 +1,6 @@
-export interface Iquestion {
-    options: string[]
-    correctAnswer: string
-    course: object
-    report: {}
-}
+// export interface Iquestion {
+//     options: string[]
+//     correctAnswer: string
+//     course: object
+//     report: {}
+// }

@@ -340,6 +340,10 @@ textarea {
 background-color: #000000;
 }
 
+.MuiSelect-select{
+  border: none;
+}
+
 .choc{
   /* background-color: #92400e;
   opacity: 1;

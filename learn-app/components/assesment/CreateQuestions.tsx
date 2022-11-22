@@ -2,14 +2,15 @@ import { InputBase, TextareaAutosize } from '@mui/material'
 import React from 'react'
 import { AssesmentContext } from '../../context/AssesmentContext';
 import { DuttonLarge,DuttonMid, DuttonSmall } from '../GeneralPurpose/dutton';
+import { Select, MenuItem, Button, FormControl, InputLabel } from '@mui/material'
 
 import { Iassesmentcontext } from '../../types/context/assesmentcontext';
 import { motion } from 'framer-motion';
-import e from 'express';
+import ReactSelect, {StylesConfig} from 'react-select'
 
 const CreateQuestions = () => {
   // const [questionsRaw, setquestionsRaw] = React.useState('');
-  const {isCreateQuestionsOpen, setisCreateQuestionsOpen, currentquestionsRaw, setcurrentquestionsRaw, setisProcessData,questionProcessedArray,currentProcessedQuestion,setcurrentProcessedQuestion,setquestionProcessedArray,isProcessData, processQuestionRaw, questionsArray, currentQuestion,setcurrentQuestion, currentAnswers, setcurrentAnswers} = React.useContext(AssesmentContext) as Iassesmentcontext
+  const {isCreateQuestionsOpen, setisCreateQuestionsOpen, currentquestionsRaw, setcurrentquestionsRaw,questionProcessedArray, processQuestionRaw, currentQuestionBatchArray, currentQuestion,setcurrentQuestion, currentAnswers, setcurrentAnswers, processQuestionsInput, isOpenSideBarQuestion, setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,    currentQuestionBatchTagsArray,    setcurrentQuestionBatchTagsArray, addNewTag} = React.useContext(AssesmentContext) as Iassesmentcontext
 
 
   const [isTextRaw, setisTextRaw] = React.useState(false);
@@ -24,6 +25,21 @@ const [lunch, setlunch] = React.useState('');
   // }
 
   // console.log(lunch)
+
+  // setTimeout(() => {
+  //   setAnimateSave(prev => !prev)
+  // }, 2000);
+
+  const handleSelectChange = (e:any) => {
+    const getTagsArray = e.map((item:any) => (item.value))
+
+    setcurrentQuestionBatchTagsArray(getTagsArray)
+  }
+
+  const selectStyles:StylesConfig = {
+    control: (styles) => ({ ...styles, backgroundColor: 'white' , border:'none'})
+
+  }
 
   const inputvalue = ({e,props}:any) => {
 
@@ -48,6 +64,44 @@ const [lunch, setlunch] = React.useState('');
    
   }
 
+  const TagsSelectComponent = (props:{text:string}) => {
+    return (
+      <div className='rounded-full border px-2 mx-2 cursor-pointer hover:bg-white hover:text-amber-800 transition-all flex items-center' >
+      {props.text}
+      
+      <div>
+      <FormControl className='w-full' sx={{ m: 0, p:0 , border:'none', outline:'none'}} size="small">
+      <InputLabel id="demo-select-small"></InputLabel>
+      <Select
+      className='w-full border-none'
+      label='CourseGroups'
+      placeholder='No CourseGroups'
+
+      // size='small'
+      >
+        {
+          <MenuItem>
+          x</MenuItem>
+        }
+      
+      </Select>
+      </FormControl>
+      </div>
+    </div>
+    )
+  }
+
+  const TagsSelectComponetDisplay =     currentQuestionBatchTagsArray.map(item => <TagsSelectComponent
+  text={item}
+  />)
+  
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+
+
   const Optioninput = (props:any) => {
 
 
@@ -71,13 +125,64 @@ const [lunch, setlunch] = React.useState('');
     )
   }
 
-  const SingleQuestion = (props:any) => {
-    console.log(props.n)
+  const EditableSideBarSingleQuestion = (props:any) =>
+  {
+
+    let optionsIndex = ['A', 'B','C', 'D']
+    let n= 0
+    const Answers = props.answers.map((item:string) => { 
+      n++
+      console.log(props.correctanswer)
+      let singleOption
+     if(item[item.length-1] == '/'){
+      singleOption = item.substring(0, item.length-1)
+      }else{
+      singleOption = item
+      } 
+      return (<div className={`${props.correctanswer == item?'bg-lime-500':''}`}>
+        {optionsIndex[n-1]}    {singleOption}
+          </div>)
+    } )
 
     return (
+      <div className='bg-amber-700 flex mt-1' >
+    <div className='flex flex-col items-center p-1 h-full bg-amber-600' >
+      <div className='' >
+          <svg className='w-8' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18 12c-2.435 3.599-4 5.85-4 8.037 0 2.19 1.79 3.963 4 3.963s4-1.773 4-3.963c0-2.187-1.565-4.438-4-8.037zm-.014 2.56c.234.363.514.994.514 1.66 0 1.954-2 2.274-2 1.085 0-.817.994-2.022 1.486-2.745zm-7.986 5.314v-16.874h-4c-1.604 0-2.001 1.826-2.001 3h-1.999v-6h19.999l.001 6h-1.98c0-1.174-.371-3-2.02-3h-4v11.448c-1.244 2.038-2 3.749-2 5.589 0 1.522.582 2.908 1.529 3.963h-6.529v-2h1c1.175 0 2-.952 2-2.126z"/></svg>
+      </div>
+
+      <div className='mt-1' >
+          <svg width="24" className='w-8'  height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M5.662 23l-5.369-5.365c-.195-.195-.293-.45-.293-.707 0-.256.098-.512.293-.707l14.929-14.928c.195-.194.451-.293.707-.293.255 0 .512.099.707.293l7.071 7.073c.196.195.293.451.293.708 0 .256-.097.511-.293.707l-11.216 11.219h5.514v2h-12.343zm3.657-2l-5.486-5.486-1.419 1.414 4.076 4.072h2.829zm.456-11.429l-4.528 4.528 5.658 5.659 4.527-4.53-5.657-5.657z"/></svg>
+      </div>
+ 
+          </div>
+
+        <div>
+          <div className='text-base'>
+            {props.question}
+          
+          </div>
+
+          <div>
+          {Answers}
+          </div>
+        </div>
+ 
+      </div>
+    )
+  }
+
+  const SidebarSingleQuestion = (props:any) => {
+    console.log(props.n)
+//create code for longer digits
+    return (
       <div className='text-sm items-center my-2 flex' >
-        <div className='pr-2'>
-          {parseInt(props.index)+ 1}
+        <div onClick={()=>{
+          setisOpenSideBarQuestion((prev) => (!prev))
+        }} className='pr-2  w-6 text-xs text-white cursor-pointer hover:scale-125 transition-all flex border '>
+         
+            {parseInt(props.index)+ 1}
+          
         </div>
         <div>
           <span style={{
@@ -86,21 +191,31 @@ const [lunch, setlunch] = React.useState('');
           {props.question}
           </span>
         </div>
-     
-       
       </div>
     )
   }
 
-  console.log(questionsArray)
+  console.log(currentQuestionBatchArray)
 
-  const questionsSideBarList = questionsArray.length? questionsArray.map((item:any, n:any) => {
-    return (
-      <SingleQuestion
-      question={item.question}
-      index={n}
-      />
-    )
+  const questionsSideBarList = currentQuestionBatchArray.length? currentQuestionBatchArray.map((item:any, n:any) => {
+    if(!isOpenSideBarQuestion){
+      return (
+        <SidebarSingleQuestion
+        question={item.question}
+        index={n}
+        />)
+    }else{
+      return (
+        <EditableSideBarSingleQuestion
+        question={item.question}
+        index={n}
+        answers={item.answers}
+        correctanswer={item.correctanswer}
+        />
+      )
+    }
+   
+    
  
   }):<div>
     No questions Created Yet
@@ -112,12 +227,55 @@ const [lunch, setlunch] = React.useState('');
 
 
   return (
-    <div className='flex  justify-between'>
+    <div className='flex  justify-between relative'>
      
 
     <div className='w-full lg:w-10/12 md:w-10/12 '>
 
-    <div className='flex text-xl '>
+      
+{/* <div style={{
+  overflowX:'auto'
+}} className='flex text-base mb-2 text-white transition-all pb-4 absolute z-10' > */}
+
+  <ReactSelect
+  className='text-base focus:border-none'
+   options={options}
+   isMulti
+   onChange={(e:any)=>{
+    handleSelectChange(e)
+    // console.log(v)
+   }}
+   styles={
+    selectStyles
+    // display:'absolute'
+   }
+  />
+    
+    {/* {TagsSelectComponetDisplay} */}
+    {/* <div className='rounded-full border px-2 mx-2 cursor-pointer hover:bg-white hover:text-amber-800 '>
+      Agriculture 
+      <span>
+        V
+      </span>
+    </div>
+
+    <div className='rounded-full border px-2 mx-2 cursor-pointer hover:bg-white hover:text-amber-800 transition-all ' >
+      Agriculture 
+      <span>
+        V
+      </span>
+    </div> */}
+
+    {/* <Button onClick={()=>addNewTag()} className='text-black' >
+      +
+    </Button> */}
+{/* 
+    <div>
+      +
+    </div> */}
+{/* </div> */}
+
+    <div className='flex text-xl mt-3'>
     <DuttonSmall
     icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14 19h-4c-.276 0-.5.224-.5.5s.224.5.5.5h4c.276 0 .5-.224.5-.5s-.224-.5-.5-.5zm0 2h-4c-.276 0-.5.224-.5.5s.224.5.5.5h4c.276 0 .5-.224.5-.5s-.224-.5-.5-.5zm.25 2h-4.5l1.188.782c.154.138.38.218.615.218h.895c.234 0 .461-.08.615-.218l1.187-.782zm3.75-13.799c0 3.569-3.214 5.983-3.214 8.799h-5.572c0-2.816-3.214-5.23-3.214-8.799 0-3.723 2.998-5.772 5.997-5.772 3.001 0 6.003 2.051 6.003 5.772zm4-.691v1.372h-2.538c.02-.223.038-.448.038-.681 0-.237-.017-.464-.035-.69h2.535zm-10.648-6.553v-1.957h1.371v1.964c-.242-.022-.484-.035-.726-.035-.215 0-.43.01-.645.028zm5.521 1.544l1.57-1.743 1.019.918-1.603 1.777c-.25-.297-.593-.672-.986-.952zm-10.738.952l-1.603-1.777 1.019-.918 1.57 1.743c-.392.28-.736.655-.986.952zm-1.597 5.429h-2.538v-1.372h2.535c-.018.226-.035.454-.035.691 0 .233.018.458.038.681z"/></svg>}
     handleClick={()=>console.log('d')}
@@ -137,11 +295,12 @@ const [lunch, setlunch] = React.useState('');
 </div>
 
 
+
 {Boolean(AnimateSave && isTextRaw)  &&
   <motion.div style={{
     height:100,
     width:280
-  }} className='absolute mt-16  z-10 left-0 rounded-3xl text-lg  flex justify-end'>
+  }} className='absolute mt-16  z-10 left-0 rounded-3xl text-lg  flex justify-start border'>
     <div className='flex flex-col' >
       <div className=' rounded-full bg-amber-800 text-green-600 flex justify-center  items-center' style={{
         width:50,
@@ -221,7 +380,9 @@ outline:'none' }}
 <div className='border-4 flex flex-col'>
 
 <div className='flex text-xl'>
-      <div className='px-2 w-8 bg-white'>A</div>
+      <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent> | any)=>{
+        console.log(event.target.innerText)
+        setcurrentCorrectAnswer(event.target.innerText)}} className= {`${currentCorrectAnswer=='A'?'bg-lime-500':'bg-white'} px-2 w-8  cursor-pointer`}>A</div>
       <input 
         onChange= {e=>{console.log(e.target.value)
           setcurrentAnswers((prev) => ({...prev, A:e.target.value}))
@@ -230,8 +391,10 @@ outline:'none' }}
         className='border-2 border-gray-400  w-full' />
     </div>
 
-    <div className='flex text-xl'>
-      <div className='px-2 w-8 bg-white'>B</div>
+    <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent> | any)=>{
+        console.log(event.target.innerText)
+        setcurrentCorrectAnswer(event.target.innerText)}}  className='flex text-xl'>
+      <div className= {`${currentCorrectAnswer=='B'?'bg-lime-500':'bg-white'} px-2 w-8  cursor-pointer`}>B</div>
       <input 
         onChange= {e=>{console.log(e.target.value)
           setcurrentAnswers((prev) => ({...prev, B:e.target.value}))
@@ -241,7 +404,9 @@ outline:'none' }}
     </div>
 
     <div className='flex text-xl'>
-      <div className='px-2 w-8 bg-white'>C</div>
+      <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent> | any)=>{
+        console.log(event.target.innerText)
+        setcurrentCorrectAnswer(event.target.innerText)}} className= {`${currentCorrectAnswer=='C'?'bg-lime-500':'bg-white'} px-2 w-8  cursor-pointer`}>C</div>
       <input 
         onChange= {e=>{console.log(e.target.value)
           setcurrentAnswers((prev) => ({...prev, C:e.target.value}))
@@ -251,7 +416,9 @@ outline:'none' }}
     </div>
 
     <div className='flex text-xl'>
-      <div className='px-2 w-8 bg-white'>D</div>
+      <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent> | any)=>{
+        console.log(event.target.innerText)
+        setcurrentCorrectAnswer(event.target.innerText)}} className= {`${currentCorrectAnswer=='D'?'bg-lime-500':'bg-white'} px-2 w-8  cursor-pointer`}>D</div>
       <input 
         onChange= {e=>{console.log(e.target.value)
           setcurrentAnswers((prev) => ({...prev, D:e.target.value}))
@@ -267,23 +434,28 @@ outline:'none' }}
 
 </motion.div>}
 
-<div className='mt-4 flex justify-end'>
+{!isOpenSideBarQuestion &&
+  <div className='mt-4 flex justify-end'>
 <DuttonMid
 icon='Save'
-handleClick={()=>processQuestionRaw()}
+handleClick={isTextRaw? ()=>processQuestionRaw():()=>processQuestionsInput()}
 />
   </div>
+}
+
   </div>
 
   <div style={{
-    height:400,
-    width:150,
+    height:450,
+    width:isOpenSideBarQuestion? 300:150,
     overflowY:'auto',
     overflowX:'hidden',
     wordWrap:'break-word'
-  }} className='text-sm text-wrap text-black mt-8 p-2  hidden lg:block md:block font-bold  rounded-3xl '>
-    <div className='opacity-100 polkachild border'>
-      Questions
+  }} className={`text-sm text-wrap ${isOpenSideBarQuestion?'right-0 absolute z-10 ':""}text-black mt-20 p-2 pt-8 bg-amber-800  transition-all hidden lg:block md:block font-bold `}>
+    <div className={`opacity-100 bg-amber-800 polkachild border flex ${isOpenSideBarQuestion?'fixed':''}`}>
+      <div className='cursor-pointer w-8' onClick={()=>{setisOpenSideBarQuestion((prev)=>(!prev))}} >x</div>
+      {!isOpenSideBarQuestion && 'Questions'}
+      
     </div>
 
     <div>

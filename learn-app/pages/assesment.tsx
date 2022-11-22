@@ -18,7 +18,7 @@ const assesment:NextPage = () => {
     style={{
       // backgroundColor:'#DD9D29'
     }}
-    className='flex justify-center mt-8  xl:px-16 lg:px-10 '>
+    className='flex justify-center mt-4  xl:px-16 lg:px-10 '>
         <div className='xl:w-8/12 lg:w-9/12 w-11/12 '>
         <div className='font-header6 font-extralight text-5xl text-black ' >
           {!isCreateQuestionsOpen &&
