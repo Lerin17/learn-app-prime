@@ -7,6 +7,7 @@ import { AssesmentContext } from '../context/AssesmentContext'
 
 import { Iassesmentcontext } from '../types/context/assesmentcontext'
 import { AnimatePresence, motion } from 'framer-motion'
+import zIndex from '@mui/material/styles/zIndex'
 
 
 
@@ -31,11 +32,27 @@ const assesment:NextPage = () => {
           {!isCreateQuestionsOpen &&
           <motion.div 
           transition={{
-            duration:'0.7',
+
+            duration:0.7,
+            type:'tween',
+            // delay:scale:{x:''}
             
           }}
+
+          initial={{
+            opacity:1
+          }}
+
          exit={{
-            x:620,
+            scale:1.5,
+            border:'solid brown 1px',
+            marginLeft:'100px',
+            zIndex:'-1',
+            x:-400,
+            y:-200,
+            opacity:0.1
+            // display:'absolute'
+            // x:620,
             // opacity:0
              }}>
           <QuestionsHome/>
@@ -68,7 +85,7 @@ const assesment:NextPage = () => {
           </AnimatePresence> */}
 
 
-          <AnimatePresence>
+          {/* <AnimatePresence>
             {isCreateQuestionsOpen &&
               <motion.div
               initial={{
@@ -89,27 +106,41 @@ const assesment:NextPage = () => {
                 .
               </motion.div>
             }
-          </AnimatePresence>
+          </AnimatePresence> */}
 
             {isCreateQuestionsOpen &&
 
-            <motion.div 
+            <motion.div className=''
             exit={{
-              y:40
+              // y:40
             }}
             initial={{
-              x:-500,
-              display:'none'
+              scale:0.4,
+              x:500,
+              y:300,
+              backgroundColor:'',
+              opacity:0.1
+              // display:'absolute',
+
+              // x:-500,
+              // display:'none'
             }}
             animate={{
+              scale: 1,
               x:0,
-              display:'block'
+              y:0,
+              backgroundColor:'',
+              opacity:1
+              // x:-100,
+              // x:0,
+              // display:'block'
             }}
             transition={{
-              delay:0.68,
+              delay:0.6,
               duration:0.6,
               type:'spring',
-              stiffness:100
+              stiffness:50
+              
             }}
             >
                <CreateQuestions/>
