@@ -12,7 +12,7 @@ module.exports = {
         header3: 'ALDO',
         header4: 'PLA',
         header5: 'NEM',
-        header6: 'OBO',
+        header6: 'CHA',
         header7:'OBO-B',
         header8:'OBO-L',
         header9:'OBO-N'

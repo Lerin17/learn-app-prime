@@ -34,7 +34,7 @@ const AssesmentContextProvider = (props:any) => {
 
 
  //questions array contains the sum questions set from either raw or normal input method, further subdivisions should be provided enventually
-  const [currentQuestionBatchArray, setcurrentQuestionsBatchArray] = React.useState<Iquestion[] | []>([]);
+  const [QuestionsArray, setQuestionsArray] = React.useState<Iquestion[] | []>([]);
 
   const [questionsArray, setquestionsArray] = React.useState([]);
 
@@ -70,11 +70,12 @@ const correctAnswerIndex = findcorrectAnswersArray.indexOf(currentCorrectAnswer)
 
 // setcurrentQuestionBatch((prev) => ([]))
 
-  setcurrentQuestionsBatchArray((prev) => ([...prev, {
+  setQuestionsArray((prev) => ([...prev, {
     question:currentQuestion,
     correctanswer:answers[correctAnswerIndex],
     answers:[currentAnswers.A, currentAnswers.B, currentAnswers.C, currentAnswers.D],
-    id: uniqid()
+    id: uniqid(),
+    tags:currentQuestionBatchTagsArray
   }]))
 }
 
@@ -109,9 +110,9 @@ const processQuestionRaw = () => {
 
 }
 
-React.useEffect(() => {
+// React.useEffect(() => {
   
-}, []);
+// }, []);
 
 React.useEffect(() => {
   let processArray
@@ -140,7 +141,7 @@ React.useEffect(() => {
 
 
   if(item){
-    item.map((text:any) => {
+    item.map((text:string) => {
       console.log(text[text.length-1])
       if(text[text.length-1] == '/'){
         correctanswer = text
@@ -157,12 +158,13 @@ React.useEffect(() => {
       question,
       answers,
       correctanswer,
-      id:uniqid()
+      id:uniqid(),
+      tags:currentQuestionBatchTagsArray
     }
   }
 }) 
 
-const presentIds:any[] = currentQuestionBatchArray.length? currentQuestionBatchArray.map(item => (item.question)):[]
+const presentIds:any[] = QuestionsArray.length? QuestionsArray.map(item => (item.question)):[]
 
 // presentIds.includes('e')
 // console.log(getProcessedArray, 'getProcessedArray')
@@ -173,20 +175,16 @@ const itemNotPresent = getProcessedArray.filter((item:any) => {
   }
 })
 
-// console.log(wor, 'work')
-
-setcurrentQuestionsBatchArray((prev:Iquestion[]) => ([...prev,...itemNotPresent]))
+setQuestionsArray((prev:Iquestion[]) => ([...prev,...itemNotPresent]))
 
 }
 
-  
-  // console.log(xx, 'whatebver')
 }, [questionProcessedArray]);
 
 
 
   return (
-    <AssesmentContext.Provider value={{isCreateQuestionsOpen,questionProcessedArray , setquestionProcessedArray,setisCreateQuestionsOpen, setcurrentquestionsRaw, currentquestionsRaw,processQuestionRaw, currentQuestionBatchArray, currentQuestion,setcurrentQuestion,setcurrentAnswers,currentAnswers, processQuestionsInput, isOpenSideBarQuestion,setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,currentQuestionBatchTagsArray,setcurrentQuestionBatchTagsArray,addNewTag }}>
+    <AssesmentContext.Provider value={{isCreateQuestionsOpen,questionProcessedArray , setquestionProcessedArray,setisCreateQuestionsOpen, setcurrentquestionsRaw, currentquestionsRaw,processQuestionRaw, QuestionsArray, currentQuestion,setcurrentQuestion,setcurrentAnswers,currentAnswers, processQuestionsInput, isOpenSideBarQuestion,setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,currentQuestionBatchTagsArray,setcurrentQuestionBatchTagsArray,addNewTag }}>
         {props.children}
     </AssesmentContext.Provider>
   )

@@ -10,7 +10,7 @@ import ReactSelect, {StylesConfig} from 'react-select'
 
 const CreateQuestions = () => {
   // const [questionsRaw, setquestionsRaw] = React.useState('');
-  const {isCreateQuestionsOpen, setisCreateQuestionsOpen, currentquestionsRaw, setcurrentquestionsRaw,questionProcessedArray, processQuestionRaw, currentQuestionBatchArray, currentQuestion,setcurrentQuestion, currentAnswers, setcurrentAnswers, processQuestionsInput, isOpenSideBarQuestion, setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,    currentQuestionBatchTagsArray,    setcurrentQuestionBatchTagsArray, addNewTag} = React.useContext(AssesmentContext) as Iassesmentcontext
+  const {isCreateQuestionsOpen, setisCreateQuestionsOpen, currentquestionsRaw, setcurrentquestionsRaw,questionProcessedArray, processQuestionRaw, QuestionsArray, currentQuestion,setcurrentQuestion, currentAnswers, setcurrentAnswers, processQuestionsInput, isOpenSideBarQuestion, setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,    currentQuestionBatchTagsArray,    setcurrentQuestionBatchTagsArray, addNewTag} = React.useContext(AssesmentContext) as Iassesmentcontext
 
 
   const [isTextRaw, setisTextRaw] = React.useState(false);
@@ -35,6 +35,8 @@ const [lunch, setlunch] = React.useState('');
 
     setcurrentQuestionBatchTagsArray(getTagsArray)
   }
+
+  console.log(currentQuestionBatchTagsArray, 'eex')
 
   const selectStyles:StylesConfig = {
     control: (styles) => ({ ...styles, backgroundColor: 'white' , border:'none'})
@@ -176,10 +178,10 @@ const [lunch, setlunch] = React.useState('');
     console.log(props.n)
 //create code for longer digits
     return (
-      <div className='text-sm items-center my-2 flex' >
+      <div className='text-sm  my-2 flex' >
         <div onClick={()=>{
           setisOpenSideBarQuestion((prev) => (!prev))
-        }} className='pr-2  w-6 text-xs text-white cursor-pointer hover:scale-125 transition-all flex border '>
+        }} className='pr-2  w-6 text-xs text-white cursor-pointer hover:scale-125 transition-all flex  '>
          
             {parseInt(props.index)+ 1}
           
@@ -195,9 +197,9 @@ const [lunch, setlunch] = React.useState('');
     )
   }
 
-  console.log(currentQuestionBatchArray)
+  console.log(QuestionsArray)
 
-  const questionsSideBarList = currentQuestionBatchArray.length? currentQuestionBatchArray.map((item:any, n:any) => {
+  const questionsSideBarList = QuestionsArray.length? QuestionsArray.map((item:any, n:any) => {
     if(!isOpenSideBarQuestion){
       return (
         <SidebarSingleQuestion
@@ -446,14 +448,14 @@ handleClick={isTextRaw? ()=>processQuestionRaw():()=>processQuestionsInput()}
   </div>
 
   <div style={{
-    height:450,
+    height:500,
     width:isOpenSideBarQuestion? 300:150,
     overflowY:'auto',
     overflowX:'hidden',
     wordWrap:'break-word'
-  }} className={`text-sm text-wrap ${isOpenSideBarQuestion?'right-0 absolute z-10 ':""}text-black mt-20 p-2 pt-8 bg-amber-800  transition-all hidden lg:block md:block font-bold `}>
-    <div className={`opacity-100 bg-amber-800 polkachild border flex ${isOpenSideBarQuestion?'fixed':''}`}>
-      <div className='cursor-pointer w-8' onClick={()=>{setisOpenSideBarQuestion((prev)=>(!prev))}} >x</div>
+  }} className={`text-sm text-wrap ${isOpenSideBarQuestion?'right-0 absolute z-10 ':""}text-black  p-2 pt-0  bg-amber-800  transition-all hidden lg:block md:block font-bold `}>
+    <div className={`opacity-100 text-xl bg-amber-800 polkachild border flex justify-between ${isOpenSideBarQuestion?'fixed':''}`}>
+      <div className={`cursor-pointer ${isOpenSideBarQuestion?'w-8 ':'hidden'} `} onClick={()=>{setisOpenSideBarQuestion(false)}} >x</div>
       {!isOpenSideBarQuestion && 'Questions'}
       
     </div>

@@ -7,6 +7,7 @@ import { motion, AnimatePresence, animate } from 'framer-motion'
 
 import {TiPlus} from 'react-icons/ti'
 import {CgMathPlus} from 'react-icons/cg'
+import { DuttonLarge } from '../GeneralPurpose/dutton'
 
 const CourseList = () => {
     const {CoursesArray, coursesArray, toggleNewCoursePanel, courseListSelectedCourse, setcourseListSelectedCourse, setisNewCoursePanelOpen, isCourseList, setisCourseList, setisCreateCourseGroupOpen, isCreateCourseGroupOpen} = React.useContext(CourseContext) as Icoursecontext
@@ -213,26 +214,44 @@ const CourseList = () => {
         if( coursesArray.length === 0){
             return <div className={`${isCreateCourseGroupOpen?'hidden':'mt-6'}`} >
                 {/* <div className='text-lg' >Course list</div> */}
-                <div className='text-5xl ' >
+                <div className='text-6xl text-zinc-300' >
                     No Courses Created Yet,
                     <div className='flex pt-2 cursor-pointer' >
                         Create Course Group
-                        <div  onClick={()=>{setisCreateCourseGroupOpen(true)
+
+                        <DuttonLarge
+                        icon={<div className='flex'>
+                            <svg className='fill-current text-amber-800 ml-1 my-1' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>
+                        <svg className='fill-current text-amber-800 mx-1 my-1'  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>
+                        <svg className='fill-current text-amber-800 my-1 mr-1'  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>
+                        </div>}
+                        handleClick={()=>{
+                            setisCreateCourseGroupOpen(true)
+                        setisCourseList(false)
+                        }}
+                        />,
+                        {/* <div  onClick={()=>{setisCreateCourseGroupOpen(true)
                         setisCourseList(false)
                         }} className=' hover:scale-110 transition-all' >
                         <button className='text-5xl text-black flex items-center  justify-center'>
                             
                             [<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>]
-                            </button></div>,
+                            </button>
+                            </div>, */}
                     </div>
 
                     <div className='flex pt-2 cursor-pointer' >
                         Create Course 
-                        <div  onClick={()=>toggleNewCoursePanel()} className=' hover:scale-110 transition-all' >
+
+                        <DuttonLarge
+                        icon={   <svg className='fill-current text-amber-800 mx-1 my-1'  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>}
+                        handleClick={()=>toggleNewCoursePanel()}
+                        />,
+                        {/* <div  onClick={()=>toggleNewCoursePanel()} className=' hover:scale-110 transition-all' >
                         <button className='text-5xl text-black flex items-center '>[
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>
-                        ]</button></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5.495 4c-1.375 0-1.375-2 0-2h16.505v-2h-17c-1.657 0-3 1.343-3 3v18c0 1.657 1.343 3 3 3h17v-20h-16.505z"/></svg>
+                        ]</button></div> */}
                     </div>                                  
                 </div>
               

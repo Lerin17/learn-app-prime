@@ -41,11 +41,15 @@ const DuttonSmall = (props:duttonProps) => {
 
 const DuttonLarge = (props:duttonProps) => {
   return (
-    <motion.div onClick={props.handleClick} transition={{type:'tween', duration:0.3}} whileHover={{
+    <motion.div 
+ 
+    onClick={props.handleClick} transition={{type:'tween', duration:0.3}} whileHover={{
       skewX:-20
-    }} className='flex items-center font-header6  cursor-pointer px-4'>
+    }} className='flex items-center font-header9 cursor-pointer px-4'>
       [
-      <motion.div  className=' transition-all'>
+      <motion.div    style={{
+      backgroundColor:'#a8a29e'
+    }}  className=' transition-all '>
          {props.icon}
       </motion.div>]
       </motion.div>

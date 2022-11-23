@@ -231,6 +231,11 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
   src: url('../public/fonts/N2/n27-regular-webfont.woff');
 }
 
+@font-face {
+  font-family: 'CHA';
+  src: url('../public/fonts/valcon/Vollkorn-Bold.ttf');
+}
+
 .nylon{
   background-image: url('../images/nylon.png');
 }
@@ -238,6 +243,10 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
 .nylon2{
   background-image: url('../images/nylon.png');
   opacity: '50%';
+}
+
+.borderx{
+  border-radius: 48% 45% 45% 47% / 45% 45% 50% 51%;
 }
 
 body::-webkit-scrollbar {

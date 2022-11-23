@@ -6,6 +6,9 @@ import CreateQuestions from '../components/assesment/CreateQuestions'
 import { AssesmentContext } from '../context/AssesmentContext'
 
 import { Iassesmentcontext } from '../types/context/assesmentcontext'
+import { AnimatePresence, motion } from 'framer-motion'
+
+
 
 const assesment:NextPage = () => {
 
@@ -20,14 +23,98 @@ const assesment:NextPage = () => {
     }}
     className='flex justify-center mt-4  xl:px-16 lg:px-10 '>
         <div className='xl:w-8/12 lg:w-9/12 w-11/12 '>
-        <div className='font-header6 font-extralight text-5xl text-black ' >
+        <div className='font-header6 font-extralight  text-stone-300 ' >
+  
+        {/* <QuestionsHome/> */}
+
+          <AnimatePresence>
           {!isCreateQuestionsOpen &&
-            <QuestionsHome/>
-          }
+          <motion.div 
+          transition={{
+            duration:'0.7',
             
+          }}
+         exit={{
+            x:620,
+            // opacity:0
+             }}>
+          <QuestionsHome/>
+         </motion.div>         
+          }
+          </AnimatePresence>
+
+{/* 
+          <AnimatePresence>
+            {isCreateQuestionsOpen &&
+              <motion.div
+              initial={{
+                display:'none'
+              }}
+              animate={{
+                display: ['none','block','none']
+              }}
+              transition={{
+                duration:0.4,
+                delay: 0.7 
+                
+              }}
+              style={{
+                width:670,
+                height:250,
+              }} className='bg-amber-800 text-amber-800 absolute rounded-l-full z-10 left-0 top-0' >
+                .
+              </motion.div>
+            }
+          </AnimatePresence> */}
+
+
+          <AnimatePresence>
+            {isCreateQuestionsOpen &&
+              <motion.div
+              initial={{
+                display:'block'
+              }}
+              animate={{
+                display: 'none'
+              }}
+              transition={{
+                duration:0.4,
+                delay: 0.7 
+                
+              }}
+              style={{
+                width:470,
+                height:250,
+              }} className='bg-amber-800 text-amber-800 absolute rounded-l-full z-10 right-0 top-36' >
+                .
+              </motion.div>
+            }
+          </AnimatePresence>
 
             {isCreateQuestionsOpen &&
-              <CreateQuestions/>
+
+            <motion.div 
+            exit={{
+              y:40
+            }}
+            initial={{
+              x:-500,
+              display:'none'
+            }}
+            animate={{
+              x:0,
+              display:'block'
+            }}
+            transition={{
+              delay:0.68,
+              duration:0.6,
+              type:'spring',
+              stiffness:100
+            }}
+            >
+               <CreateQuestions/>
+            </motion.div>
+             
             }
         </div>
      

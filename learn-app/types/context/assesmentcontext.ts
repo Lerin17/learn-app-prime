@@ -7,7 +7,7 @@ export interface Iassesmentcontext {
     questionProcessedArray:any
     setquestionProcessedArray:React.Dispatch<React.SetStateAction<any>>
     processQuestionRaw:()=>void
-    currentQuestionBatchArray:Iquestion[] | []
+    QuestionsArray:Iquestion[] | []
     currentQuestion:string
     setcurrentQuestion:React.Dispatch<React.SetStateAction<any>>
     currentAnswers:{
@@ -39,5 +39,5 @@ export interface Iquestion {
     answers:string[]
     correctanswer?:string
     id:string
-    tags?:[]
+    tags?:string[]
 }
