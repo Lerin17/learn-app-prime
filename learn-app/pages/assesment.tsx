@@ -33,7 +33,7 @@ const assesment:NextPage = () => {
           <motion.div 
           transition={{
 
-            duration:0.7,
+            duration:0.4,
             type:'tween',
             // delay:scale:{x:''}
             
@@ -44,12 +44,12 @@ const assesment:NextPage = () => {
           }}
 
          exit={{
-            scale:1.5,
+            scale:1.6,
             border:'solid brown 1px',
             marginLeft:'100px',
             zIndex:'-1',
-            x:-400,
-            y:-200,
+            x:-570,
+            y:-400,
             opacity:0.1
             // display:'absolute'
             // x:620,
@@ -115,7 +115,7 @@ const assesment:NextPage = () => {
               // y:40
             }}
             initial={{
-              scale:0.4,
+              scale:0.2,
               x:500,
               y:300,
               backgroundColor:'',
@@ -136,8 +136,8 @@ const assesment:NextPage = () => {
               // display:'block'
             }}
             transition={{
-              delay:0.6,
-              duration:0.6,
+              delay:0.3,
+              duration:0.4,
               type:'spring',
               stiffness:50
               
