@@ -229,6 +229,8 @@ const [lunch, setlunch] = React.useState('');
 
 
   return (
+
+    
     <div className='flex  justify-between relative'>
      
 
@@ -453,7 +455,7 @@ handleClick={isTextRaw? ()=>processQuestionRaw():()=>processQuestionsInput()}
     overflowY:'auto',
     overflowX:'hidden',
     wordWrap:'break-word'
-  }} className={`text-sm text-wrap ${isOpenSideBarQuestion?'right-0 absolute z-10 ':""}text-black  p-2 pt-0  bg-amber-800  transition-all hidden lg:block md:block font-bold `}>
+  }} className={`text-sm text-wrap ${isOpenSideBarQuestion?'right-0 absolute z-10 ':""}text-black  p-2 pt-0   transition-all hidden lg:block md:block font-bold `}>
     <div className={`opacity-100 text-xl bg-amber-800 polkachild border flex justify-between ${isOpenSideBarQuestion?'fixed':''}`}>
       <div className={`cursor-pointer ${isOpenSideBarQuestion?'w-8 ':'hidden'} `} onClick={()=>{setisOpenSideBarQuestion(false)}} >x</div>
       {!isOpenSideBarQuestion && 'Questions'}
