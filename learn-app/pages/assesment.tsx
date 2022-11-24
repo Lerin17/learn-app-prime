@@ -17,6 +17,15 @@ const assesment:NextPage = () => {
 
   console.log(isCreateQuestionsOpen, 'dam')
 
+  // React.useEffect(() => {
+  //   if(!isCreateQuestionsOpen){
+  //     setTimeout(() => {
+  //     setisCreateQuestionsOpen(true)
+  //     }, 300);
+  //   }
+ 
+  // }, [isCreateQuestionsOpen]);
+
   return (
     <div
     style={{
@@ -33,6 +42,8 @@ const assesment:NextPage = () => {
           transition={!isCreateQuestionsOpen? {
             duration:0.4,
             type:'tween',
+            // delay: 0.7 
+            
 
             // delay:scale:{x:''}
             // delay:0.3,
@@ -42,19 +53,20 @@ const assesment:NextPage = () => {
             
           }:{
             duration:0.4,
-            delay: 0.7 
+            // delay: 0.7 
           }}
 
-          initial={{
+          initial={!isCreateQuestionsOpen?{
+            scale:0.2,
+  x:500,
+  y:300,
+  backgroundColor:'gray',
+  opacity:0.1,
+          }:{
             opacity:1
           }}
 
-          animate={!isCreateQuestionsOpen? {
-           
-            // x:-100,
-            // x:0,
-            // display:'block'
-          }:{
+          animate={ {
             scale: 1,
             x:0,
             y:0,
@@ -132,21 +144,34 @@ const assesment:NextPage = () => {
 {isCreateQuestionsOpen &&
 
 <motion.div className=''
-exit={{
-  // y:40
-}}
-initial={{
+ exit=  {{
+  scale:1.3,
+  border:'solid brown 1px',
+  backgroundColor:'red',
+  // marginLeft:'100px',
+  // zIndex:'-1',
+  x:-970,
+  y:-900,
+  opacity:0.1
+  // display:'absolute'
+  // x:620,
+  // opacity:0
+   }}
+initial={isCreateQuestionsOpen?{
   scale:0.2,
   x:500,
   y:300,
-  backgroundColor:'',
-  opacity:0.1
+  // backgroundColor:'gray',
+  opacity:0.1,
+  
   // display:'absolute',
 
   // x:-500,
   // display:'none'
+}:{
+  opacity:1
 }}
-animate={{
+animate={isCreateQuestionsOpen ? {
   scale: 1,
   x:0,
   y:0,
@@ -155,13 +180,18 @@ animate={{
   // x:-100,
   // x:0,
   // display:'block'
-}}
-transition={{
+}:{}}
+
+transition={isCreateQuestionsOpen? {
   delay:0.3,
   duration:0.4,
-  type:'spring',
-  stiffness:50
+  type:'tween',
+  // stiffness:50
   
+}:{ 
+  duration:0.3,
+  type:'tween'
+  // delay: 0.7 
 }}
 >
    <CreateQuestions/>
