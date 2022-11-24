@@ -66,7 +66,7 @@ const assesment:NextPage = () => {
 
          exit=  {{
             scale:1.6,
-            border:'solid brown 1px',
+            // border:'solid brown 1px',
             marginLeft:'100px',
             // zIndex:'-1',
             x:-570,
@@ -83,14 +83,15 @@ const assesment:NextPage = () => {
           y:300,
           // backgroundColor:'gray',
           opacity:0.1,
-          color:'#92400e'
+          color:'#92400e',
+          // backgroundColor:'#d6d3d1'
                   }}
 
           animate={ {
             scale: 1,
             x:0,
             y:0,
-            backgroundColor:'',
+            // backgroundColor:'',
             opacity:1,
             color:'#d6d3d1'
           }}
@@ -156,46 +157,51 @@ const assesment:NextPage = () => {
           </AnimatePresence> */}
 
 
-          {/* <AnimatePresence>
+           {/* <AnimatePresence>
             {isCreateQuestionsOpen &&
               <motion.div
               initial={{
-                display:'block'
+                display:'block',
+                opacity:100,
+                scale:0.2
+                // y:100,
+                // x:100
               }}
               animate={{
-                display: 'none'
+                display: 'none',
+                scale:1
+                // opacity:0
               }}
               transition={{
                 duration:0.4,
-                delay: 0.7 
-                
+                delay:0.3
               }}
               style={{
-                width:470,
-                height:250,
-              }} className='bg-amber-800 text-amber-800 absolute rounded-l-full z-10 right-0 top-36' >
+                width:350,
+                height:150,
+              }} className='bg-white text-amber-800 absolute  z-10 right-36 bottom-36' >
                 .
               </motion.div>
             }
-          </AnimatePresence> */}
+          </AnimatePresence>  */}
 
 <AnimatePresence>
 {isCreateQuestionsOpen &&
 
 <motion.div className=''
  exit=  {{
-  scale:1.3,
-  // border:'solid brown 1px',
-  backgroundColor:'',
-  // marginLeft:'100px',
-  // zIndex:'-1',
-  x:-770,
-  y:-700,
-  opacity:0.1
-  // display:'absolute'
-  // x:620,
-  // opacity:0
+  scale:1.2,
+            // border:'solid brown 1px',
+            // marginLeft:'100px',
+            // zIndex:'-1',
+            x:-870,
+            y:-659,
+            opacity:0.1,
+  display:'absolute'
+  
    }}
+
+
 
 
 // initial={isCreateQuestionsOpen?{
@@ -217,9 +223,9 @@ const assesment:NextPage = () => {
 //   // display:'block'
 // }:{}}
 
-transition={isCreateQuestionsOpen && {
+transition={{
   // delay:  0.4,
-  duration: 0.4,
+  duration: 0.5,
   type:'tween'  
 }}
 >
@@ -246,19 +252,12 @@ transition={isCreateQuestionsOpen && {
     
   }}
 
-  initial={isCreateQuestionsOpen?{
+  initial={{
     scale:0.2,
     x:500,
     y:300,
     // backgroundColor:'gray',
-    opacity:0.1,
-    
-    // display:'absolute',
-  
-    // x:-500,
-    // display:'none'
-  }:{
-    opacity:1
+    opacity:0.1
   }}
                     // animate={{
                     //   x:0,

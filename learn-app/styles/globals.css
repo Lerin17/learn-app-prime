@@ -235,6 +235,10 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
   font-family: 'CHA';
   src: url('../public/fonts/valcon/Vollkorn-Bold.ttf');
 }
+@font-face {
+  font-family: 'LEMON';
+  src: url('../public/fonts/lemon/LemonMilkLight-owxMq.otf');
+}
 
 .nylon{
   background-image: url('../images/nylon.png');
@@ -347,6 +351,15 @@ textarea {
 .dot{
   background: radial-gradient(circle, transparent 20%, #000000 20%, #000000 80%, transparent 80%, transparent) 0% 0% / 22px 22px, radial-gradient(circle, transparent 20%, #000000 20%, #000000 80%, transparent 80%, transparent) 11px 11px / 22px 22px, linear-gradient(#ffffff 1.5px, transparent 1.5px) 0px -0.75px / 11px 11px, linear-gradient(90deg, #ffffff 1.5px, #000000 1.5px) -0.75px 0px / 11px 11px #000000;
 background-color: #000000;
+}
+
+.vortex{
+ /* background: rgb(146,64,14);
+background: radial-gradient(circle, rgba(146,64,14,1) 2%, rgba(220,98,22,1) 9%, rgba(231,126,47,1) 31%, rgba(247,216,193,1) 45%, rgba(239,231,225,1) 52%, rgba(232,201,179,1) 58%, rgba(155,133,118,1) 67%, rgba(0,0,0,1) 86%, rgba(146,64,14,1) 97%);  */
+
+
+  background: rgb(218,94,18);
+  background: linear-gradient(90deg, rgba(218,94,18,1) 2%, rgba(231,126,47,1) 31%, rgba(247,216,193,1) 45%, rgba(239,231,225,1) 52%, rgba(232,201,179,1) 58%, rgba(155,133,118,1) 67%, rgba(0,0,0,1) 86%); 
 }
 
 .MuiSelect-select{
