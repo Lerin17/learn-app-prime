@@ -6,7 +6,7 @@ import CreateQuestions from '../components/assesment/CreateQuestions'
 import { AssesmentContext } from '../context/AssesmentContext'
 
 import { Iassesmentcontext } from '../types/context/assesmentcontext'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, usePresence } from 'framer-motion'
 import zIndex from '@mui/material/styles/zIndex'
 
 
@@ -36,49 +36,39 @@ const assesment:NextPage = () => {
         <div className='font-header6 font-extralight  text-stone-300 ' >
   
         {/* <QuestionsHome/> */}
-        <AnimatePresence>
+        <AnimatePresence >
           {!isCreateQuestionsOpen &&
           <motion.div 
-          transition={!isCreateQuestionsOpen? {
+          transition={{
             duration:0.4,
-            type:'tween',
-            // delay: 0.7 
-            
-
-            // delay:scale:{x:''}
-            // delay:0.3,
-            // duration:0.4,*
-            // type:'spring',ss
-            // stiffness:  50:100,
-            
-          }:{
-            duration:0.4,
-            // delay: 0.7 
+            type:'tween',    
           }}
 
-          initial={!isCreateQuestionsOpen?{
-            scale:0.2,
-  x:500,
-  y:300,
-  backgroundColor:'gray',
-  opacity:0.1,
-          }:{
-            opacity:1
-          }}
+  //         initial={!isCreateQuestionsOpen?{
+  //           scale:0.2,
+  // x:500,
+  // y:300,
+  // backgroundColor:'gray',
+  // opacity:0.1,
+  //         }:{
+  //           opacity:1
+  //         }}
 
-          animate={ {
-            scale: 1,
-            x:0,
-            y:0,
-            backgroundColor:'',
-            opacity:1
-          }}
+          // animate={ {
+          //   scale: 1,
+          //   x:0,
+          //   y:0,
+          //   backgroundColor:'',
+          //   opacity:1
+          // }}
+
+      
 
          exit=  {{
             scale:1.6,
             border:'solid brown 1px',
             marginLeft:'100px',
-            zIndex:'-1',
+            // zIndex:'-1',
             x:-570,
             y:-400,
             opacity:0.1
@@ -86,7 +76,56 @@ const assesment:NextPage = () => {
             // x:620,
             // opacity:0
              }}>
-          <QuestionsHome/>
+            <motion.div 
+                  initial={{
+                    scale:0.2,
+          x:500,
+          y:300,
+          // backgroundColor:'gray',
+          opacity:0.1,
+          color:'#92400e'
+                  }}
+
+          animate={ {
+            scale: 1,
+            x:0,
+            y:0,
+            backgroundColor:'',
+            opacity:1,
+            color:'#d6d3d1'
+          }}
+
+          transition={!isCreateQuestionsOpen? {
+            duration:0.4,
+            type:'spring',
+            stiffness:50,
+            delay:0.3
+        
+            
+          }:{
+            // duration:0.4,
+            // delay:0.8
+            // delay: 0.4 
+          }}
+            // animate={{
+            //   x:0,
+            //   y:0
+            // }}
+
+            // transition={{
+            //   type:'spring',
+            //   stiffness:50,
+            //   duration:0.3
+            // }}
+
+            // initial={{
+            //   x:50,
+            //   y:50
+            // }}
+            >
+               <QuestionsHome/>
+            </motion.div>
+         
          </motion.div>         
           }
           </AnimatePresence>
@@ -146,55 +185,100 @@ const assesment:NextPage = () => {
 <motion.div className=''
  exit=  {{
   scale:1.3,
-  border:'solid brown 1px',
-  backgroundColor:'red',
+  // border:'solid brown 1px',
+  backgroundColor:'',
   // marginLeft:'100px',
   // zIndex:'-1',
-  x:-970,
-  y:-900,
+  x:-770,
+  y:-700,
   opacity:0.1
   // display:'absolute'
   // x:620,
   // opacity:0
    }}
-initial={isCreateQuestionsOpen?{
-  scale:0.2,
-  x:500,
-  y:300,
-  // backgroundColor:'gray',
-  opacity:0.1,
-  
-  // display:'absolute',
 
-  // x:-500,
-  // display:'none'
-}:{
-  opacity:1
-}}
-animate={isCreateQuestionsOpen ? {
-  scale: 1,
-  x:0,
-  y:0,
-  backgroundColor:'',
-  opacity:1
-  // x:-100,
-  // x:0,
-  // display:'block'
-}:{}}
 
-transition={isCreateQuestionsOpen? {
-  delay:0.3,
-  duration:0.4,
-  type:'tween',
-  // stiffness:50
-  
-}:{ 
-  duration:0.3,
-  type:'tween'
-  // delay: 0.7 
+// initial={isCreateQuestionsOpen?{
+//   scale:0.2,
+//   x:500,
+//   y:300,
+//   opacity:0.1,
+// }:{
+//   opacity:1
+// }}
+// animate={isCreateQuestionsOpen ? {
+//   scale: 1,
+//   x:0,
+//   y:0,
+//   backgroundColor:'',
+//   opacity:1
+//   // x:-100,
+//   // x:0,
+//   // display:'block'
+// }:{}}
+
+transition={isCreateQuestionsOpen && {
+  // delay:  0.4,
+  duration: 0.4,
+  type:'tween'  
 }}
 >
-   <CreateQuestions/>
+  <motion.div
+  animate={isCreateQuestionsOpen ? {
+    scale: 1,
+    x:0,
+    y:0,
+    backgroundColor:'',
+    opacity:1
+    // x:-100,
+    // x:0,
+    // display:'block'
+  }:{}}
+
+  transition={isCreateQuestionsOpen && {
+    delay: isCreateQuestionsOpen? 0.3:0,
+    duration: isCreateQuestionsOpen? 0.4:0.4,
+    type:'spring',
+    stiffness:50
+    // type: isCreateQuestionsOpen? 'spring':'tween',
+    // stiffness:isCreateQuestionsOpen?50:100,
+    // bounce: isCreateQuestionsOpen?0.8:0
+    
+  }}
+
+  initial={isCreateQuestionsOpen?{
+    scale:0.2,
+    x:500,
+    y:300,
+    // backgroundColor:'gray',
+    opacity:0.1,
+    
+    // display:'absolute',
+  
+    // x:-500,
+    // display:'none'
+  }:{
+    opacity:1
+  }}
+                    // animate={{
+                    //   x:0,
+                    //   y:0
+                    // }}
+        
+                    // transition={{
+                    //   type:'spring',
+                    //   stiffness:50,
+                    //   duration:0.3
+                    // }}
+        
+                    // initial={{
+                    //   x:50,
+                    //   y:50
+                    // }}
+  >
+  <CreateQuestions/>
+  </motion.div>
+
 </motion.div>
  
 }
