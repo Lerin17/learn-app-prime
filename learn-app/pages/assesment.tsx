@@ -27,23 +27,42 @@ const assesment:NextPage = () => {
         <div className='font-header6 font-extralight  text-stone-300 ' >
   
         {/* <QuestionsHome/> */}
-
-          <AnimatePresence>
+        <AnimatePresence>
           {!isCreateQuestionsOpen &&
           <motion.div 
-          transition={{
-
+          transition={!isCreateQuestionsOpen? {
             duration:0.4,
             type:'tween',
+
             // delay:scale:{x:''}
+            // delay:0.3,
+            // duration:0.4,*
+            // type:'spring',ss
+            // stiffness:  50:100,
             
+          }:{
+            duration:0.4,
+            delay: 0.7 
           }}
 
           initial={{
             opacity:1
           }}
 
-         exit={{
+          animate={!isCreateQuestionsOpen? {
+           
+            // x:-100,
+            // x:0,
+            // display:'block'
+          }:{
+            scale: 1,
+            x:0,
+            y:0,
+            backgroundColor:'',
+            opacity:1
+          }}
+
+         exit=  {{
             scale:1.6,
             border:'solid brown 1px',
             marginLeft:'100px',
@@ -59,6 +78,7 @@ const assesment:NextPage = () => {
          </motion.div>         
           }
           </AnimatePresence>
+
 
 {/* 
           <AnimatePresence>
@@ -108,45 +128,48 @@ const assesment:NextPage = () => {
             }
           </AnimatePresence> */}
 
-            {isCreateQuestionsOpen &&
+<AnimatePresence>
+{isCreateQuestionsOpen &&
 
-            <motion.div className=''
-            exit={{
-              // y:40
-            }}
-            initial={{
-              scale:0.2,
-              x:500,
-              y:300,
-              backgroundColor:'',
-              opacity:0.1
-              // display:'absolute',
+<motion.div className=''
+exit={{
+  // y:40
+}}
+initial={{
+  scale:0.2,
+  x:500,
+  y:300,
+  backgroundColor:'',
+  opacity:0.1
+  // display:'absolute',
 
-              // x:-500,
-              // display:'none'
-            }}
-            animate={{
-              scale: 1,
-              x:0,
-              y:0,
-              backgroundColor:'',
-              opacity:1
-              // x:-100,
-              // x:0,
-              // display:'block'
-            }}
-            transition={{
-              delay:0.3,
-              duration:0.4,
-              type:'spring',
-              stiffness:50
-              
-            }}
-            >
-               <CreateQuestions/>
-            </motion.div>
-             
-            }
+  // x:-500,
+  // display:'none'
+}}
+animate={{
+  scale: 1,
+  x:0,
+  y:0,
+  backgroundColor:'',
+  opacity:1
+  // x:-100,
+  // x:0,
+  // display:'block'
+}}
+transition={{
+  delay:0.3,
+  duration:0.4,
+  type:'spring',
+  stiffness:50
+  
+}}
+>
+   <CreateQuestions/>
+</motion.div>
+ 
+}
+</AnimatePresence>
+
         </div>
      
         {/* <div style={{
