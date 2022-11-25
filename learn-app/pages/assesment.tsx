@@ -41,9 +41,9 @@ const assesment:NextPage = () => {
           <motion.div 
           // className='border'
           transition={{
-            duration:0.4,
+            duration:0.6,
             type:'tween',   
-            ease:'easeInOut'   
+            ease:'easeIn'   
           }}
 
 
@@ -66,12 +66,13 @@ const assesment:NextPage = () => {
              >
             <motion.div 
                   initial={{
-                    scale:0.2,
-          x:500,
-          y:300,
-          // backgroundColor:'gray',
-          opacity:0.1,
-          color:'#92400e',
+                    scale:0.3,
+                       x:300,
+          y:180,
+          // x:500,
+          // y:300,
+          opacity:0.5,
+          // color:'#92400e',
           display:'none'
           // backgroundColor:'#d6d3d1'
                   }}
@@ -87,10 +88,10 @@ const assesment:NextPage = () => {
           }}
 
           transition={!isCreateQuestionsOpen? {
-            duration:0.4,
+            duration:0.6,
             type:'spring',
             stiffness:50,
-            delay:0.5
+            delay:0.63
         
             
           }:{
@@ -129,9 +130,9 @@ const assesment:NextPage = () => {
    }}
 
    transition={{
-    duration:0.4,
+    duration:0.6,
     type:'tween',
-    ease:'easeInOut'  
+    ease:'easeIn'  
   }}
 
 
@@ -139,8 +140,8 @@ const assesment:NextPage = () => {
   <motion.div
         initial={{
           scale:0.2,
-x:500,
-y:300,
+x:300,
+y:180,
 // backgroundColor:'gray',
 opacity:0.1,
 color:'#92400e',
@@ -162,7 +163,7 @@ transition={ {
   duration:0.4,
   type:'spring',
   stiffness:50,
-  delay:0.5
+  delay:0.63
 
   
 }}
