@@ -8,7 +8,8 @@ const dutton = () => {
 }
  type duttonProps = {
   icon: any;
-  handleClick:()=>void
+  handleClick:()=>void,
+  color?:string
   
  }
 
@@ -30,7 +31,7 @@ const DuttonSmall = (props:duttonProps) => {
   return (
     <motion.div onClick={props.handleClick} transition={{type:'tween', duration:0.3}} whileHover={{
       skewX:-20
-    }} className='font-header8 capitalize text-black  text-2xl px-0 font-extralight flex items-center cursor-pointer'>
+    }} className={`${props.color?`text-${props.color}-300`:``} font-header9 capitalize  text-2xl px-0  flex items-center cursor-pointer`}>
       [
       <motion.div  className=' transition-all px-2 text-base font-header9'>
          {props.icon}
