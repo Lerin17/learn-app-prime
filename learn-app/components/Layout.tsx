@@ -27,7 +27,7 @@ export const Layout = (prop:any) => {
             <Mavbar/>
             </div>
 
-            <div className='h-full bg-red-400' >
+            <div className='h-full ' >
               {prop.children} 
             </div>
           </div>

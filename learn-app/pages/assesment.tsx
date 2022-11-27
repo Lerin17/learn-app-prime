@@ -72,13 +72,30 @@ const assesment:NextPage = () => {
     style={{
       // backgroundColor:'#DD9D29'
     }}
-    className='flex justify-center mt-4  xl:px-16 lg:px-10 '>
-      <div>
-        dd
-      </div>
-        <div className='xl:w-8/12 lg:w-9/12 w-11/12 bg-sky-300'>
-        <div className='font-header6 font-extralight  text-stone-300 ' >
+    className='flex justify-center mt-4  xl:px-16 lg:px-10 relative'>
+      {/* {isCreateQuestionsOpen && <div className={`${isCreateQuestionsOpen?'wrapper':'hidden'} `} >
+    <div className='inner innerx '>
+    <CreateQuestions/>
+    </div>
+  </div>
 
+  } */}
+      <div className='z-20 relative'>
+        
+{!isCreateQuestionsOpen && <div className={`${!isCreateQuestionsOpen?'wrapper':'hidden'} `} >
+    <div className='inner innerx '>
+    <QuestionsHome/>
+    </div>
+  </div>
+
+  }
+      </div>
+
+        <div style={{
+          width:900
+        }} className='w-full z-30  bg-amber-800 border absolute h-full mx-20'>
+        <div className='font-header6 font-extralight  text-stone-300 w-full' >
+{/* 
         <AnimatePresence >
           {!isCreateQuestionsOpen &&
           <motion.div 
@@ -150,13 +167,45 @@ const assesment:NextPage = () => {
          
          </motion.div>         
           }
-          </AnimatePresence>
+
+
+   
+   
+   </AnimatePresence> */}
+
+
+{/* {!isCreateQuestionsOpen && <div className={`${!isCreateQuestionsOpen?'wrapper':'hidden'} `} >
+    <div className='inner innerx '>
+    <QuestionsHome/>
+    </div>
+  </div>
+
+  } */}
+
+  <div>
+    exesdd
+  </div>
+
+<div className='z-20 relative' >
+{isCreateQuestionsOpen && <div className={`${isCreateQuestionsOpen?'wrapper':'hidden'} `} >
+    <div className='inner innerx '>
+    <CreateQuestions/>
+    </div>
+  </div>
+
+  }
+</div>
+
+
 
 
 <AnimatePresence>
 
+
+
+
           
-{isCreateQuestionsOpen &&
+{/* {isCreateQuestionsOpen &&
 
 <motion.div
 
@@ -238,7 +287,7 @@ className='wrapper'
 
 </motion.div>
  
-}
+} */}
       </AnimatePresence>
   
         {/* <QuestionsHome/> */}
