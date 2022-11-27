@@ -14,9 +14,9 @@ export const Nav = () => {
   const NavOption = (props:INavOptions) => {
 
     return (
-      <div className={`px-2 py-1  lg:px-4 md:px-4 lg:text-base md:text-base text-sm  hover:text-black transition-all text-white font-header1 font-normal`} >
+      <div className={`px-2 py-1  lg:px-6 md:px-4 lg:text-base md:text-base text-sm  hover:text-black transition-all text-white font-header1 font-normal`} >
         <Link  href= {props.locationURL} >
-            <div className={`cursor-pointer ${props.one?'text-5xl font-black font-header9  uppercase ':'font-header6'}`} >
+            <div className={`cursor-pointer ${props.one?'lg:text-5xl md:text-2xl font-black font-header6  uppercase ':'font-header6 lg:text-2xl md:text-lg'}`} >
               {props.text}
             </div>
         </Link>
@@ -25,7 +25,7 @@ export const Nav = () => {
   }
 
   return (
-    <div className='text-white flex flex-wrap justify-center w-full items-center' >
+    <div className='text-white flex flex-wrap justify-center  w-full items-center ' >
         <NavOption
         text = 'Home'
         locationURL= "/"

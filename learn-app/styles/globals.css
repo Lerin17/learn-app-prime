@@ -240,8 +240,21 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
   src: url('../public/fonts/lemon/LemonMilkBold-gx2B3.otf');
 }
 
+@font-face {
+  font-family: 'LEMONL';
+  src: url('../public/fonts/lemon/LemonMilkRegularItalic-L3AEy.otf');
+}
+
+@font-face {
+  font-family: 'LEMONB';
+  src: url('../public/fonts/lemon/LemonMilkBoldItalic-PKZ3P.otf');
+}
+
+
+
 .nylon{
-  background-image: url('../images/nylon.png');
+  background-image: url('../images/3px-tile.png');
+  /* background-size: cover; */
 }
 
 .nylon2{
@@ -358,8 +371,12 @@ background-color: #000000;
 background: radial-gradient(circle, rgba(146,64,14,1) 2%, rgba(220,98,22,1) 9%, rgba(231,126,47,1) 31%, rgba(247,216,193,1) 45%, rgba(239,231,225,1) 52%, rgba(232,201,179,1) 58%, rgba(155,133,118,1) 67%, rgba(0,0,0,1) 86%, rgba(146,64,14,1) 97%);  */
 
 
+background: rgb(231,79,47);
+background: linear-gradient(90deg, rgba(231,79,47,1) 7%, rgba(231,126,47,1) 14%, rgba(233,137,64,1) 17%, rgba(240,176,128,1) 28%, rgba(247,216,193,1) 41%, rgba(239,231,225,1) 52%, rgba(233,220,211,1) 60%, rgba(195,186,180,1) 73%, rgba(16,16,16,1) 98%); 
+
+/* 
   background: rgb(218,94,18);
-  background: linear-gradient(90deg, rgba(218,94,18,1) 2%, rgba(231,126,47,1) 31%, rgba(247,216,193,1) 45%, rgba(239,231,225,1) 52%, rgba(232,201,179,1) 58%, rgba(155,133,118,1) 67%, rgba(0,0,0,1) 86%); 
+  background: linear-gradient(90deg, rgba(218,94,18,1) 2%, rgba(231,126,47,1) 31%, rgba(247,216,193,1) 45%, rgba(239,231,225,1) 52%, rgba(232,201,179,1) 58%, rgba(155,133,118,1) 67%, rgba(0,0,0,1) 86%);  */
 }
 
 
@@ -390,6 +407,43 @@ background: radial-gradient(circle, rgba(146,64,14,1) 2%, rgba(220,98,22,1) 9%, 
   background-size: 8px 14px;
   background-position: 0 0, 0 0, 4px 7px, 4px 7px, 0 0, 4px 7px; */
 }
+
+
+.wrapper {
+  perspective: 1000px;
+  margin: 4em auto; 
+  width: 37em;
+}
+
+.inner {
+  transition: .3s; 
+  transform: rotateY(30deg);
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    /* width: 300%; */
+  }
+
+  to {
+    margin-left: 0%;
+    /* width: 100%; */
+  }
+}
+
+.innerx {
+  animation-name: slidein;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+
+
+/* animation: example 5s linear 2s infinite alternate; */
 /* html,
 body {
   padding: 0;
@@ -402,6 +456,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
 
 
 

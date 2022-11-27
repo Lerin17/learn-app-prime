@@ -27,13 +27,56 @@ const assesment:NextPage = () => {
  
   // }, [isCreateQuestionsOpen]);
 
+  const Item = {
+    visible: {  scale: 1,
+      x:0,
+      y:0,
+      opacity:1,
+      // backgroundColor:'',
+      // opacity:1,
+      color:'#d6d3d1',
+      display:'block',
+      // skewX:0,
+      perspective:'',
+    
+    
+      transition:{
+        duration:0.6,
+        type:'spring',
+        stiffness:50,
+        delay:0.63,
+        delayChildren: 0.3
+    
+       }},
+
+
+    hidden: { 
+      // scale:0.3,
+      x:300,
+     y:180,
+     opacity:0.5,
+     display:'none',
+    //  skewX:-30,
+     perspective:100
+     },
+
+  }
+  
+  const item = {
+    visible: { opacity: 1, },
+    hidden: { opacity: 0.5 },
+  }
+
   return (
     <div
     style={{
       // backgroundColor:'#DD9D29'
     }}
     className='flex justify-center mt-4  xl:px-16 lg:px-10 '>
-        <div className='xl:w-8/12 lg:w-9/12 w-11/12 '>
+      <div>
+        dd
+      </div>
+        <div className='xl:w-8/12 lg:w-9/12 w-11/12 bg-sky-300'>
         <div className='font-header6 font-extralight  text-stone-300 ' >
 
         <AnimatePresence >
@@ -51,12 +94,9 @@ const assesment:NextPage = () => {
 
          exit=  {{
             scale:1.6,
-            // border:'solid brown 1px',
-            // marginLeft:'100px',
-            // zIndex:'-1',
             x:-570,
             y:-480,
-            opacity:0.1
+            opacity:0.5
              }}
 
              initial={{
@@ -65,43 +105,47 @@ const assesment:NextPage = () => {
              }}
              >
             <motion.div 
-                  initial={{
-                    scale:0.3,
-                       x:300,
-          y:180,
-          // x:500,
-          // y:300,
-          opacity:0.5,
-          // color:'#92400e',
-          display:'none'
-          // backgroundColor:'#d6d3d1'
-                  }}
+            initial='hidden'
+            animate='visible'
+            variants={Item}
+          //         initial={{
+          //           scale:0.3,
+          //              x:300,
+          //             y:180,
+          //             opacity:0.5,
+          //             display:'none'
+          //         }}
 
-          animate={ {
-            scale: 1,
-            x:0,
-            y:0,
-            // backgroundColor:'',
-            opacity:1,
-            color:'#d6d3d1',
-            display:'block'
-          }}
+          // animate={ {
+          //   scale: 1,
+          //   x:0,
+          //   y:0,
+          //   // backgroundColor:'',
+          //   opacity:1,
+          //   color:'#d6d3d1',
+          //   display:'block'
+          // }}
 
-          transition={!isCreateQuestionsOpen? {
-            duration:0.6,
-            type:'spring',
-            stiffness:50,
-            delay:0.63
+          // transition={!isCreateQuestionsOpen? {
+          //   duration:0.6,
+          //   type:'spring',
+          //   stiffness:50,
+          //   delay:0.63
         
             
-          }:{
-            // duration:0.4,
-            // delay:0.8
-            // delay: 0.4 
-          }}
+          // }:{
+          //   // duration:0.4,
+          //   // delay:0.8
+          //   // delay: 0.4 
+          // }}
             
             >
-               <QuestionsHome/>
+              <motion.div 
+
+              className=''
+              variants={item} >
+                <QuestionsHome/>
+              </motion.div> 
             </motion.div>
          
          </motion.div>         
@@ -114,12 +158,17 @@ const assesment:NextPage = () => {
           
 {isCreateQuestionsOpen &&
 
-<motion.div className=''
+<motion.div
+
+style={{
+  perspective:'200px'
+}}
+className='slant'
  exit=  {{
   scale:1.3,
-            x:-670,
-            y:-459,
-            opacity:0.1,
+            x:-770,
+            y:-559,
+            opacity:0.3,
   // display:'absolute'
   
    }}
@@ -143,7 +192,7 @@ const assesment:NextPage = () => {
 x:300,
 y:180,
 // backgroundColor:'gray',
-opacity:0.1,
+opacity:0.5,
 color:'#92400e',
 display:'none'
 // backgroundColor:'#d6d3d1'
@@ -156,25 +205,35 @@ animate={ {
   // backgroundColor:'',
   opacity:1,
   color:'#d6d3d1',
-  display:'block'
+  display:'block',
+  perspective:1
 }}
 
 transition={ {
   duration:0.4,
   type:'spring',
   stiffness:50,
-  delay:0.63
+  delay:0.63,
+  // delayChildren:0.3
 
   
 }}
-  // duration:0.4,
-  // delay:0.8
-  // delay: 0.4 
 
-  
+className='wrapper'
   >
-  <CreateQuestions/> 
-  {/* <Rawinput/> */}
+  <motion.div className='inner'
+
+
+
+  initial={{
+    opacity:0.5
+  }}
+  animate={{
+    opacity:1
+  }}
+  >
+      <CreateQuestions/> 
+  </motion.div>
   </motion.div>
 
 </motion.div>
@@ -193,6 +252,9 @@ transition={ {
         </div> */}
        
     </div>
+    <div>
+        dd
+      </div>
     </div>
   
   )

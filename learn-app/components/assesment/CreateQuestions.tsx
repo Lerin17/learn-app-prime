@@ -39,7 +39,7 @@ const [lunch, setlunch] = React.useState('');
   console.log(currentQuestionBatchTagsArray, 'eex')
 
   const selectStyles:StylesConfig = {
-    control: (styles) => ({ ...styles, backgroundColor: 'white' , border:'none'})
+    control: (styles) => ({ ...styles, backgroundColor: 'LightGray' , border:'none'})
 
   }
 
@@ -148,13 +148,13 @@ const [lunch, setlunch] = React.useState('');
 
     return (
       <div className='bg-amber-700 flex mt-1' >
-    <div className='flex flex-col items-center p-1 h-full bg-amber-600' >
+    <div className='flex flex-col items-center justify-between p-1 py-4  flex flex-col bg-amber-600 ' >
       <div className='' >
-          <svg className='w-8' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18 12c-2.435 3.599-4 5.85-4 8.037 0 2.19 1.79 3.963 4 3.963s4-1.773 4-3.963c0-2.187-1.565-4.438-4-8.037zm-.014 2.56c.234.363.514.994.514 1.66 0 1.954-2 2.274-2 1.085 0-.817.994-2.022 1.486-2.745zm-7.986 5.314v-16.874h-4c-1.604 0-2.001 1.826-2.001 3h-1.999v-6h19.999l.001 6h-1.98c0-1.174-.371-3-2.02-3h-4v11.448c-1.244 2.038-2 3.749-2 5.589 0 1.522.582 2.908 1.529 3.963h-6.529v-2h1c1.175 0 2-.952 2-2.126z"/></svg>
+          <svg className='' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18 12c-2.435 3.599-4 5.85-4 8.037 0 2.19 1.79 3.963 4 3.963s4-1.773 4-3.963c0-2.187-1.565-4.438-4-8.037zm-.014 2.56c.234.363.514.994.514 1.66 0 1.954-2 2.274-2 1.085 0-.817.994-2.022 1.486-2.745zm-7.986 5.314v-16.874h-4c-1.604 0-2.001 1.826-2.001 3h-1.999v-6h19.999l.001 6h-1.98c0-1.174-.371-3-2.02-3h-4v11.448c-1.244 2.038-2 3.749-2 5.589 0 1.522.582 2.908 1.529 3.963h-6.529v-2h1c1.175 0 2-.952 2-2.126z"/></svg>
       </div>
 
-      <div className='mt-1' >
-          <svg width="24" className='w-8'  height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M5.662 23l-5.369-5.365c-.195-.195-.293-.45-.293-.707 0-.256.098-.512.293-.707l14.929-14.928c.195-.194.451-.293.707-.293.255 0 .512.099.707.293l7.071 7.073c.196.195.293.451.293.708 0 .256-.097.511-.293.707l-11.216 11.219h5.514v2h-12.343zm3.657-2l-5.486-5.486-1.419 1.414 4.076 4.072h2.829zm.456-11.429l-4.528 4.528 5.658 5.659 4.527-4.53-5.657-5.657z"/></svg>
+      <div className='' >
+          <svg width="24" className=''  height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M5.662 23l-5.369-5.365c-.195-.195-.293-.45-.293-.707 0-.256.098-.512.293-.707l14.929-14.928c.195-.194.451-.293.707-.293.255 0 .512.099.707.293l7.071 7.073c.196.195.293.451.293.708 0 .256-.097.511-.293.707l-11.216 11.219h5.514v2h-12.343zm3.657-2l-5.486-5.486-1.419 1.414 4.076 4.072h2.829zm.456-11.429l-4.528 4.528 5.658 5.659 4.527-4.53-5.657-5.657z"/></svg>
       </div>
  
           </div>
@@ -242,7 +242,7 @@ const [lunch, setlunch] = React.useState('');
 }} className='flex text-base mb-2 text-white transition-all pb-4 absolute z-10' > */}
 
   <ReactSelect
-  className='text-base focus:border-none'
+  className='text-base focus:border-none border border-black rounded '
    options={options}
    isMulti
    onChange={(e:any)=>{
@@ -367,10 +367,10 @@ style={{ height: 400 }}
 
 {!isTextRaw &&   <motion.div  transition={{type:'tween', duration:0.2}} animate={AnimateSave && {x:-70}}>
 
-<div className='border border-gray-400 my-4'>
+<div className=' my-4 border border-black'>
 <textarea
 onChange={(e)=>{setcurrentQuestion(e.target.value)}}  
-className='w-full text-lg bg-white  text-black  p-2 border border-gray-400'
+className='w-full text-lg bg-stone-200 text-black  p-2 '
 placeholder='Enter Question'
 value={currentQuestion}
 defaultValue=""
@@ -381,54 +381,54 @@ outline:'none' }}
 
 
 
-<div className='border-4 flex flex-col'>
+<div className='border flex flex-col'>
 
 <div className='flex text-xl'>
       <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent> | any)=>{
         console.log(event.target.innerText)
-        setcurrentCorrectAnswer(event.target.innerText)}} className= {`${currentCorrectAnswer=='A'?'bg-lime-500':'bg-white'} px-2 w-8  cursor-pointer`}>A</div>
+        setcurrentCorrectAnswer(event.target.innerText)}} className= {`${currentCorrectAnswer=='A'?'bg-lime-500':'bg-gray-300 text-amber-800'} px-2 w-8  cursor-pointer`}>A</div>
       <input 
         onChange= {e=>{console.log(e.target.value)
           setcurrentAnswers((prev) => ({...prev, A:e.target.value}))
           }}
         value={currentAnswers.A} 
-        className='border-2 border-gray-400  w-full' />
+        className='border border-t-0 border-black bg-stone-300 text-black w-full' />
     </div>
 
     <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent> | any)=>{
         console.log(event.target.innerText)
         setcurrentCorrectAnswer(event.target.innerText)}}  className='flex text-xl'>
-      <div className= {`${currentCorrectAnswer=='B'?'bg-lime-500':'bg-white'} px-2 w-8  cursor-pointer`}>B</div>
+      <div className= {`${currentCorrectAnswer=='B'?'bg-lime-500':'bg-gray-300 text-amber-800'} px-2 w-8  cursor-pointer`}>B</div>
       <input 
         onChange= {e=>{console.log(e.target.value)
           setcurrentAnswers((prev) => ({...prev, B:e.target.value}))
           }}
         value={currentAnswers.B} 
-        className='border-2 border-gray-400  w-full' />
+        className='border border-t-0 border-black bg-stone-300 text-black w-full' />
     </div>
 
     <div className='flex text-xl'>
       <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent> | any)=>{
         console.log(event.target.innerText)
-        setcurrentCorrectAnswer(event.target.innerText)}} className= {`${currentCorrectAnswer=='C'?'bg-lime-500':'bg-white'} px-2 w-8  cursor-pointer`}>C</div>
+        setcurrentCorrectAnswer(event.target.innerText)}} className= {`${currentCorrectAnswer=='C'?'bg-lime-500':'bg-gray-300 text-amber-800'} px-2 w-8 cursor-pointer`}>C</div>
       <input 
         onChange= {e=>{console.log(e.target.value)
           setcurrentAnswers((prev) => ({...prev, C:e.target.value}))
           }}
         value={currentAnswers.C} 
-        className='border-2 border-gray-400  w-full' />
+        className='border border-t-0 border-black bg-stone-300 text-black w-full' />
     </div>
 
     <div className='flex text-xl'>
       <div onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent> | any)=>{
         console.log(event.target.innerText)
-        setcurrentCorrectAnswer(event.target.innerText)}} className= {`${currentCorrectAnswer=='D'?'bg-lime-500':'bg-white'} px-2 w-8  cursor-pointer`}>D</div>
+        setcurrentCorrectAnswer(event.target.innerText)}} className= {`${currentCorrectAnswer=='D'?'bg-lime-500':'bg-gray-300 text-amber-800'} px-2 w-8  cursor-pointer`}>D</div>
       <input 
         onChange= {e=>{console.log(e.target.value)
           setcurrentAnswers((prev) => ({...prev, D:e.target.value}))
           }}
         value={currentAnswers.D} 
-        className='border-2 border-gray-400  w-full' />
+        className='border border-t-0 border-black bg-stone-300 text-black w-full' />
     </div>
 
 
@@ -455,14 +455,14 @@ handleClick={isTextRaw? ()=>processQuestionRaw():()=>processQuestionsInput()}
     overflowY:'auto',
     overflowX:'hidden',
     wordWrap:'break-word'
-  }} className={`text-sm text-wrap ${isOpenSideBarQuestion?'right-0 absolute z-10 ':""}text-black  p-2 pt-0   transition-all hidden lg:block md:block font-bold bg-amber-800`}>
-    <div className={`opacity-100 text-xl bg-amber-800 polkachild border flex justify-between ${isOpenSideBarQuestion?'fixed':''}`}>
+  }} className={`text-sm text-wrap ${isOpenSideBarQuestion?'right-0 absolute bg-amber-800 z-10 ':""}text-black  p-2 pt-0   transition-all hidden lg:block md:block font-bold `}>
+    <div className={`opacity-100 text-2xl bg-amber-800 polkachild uppercase flex justify-between ${isOpenSideBarQuestion?'fixed':''}`}>
       <div className={`cursor-pointer ${isOpenSideBarQuestion?'w-8 ':'hidden'} `} onClick={()=>{setisOpenSideBarQuestion(false)}} >x</div>
       {!isOpenSideBarQuestion && 'Questions'}
       
     </div>
 
-    <div>
+    <div className={`${isOpenSideBarQuestion?'mt-10':''}`}>
       {questionsSideBarList}
     </div>
 
