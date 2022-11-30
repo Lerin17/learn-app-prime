@@ -77,23 +77,25 @@ const assesment:NextPage = () => {
      
       <div
       style={{
-        height:400
-        // top:-38
+        height:400,
+        transform: 'scale(1.45)',
+        top: '-94px'
+
       }}
-      className='-top-24  relative bg-amber-600  z-10 w-2/12 scale-125 flex'>
+      className='relative bg-amber-700 ml-4 z-10 w-2/12  flex'>
         
-{!isCreateQuestionsOpen && <div 
+ <div 
 style={{
-  left:-450
+  left:-372
 }}
-className={`${!isCreateQuestionsOpen?'wrapper':'hidden'} absolute  top-24 `} >
+className={`${!isCreateQuestionsOpen?'wrapper absolute':'hidden'}   top-24 `} >
     <div className='inner  font-header6 text-stone-300 '>
       <div className='innerx' >
         <QuestionsHome/>
       </div>
     </div>
   </div>
-  }
+
 
 
   {/* <div className=' h-full  z-10' >
@@ -122,7 +124,7 @@ s
     </div>
 
     <div>
-    <div className='z-20 relative w-3/12' >
+    <div className='z-20 relative w-2/12' >
 {isCreateQuestionsOpen && <div className={`${isCreateQuestionsOpen?'wrapper':'hidden'} `} >
     <div className='inner innerx '>
     <CreateQuestions/>

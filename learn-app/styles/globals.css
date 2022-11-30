@@ -456,24 +456,23 @@ background: linear-gradient(90deg, rgba(231,79,47,1) 7%, rgba(231,126,47,1) 14%,
   }
 }
 
-/* 
+ 
 @keyframes widthDecrease {
   from{
-  width: 37em;
+  opacity: 100;
   }
   to{
-width: 12em;
+opacity: 0;
   }
-} */
+} 
 
 .wrapper {
   perspective: 300px;
-
-  /* animation-name: widthDecrease; */
-  /* animation-duration: 2s;
-  animation-timing-function: ease-in-out; */
-  /* margin: 4em auto;  */
-  /* width: 37em; */
+  animation-name: widthDecrease;
+  animation-delay: 1.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;  
+  /* opacity: 0; */
 }
 
 .inner {
@@ -482,23 +481,23 @@ width: 12em;
 }
 
 @keyframes slidein {
-  from {
+  0% {
     transform: translateX(0%) rotateY(20deg);
     display: none;
     /* width: 0%; */
     overflow: hidden;
     margin-left: 0;
+    opacity: 100;
     /* opacity: 0; */
     /* width: 300%; */
-  }
-
-  to {
+  }100% {
     transform: translateX(0%)   rotateY(20deg); 
     display: block;
     /* opacity: 100; */
     /* width: 100%; */
     overflow: hidden;
     margin-left: 100%;
+    opacity: 100;
   }
 }
 
@@ -525,7 +524,7 @@ width: 12em;
 
 .innerx {
   animation-name: slidein;
-  animation-duration: 2s;
+  animation-duration: 1.5s;
   animation-timing-function: linear;
   /* animation-delay: 0.6s; */
   /* animation-iteration-count: infinite; */
@@ -534,8 +533,8 @@ width: 12em;
 
 .center{
   animation-name: slideinStatic;
-  animation-duration: 1.8s;
-  /* animation-delay: 0.4s; */
+  animation-duration: 1.5s;
+  animation-delay: 0.1s;
   animation-timing-function: linear;
   overflow: auto;
 }

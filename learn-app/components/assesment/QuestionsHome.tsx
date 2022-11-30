@@ -26,7 +26,7 @@ return (
   // y:40,
   // opacity:0
 }} className='text-6xl bg-amber-800 border'>
-    <div  className='border'>
+    <div  className=''>
        No Questisons Created yet ,<span className='font-header6' ></span>
       </div>
       <div style={{
