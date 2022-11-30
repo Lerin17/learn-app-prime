@@ -72,121 +72,57 @@ const assesment:NextPage = () => {
     style={{
       // backgroundColor:'#DD9D29'
     }}
-    className='flex justify-center mt-4  xl:px-16 lg:px-10 relative'>
-      {/* {isCreateQuestionsOpen && <div className={`${isCreateQuestionsOpen?'wrapper':'hidden'} `} >
-    <div className='inner innerx '>
-    <CreateQuestions/>
-    </div>
-  </div>
-
-  } */}
-      <div className='z-20 relative'>
+    // xl:px-16 lg:px-10 
+    className='flex mt-4 relative '>
+     
+      <div
+      style={{
+        height:400
+        // top:-38
+      }}
+      className='-top-24  relative bg-amber-600  z-10 w-2/12 scale-125 flex'>
         
-{!isCreateQuestionsOpen && <div className={`${!isCreateQuestionsOpen?'wrapper':'hidden'} `} >
-    <div className='inner innerx '>
-    <QuestionsHome/>
+{!isCreateQuestionsOpen && <div 
+style={{
+  left:-450
+}}
+className={`${!isCreateQuestionsOpen?'wrapper':'hidden'} absolute  top-24 `} >
+    <div className='inner  font-header6 text-stone-300 '>
+      <div className='innerx' >
+        <QuestionsHome/>
+      </div>
     </div>
   </div>
-
   }
+
+
+  {/* <div className=' h-full  z-10' >
+s
+  </div> */}
       </div>
 
         <div style={{
-          width:900
-        }} className='w-full z-30  bg-amber-800 border absolute h-full mx-20'>
-        <div className='font-header6 font-extralight  text-stone-300 w-full' >
-{/* 
-        <AnimatePresence >
-          {!isCreateQuestionsOpen &&
-          <motion.div 
-          // className='border'
-          transition={{
-            duration:0.6,
-            type:'tween',   
-            ease:'easeIn'   
-          }}
+          // width:900
+        }} className={`${!isCreateQuestionsOpen?'center block':'hidden'} w-8/12 justify-self-center   h-full `}>
+        <div className={`font-header6 ${!isCreateQuestionsOpen?'':''} font-extralight  text-stone-300 w-full`} >
 
 
-      
+  <div className='flex justify-center' >
 
-         exit=  {{
-            scale:1.6,
-            x:-570,
-            y:-480,
-            opacity:0.5
-             }}
+  <QuestionsHome/>
+  </div>
 
-             initial={{
-              x:0,
-              y:0
-             }}
-             >
-            <motion.div 
-            initial='hidden'
-            animate='visible'
-            variants={Item}
-          //         initial={{
-          //           scale:0.3,
-          //              x:300,
-          //             y:180,
-          //             opacity:0.5,
-          //             display:'none'
-          //         }}
 
-          // animate={ {
-          //   scale: 1,
-          //   x:0,
-          //   y:0,
-          //   // backgroundColor:'',
-          //   opacity:1,
-          //   color:'#d6d3d1',
-          //   display:'block'
-          // }}
 
-          // transition={!isCreateQuestionsOpen? {
-          //   duration:0.6,
-          //   type:'spring',
-          //   stiffness:50,
-          //   delay:0.63
+        {/* <QuestionsHome/> */}
         
-            
-          // }:{
-          //   // duration:0.4,
-          //   // delay:0.8
-          //   // delay: 0.4 
-          // }}
-            
-            >
-              <motion.div 
-
-              className=''
-              variants={item} >
-                <QuestionsHome/>
-              </motion.div> 
-            </motion.div>
-         
-         </motion.div>         
-          }
-
-
-   
-   
-   </AnimatePresence> */}
-
-
-{/* {!isCreateQuestionsOpen && <div className={`${!isCreateQuestionsOpen?'wrapper':'hidden'} `} >
-    <div className='inner innerx '>
-    <QuestionsHome/>
+        </div>
+    
+       
     </div>
-  </div>
 
-  } */}
-
-  <div>
-    exesdd
-  </div>
-
-<div className='z-20 relative' >
+    <div>
+    <div className='z-20 relative w-3/12' >
 {isCreateQuestionsOpen && <div className={`${isCreateQuestionsOpen?'wrapper':'hidden'} `} >
     <div className='inner innerx '>
     <CreateQuestions/>
@@ -195,114 +131,6 @@ const assesment:NextPage = () => {
 
   }
 </div>
-
-
-
-
-<AnimatePresence>
-
-
-
-
-          
-{/* {isCreateQuestionsOpen &&
-
-<motion.div
-
-style={{
-  perspective:'200px'
-}}
-className='slant'
- exit=  {{
-  scale:1.3,
-            x:-770,
-            y:-559,
-            opacity:0.3,
-  // display:'absolute'
-  
-   }}
-
-   initial={{
-    x:0,
-    y:0
-   }}
-
-   transition={{
-    duration:0.6,
-    type:'tween',
-    ease:'easeIn'  
-  }}
-
-
->
-  <motion.div
-        initial={{
-          scale:0.2,
-x:300,
-y:180,
-// backgroundColor:'gray',
-opacity:0.5,
-color:'#92400e',
-display:'none'
-// backgroundColor:'#d6d3d1'
-        }}
-
-animate={ {
-  scale: 1,
-  x:0,
-  y:0,
-  // backgroundColor:'',
-  opacity:1,
-  color:'#d6d3d1',
-  display:'block',
-  perspective:1
-}}
-
-transition={ {
-  duration:0.4,
-  type:'spring',
-  stiffness:50,
-  delay:0.63,
-  // delayChildren:0.3
-
-  
-}}
-
-className='wrapper'
-  >
-  <motion.div className='inner'
-
-
-
-  initial={{
-    opacity:0.5
-  }}
-  animate={{
-    opacity:1
-  }}
-  >
-      <CreateQuestions/> 
-  </motion.div>
-  </motion.div>
-
-</motion.div>
- 
-} */}
-      </AnimatePresence>
-  
-        {/* <QuestionsHome/> */}
-        
-        </div>
-     
-        {/* <div style={{
-          // backgroundColor:'#BFD5ED'
-        }}>
-             assesment
-        </div> */}
-       
-    </div>
-    <div>
-        dd
       </div>
     </div>
   

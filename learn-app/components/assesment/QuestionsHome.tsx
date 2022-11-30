@@ -17,17 +17,16 @@ const QuestionsHome = () => {
   //   !isPresent && setTimeout(safeToRemove, 1000)
   // }, [isPresent])
 
-  return (
-
-
-
-<motion.div exit={{
+return (
+<motion.div style={{
+      overflow:'hidden',
+      width:800
+      // backgroundColor:'#A46741'
+    }} exit={{
   // y:40,
   // opacity:0
-}} className='text-6xl'>
-    <div style={{
-      // backgroundColor:'#A46741'
-    }} className='bg-amber-800'>
+}} className='text-6xl bg-amber-800 border'>
+    <div  className='border'>
        No Questisons Created yet ,<span className='font-header6' ></span>
       </div>
       <div style={{
@@ -40,7 +39,7 @@ icon={ <svg className='fill-current text-amber-800' xmlns="http://www.w3.org/200
 />
 
 
-  <span className='font-header6' >,</span> </div>
+  <span className='font-header6 ' >,</span> </div>
 
   <div style={{
   // backgroundColor:'#89ABD0'
@@ -61,11 +60,7 @@ icon={<div className='flex'> <svg style={{
 
 
   <span className='font-header6' >,</span> </div>
-</motion.div>
-
-
-    
-    
+</motion.div>    
   )
 }
 
