@@ -82,15 +82,15 @@ const assesment:NextPage = () => {
         top: '-94px'
 
       }}
-      className='relative bg-amber-800 ml-4 z-10 w-2/12  flex'>
+      className='relative bg-amber-600 opacity-50 ml-4 z-10 w-2/12  flex'>
         
  <div 
 style={{
   left:-372
 }}
-className={`${!isCreateQuestionsOpen?'wrapper absolute':'hidden'}   top-24 `} >
+className={`${!isCreateQuestionsOpen?'wrapper absolute':'hidden'}  top-24`} >
     <div className='inner  font-header6 text-stone-300 '>
-      <div className='innerx' >
+      <div className='innerx border' >
         <QuestionsHome/>
       </div>
     </div>
@@ -109,7 +109,7 @@ s
         <div className={`font-header6 ${!isCreateQuestionsOpen?'':''} font-extralight  text-stone-300 w-full`} >
 
 
-  <div className='flex justify-center' >
+  <div className='flex justify-center border' >
 
   <QuestionsHome/>
   </div>
