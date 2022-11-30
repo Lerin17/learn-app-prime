@@ -82,7 +82,7 @@ const assesment:NextPage = () => {
         top: '-94px'
 
       }}
-      className='relative bg-amber-700 ml-4 z-10 w-2/12  flex'>
+      className='relative bg-amber-800 ml-4 z-10 w-2/12  flex'>
         
  <div 
 style={{
