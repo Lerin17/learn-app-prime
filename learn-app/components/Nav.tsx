@@ -25,7 +25,7 @@ export const Nav = () => {
   }
 
   return (
-    <div className='text-white flex flex-wrap justify-center  w-full items-center ' >
+    <div className='text-white p-2 flex flex-wrap justify-center  w-full items-center ' >
         <NavOption
         text = 'Home'
         locationURL= "/"

@@ -73,65 +73,52 @@ const assesment:NextPage = () => {
       // backgroundColor:'#DD9D29'
     }}
     // xl:px-16 lg:px-10 
-    className='flex mt-4 relative '>
+    className='flex mt-4 justify-center relative'>
      
       <div
       style={{
         height:400,
-        transform: 'scale(1.45)',
-        top: '-94px'
+        top: '-96px'
 
       }}
-      className='relative bg-amber-600 opacity-50 ml-4 z-10 w-2/12  flex'>
+      className='relative z-10 w-3/12 bg-amber-800 flex '>
         
  <div 
 style={{
-  left:-372
+  //  textShadow:'-moz-initial',
+  left: -195,
+  // right:200,
+  transform: 'scale(1.45)',
 }}
-className={`${!isCreateQuestionsOpen?'wrapper absolute':'hidden'}  top-24`} >
+className={`${!isCreateQuestionsOpen?'wrapper absolute':'hidden'}  top-24 z-10`} >
     <div className='inner  font-header6 text-stone-300 '>
-      <div className='innerx border' >
+      <div 
+      style={{
+        width:770
+        // transform: 'scale(1.45)',
+      }}
+      className='innerx ' >
         <QuestionsHome/>
       </div>
     </div>
   </div>
 
 
-
-  {/* <div className=' h-full  z-10' >
-s
-  </div> */}
       </div>
 
-        <div style={{
+      <div style={{
           // width:900
-        }} className={`${!isCreateQuestionsOpen?'center block':'hidden'} w-8/12 justify-self-center   h-full `}>
-        <div className={`font-header6 ${!isCreateQuestionsOpen?'':''} font-extralight  text-stone-300 w-full`} >
-
-
-  <div className='flex justify-center border' >
-
-  <QuestionsHome/>
-  </div>
-
-
-
-        {/* <QuestionsHome/> */}
-        
-        </div>
-    
-       
+        }} className={`${!isCreateQuestionsOpen?' block':'hidden'}  flex  bg-amber-800 w-7/12 h-full `}>
+        <div className={`font-header6 justify-self-center  ${!isCreateQuestionsOpen?'':''} font-extralight  text-stone-300  `} >
+          <div className=' w-full center' >
+            <QuestionsHome/>
+          </div>
+        </div>   
     </div>
 
-    <div>
-    <div className='z-20 relative w-2/12' >
-{isCreateQuestionsOpen && <div className={`${isCreateQuestionsOpen?'wrapper':'hidden'} `} >
-    <div className='inner innerx '>
-    <CreateQuestions/>
-    </div>
-  </div>
-
-  }
+    <div className='z-20 relative w-2/12  '>
+    <div  >
+        x
 </div>
       </div>
     </div>

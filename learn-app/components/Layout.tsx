@@ -16,7 +16,7 @@ export const Layout = (prop:any) => {
     
     }}
      className='h-screen bg-amber-800' > 
-        <div className='p-2 lg:p-4 md:p-4 h-full' >
+        <div className=' h-full' >
 
           <div className='flex  flex-col h-full' >
             <div className='pb-4' >

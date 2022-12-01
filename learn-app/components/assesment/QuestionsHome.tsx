@@ -20,7 +20,7 @@ const QuestionsHome = () => {
 return (
 <motion.div style={{
       overflow:'hidden',
-      width:800
+      width:770
       // backgroundColor:'#A46741'
     }} exit={{
   // y:40,
@@ -31,7 +31,7 @@ return (
       </div>
       <div style={{
   // backgroundColor:'#89ABD0'
-}} className=' flex pt-2'>Create Questions  
+}} className=' flex pt-2 textshadow'>Create Questions  
 
 <DuttonLarge
 handleClick={()=>{setisCreateQuestionsOpen(true)}}

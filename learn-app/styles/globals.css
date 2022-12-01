@@ -468,8 +468,9 @@ opacity: 0;
 
 .wrapper {
   perspective: 300px;
+  perspective-origin: left;
   animation-name: widthDecrease;
-  animation-delay: 2.1s;
+  animation-delay: 0.95s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;  
   /* opacity: 0; */
@@ -482,64 +483,70 @@ opacity: 0;
 
 @keyframes slidein {
   0% {
-    transform: translateX(0%) rotateY(20deg);
+    /* transform: translateX(0%) rotateY(20deg); */
     display: none;
     /* width: 0%; */
     overflow: hidden;
-    margin-left: 0;
-    opacity: 100;
+    margin-left: 0%;
+    /* opacity: 100; */
     /* opacity: 0; */
     /* width: 300%; */
   }100% {
-    transform: translateX(0%)   rotateY(20deg); 
+    /* transform: translateX(0%)   rotateY(20deg);  */
     display: block;
     /* opacity: 100; */
     /* width: 100%; */
     overflow: hidden;
     margin-left: 100%;
-    opacity: 0;
+    /* opacity: 0; */
   }
 }
 
 @keyframes slideinStatic {
   from {
-    transform: translateX(-100%) rotateY(30deg);
+    transform: translateX(-100%);
     display: none;
     /* width: 0%; */
-    /* margin-right: auto; */
+    /* margin-left: 100%; */
     overflow: auto;
+    padding-left: 80px; 
+    margin-left: 80px;
     /* width: 0%; */
-    opacity: 0;
+    /* opacity: 0; */
   }
 
   to {
-    transform: translateX(0%)   rotateY(30deg); 
+    transform: translateX(0%)  ; 
     display: block;
-    /* margin-right: 0%; */
+    /* margin-left: 0%; */
     overflow: auto;
-    opacity: 100; 
+    padding-left: 0px;
+    margin-left: 0px;
+    /* opacity: 100;  */
     /* width: 100%; */
   }
 }
 
 .innerx {
   animation-name: slidein;
-  animation-duration: 2s;
-  animation-timing-function: linear;
-  animation-delay: 0.2s; 
+  animation-duration: 0.95s;
+  animation-timing-function: ease-in-out;
+  /* animation-delay: 0.2s;  */
   /* animation-iteration-count: infinite; */
   /* animation-direction: alternate; */
 }
 
 .center{
   animation-name: slideinStatic;
-  animation-duration: 3s;
-  animation-delay: 0.1s;
-  animation-timing-function: linear;
+  animation-duration: 0.95s;
+  /* animation-delay: 0.7s; */
+  animation-timing-function: ease-in-out;
   overflow: auto;
 }
 
-
+.textshadow{
+  text-shadow: #000000;
+}
 
 /* animation: example 5s linear 2s infinite alternate; */
 /* html,
