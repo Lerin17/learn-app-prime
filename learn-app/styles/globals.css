@@ -469,10 +469,7 @@ opacity: 0;
 .wrapper {
   perspective: 300px;
   perspective-origin: left;
-  animation-name: widthDecrease;
-  animation-delay: 0.95s;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;  
+
   /* opacity: 0; */
 }
 
@@ -509,8 +506,8 @@ opacity: 0;
     /* width: 0%; */
     /* margin-left: 100%; */
     overflow: auto;
-    padding-left: 80px; 
-    margin-left: 80px;
+    /* padding-left: 50px; 
+    margin-left: 50px; */
     /* width: 0%; */
     /* opacity: 0; */
   }
@@ -520,8 +517,8 @@ opacity: 0;
     display: block;
     /* margin-left: 0%; */
     overflow: auto;
-    padding-left: 0px;
-    margin-left: 0px;
+    /* padding-left: 0px;
+    margin-left: 0px; */
     /* opacity: 100;  */
     /* width: 100%; */
   }
@@ -529,7 +526,7 @@ opacity: 0;
 
 .innerx {
   animation-name: slidein;
-  animation-duration: 0.95s;
+  animation-duration: 0.96s;
   animation-timing-function: ease-in-out;
   /* animation-delay: 0.2s;  */
   /* animation-iteration-count: infinite; */
@@ -538,7 +535,7 @@ opacity: 0;
 
 .center{
   animation-name: slideinStatic;
-  animation-duration: 0.95s;
+  animation-duration: 0.93s;
   /* animation-delay: 0.7s; */
   animation-timing-function: ease-in-out;
   overflow: auto;

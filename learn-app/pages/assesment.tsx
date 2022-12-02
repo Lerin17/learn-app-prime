@@ -18,6 +18,128 @@ const assesment:NextPage = () => {
 
   console.log(isCreateQuestionsOpen, 'dam')
 
+  const RenderPerspectiveLeft = () => {
+    if(isCreateQuestionsOpen){
+      return (
+        <motion.div
+        initial={{
+          opacity:100
+        }}
+        animate={{
+          opacity:0,
+          display:'none'
+        }}
+        transition={{
+          delay:0.96
+        }}
+        >
+                  <motion.div
+        initial={{
+          overflow:'hidden',
+          marginLeft:'0%'
+        }}
+        animate={{
+          overflow:'hidden',
+          marginLeft:'100%'
+        }}
+        transition={{
+          duration:0.96,
+          type:'tween',
+          ease:'easeInOut'
+        }}
+        style={{
+          // width:770
+          // transform: 'scale(1.45)',
+        }}
+        className='' >
+         <CreateQuestions/>
+         
+          </motion.div>
+        </motion.div>
+    
+      )
+    }else{
+      return (
+        <motion.div
+        initial={{
+          opacity:100
+        }}
+        animate={{
+          opacity:0,
+          display:'none'
+        }}
+        transition={{
+          delay:0.96
+        }}
+        >
+                  <motion.div
+        initial={{
+          overflow:'hidden',
+          marginLeft:'0%'
+        }}
+        animate={{
+          overflow:'hidden',
+          marginLeft:'100%'
+        }}
+        transition={{
+          duration:0.96,
+          type:'tween',
+          ease:'easeInOut'
+        }}
+        style={{
+          // width:770
+          // transform: 'scale(1.45)',
+        }}
+        className='' >
+          <QuestionsHome/>
+         
+           </motion.div>
+        </motion.div>
+    
+      )
+    }
+  }
+
+  const RenderComponentCon = () => {
+    if(isCreateQuestionsOpen){
+      return <motion.div
+      initial={{
+        transform: 'translateX(-100%)',
+        overflow:'auto'
+      }} 
+      animate={ {
+        transform: 'translateX(0%)',
+        overflow:'auto'
+      }}
+      transition={{
+        duration:0.93,
+    type:'tween',
+    ease:'easeInOut'
+      }}
+      className=' w-full' >
+        <CreateQuestions/>
+      </motion.div>
+    }else{
+      return   <motion.div
+      initial={{
+        transform: 'translateX(-100%)',
+        overflow:'auto'
+      }} 
+      animate={ {
+        transform: 'translateX(0%)',
+        overflow:'auto'
+      }}
+      transition={{
+        duration:0.93,
+    type:'tween',
+    ease:'easeInOut'
+      }}
+      className=' w-full' >
+        <QuestionsHome/>
+      </motion.div>
+    }
+  }
+
   // React.useEffect(() => {
   //   if(!isCreateQuestionsOpen){
   //     setTimeout(() => {
@@ -77,8 +199,8 @@ const assesment:NextPage = () => {
      
       <div
       style={{
-        height:400,
-        top: '-96px'
+        height:570,
+        top: '-95px'
 
       }}
       className='relative z-10 w-3/12 bg-amber-800 flex '>
@@ -86,20 +208,36 @@ const assesment:NextPage = () => {
  <div 
 style={{
   //  textShadow:'-moz-initial',
-  left: -195,
+  left: isCreateQuestionsOpen?-208: -195,
+  top:'96px',
   // right:200,
-  transform: 'scale(1.45)',
+  transform: isCreateQuestionsOpen?'scale(1.46)': 'scale(1.45)',
 }}
-className={`${!isCreateQuestionsOpen?'wrapper absolute':'hidden'}  top-24 z-10`} >
+className={`${!isCreateQuestionsOpen?'absolute':'absolute'}   z-10 wrapper `} >
     <div className='inner  font-header6 text-stone-300 '>
-      <div 
+      <RenderPerspectiveLeft/>
+      {/* <motion.div
+      initial={{
+        overflow:'hidden',
+        marginLeft:'0%'
+      }}
+      animate={{
+        overflow:'hidden',
+        marginLeft:'100%'
+      }}
+      transition={{
+        duration:0.96,
+        type:'tween',
+        ease:'easeInOut'
+      }}
       style={{
-        width:770
+        // width:770
         // transform: 'scale(1.45)',
       }}
-      className='innerx ' >
+      className='' >
         <QuestionsHome/>
-      </div>
+       
+      </motion.div> */}
     </div>
   </div>
 
@@ -108,15 +246,13 @@ className={`${!isCreateQuestionsOpen?'wrapper absolute':'hidden'}  top-24 z-10`}
 
       <div style={{
           // width:900
-        }} className={`${!isCreateQuestionsOpen?' block':'hidden'}  flex  bg-amber-800 w-7/12 h-full `}>
+        }} className={`${!isCreateQuestionsOpen?' block':''}  flex   border-r w-6/12 h-full `}>
         <div className={`font-header6 justify-self-center  ${!isCreateQuestionsOpen?'':''} font-extralight  text-stone-300  `} >
-          <div className=' w-full center' >
-            <QuestionsHome/>
-          </div>
+        <RenderComponentCon/>
         </div>   
     </div>
 
-    <div className='z-20 relative w-2/12  '>
+    <div className='z-20 relative w-3/12  '>
     <div  >
         x
 </div>

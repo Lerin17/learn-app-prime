@@ -230,11 +230,16 @@ const [lunch, setlunch] = React.useState('');
 
   return (
 
-
-    <div className='flex  justify-between relative '>
+    <div
+    style={{
+      overflow:'hidden',
+      width:800
+      // backgroundColor:'#A46741'
+    }} 
+    className='flex justify-between relative'>
      
 
-    <div className='w-full lg:w-10/12 md:w-10/12 '>
+    <div className='w-full '>
 
       
 {/* <div style={{
