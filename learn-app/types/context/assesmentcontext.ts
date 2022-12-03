@@ -30,6 +30,10 @@ export interface Iassesmentcontext {
     currentQuestionBatchTagsArray:string[]
     setcurrentQuestionBatchTagsArray:React.Dispatch<React.SetStateAction<string[]>>
     addNewTag:()=>void
+    isQuestionList:Boolean
+    setisQuestionList:React.Dispatch<React.SetStateAction<boolean>>
+    isQuestionHome:boolean
+    setisQuestionHome:React.Dispatch<React.SetStateAction<boolean>>
 
 
 }
