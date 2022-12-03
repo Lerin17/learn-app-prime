@@ -9,136 +9,15 @@ import { Iassesmentcontext } from '../types/context/assesmentcontext'
 import { AnimatePresence, motion, usePresence } from 'framer-motion'
 import zIndex from '@mui/material/styles/zIndex'
 import Rawinput from '../components/assesment/Rawinput'
+import QuestionsList from '../components/assesment/QuestionsList'
 
 
 
 const assesment:NextPage = () => {
 
-  const {isCreateQuestionsOpen, setisCreateQuestionsOpen} = React.useContext(AssesmentContext) as Iassesmentcontext
+  const {isCreateQuestionsOpen, setisCreateQuestionsOpen,isQuestionList,    isQuestionHome} = React.useContext(AssesmentContext) as Iassesmentcontext
 
   console.log(isCreateQuestionsOpen, 'dam')
-
-  const RenderPerspectiveLeft = () => {
-    if(isCreateQuestionsOpen){
-      return (
-        <motion.div
-        initial={{
-          opacity:100
-        }}
-        animate={{
-          opacity:0,
-          display:'none'
-        }}
-        transition={{
-          delay:0.96
-        }}
-        >
-                  <motion.div
-        initial={{
-          overflow:'hidden',
-          marginLeft:'0%'
-        }}
-        animate={{
-          overflow:'hidden',
-          marginLeft:'100%'
-        }}
-        transition={{
-          duration:0.96,
-          type:'tween',
-          ease:'easeInOut'
-        }}
-        style={{
-          // width:770
-          // transform: 'scale(1.45)',
-        }}
-        className='' >
-         <CreateQuestions/>
-         
-          </motion.div>
-        </motion.div>
-    
-      )
-    }else{
-      return (
-        <motion.div
-        initial={{
-          opacity:100
-        }}
-        animate={{
-          opacity:0,
-          display:'none'
-        }}
-        transition={{
-          delay:0.96
-        }}
-        >
-                  <motion.div
-        initial={{
-          overflow:'hidden',
-          marginLeft:'0%'
-        }}
-        animate={{
-          overflow:'hidden',
-          marginLeft:'100%'
-        }}
-        transition={{
-          duration:0.96,
-          type:'tween',
-          ease:'easeInOut'
-        }}
-        style={{
-          // width:770
-          // transform: 'scale(1.45)',
-        }}
-        className='' >
-          <QuestionsHome/>
-         
-           </motion.div>
-        </motion.div>
-    
-      )
-    }
-  }
-
-  const RenderComponentCon = () => {
-    if(isCreateQuestionsOpen){
-      return <motion.div
-      initial={{
-        transform: 'translateX(-100%)',
-        overflow:'auto'
-      }} 
-      animate={ {
-        transform: 'translateX(0%)',
-        overflow:'auto'
-      }}
-      transition={{
-        duration:0.93,
-    type:'tween',
-    ease:'easeInOut'
-      }}
-      className=' w-full' >
-        <CreateQuestions/>
-      </motion.div>
-    }else{
-      return   <motion.div
-      initial={{
-        transform: 'translateX(-100%)',
-        overflow:'auto'
-      }} 
-      animate={ {
-        transform: 'translateX(0%)',
-        overflow:'auto'
-      }}
-      transition={{
-        duration:0.93,
-    type:'tween',
-    ease:'easeInOut'
-      }}
-      className=' w-full' >
-        <QuestionsHome/>
-      </motion.div>
-    }
-  }
 
   // React.useEffect(() => {
   //   if(!isCreateQuestionsOpen){
@@ -149,114 +28,242 @@ const assesment:NextPage = () => {
  
   // }, [isCreateQuestionsOpen]);
 
-  const Item = {
-    visible: {  scale: 1,
-      x:0,
-      y:0,
-      opacity:1,
-      // backgroundColor:'',
-      // opacity:1,
-      color:'#d6d3d1',
-      display:'block',
-      // skewX:0,
-      perspective:'',
-    
-    
-      transition:{
-        duration:0.6,
-        type:'spring',
-        stiffness:50,
-        delay:0.63,
-        delayChildren: 0.3
-    
-       }},
-
-
-    hidden: { 
-      // scale:0.3,
-      x:300,
-     y:180,
-     opacity:0.5,
-     display:'none',
-    //  skewX:-30,
-     perspective:100
-     },
-
-  }
-  
-  const item = {
-    visible: { opacity: 1, },
-    hidden: { opacity: 0.5 },
-  }
-
   return (
     <div
     style={{
       // backgroundColor:'#DD9D29'
     }}
-    // xl:px-16 lg:px-10 
-    className='flex mt-4 justify-center relative'>
-     
-      <div
-      style={{
-        height:570,
-        top: '-95px'
+    className='flex justify-center mt-4  xl:px-16 lg:px-10 '>
+        <div className='xl:w-8/12 lg:w-9/12 w-11/12 '>
+        <div className='font-header6 font-extralight  text-stone-300 ' >
 
-      }}
-      className='relative z-10 w-3/12 bg-amber-800 flex '>
-        
- <div 
-style={{
-  //  textShadow:'-moz-initial',
-  left: isCreateQuestionsOpen?-208: -195,
-  top:'96px',
-  // right:200,
-  transform: isCreateQuestionsOpen?'scale(1.46)': 'scale(1.45)',
+        <AnimatePresence >
+          {isQuestionHome &&
+          <motion.div 
+          // className='border'
+          transition={{
+            duration:0.5,
+            type:'tween',   
+            ease:'easeIn',
+            delay:0.2
+          }}
+
+
+      
+
+         exit=  {{
+            scale:1.6,
+            // border:'solid brown 1px',
+            // marginLeft:'100px',
+            // zIndex:'-1',
+            x:-570,
+            y:-480,
+            opacity:0.1
+             }}
+
+             initial={{
+              x:0,
+              y:0
+             }}
+             >
+            <motion.div 
+                  initial={{
+                    scale:0.3,
+                       x:300,
+          y:180,
+          // x:500,
+          // y:300,
+          opacity:0.5,
+          // color:'#92400e',
+          display:'none'
+          // backgroundColor:'#d6d3d1'
+                  }}
+
+          animate={{
+            scale: 1,
+            x:0,
+            y:0,
+            // backgroundColor:'',
+            opacity:1,
+            color:'#d6d3d1',
+            display:'block'
+          }}
+
+          transition={isQuestionHome? {
+            duration:0.6,
+            type:'spring',
+            stiffness:50,
+            delay:0.7  
+          }:{
+            // duration:0.4,
+            // delay:0.8
+            // delay: 0.4 
+          }}
+            
+            >
+               <QuestionsHome/>
+            </motion.div>
+         
+         </motion.div>         
+          }
+          </AnimatePresence>
+
+
+<AnimatePresence>
+
+          
+{isCreateQuestionsOpen &&
+
+<motion.div className=''
+ exit=  {{
+  scale:1.3,
+            x:-670,
+            y:-459,
+            opacity:0.1,
+  // display:'absolute'
+  
+   }}
+
+   initial={{
+    x:0,
+    y:0
+   }}
+
+   transition={{
+    duration:0.5,
+    type:'tween',
+    ease:'easeIn',
+    delay:0.2
+  }}
+
+
+>
+
+
+  <motion.div
+        initial={{
+          scale:0.2,
+x:300,
+y:180,
+// backgroundColor:'gray',
+opacity:0.1,
+color:'#92400e',
+display:'none'
+// backgroundColor:'#d6d3d1'
+        }}
+
+animate={ {
+  scale: 1,
+  x:0,
+  y:0,
+  // backgroundColor:'',
+  opacity:1,
+  color:'#d6d3d1',
+  display:'block'
 }}
-className={`${!isCreateQuestionsOpen?'absolute':'absolute'}   z-10 wrapper `} >
-    <div className='inner  font-header6 text-stone-300 '>
-      <RenderPerspectiveLeft/>
-      {/* <motion.div
-      initial={{
-        overflow:'hidden',
-        marginLeft:'0%'
-      }}
-      animate={{
-        overflow:'hidden',
-        marginLeft:'100%'
-      }}
-      transition={{
-        duration:0.96,
-        type:'tween',
-        ease:'easeInOut'
-      }}
-      style={{
-        // width:770
-        // transform: 'scale(1.45)',
-      }}
-      className='' >
-        <QuestionsHome/>
+
+transition={ {
+  duration:0.6,
+  type:'spring',
+  stiffness:50,
+  delay:0.7
+
+  
+}}
+  
+  >
+  <CreateQuestions/> 
+  {/* <Rawinput/> */}
+  </motion.div>
+
+</motion.div>
+ 
+}
+
+
+
+
+</AnimatePresence>
+
+
+<AnimatePresence>
+
+          
+{isQuestionList &&
+
+<motion.div className=''
+ exit=  {{
+  scale:1.3,
+            x:-670,
+            y:-459,
+            opacity:0.1,
+  // display:'absolute'
+  
+   }}
+
+   initial={{
+    x:0,
+    y:0
+   }}
+
+   transition={{
+    duration:0.5,
+    type:'tween',
+    ease:'easeIn',
+    delay:0.2
+  }}
+
+
+>
+
+
+  <motion.div
+        initial={{
+          scale:0.2,
+x:300,
+y:180,
+// backgroundColor:'gray',
+opacity:0.1,
+color:'#92400e',
+display:'none'
+// backgroundColor:'#d6d3d1'
+        }}
+
+animate={ {
+  scale: 1,
+  x:0,
+  y:0,
+  // backgroundColor:'',
+  opacity:1,
+  color:'#d6d3d1',
+  display:'block'
+}}
+
+transition={ {
+  duration:0.6,
+  type:'spring',
+  stiffness:50,
+  delay:0.7
+
+  
+}}
+  
+  >
+  <QuestionsList/> 
+  {/* <Rawinput/> */}
+  </motion.div>
+
+</motion.div>
+ 
+}
+
+</AnimatePresence>
+        
+        </div>
+     
+   
        
-      </motion.div> */}
     </div>
-  </div>
-
-
-      </div>
-
-      <div style={{
-          // width:900
-        }} className={`${!isCreateQuestionsOpen?' block':''}  flex   border-r w-6/12 h-full `}>
-        <div className={`font-header6 justify-self-center  ${!isCreateQuestionsOpen?'':''} font-extralight  text-stone-300  `} >
-        <RenderComponentCon/>
-        </div>   
-    </div>
-
-    <div className='z-20 relative w-3/12  '>
-    <div  >
-        x
-</div>
-      </div>
     </div>
   
   )
