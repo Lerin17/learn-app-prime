@@ -29,9 +29,15 @@ export interface Iassesmentcontext {
     currentCorrectAnswer:string
     currentQuestionBatchTagsArray:string[]
     setcurrentQuestionBatchTagsArray:React.Dispatch<React.SetStateAction<string[]>>
-    addNewTag:()=>void
-
-
+    isQuestionList:Boolean
+    setisQuestionList:React.Dispatch<React.SetStateAction<boolean>>
+    isQuestionHome:boolean
+    setisQuestionHome:React.Dispatch<React.SetStateAction<boolean>>
+    TagsOptions:{
+        value: string;
+        label: string;
+      }[]
+    // Test:any
 }
 
 export interface Iquestion {
@@ -39,5 +45,5 @@ export interface Iquestion {
     answers:string[]
     correctanswer?:string
     id:string
-    tags?:string[]
+    tags:string[]
 }
