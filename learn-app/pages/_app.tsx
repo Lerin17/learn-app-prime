@@ -16,9 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme} >
     <StyledEngineProvider injectFirst >
+    <CourseContextProvider>
       <AssesmentContextProvider>
       <UtilityContextProvider>
-        <CourseContextProvider>
           <StudentContextProvider>
            <CalendarContextProvider>
             <SocketContextProvider>
@@ -27,11 +27,10 @@ function MyApp({ Component, pageProps }: AppProps) {
               </Layout>
             </SocketContextProvider>     
           </CalendarContextProvider>
-        </StudentContextProvider>
-        </CourseContextProvider>
+        </StudentContextProvider> 
       </UtilityContextProvider>
       </AssesmentContextProvider>
-  
+      </CourseContextProvider>
 
     </StyledEngineProvider>
 

@@ -44,7 +44,11 @@ const DuttonLarge = (props:duttonProps) => {
   return (
     <motion.div 
  
-    onClick={props.handleClick} transition={{type:'tween', duration:0.3}} whileHover={{
+    onClick={props.handleClick} transition={{type:'tween', duration:0.3}}
+    whileTap={{
+      x:40
+    }}
+    whileHover={{
       skewX:-20
     }} className='flex items-center font-header9 cursor-pointer px-4'>
       [

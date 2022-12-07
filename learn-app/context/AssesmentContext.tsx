@@ -3,11 +3,16 @@ import { FaWeebly } from 'react-icons/fa';
 import { Iassesmentcontext } from '../types/context/assesmentcontext';
 import { Iquestion } from '../types/context/assesmentcontext';
 import uniqid from 'uniqid'
+import { CourseContext } from './CourseContext';
+import { Icoursecontext } from '../types/context/coursecontext';
 
 const AssesmentContext = React.createContext< Iassesmentcontext | null>(null)
 
 const AssesmentContextProvider = (props:any) => {
 
+  const {coursesArray,courseGroupArray} = React.useContext(CourseContext) as Icoursecontext
+
+  // console.log(coursesArray, 'jack')
 
 
     const [isCreateQuestionsOpen, setisCreateQuestionsOpen] = React.useState<Boolean>(false);
@@ -36,14 +41,27 @@ const AssesmentContextProvider = (props:any) => {
  //questions array contains the sum questions set from either raw or normal input method, further subdivisions should be provided enventually
   const [QuestionsArray, setQuestionsArray] = React.useState<Iquestion[] | []>([]);
 
-  const [questionsArray, setquestionsArray] = React.useState([]);
+  // const [questionsArray, setquestionsArray] = React.useState([]);
 
 
 const [isOpenSideBarQuestion, setisOpenSideBarQuestion] = React.useState<boolean>(false);
 
 const [currentQuestionBatchTagsArray, setcurrentQuestionBatchTagsArray] = React.useState<string[]>(['All']);
 
+// const [Test, setTest] = React.useState([]);
 
+const [TagsOptions, setTagsOptions] = React.useState<{
+  value: string;
+  label: string;
+}[]>( [
+  { value: 'chocolate', label: 'Chocolate' },
+  // { value: 'strawberry', label: 'Strawberry' },
+  // { value: 'vanilla', label: 'Vanilla' }
+]);
+
+const [isQuestionList, setisQuestionList] = React.useState(false);
+
+const [isQuestionHome, setisQuestionHome] = React.useState(true);
 // const [currentQuestionBatch, setcurrentQuestionBatch] = React.useState([]);
 // const [Que, setQue] = useState();
 //
@@ -52,9 +70,24 @@ const [currentQuestionBatchTagsArray, setcurrentQuestionBatchTagsArray] = React.
 //   return a +b
 // }
 
-const addNewTag = () => {
-  setcurrentQuestionBatchTagsArray(prev => [...prev, 'Anything'])
-}
+console.log(courseGroupArray, 'courde')
+console.log(TagsOptions, 'Tags')
+
+React.useEffect(() => {
+  const AvailableCourses = coursesArray.map(item => (item.courseName))
+
+  const AvailableCourseGroups = courseGroupArray.map(item => (item.courseGroupName))
+
+  const getTagsOptions = [...AvailableCourses, ...AvailableCourseGroups].map(item => ({
+    value:item,
+    label:item
+  }))
+
+  setTagsOptions((prev:any) => ([...prev, ...getTagsOptions]))
+
+
+}, [courseGroupArray, coursesArray]);
+
 
 let array:string[] = []
 
@@ -184,7 +217,7 @@ setQuestionsArray((prev:Iquestion[]) => ([...prev,...itemNotPresent]))
 
 
   return (
-    <AssesmentContext.Provider value={{isCreateQuestionsOpen,questionProcessedArray , setquestionProcessedArray,setisCreateQuestionsOpen, setcurrentquestionsRaw, currentquestionsRaw,processQuestionRaw, QuestionsArray, currentQuestion,setcurrentQuestion,setcurrentAnswers,currentAnswers, processQuestionsInput, isOpenSideBarQuestion,setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,currentQuestionBatchTagsArray,setcurrentQuestionBatchTagsArray,addNewTag }}>
+    <AssesmentContext.Provider value={{isCreateQuestionsOpen,questionProcessedArray , setquestionProcessedArray,setisCreateQuestionsOpen, setcurrentquestionsRaw, currentquestionsRaw,processQuestionRaw, QuestionsArray, currentQuestion,setcurrentQuestion,setcurrentAnswers,currentAnswers, processQuestionsInput, isOpenSideBarQuestion,setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,currentQuestionBatchTagsArray,setcurrentQuestionBatchTagsArray,isQuestionList, setisQuestionList, isQuestionHome, setisQuestionHome,TagsOptions}}>
         {props.children}
     </AssesmentContext.Provider>
   )
