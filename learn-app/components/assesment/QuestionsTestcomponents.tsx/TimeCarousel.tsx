@@ -134,7 +134,7 @@ const TimeCarousel = () => {
 
 <div 
 style={{
-    fontSize:40,
+    fontSize:60,
     WebkitTextStroke:'2px black'
 }}
 className='text-7xl text-transparent font-header7 flex flex-col items-center '>
@@ -148,9 +148,9 @@ className='text-7xl text-transparent font-header7 flex flex-col items-center '>
         <div
         className='textShadow4 '
         style={{
-              transform: 'rotateX(75deg)'
+              transform: 'rotateX(30deg)'
         }}>
-        43hrs
+        43
         </div>
    
     </div>
@@ -175,126 +175,6 @@ className='text-7xl text-transparent font-header7 flex flex-col items-center '>
 
 
 
-    <div
-      style={{
-        fontSize: 75
-    }}
-    >
-        <div
-        style={{
-            WebkitTextStroke:'6px white', 
-            textShadow:'5px 1px 2px rgba(150, 150, 150, 0.81);',
-            // perspective:200,
-            perspectiveOrigin:'top',
-            // width:185,
-            // height:185
-        }}
-
-        className='rounded-full flex items-center justify-center '
-        >
-            <div 
-            style={{
-                transform: 'rotateX(-30deg)'
-            }}
-            className='text-center scale-x-125'
-            >
-            45
-            </div>
-        
-        </div>
-   
-    </div>
-
-    <div 
-    style={{
-        fontSize: 55,
-        perspective:150,
-        perspectiveOrigin:'top',
-        WebkitTextStroke:'5px silver',
-        overflow:'hidden',
-        height:65
-    }}
-    className='' >
-
-<Time
-        number={47}
-        time={0.9}
-        rotate='60'
-        />
-
-           <Time
-        number={45}
-        time={0}
-        rotate='60'
-        />
-
-        <Time
-        number={46}
-        time={0.4}
-        rotate='60'
-        />
-
-      
-   
-    </div>
-   
-    
-    <motion.div 
-    style={{
-        perspective:100,
-        perspectiveOrigin:'bottom',
-        WebkitTextStroke:'3px silver',
-        overflow:'hidden',
-        height:50
-    }}
-    className='' >
-
-<Time
-        number={47}
-        time={0.9}
-        />
-
-        <Time
-        number={45}
-        time={0}
-        />
-
-        <Time
-        number={46}
-        time={0.4}
-        />
-
-       
-        {/* <motion.div
-
-        initial={{
-            y:0,
-            display:'block'
-        }}
-
-        animate={Number?
-            {
-            y:50
-        }:{}}
-
-        transition={{
-            delay:2,
-            ease:'easeInOut',
-            type:'tween',
-            duration:1
-            
-        }}
-        className='textShadow4 '
-        style={{
-              transform: 'rotateX(-75deg)'
-        }}>
-        {Number + 2}
-        
-        </motion.div> */}
-
-
-   
-    </motion.div>
 </div>
 
 <div className='text-sm flex justify-center font-header8'>
