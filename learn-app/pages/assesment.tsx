@@ -10,12 +10,13 @@ import { AnimatePresence, motion, usePresence } from 'framer-motion'
 import zIndex from '@mui/material/styles/zIndex'
 import Rawinput from '../components/assesment/Rawinput'
 import QuestionsList from '../components/assesment/QuestionsList'
+import QuestionsTest from '../components/assesment/QuestionsTest'
 
 
 
 const assesment:NextPage = () => {
 
-  const {isCreateQuestionsOpen, setisCreateQuestionsOpen,isQuestionList,    isQuestionHome} = React.useContext(AssesmentContext) as Iassesmentcontext
+  const {isCreateQuestionsOpen, setisCreateQuestionsOpen,isQuestionList,    isQuestionHome, isQuestionsTest} = React.useContext(AssesmentContext) as Iassesmentcontext
 
   console.log(isCreateQuestionsOpen, 'dam')
 
@@ -250,6 +251,81 @@ transition={ {
   
   >
   <QuestionsList/> 
+  {/* <Rawinput/> */}
+  </motion.div>
+
+</motion.div>
+ 
+}
+
+</AnimatePresence>
+
+
+
+<AnimatePresence>
+
+          
+{isQuestionsTest &&
+
+<motion.div className=''
+ exit=  {{
+  scale:1.3,
+            x:-670,
+            y:-459,
+            opacity:0.1,
+  // display:'absolute'
+  
+   }}
+
+   initial={{
+    x:0,
+    y:0
+   }}
+
+   transition={{
+    duration:0.5,
+    type:'tween',
+    ease:'easeIn',
+    delay:0.2
+  }}
+
+
+>
+
+
+  <motion.div
+        initial={{
+          scale:0.2,
+x:300,
+y:180,
+// backgroundColor:'gray',
+opacity:0.1,
+color:'#92400e',
+display:'none'
+// backgroundColor:'#d6d3d1'
+        }}
+
+animate={ {
+  scale: 1,
+  x:0,
+  y:0,
+  // backgroundColor:'',
+  opacity:1,
+  color:'#d6d3d1',
+  display:'block'
+}}
+
+transition={ {
+  duration:0.6,
+  type:'spring',
+  stiffness:50,
+  delay:0.7
+
+  
+}}
+  
+  >
+  <QuestionsTest/> 
   {/* <Rawinput/> */}
   </motion.div>
 

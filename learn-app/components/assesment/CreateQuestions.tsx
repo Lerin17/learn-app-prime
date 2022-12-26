@@ -470,10 +470,11 @@ handleClick={isTextRaw? ()=>processQuestionRaw():()=>processQuestionsInput()}
   <div style={{
     height:isTextRaw? 500:400,
     width:isOpenSideBarQuestion? 300:150,
+    backgroundColor:isOpenSideBarQuestion?'brown':'',
     overflowY:'auto',
     overflowX:'hidden',
     wordWrap:'break-word'
-  }} className={`text-sm text-wrap font-header8 ${isOpenSideBarQuestion?'right-0 absolute z-10 ':""}text-black  p-2 pt-0   transition-all hidden lg:block md:block font-bold bg-amber-800 `}>
+  }} className={`text-sm text-wrap font-header8 ${isOpenSideBarQuestion?'right-0 absolute z-10 ':""}text-black  p-2 pt-0   transition-all hidden lg:block md:block font-bold  `}>
     <div className={`opacity-100 text-xl polkachild  border-b pt-2 flex justify-between ${isOpenSideBarQuestion?'fixed':''}`}>
       <div className={`cursor-pointer ${isOpenSideBarQuestion?' bg-amber-800 ':'hidden'} `} onClick={()=>{setisOpenSideBarQuestion(false)}} >[x]</div>
       {!isOpenSideBarQuestion && 'Questions'}

@@ -48,8 +48,15 @@ if(userVideo.current){
           ss
         </div> */}
 
-            <div className='absolute z-20 top-4 lg:right-20 right-8   border w-52 h-36' >
-                fin
+            <div className='absolute z-20 top-4 lg:right-20 right-8   border w-72 h-48' >
+            <Paper>
+               <video className='bg-black' style={{
+                   width: '600px',
+                   height: '100%'
+               }}
+               playsInline  ref={userVideo} autoPlay 
+               />
+           </Paper> 
             </div>
 
         <div style={{

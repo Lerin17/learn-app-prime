@@ -407,12 +407,16 @@ const socket = io('http://localhost:3023', {
            peerConnection.setRemoteDescription(ans).then(() => {
             socket.on('SiceCandidateReceive', async ({candidates}) => {
               console.log('two')
-              console.log(candidates, 'candidatesReceived')
+              // console.log(candidates, 'candidatesReceived')
               if(candidates){
                 try {
                   await peerConnection.addIceCandidate(candidates);
                 } catch (error) {
-                  console.log(error, 'candidatesAdd')
+                  if(error){
+                    console.log(candidates, 'candidates received')
+                  }
+                 
+                  console.log(error, 'candidatesAddError')
                 }
               }
             })
@@ -447,7 +451,9 @@ const socket = io('http://localhost:3023', {
       const anzs = offer
       
       return {offer:anzs}
+
     }
+    /////en
 
     const CreateClass =  async () => {
       const Class = await createPeer({stream, isConsumer: false})

@@ -47,7 +47,7 @@ const TextAlt2 = (props:any) => {
           opacity: 1,
           display:'flex',
           transition: {
-            staggerChildren: 0.6,
+            staggerChildren: 0.4,
           
             duration:0.3,
           }
@@ -56,8 +56,10 @@ const TextAlt2 = (props:any) => {
 
       const character = {
         hidden: {y:270,
-            display:'none'},
+            opacity:0,
+            display:''},
         show: {   y:0,
+            opacity:1,
             display:'block' ,
            transition: {
             duration:0.5,
@@ -79,12 +81,41 @@ const TextAlt2 = (props:any) => {
         const lastvalue = !isAnimate? textValueArray1.length-1:textValueArray2.length-1
 
         const firstvalue = 0
+        let nx = 0
 
         return (
-            <div className=''>
+            <div 
+            style={{
+                height:210,
+                overflow:'hidden',
+                // backgroundColor:'#E55934'
+            }}
+            className=' w-11/12 noise innershadow2 rounded-full  justify-center flex   relative'>
+
+<div
+        style={{
+            height:20,
+            width:20,
+            fontSize:3,
+        }}
+        className='bg-white rounded-full absolute border top-10 right-10 z-20 border blur-sm' > 
+            x
+        </div>
+
+        
+
+        <div
+        style={{
+            height:40,
+            width:40,
+            fontSize:3,
+        }}
+        className='bg-white rounded-full absolute border top-4 right-6 z-20 border blur-md' > 
+            x
+        </div>
             <AnimatePresence>
         {!isAnimate && <motion.div 
-            className='flex bg-red-500 rounded-full overflow-hidden border-4 border-yellow-800  '
+            className='flex  rounded-full overflow-hidden'
         variants={container}
         transition={{
             duration:0.4
@@ -103,7 +134,7 @@ const TextAlt2 = (props:any) => {
              if(indexValueofItem == 0 || indexValueofItem == lastvalue){
                 return (
                     <motion.span
-                    className='border-4 border-x-none bg-blue-600'
+                    className=''
                     variants={character}
              
                >
@@ -113,7 +144,7 @@ const TextAlt2 = (props:any) => {
              }else{
                 return (
                     <motion.span
-                    className='border-4 border-x-none bg-orange-600'
+                    className=''
                     variants={character}
              
                >
@@ -131,7 +162,7 @@ const TextAlt2 = (props:any) => {
     style={{
         // width:300
     }}
-    className='flex relative border-4 border-black rounded-full overflow-hidden innershadow noise'
+    className='flex relative '
         variants={container}
         transition={{
             duration:0.4
@@ -147,15 +178,7 @@ const TextAlt2 = (props:any) => {
 
 
 
-        <div
-        style={{
-            height:30,
-            width:30,
-            fontSize:3,
-        }}
-        className='bg-white rounded-full absolute border top-10 right-10 z-20 border blur-md' > 
-            x
-        </div>
+
 
             
                
@@ -163,9 +186,14 @@ const TextAlt2 = (props:any) => {
 {textValueArray2.map((item:string) => {
              const indexValueofItem =  textValueArray2.indexOf (item)
 
+             nx++
+
              console.log(lastvalue, 'lasrvalue')
 
              if(indexValueofItem == 0 || indexValueofItem == lastvalue){
+
+                
+
                 return (
                     <motion.span
                     style={{
@@ -181,8 +209,8 @@ const TextAlt2 = (props:any) => {
                 <div className='flex ' >
                 
                 
-       
-                <div className={` ${indexValueofItem == lastvalue?'pr-10':indexValueofItem == 0?'pl-10':''}   z-10 text-amber-900`}>
+                
+                <div className={` ${nx == textValueArray2.length?'pr-10 ':nx == 1?'pl-10  border-black':''}   z-10 `}>
                 {item}
                 </div>
 
@@ -209,99 +237,7 @@ const TextAlt2 = (props:any) => {
         )
     }
 
-    // const display = 
-    // <div>
-    //         <AnimatePresence>
-    //     {!isAnimate && <motion.div 
-    //     variants={container}
-    //     transition={{
-    //         duration:0.4
-    //     }}
-    //     exit={{
-    //         y:-200,
-    //     }}
 
-    //     initial={{
-    //         x:0,
-    //         y:0
-    //        }}
-    //     >
-
-    //         {textValuesArray[0].value.map((item:string) => (
-    //                <motion.div
-    //                variants={character}
-    //             //    initial={{
-    //             //       y:200,
-    //             //       display:'none'
-    //             //   }} 
-    //             //   transition={{
-    //             //       delay:0.4,
-    //             //       duration:0.4
-    //             //   }}
-    //             //   animate={{
-    //             //       y:0,
-    //             //       display:'block'
-    //             //   }}
-    //           >
-    //             {item}
-    //           </motion.div>
-    //         ))}
-             
-    //         </motion.div>}
-    // </AnimatePresence>
-
-    // <AnimatePresence>
-    // {isAnimate && <motion.div 
-    //     variants={container}
-    //     transition={{
-    //         duration:0.4
-    //     }}
-    //     exit={{
-    //         y:-200,
-    //     }}
-
-    //     initial={{
-    //         x:0,
-    //         y:0
-    //        }}
-    //     >
-
-    //         {textValuesArray[1].value.map((item:string) => (
-    //                <motion.div
-    //                variants={character}
-    //             //    initial={{
-    //             //       y:200,
-    //             //       display:'none'
-    //             //   }} 
-    //             //   transition={{
-    //             //       delay:0.4,
-    //             //       duration:0.4
-    //             //   }}
-    //             //   animate={{
-    //             //       y:0,
-    //             //       display:'block'
-    //             //   }}
-    //           >
-    //             {item}
-    //           </motion.div>
-    //         ))}
-             
-    //         </motion.div>}
-    // </AnimatePresence>
-    // </div> 
-
-
-    // const [, set] = useState();
-
-    // const container = {
-    //     hidden: {},
-    //     show: props.animate? {
-    //         opacity: 1,
-    //                transition: {
-    //                  staggerChildren: 0.5
-    //          }
-    //     }:{}
-    // }
 
        const jam = <AnimatePresence>
         {

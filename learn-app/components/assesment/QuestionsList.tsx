@@ -18,15 +18,15 @@ const QuestionsList = () => {
 
 
 
-   const [FilteredQuestionsArray, setFilteredQuestionsArray] = React.useState<Iquestion[]>(new Array(10));
+   const [FilteredQuestionsArray, setFilteredQuestionsArray] = React.useState<Iquestion[]>([]);
 
-   React.useEffect(() => {
-    if(FilteredQuestionsArray.length == 10){
-        setTimeout(() => {
-             setFilteredQuestionsArray(new Array(12))
-    }, 2000);
-    }
-   }, [FilteredQuestionsArray]);
+//    React.useEffect(() => {
+//     if(FilteredQuestionsArray.length == 10){
+//         setTimeout(() => {
+//              setFilteredQuestionsArray(new Array(12))
+//     }, 2000);
+//     }
+//    }, [FilteredQuestionsArray]);
  
 
 
@@ -37,7 +37,7 @@ const QuestionsList = () => {
 // }, 2000);
 
     const QuestionComponent = (props:Iquestion) => {
-        return (<div className='border-y' >
+        return (<div className='border-y px-2' >
             {props.question}
         </div>)
     }
@@ -55,7 +55,7 @@ const QuestionsList = () => {
         console.log(filteredQuestions,'filterdQuestions')
 
         //hashed out
-        // setFilteredQuestionsArray(filteredQuestions)
+        setFilteredQuestionsArray(filteredQuestions)
 
 
         // Array.from(new Set(PlayerOne.concat(PlayerTwo)) ).length
@@ -93,7 +93,7 @@ const QuestionsList = () => {
     <div>
         <div className='border bg-white w-full' >
         <ReactSelect
-  className='text-base focus:border-none '
+  className='text-base focus:border-none z-30 block'
    options={TagsOptions}
    isMulti
 //    onChange={}
@@ -115,16 +115,16 @@ const QuestionsList = () => {
                 style={{
                     // backgroundColor:'#69140E'
                 }}
-                className='bg-amber-900 rounded text-transparent w-5/12' >
+                className='bg-amber-900 rounded  font-header7 w-5/12' >
                     <div 
                     style={{
                         fontSize:200,
-                        WebkitTextStroke:'2px lightgray',
+                        WebkitTextStroke:'2px gray',
                     }}
-                    className='text-8xl font-header7 text-center mt-4' >
+                    className='text-8xl text-transparent font-header7 text-center mt-4' >
                         <TextAlt2                  
                         // OriginalText='22'
-                        textAlt= {String(FilteredQuestionsArray.length)}
+                        textAlt= {String(FilteredQuestionsArray.length + 10)}
                         text={textTest}
                         animate={TagsArrayPool.length}
                         />
@@ -133,12 +133,18 @@ const QuestionsList = () => {
                     Available Questions
                     </div>
 
-                    <div>
+                    <div className='p-2  bg-amber-600'>
+                        Finished Questions
+                    </div>
+                    <div className='p-2 bg-amber-700'>
+                        Finished Questions
+                    </div>
+                    <div className='p-2  bg-amber-800'>
                         Finished Questions
                     </div>
              
                 </div>
-                <div className='w-7/12 border' >
+                <div className='w-7/12 bg-amber-900' >
                     <div>
                         <input
                         className='w-full'

@@ -33,7 +33,7 @@ const VideoOptions = () => {
         <RiSignalTowerFill/>
       </Button>
 
-      <Button className='text-2xl text-lime-400 p-0 hover:scale-110 transition-all' onClick={()=>JoinClass()} >
+      <Button className='text-2xl text-blue-600 p-0 hover:scale-110 transition-all' onClick={()=>JoinClass()} >
        <MdWifiCalling2/>
       </Button>
 

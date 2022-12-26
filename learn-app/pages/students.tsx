@@ -20,11 +20,11 @@ const students = () => {
     <div className='font-header6 flex justify-center  h-full ' >
         
        
-    <div className='flex flex-col w-10/12 justify-center '>
+    <div className=' w-10/12  mt-4  '>
          {/* students */}
-         <div className='w-8/12  mx-auto  flex justify-center'>
-        <div className='flex justify-center w-full border-b border-amber-700 ' >
-        <input placeholder='Search' className='text-4xl w-full  text-white bg-amber-800' />
+         <div className='w-8/12  mx-auto  flex '>
+        <div className='flex  w-full border-b border-black ' >
+        <input placeholder='Search' className='text-4xl w-full  text-white bg-transparent' />
         <div className='self-bottom text-white text-4xl' >
             <HiSearchCircle/>
         </div>
@@ -32,7 +32,7 @@ const students = () => {
         </div>
 
 
-        <div className='flex justify-center mt-10 ' >
+        <div className='flex justify-center mt-4 ' >
             <div  style={{
    
     }} className={`${isAssesmentopen || isNewStudentOpen?'w-5/12':'w-5/12'}   h-5/6`}>

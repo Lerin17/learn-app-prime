@@ -37,6 +37,10 @@ export interface Iassesmentcontext {
         value: string;
         label: string;
       }[]
+      isQuestionsTest:boolean
+    setisQuestionsTest:React.Dispatch<React.SetStateAction<boolean>>
+    isPreviewPage:boolean
+     setisPreviewPage:React.Dispatch<React.SetStateAction<boolean>>
     // Test:any
 }
 

@@ -62,6 +62,10 @@ const [TagsOptions, setTagsOptions] = React.useState<{
 const [isQuestionList, setisQuestionList] = React.useState(false);
 
 const [isQuestionHome, setisQuestionHome] = React.useState(true);
+
+const [isQuestionsTest, setisQuestionsTest] = React.useState(false);
+
+const [isPreviewPage, setisPreviewPage] = React.useState(false);
 // const [currentQuestionBatch, setcurrentQuestionBatch] = React.useState([]);
 // const [Que, setQue] = useState();
 //
@@ -217,7 +221,7 @@ setQuestionsArray((prev:Iquestion[]) => ([...prev,...itemNotPresent]))
 
 
   return (
-    <AssesmentContext.Provider value={{isCreateQuestionsOpen,questionProcessedArray , setquestionProcessedArray,setisCreateQuestionsOpen, setcurrentquestionsRaw, currentquestionsRaw,processQuestionRaw, QuestionsArray, currentQuestion,setcurrentQuestion,setcurrentAnswers,currentAnswers, processQuestionsInput, isOpenSideBarQuestion,setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,currentQuestionBatchTagsArray,setcurrentQuestionBatchTagsArray,isQuestionList, setisQuestionList, isQuestionHome, setisQuestionHome,TagsOptions}}>
+    <AssesmentContext.Provider value={{isCreateQuestionsOpen,questionProcessedArray , setquestionProcessedArray,setisCreateQuestionsOpen, setcurrentquestionsRaw, currentquestionsRaw,processQuestionRaw, QuestionsArray, currentQuestion,setcurrentQuestion,setcurrentAnswers,currentAnswers, processQuestionsInput, isOpenSideBarQuestion,setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,currentQuestionBatchTagsArray,setcurrentQuestionBatchTagsArray,isQuestionList, setisQuestionList, isQuestionHome, setisQuestionHome,TagsOptions, isQuestionsTest, setisQuestionsTest,isPreviewPage, setisPreviewPage}}>
         {props.children}
     </AssesmentContext.Provider>
   )
