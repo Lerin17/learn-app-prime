@@ -6,9 +6,12 @@ import uniqid from 'uniqid'
 import { CourseContext } from './CourseContext';
 import { Icoursecontext } from '../types/context/coursecontext';
 
+const {products, people, questions} = require('../testdata/QuestionsArraysample')
+
 const AssesmentContext = React.createContext< Iassesmentcontext | null>(null)
 
 const AssesmentContextProvider = (props:any) => {
+  console.log(people, 'people')
 
   const {coursesArray,courseGroupArray} = React.useContext(CourseContext) as Icoursecontext
 
@@ -39,7 +42,7 @@ const AssesmentContextProvider = (props:any) => {
 
 
  //questions array contains the sum questions set from either raw or normal input method, further subdivisions should be provided enventually
-  const [QuestionsArray, setQuestionsArray] = React.useState<Iquestion[] | []>([]);
+  const [QuestionsArray, setQuestionsArray] = React.useState<Iquestion[] | []>([...questions]);
 
   // const [questionsArray, setquestionsArray] = React.useState([]);
 
@@ -47,6 +50,22 @@ const AssesmentContextProvider = (props:any) => {
 const [isOpenSideBarQuestion, setisOpenSideBarQuestion] = React.useState<boolean>(false);
 
 const [currentQuestionBatchTagsArray, setcurrentQuestionBatchTagsArray] = React.useState<string[]>(['All']);
+
+//In the process of creating a test these are the questions that are filtered out and selected
+const [currentTestQuestionsArray, setcurrentTestQuestionsArray] = React.useState<Iquestion[]>([]);
+
+//The number of questions selected for a test
+const [currentNoOfTestQuestions, setcurrentNoOfTestQuestions] = React.useState<number>(0);
+
+const [currentTestQuestionsTimeInput, setcurrentTestQuestionTimeInput] = React.useState< {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}>(
+  {hours:0,
+  minutes:0,
+  seconds:0},
+);
 
 // const [Test, setTest] = React.useState([]);
 
@@ -69,6 +88,12 @@ const [isPreviewPage, setisPreviewPage] = React.useState(false);
 // const [currentQuestionBatch, setcurrentQuestionBatch] = React.useState([]);
 // const [Que, setQue] = useState();
 //
+
+//these are the tags used to filter out test questions in the process of creating a test
+const [tagsArrayForTestQuestions, settagsArrayForTestQuestions] = React.useState<{
+  value: string;
+  option: string;
+}[]>([]);
 
 // const Add = (a:number, b:number) => {
 //   return a +b
@@ -221,7 +246,7 @@ setQuestionsArray((prev:Iquestion[]) => ([...prev,...itemNotPresent]))
 
 
   return (
-    <AssesmentContext.Provider value={{isCreateQuestionsOpen,questionProcessedArray , setquestionProcessedArray,setisCreateQuestionsOpen, setcurrentquestionsRaw, currentquestionsRaw,processQuestionRaw, QuestionsArray, currentQuestion,setcurrentQuestion,setcurrentAnswers,currentAnswers, processQuestionsInput, isOpenSideBarQuestion,setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,currentQuestionBatchTagsArray,setcurrentQuestionBatchTagsArray,isQuestionList, setisQuestionList, isQuestionHome, setisQuestionHome,TagsOptions, isQuestionsTest, setisQuestionsTest,isPreviewPage, setisPreviewPage}}>
+    <AssesmentContext.Provider value={{isCreateQuestionsOpen,questionProcessedArray , setquestionProcessedArray,setisCreateQuestionsOpen, setcurrentquestionsRaw, currentquestionsRaw,processQuestionRaw, QuestionsArray, currentQuestion,setcurrentQuestion,setcurrentAnswers,currentAnswers, processQuestionsInput, isOpenSideBarQuestion,setisOpenSideBarQuestion,setcurrentCorrectAnswer,currentCorrectAnswer,currentQuestionBatchTagsArray,setcurrentQuestionBatchTagsArray,isQuestionList, setisQuestionList, isQuestionHome, setisQuestionHome,TagsOptions, isQuestionsTest, setisQuestionsTest,isPreviewPage, setisPreviewPage, currentTestQuestionsArray, setcurrentTestQuestionsArray, currentTestQuestionsTimeInput, setcurrentTestQuestionTimeInput, currentNoOfTestQuestions, setcurrentNoOfTestQuestions, tagsArrayForTestQuestions, settagsArrayForTestQuestions}}>
         {props.children}
     </AssesmentContext.Provider>
   )

@@ -41,6 +41,26 @@ export interface Iassesmentcontext {
     setisQuestionsTest:React.Dispatch<React.SetStateAction<boolean>>
     isPreviewPage:boolean
      setisPreviewPage:React.Dispatch<React.SetStateAction<boolean>>
+     currentTestQuestionsArray:Iquestion[]
+     setcurrentTestQuestionsArray:React.Dispatch<React.SetStateAction<Iquestion[]>>
+     currentTestQuestionsTimeInput: {
+        hours: number;
+        minutes: number;
+        seconds: number;
+    }
+     setcurrentTestQuestionTimeInput: React.Dispatch<React.SetStateAction<{
+        hours: number;
+        minutes: number;
+        seconds: number;
+    }>>
+    currentNoOfTestQuestions:number
+    setcurrentNoOfTestQuestions: React.Dispatch<React.SetStateAction<number>>
+    tagsArrayForTestQuestions:{value:string,
+    option:string}[]
+    settagsArrayForTestQuestions:React.Dispatch<React.SetStateAction<{
+        value: string;
+        option: string;
+    }[]>>
     // Test:any
 }
 

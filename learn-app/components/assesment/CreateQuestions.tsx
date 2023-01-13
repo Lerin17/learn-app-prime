@@ -147,7 +147,7 @@ const [lunch, setlunch] = React.useState('');
       }else{
       singleOption = item
       } 
-      return (<div className={`${props.correctanswer == item?'text-white':''}`}>
+      return (<div className={`${props.correctanswer == item?'text-white bg-black':''}`}>
         {optionsIndex[n-1]}    {singleOption}
           </div>)
     } )
@@ -257,7 +257,18 @@ const [lunch, setlunch] = React.useState('');
   overflowX:'auto'
 }} className='flex text-base mb-2 text-white transition-all pb-4 absolute z-10' > */}
 
+<div className='flex'>
+  <div className='px-1'>
+    +
+  </div>
+  <input
+  className='bg-transparent border-b mb-1 w-full'
+  placeholder='Create and add Unique tag for Questions'
+  />
+</div>
+
   <ReactSelect
+  placeholder='Tags for Questions'
   className='text-base focus:border-none'
    options={TagsOptions}
    isMulti
@@ -470,7 +481,7 @@ handleClick={isTextRaw? ()=>processQuestionRaw():()=>processQuestionsInput()}
   <div style={{
     height:isTextRaw? 500:400,
     width:isOpenSideBarQuestion? 300:150,
-    backgroundColor:isOpenSideBarQuestion?'brown':'',
+    backgroundColor:isOpenSideBarQuestion?'black':'',
     overflowY:'auto',
     overflowX:'hidden',
     wordWrap:'break-word'

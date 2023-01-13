@@ -240,6 +240,16 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
   src: url('../public/fonts/lemon/LemonMilkBold-gx2B3.otf');
 }
 
+@font-face {
+  font-family: 'HOUSE';
+  src: url('../public/fonts/house/Housebreak-Extended.ttf');
+}
+
+@font-face {
+  font-family: 'NUE';
+  src: url('../public/fonts/nue/HelveticaNeue\ Medium.ttf');
+}
+
 .nylon{
   background-image: url('../images/nylon.png');
 }
@@ -287,6 +297,21 @@ body {
   opacity: 1;
 }
 
+.testpaper{
+  background-image: url('../images/handmade-paper.png');
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 /* 
 @font-face {
@@ -317,13 +342,20 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 }
 
 .earth{
-  background-image: url('../images/earth.png');
+  background-image: url('../images/earth5.png');
   background-size: cover;
+  opacity: 10%;
+}
+
+.apple{
+  background-image: url('../images/bulb.png');
+  background-size: cover;
+  opacity: 10%;
 }
 
 .compass{
   background-image: url('../images/pencil_dither_large.jpg');
-  background-size: cover;
+  background-size: contain;
 }
 
 .paper{
@@ -344,8 +376,24 @@ background-size: cover;
   background-image: url('../images/brushed-alum.png');
 }
 
+
+
 .grid{
   background-image: url('../images/graphy-dark.png');
+}
+
+#timeinput::placeholder{
+  
+    color: #060606;
+    opacity: 0.5;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
 }
 
 .conic{

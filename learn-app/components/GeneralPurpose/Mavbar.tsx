@@ -15,7 +15,7 @@ const Mavbar = () => {
     style={{
       overflow:'hidden'
   }}
-    className='relative transition-all shadow xl:w-8/12 lg:w-9/12 w-11/12  z-40 ' >
+    className='relative transition-all  xl:w-8/12 lg:w-9/12 w-11/12  z-40 ' >
 
 
 <div 
@@ -87,7 +87,7 @@ const Mavbar = () => {
             style={{opacity:'100',
             // overflow:'hidden'
           }}
-            className=' text-xl flex justify-between px-3 relative w-full py-1   z-10 text-2xl text-transparent vortex   border-b-2 border-l-2 border-amber-900'> 
+            className=' text-xl flex justify-between px-3 relative w-full py-1   z-10 text-2xl text-transparent   border-b-2 border-l-2 border-amber-900'> 
                   {/* [c] */}[c]
             </div>
 
