@@ -11,12 +11,14 @@ import { StyledEngineProvider, ThemeProvider } from '@mui/material'
 import { UtilityContextProvider } from '../context/UtilityContext'
 import { CourseContextProvider } from '../context/CourseContext'
 import { AssesmentContextProvider } from '../context/AssesmentContext'
+import { UserContextProvider } from '../context/UserContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme} >
     <StyledEngineProvider injectFirst >
-    <CourseContextProvider>
+      <UserContextProvider>
+      <CourseContextProvider>
       <AssesmentContextProvider>
       <UtilityContextProvider>
           <StudentContextProvider>
@@ -31,6 +33,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       </UtilityContextProvider>
       </AssesmentContextProvider>
       </CourseContextProvider>
+      </UserContextProvider>
+
 
     </StyledEngineProvider>
 

@@ -250,7 +250,7 @@ const [lunch, setlunch] = React.useState('');
     }} className='flex  justify-between relative '>
      
 
-    <div className='w-full lg:w-10/12 md:w-10/12 '>
+    <div className='w-full lg:w-9/12 md:w-9/12 '>
 
       
 {/* <div style={{
@@ -480,13 +480,13 @@ handleClick={isTextRaw? ()=>processQuestionRaw():()=>processQuestionsInput()}
 
   <div style={{
     height:isTextRaw? 500:400,
-    width:isOpenSideBarQuestion? 300:150,
+    width:isOpenSideBarQuestion? 300:250,
     backgroundColor:isOpenSideBarQuestion?'black':'',
     overflowY:'auto',
     overflowX:'hidden',
     wordWrap:'break-word'
-  }} className={`text-sm text-wrap font-header8 ${isOpenSideBarQuestion?'right-0 absolute z-10 ':""}text-black  p-2 pt-0   transition-all hidden lg:block md:block font-bold  `}>
-    <div className={`opacity-100 text-xl polkachild  border-b pt-2 flex justify-between ${isOpenSideBarQuestion?'fixed':''}`}>
+  }} className={`text-sm text-wrap font-header8 ${isOpenSideBarQuestion?'right-0 absolute border border-r-0 z-10 ':""}  text-black  p-2 pt-0  mt-6  transition-all hidden lg:block md:block font-bold  `}>
+    <div className={`opacity-100 text-xl polkachild  border-b pt-2 flex justify-between ${isOpenSideBarQuestion?'fixed ':''}`}>
       <div className={`cursor-pointer ${isOpenSideBarQuestion?' bg-amber-800 ':'hidden'} `} onClick={()=>{setisOpenSideBarQuestion(false)}} >[x]</div>
       {!isOpenSideBarQuestion && 'Questions'}
       

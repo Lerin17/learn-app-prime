@@ -85,10 +85,10 @@ style={{
     // color:'#BFD5ED',
     // backgroundColor:'#BFD5ED'
   }}
-            animate={isNewStudentOpen? { x: -10}:{x:5}} transition={{type:'tween', duration: 0.5}} onClick={()=>{
+             onClick={()=>{
                 setcurrentCPOP('New student')
-                toggleNewStudentPanel()}} className={`text-black ${ isNewStudentOpen?'':'text-4xl'} font-header8 cursor-pointer flex items-center`} >
-                [<span className='text-base font-header9 px-4' >NEW STUDENT +</span>]
+                toggleNewStudentPanel()}} className={`text-black ${ isNewStudentOpen?'':'text-4xl'} cursor-pointer flex items-center`} >
+                <span className='text-3xl text-stone-300 hover:text-stone-800 transition-all font-header12 px-4' >Add New Student +</span>
             </motion.div>
 
 
@@ -97,12 +97,12 @@ style={{
                 // color:'#89ABD0'
                 // backgroundColor:'#BFD5ED'
               }}
-            onClick={()=>openAssesmentPanel()} animate={  isNewStudentOpen? { x: -10}:{x:5}} transition={{type:'tween', duration: 0.6}} className={`text-black ${  isNewStudentOpen?'text-lg':'text-4xl  mt-4'}   cursor-pointer pr-4 font-header8 flex items-center`} >
-               [<span className='text-base font-header9 px-4' > ASSESMENT</span>]
+            onClick={()=>openAssesmentPanel()}  className={`text-black ${  isNewStudentOpen?'text-lg':'text-4xl  '} mt-3  cursor-pointer pr-4 font-header8 flex items-center`} >
+               <span className='text-3xl text-stone-300 hover:text-stone-800 transition-all font-header12 px-4' > Remove Student</span>
             </motion.div>
 
-            <motion.div transition={{type:'tween', duration: 0.7}} animate={  isNewStudentOpen?{ x: -10}:{x:5}}   className={`text-black ${ isNewStudentOpen?'text-lg':'text-4xl mt-4'}   cursor-pointer  pr-4 flex items-center font-header8`} >
-              [<span className='text-base font-header9 px-4' > COURSES</span> ]
+            <motion.div  className={`text-black ${ isNewStudentOpen?'text-lg':'text-4xl '} mt-3  cursor-pointer  pr-4 flex items-center font-header8`} >
+              <span className='text-base font-header12 text-3xl text-stone-300 hover:text-stone-800 transition-all  px-4' > Courses</span> 
             </motion.div>
 
         </div>

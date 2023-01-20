@@ -25,7 +25,7 @@ const StudentLibaryDisplay = StudentArray.map(item => <motion.div animate={isAss
       overflow: 'auto',
       height: isAssesmentopen? '600px': ''
     }}
-    className={`flex flex-wrap justify-center  transition-all `} >
+    className={`flex flex-wrap justify-start  transition-all `} >
         {StudentLibaryDisplay}
     </div>
   )
