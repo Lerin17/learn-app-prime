@@ -50,7 +50,7 @@ const {isUserStudent} = React.useContext(UserContext) as Iusercontext
      className='lg:h-screen md:h-screen  h-full bg-amber-800 paper relative ' > 
 
         
-{isUserStudent?<div className='flex justify-center'>
+{!isUserStudent?<div className='flex justify-center'>
  <Login/>
 </div>: <div className=' h-full' >
 

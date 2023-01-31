@@ -2,7 +2,18 @@ const express = require('express')
 
 const app = express()
 
+const txry = require('./firebaseapp')
+
+
+// const name:String = 'ss'
+
+// Initialize Firebase
+// const fapp = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(fapp);
+/////
+
 const bodyParser = require('body-parser')
+
 const server = require('http').createServer(app)
 
 let candidatesFromBroadcast = []
@@ -20,6 +31,11 @@ const io = require('socket.io')(server, {
         origin: '*',
         methods: ['GET', 'POST']
     }
+})
+
+app.post('/create',   (req, res) => {
+   txry(req, res)
+
 })
 
 // const start = async () => {
