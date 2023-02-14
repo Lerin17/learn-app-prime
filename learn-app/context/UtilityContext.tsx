@@ -8,12 +8,42 @@ const UtilityContextProvider = (props:any) => {
 
     const [screenWidth, setscreenWidth] = React.useState(0);
 
+    const [mousePosition, setmousePosition] = React.useState({
+        x:0,
+        y:0
+    });
+
+    const [currentCursorVariant, setcurrentCursorVariant] = React.useState<string>('default');
+
+    const getMousePosition = (e:any) => {
+        //  console.log(e)
+         setmousePosition({
+            x:e.clientX,
+            y:e.clientY
+         })
+    }
+
+    React.useEffect(() => {
+        window.addEventListener('mousemove', getMousePosition)
+
+        return () => {
+            window.removeEventListener('mousemove', getMousePosition)
+        }
+    }, []);
+
+    const getWindowWidth = () => {
+        setscreenWidth(window.innerWidth)
+    }
+
+
     React.useEffect(() => {
         if(window){
-            window.addEventListener('resize', ()=>{
-                setscreenWidth(window.innerWidth)
-            })
+            window.addEventListener('resize', getWindowWidth)
             // setscreenWidth(window.innerWidth)
+        }
+
+        return () => {
+            window.removeEventListener('resize', getWindowWidth)
         }
     }, []);
 
@@ -23,12 +53,19 @@ const UtilityContextProvider = (props:any) => {
     
     // }
 
+    const cursorEnter = () => {
+setcurrentCursorVariant('animate')
+    }
+
+    const cursorLeave = () => {
+setcurrentCursorVariant('default')
+    }
    
 
     
 
   return (
-    <UtilityContext.Provider value={{screenWidth}} >
+    <UtilityContext.Provider value={{screenWidth, mousePosition, currentCursorVariant, setcurrentCursorVariant,  cursorLeave, cursorEnter}} >
         {props.children}
     </UtilityContext.Provider>
   )

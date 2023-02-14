@@ -5,6 +5,8 @@ import { DuttonLarge } from '../GeneralPurpose/dutton'
 import { AssesmentContext } from '../../context/AssesmentContext'
 import { Iassesmentcontext } from '../../types/context/assesmentcontext'
 import Text from '../GeneralPurpose/Text'
+import { UtilityContext } from '../../context/UtilityContext'
+import { Iutilitycontext } from '../../types/context/utilitycontext'
 // import { motion } from 'framer-motion'
 
 
@@ -12,6 +14,7 @@ import Text from '../GeneralPurpose/Text'
 const QuestionsHome = () => {
   const {isCreateQuestionsOpen, setisCreateQuestionsOpen, QuestionsArray,setisQuestionList,  setisQuestionHome, isQuestionsTest, setisQuestionsTest} = React.useContext(AssesmentContext) as Iassesmentcontext
 
+  const {currentCursorVariant, setcurrentCursorVariant,cursorEnter,cursorLeave} = React.useContext(UtilityContext) as Iutilitycontext
   // const [isPresent, safeToRemove] = usePresence()
 
   // React.useEffect(() => {
@@ -19,7 +22,7 @@ const QuestionsHome = () => {
   // }, [isPresent])
 
   return (
-<div className='flex justify-start relative z-20'>
+<div className='flex justify-start relative '>
 <motion.div exit={{
   // y:40,
   // opacity:0
@@ -28,13 +31,16 @@ style={{
   // fontSize:65
 }}
 className='text-7xl  font-header12 flex flex-col justify-center '>
-    <div onClick={()=>{
+    <div 
+       onMouseEnter={()=>cursorEnter()}
+       onMouseLeave={()=>cursorLeave()}
+    onClick={()=>{
       setisQuestionHome(false)
       setisQuestionList(true)}} style={{
        
       // backgroundColor:'#A46741'
     }} className=''>
-      {QuestionsArray.length?<div className='flex  cursor-pointer pt-3 transition-all hover:text-stone-800'>
+      {QuestionsArray.length?<div className='flex   pt-3 transition-all hover:text-stone-400'>
       Tour Questions Inventory
       <DuttonLarge
       handleClick={()=>{
@@ -47,7 +53,10 @@ className='text-7xl  font-header12 flex flex-col justify-center '>
       </div> :'No Questisons Created yet ,'}
        
       </div>
-      <div style={{
+      <div 
+      onMouseEnter={()=>cursorEnter()}
+      onMouseLeave={()=>cursorLeave()}
+      style={{
   // backgroundColor:'#89ABD0'
 }} className=' flex pt-3 font-header12 transition-all hover:text-stone-800'>
   Create Questions 
@@ -63,10 +72,13 @@ icon={ <svg className='fill-current text-amber-800' xmlns="http://www.w3.org/200
   <span className='font-header12' >,</span> 
   </div>
 
-  <div style={{
+  <div
+     onMouseEnter={()=>cursorEnter()}
+     onMouseLeave={()=>cursorLeave()}
+  style={{
   // backgroundColor:'#89ABD0'
   // WebkitTextStroke:'2px black'
-}} className=' flex pt-3 transition-all hover:text-stone-800 font-header12  cursor-pointer'>
+}} className=' flex pt-3 transition-all hover:text-stone-800 font-header12  '>
 
 Create Test 
 <DuttonLarge

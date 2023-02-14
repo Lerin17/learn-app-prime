@@ -27,7 +27,11 @@ export const Nav = () => {
 
   return (
     <div
-    className='text-white flex flex-wrap justify-center bg-stone-300  w-full items-center  ' >
+    style={{
+
+     
+    }}
+    className='text-white   flex flex-wrap justify-center bg-stone-300  w-full items-center  ' >
         <NavOption
         text = 'Home'
         locationURL= "/"
@@ -36,7 +40,7 @@ export const Nav = () => {
        
 
         <NavOption
-        text = 'About'
+        text = 'You'
         locationURL= '/aboot'
         />
 

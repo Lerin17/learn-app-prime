@@ -250,13 +250,29 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
   src: url('../public/fonts/nue/HelveticaNeue\ Medium.ttf');
 }
 
+.glass{
+  /* From https://css.glass */
+/* From https://css.glass */
+background: rgba(255, 230, 230, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 230, 230, 0.3);
+}
+
+*{
+  cursor: none;
+}
+
 .nylon{
   background-image: url('../images/nylon.png');
+  background-size: contain;
 }
 
 .nylon2{
   background-image: url('../images/nylon3Alt3.png');
-  /* opacity: '50%'; */
+  opacity: 30%;
   background-size: cover;
 }
 
@@ -285,6 +301,12 @@ body {
   scrollbar-color: rgb(184, 184, 184) #92400e;   /* scroll thumb and track */ 
 }
 
+.earth-1{
+  background-image: url('../images/earth4.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .polka{
   background-color: #e5e5f700;
   opacity: 0.8;
@@ -311,6 +333,32 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.custom-cursor{
+  /* background-color: #e0611e; */
+  /* height: 32px;
+  width: 32px; */
+
+  position: fixed;
+  left: 0;
+  top:0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.triangle-up {
+  position: fixed;
+  pointer-events: none;
+  left: 0;
+  top:0;
+	width: 0;
+	height: 0;
+	border-left: 16px solid transparent;
+	border-right: 16px solid transparent;
+	border-bottom: 32px solid #a1a1aa;
+  z-index: 1;
+
 }
 
 /* 
