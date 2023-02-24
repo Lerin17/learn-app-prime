@@ -28,8 +28,10 @@ const UserContextProvider = (props:any) => {
     const [isLoginPage, setisLoginPage] = React.useState<boolean>(true);
 
     const addNewUser =  () => {
-      setDoc(doc(databaseRef, 'sax') ,{name:'jack',
-    isStudent:isUserStudent,age:26}).then(() => {
+      setDoc(doc(databaseRef, userData.name) ,{name:userData.name,
+      email:userData.email,
+      password:userData.hashedpassword
+    }).then(() => {
       alert('Data Sent')
     }).then(async ()=>{
       const getx = await getDoc(doc(database, 'Users', 'sax'))
