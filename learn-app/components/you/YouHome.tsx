@@ -56,7 +56,7 @@ const {addNewUser, setisLoginPage} = React.useContext(UserContext) as Iuserconte
             </div>,
        </div>
 
-       <div onClick={()=>addNewUser()} className="   text-7xl  font-header12 transition-all hover:text-stone-800 pt-3" >
+       <div  className="   text-7xl  font-header12 transition-all hover:text-stone-800 pt-3 textshadow" >
            Tour Your Network.
        </div> 
     </div>

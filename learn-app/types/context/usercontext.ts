@@ -6,6 +6,14 @@ export interface Iusercontext {
     setisLoginPage: React.Dispatch<React.SetStateAction<boolean>>
     userData:Iuserdata
     setuserData:React.Dispatch<React.SetStateAction<Iuserdata>>
+    Userpasswordinput:string
+    setUserpasswordinput: React.Dispatch<React.SetStateAction<string>>
+    Useremailinput:string
+     setUseremailinput:React.Dispatch<React.SetStateAction<string>>
+     Usernameinput:string
+    setUsernameinput:React.Dispatch<React.SetStateAction<string>>
+    notficationState:string
+    
 }
 
 export interface Iuserdata {

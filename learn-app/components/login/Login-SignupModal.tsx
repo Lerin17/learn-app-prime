@@ -6,7 +6,7 @@ import { Iusercontext } from '../../types/context/usercontext'
 
 const Login = () => {
 
-  const {userData, setuserData, addNewUser} = React.useContext(UserContext) as Iusercontext
+  const {userData, setuserData, addNewUser, Useremailinput, Usernameinput, Userpasswordinput, setUseremailinput, setUserpasswordinput, setUsernameinput, notficationState} = React.useContext(UserContext) as Iusercontext
 
   const [hashedPass, sethashedPass] = React.useState<any>('');
 
@@ -80,67 +80,85 @@ const Login = () => {
 
   }
 
+  console.log(notficationState,'notiixexexxexexexexexexexxdexzf')
+
   return (
+    
     <div className='flex justify-center font-header12'>
-         <div 
+      {notficationState ==  'success' || notficationState == 'error'?
+          <div className='w-8/12 pt-4 text-7xl text-green-200 px-2'>
+            <div>
+              Lerin17,
+            </div>
+            <div className=' text-6xl leading-tight'>
+            you have successfully logged in.
+            </div>
+            
+          </div>: 
+          <div 
          style={{
           height:450
          }}
          className='w-8/12'>
-              <div className='flex flex-col'>
-              <div className='flex border-b-2 text-7xl' >
-                Name
-                <div className='w-full'>
-                  <input
-                  onChange={(e)=>{
-                    setuserData(prev => ({...prev, name:e.target.value}))
-                  }}
-                  className='w-full text-stone-400  bg-transparent focus:border-none focus:text-stone-800 transition-all border-b-4 pl-4'
-                  />
-                </div>
-              </div>
+       
+           <div className='flex flex-col'>
+           <div className='flex border-b-2 text-7xl' >
+             Name
+             <div className='w-full'>
+               <input
+               value={Usernameinput}
+               onChange={(e)=>{
+                setUsernameinput(e.target.value)
+               }}
+               className='w-full text-stone-400  bg-transparent focus:border-none focus:text-stone-800 transition-all border-b-4 pl-4'
+               />
+             </div>
+           </div>
 
-              <div className='flex text-7xl border-b-2' >
-                Password
-                <div className='w-full'>
-                  <input
-                  type={'password'}
-                  value={userData.hashedpassword}
-                   onChange={(e)=>{
-                    // gethashedpass(e)
-                    setuserData(prev => ({...prev, hashedpassword:e.target.value}))
-                  }}
-                  className='w-full focus:border-none focus:text-stone-800 text-stone-400  bg-transparent transition-all  border-b-4 pl-4'
-                  />
-                </div>
-              </div>
+           <div className='flex text-7xl border-b-2' >
+             Password
+             <div className='w-full'>
+               <input
+               type={'password'}
+               value={Userpasswordinput}
+                onChange={(e)=>{
+                 // gethashedpass(e)
+                 setUserpasswordinput(e.target.value)
+               }}
+               className='w-full focus:border-none focus:text-stone-800 text-stone-400  bg-transparent transition-all  border-b-4 pl-4'
+               />
+             </div>
+           </div>
 
-              <div className='flex  text-7xl border-b-2' >
-                Email
-                <div className='w-full'>
-                  <input
-                   onChange={(e)=>{
+           <div className='flex  text-7xl border-b-2' >
+             Email
+             <div className='w-full'>
+               <input
+                 value={Useremailinput}
+                onChange={(e)=>{
+                 setUseremailinput(e.target.value)
+               }}
+               className='w-full focus:border-none focus:text-stone-800 transition-all text-stone-400 bg-transparent border-b-4 pl-4'
+               />
+             </div>
+           </div>
+           </div>
 
-                    setuserData(prev => ({...prev, email:e.target.value}))
-                  }}
-                  className='w-full focus:border-none focus:text-stone-800 transition-all text-stone-400 bg-transparent border-b-4 pl-4'
-                  />
-                </div>
-              </div>
-              </div>
+             
 
               {
 
 }
 <div>
-  {Boolean( userData.name && userData.hashedpassword)  && <div
+  {Boolean( Usernameinput && Useremailinput)  && <div
   onClick={()=>addNewUser()}
   className='text-3xl pt-3  hover:bg-stone-300 transition-all'>
     Create Account
     </div>}
 
 </div>
-        </div>
+        </div>}
+        
      
     </div>
   )

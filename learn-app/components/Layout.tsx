@@ -20,13 +20,24 @@ export const Layout = (prop:any) => {
 
 const {mousePosition, currentCursorVariant} = React.useContext(UtilityContext) as Iutilitycontext
 
-const {isUserStudent} = React.useContext(UserContext) as Iusercontext
+const {isUserStudent, userData, notficationState} = React.useContext(UserContext) as Iusercontext
 
   const [windowHeight, setwindowHeight] = React.useState<number>();
 
   const handleResize = () => {
     setwindowHeight(window.innerHeight)
   }
+
+  const [backgroundstyle, setbackgroundstyle] = React.useState('paper');
+
+  React.useEffect(() => {
+    if(notficationState === 'success'){
+      setbackgroundstyle('papersuccess')
+    }else if(notficationState === 'stable'){
+      setbackgroundstyle('paper')
+    }
+  }, [notficationState]);
+
 
   //create windowHeight conditional to deal with changes in height and their effect on ui
 
@@ -79,12 +90,12 @@ const {isUserStudent} = React.useContext(UserContext) as Iusercontext
       // backgroundImage: "radial-gradient(at 77% 92%, rgb(34, 197, 94) 0, transparent 58%), radial-gradient(at 12% 12%, rgb(22, 101, 52) 0, transparent 71%), radial-gradient(at 36% 8%, rgb(22, 78, 99) 0, transparent 55%), radial-gradient(at 60% 68%, rgb(196, 181, 253) 0, transparent 93%), radial-gradient(at 67% 36%, rgb(132, 204, 22) 0, transparent 8%), radial-gradient(at 34% 34%, rgb(196, 181, 253) 0, transparent 50%)"
     
     }}
-     className='lg:h-screen md:h-screen  h-full bg-amber-800 paper relative ' >
+     className={`lg:h-screen md:h-screen  h-full bg-amber-800 ${backgroundstyle} relative`} >
 
       <motion.div
       variants={cursorVariants}
       animate={currentCursorVariant}
-      className={`custom-cursor`} >
+      className={`custom-cursor animate-pulse`} >
         
       </motion.div>
 
