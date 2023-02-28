@@ -6,14 +6,22 @@ const useNotification = () => {
 
     const [notificationMessage, setnotificationMessage] = React.useState<string>('');
 
+    let runReset:any
 
-    const runReset = setTimeout(() => {
-        setnotficationState(null)
-    }, 2000);
+    
 
     React.useEffect(() => {
       if(notficationState){
-        runReset()
+        console.log(  console.log(notficationState,'notiixexexxexexexexexexexxdexzf'))
+        runReset = setTimeout(() => {
+            setnotficationState(null)
+        }, 2000);
+      }
+      return () => {
+        if(runReset){
+            clearTimeout(runReset)
+        }
+        
       }
     }, [notficationState]);
 

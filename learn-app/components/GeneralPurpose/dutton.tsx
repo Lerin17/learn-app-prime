@@ -40,6 +40,27 @@ const DuttonSmall = (props:duttonProps) => {
   )
  }
 
+const DuttonAlt = (props:duttonProps) => {
+  return (
+    <div 
+ 
+    onClick={props.handleClick} 
+     className='flex text-center text-stone-300 items-center font-header9 text-2xl hover:bg-red-800  py-1    px-1 cursor-pointer font-header12 hover:text-stone-200 transition-all '>
+      <span className=' text-stone-300' >
+        [
+      </span>
+     
+      <motion.div  className='px-1    '>
+         {props.icon}
+      </motion.div>
+
+      <span className='text-stone-300' >
+         ]
+      </span>
+      </div>
+  )
+}
+
 const DuttonLarge = (props:duttonProps) => {
   return (
     <motion.div 
@@ -61,4 +82,4 @@ const DuttonLarge = (props:duttonProps) => {
   )
 }
 
-export  {dutton, DuttonLarge, DuttonMid, DuttonSmall}
+export  {dutton, DuttonLarge, DuttonMid, DuttonSmall, DuttonAlt}

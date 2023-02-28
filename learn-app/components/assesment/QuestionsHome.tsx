@@ -39,8 +39,8 @@ className='text-7xl  font-header12 flex flex-col justify-center '>
       setisQuestionList(true)}} style={{
        
       // backgroundColor:'#A46741'
-    }} className=''>
-      {QuestionsArray.length?<div className='flex   pt-3 transition-all hover:text-stone-400'>
+    }} className='textshadow  hover:text-stone-800 text-stone-200 '>
+      {QuestionsArray.length?<div className='flex   pt-3 transition-all'>
       Tour Questions Inventory
       <DuttonLarge
       handleClick={()=>{
@@ -58,7 +58,7 @@ className='text-7xl  font-header12 flex flex-col justify-center '>
       onMouseLeave={()=>cursorLeave()}
       style={{
   // backgroundColor:'#89ABD0'
-}} className=' flex pt-3 font-header12 transition-all hover:text-stone-800'>
+}} className=' flex pt-3 font-header12 transition-all hover:text-stone-800 textshadow text-stone-200'>
   Create Questions 
 <DuttonLarge
 handleClick={()=>{
@@ -78,7 +78,7 @@ icon={ <svg className='fill-current text-amber-800' xmlns="http://www.w3.org/200
   style={{
   // backgroundColor:'#89ABD0'
   // WebkitTextStroke:'2px black'
-}} className=' flex pt-3 transition-all hover:text-stone-800 font-header12  '>
+}} className=' flex pt-3 transition-all hover:text-stone-800 textshadow text-stone-200 font-header12  '>
 
 Create Test 
 <DuttonLarge

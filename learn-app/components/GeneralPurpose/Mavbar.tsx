@@ -1,5 +1,7 @@
+import Router from 'next/router'
 import React from 'react'
 import { AssesmentContext } from '../../context/AssesmentContext'
+import { UserContext } from '../../context/UserContext'
 
 import { Iassesmentcontext } from '../../types/context/assesmentcontext'
 import { DuttonSmall } from './dutton'
@@ -7,8 +9,31 @@ import Text from './Text'
 import TextAlt from './TextAlt'
 
 
+import { Iusercontext } from '../../types/context/usercontext'
+
 const Mavbar = () => {
   const {isCreateQuestionsOpen, setisCreateQuestionsOpen,    isQuestionHome, setisQuestionHome, setisQuestionList, isQuestionList, setisQuestionsTest} = React.useContext(AssesmentContext) as Iassesmentcontext
+
+  const {isLoginPage, setisLoginPage} = React.useContext(UserContext) as Iusercontext
+
+
+  const returnHomeAssesment = () => {
+    setisCreateQuestionsOpen(false)
+    setisQuestionList(false)
+    setisQuestionsTest(false)
+    setisQuestionHome(true)
+  }
+
+  const returnHomeYou = () => {
+    setisLoginPage(false)
+  }
+
+  // React.useEffect(() => {
+    
+  // }, []);
+  // const routerLocation = Router.pathname
+
+  // console.log(routerLocation, 'routeer')
 
   return (
     <div
@@ -53,11 +78,15 @@ const Mavbar = () => {
               icon={<div className='text-gray-300 '> 
             <svg className='fill-current text-gray-300' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>
               </div>}
-              handleClick={()=>{
-                setisCreateQuestionsOpen(false)
-                setisQuestionList(false)
-                setisQuestionsTest(false)
-                setisQuestionHome(true)}}
+              handleClick={ ()=>{
+                console.log(Router.pathname, 'routerpathname')
+                if(Router.pathname === '/assesment'){
+                 
+                 returnHomeAssesment()
+                }else if( Router.pathname === '/you'){
+                 return returnHomeYou()
+                }
+              }}
               color='gray'
               />
 

@@ -41,7 +41,7 @@ export const Nav = () => {
 
         <NavOption
         text = 'You'
-        locationURL= '/aboot'
+        locationURL= '/you'
         />
 
         <NavOption

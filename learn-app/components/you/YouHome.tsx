@@ -30,7 +30,7 @@ const {addNewUser, setisLoginPage} = React.useContext(UserContext) as Iuserconte
 
        <div onClick={()=>{
         console.log('damsn')
-        setisLoginPage(prev => !prev)}} className="   text-7xl  font-header12  transition-all hover:text-stone-300 flex" >
+        setisLoginPage(prev => !prev)}} className="   text-7xl  font-header12  transition-all hover:text-stone-800 text-stone-200 textshadow flex" >
             <div className=''>
             Create Your Unique Profile
             </div>
@@ -45,7 +45,7 @@ const {addNewUser, setisLoginPage} = React.useContext(UserContext) as Iuserconte
           </div>,
        </div>
 
-       <div onClick={()=>addNewUser()} className=" flex  text-7xl  font-header12 transition-all hover:text-stone-800 pt-3" >
+       <div onClick={()=>addNewUser()} className=" flex  text-7xl  font-header12 transition-all hover:text-stone-800 text-stone-200 textshadow pt-3" >
          Tour Your  Packages <div>
                 <DuttonLarge
                 handleClick={()=>console.log('x')}
@@ -56,7 +56,7 @@ const {addNewUser, setisLoginPage} = React.useContext(UserContext) as Iuserconte
             </div>,
        </div>
 
-       <div  className="   text-7xl  font-header12 transition-all hover:text-stone-800 pt-3 textshadow" >
+       <div  className="   text-7xl  font-header12 transition-all text-stone-200 hover:text-stone-800 pt-3 textshadow" >
            Tour Your Network.
        </div> 
     </div>

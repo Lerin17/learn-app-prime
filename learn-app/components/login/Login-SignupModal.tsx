@@ -1,6 +1,8 @@
 import React from 'react'
 import { UserContext } from '../../context/UserContext'
 import { Iusercontext } from '../../types/context/usercontext'
+import { DuttonAlt } from '../GeneralPurpose/dutton'
+
 
 
 
@@ -14,8 +16,10 @@ const Login = () => {
 
   const hashoptions = ['$', '#','@','!','*', '/', '-', '+']
 
+  const [isLoginModal, setisLoginModal] = React.useState(true);
 
 
+  const [isCheckLogininputs, setisCheckLogininputs] = React.useState(false);
   
 
 
@@ -31,6 +35,7 @@ const Login = () => {
 // }, 2000);
 
  const y:string[] = x.split('')
+
 
 
   console.log(x, 'event')
@@ -80,11 +85,12 @@ const Login = () => {
 
   }
 
-  console.log(notficationState,'notiixexexxexexexexexexexxdexzf')
+
 
   return (
     
     <div className='flex justify-center font-header12'>
+ 
       {notficationState ==  'success' || notficationState == 'error'?
           <div className='w-8/12 pt-4 text-7xl text-green-200 px-2'>
             <div>
@@ -99,50 +105,94 @@ const Login = () => {
          style={{
           height:450
          }}
-         className='w-8/12'>
+         className='w-8/12 '>
+               <div className='flex items-end'>
+                <div 
+                onClick={()=>setisLoginModal(true)}
+                className={`${isLoginModal?'text-3xl':'text-2xl'}  transition-all  `} >
+                [Login]
+                </div>
+                  <div className={` ${!isLoginModal?'':''}  px-1`}>
+                    /
+                  </div>
+                  <div>
+                    <DuttonAlt
+                    handleClick={()=>setisLoginModal(false)}
+                    icon={'Create an account'}
+                    />
+                  </div>
+                {/* <div
+                onClick={()=>setisLoginModal(false)}
+                className={`${!isLoginModal?'text-3xl':'text-2xl'}  transition-all  flex hover:bg-stone-200`} >
+                  <span  className='text-stone-200' >
+                    [
+                  </span>
+                  <span className='hover:text-stone-800'>
+                  Create an account
+                  </span>
+                  <span  className='text-stone-200'>
+                    ]
+                  </span>
+          
+                </div> */}
        
-           <div className='flex flex-col'>
-           <div className='flex border-b-2 text-7xl' >
-             Name
-             <div className='w-full'>
-               <input
-               value={Usernameinput}
+      </div>
+          {userData.name?
+          <div>
+            <div className='text-7xl'>
+            Name: Lerin
+            </div>
+         
+            <div>
+              Packages
+            </div>
+          </div> : 
+          <div className='flex flex-col'>
+          <div className='flex border-b-2 text-7xl' >
+            Name
+            <div className='w-full'>
+              <input
+              value={Usernameinput}
+              onChange={(e)=>{
+               setUsernameinput(e.target.value)
+              }}
+              className='w-full text-stone-400  bg-transparent focus:border-none focus:text-stone-800 transition-all border-b-4 pl-4'
+              />
+            </div>
+          </div>
+
+          <div className='flex text-7xl border-b-2' >
+            Password
+            <div className='w-full'>
+              <input
+              type={'password'}
+              value={Userpasswordinput}
                onChange={(e)=>{
-                setUsernameinput(e.target.value)
-               }}
-               className='w-full text-stone-400  bg-transparent focus:border-none focus:text-stone-800 transition-all border-b-4 pl-4'
-               />
-             </div>
-           </div>
-
-           <div className='flex text-7xl border-b-2' >
-             Password
-             <div className='w-full'>
-               <input
-               type={'password'}
-               value={Userpasswordinput}
-                onChange={(e)=>{
-                 // gethashedpass(e)
-                 setUserpasswordinput(e.target.value)
-               }}
-               className='w-full focus:border-none focus:text-stone-800 text-stone-400  bg-transparent transition-all  border-b-4 pl-4'
-               />
-             </div>
-           </div>
-
-           <div className='flex  text-7xl border-b-2' >
-             Email
-             <div className='w-full'>
-               <input
-                 value={Useremailinput}
-                onChange={(e)=>{
-                 setUseremailinput(e.target.value)
-               }}
-               className='w-full focus:border-none focus:text-stone-800 transition-all text-stone-400 bg-transparent border-b-4 pl-4'
-               />
-             </div>
-           </div>
-           </div>
+                // gethashedpass(e)
+                setUserpasswordinput(e.target.value)
+              }}
+              className='w-full focus:border-none focus:text-stone-800 text-stone-400  bg-transparent transition-all  border-b-4 pl-4'
+              />
+            </div>
+          </div>
+            
+            {!isLoginModal && <div className='flex  text-7xl border-b-2' >
+            Email
+            <div className='w-full'>
+              <input
+                value={Useremailinput}
+               onChange={(e)=>{
+                setUseremailinput(e.target.value)
+              }}
+              className='w-full focus:border-none focus:text-stone-800 transition-all text-stone-400 bg-transparent border-b-4 pl-4'
+              />
+            </div>
+          </div>}
+          
+          </div>
+        }
+       
+           
 
              
 
@@ -150,14 +200,35 @@ const Login = () => {
 
 }
 <div>
-  {Boolean( Usernameinput && Useremailinput)  && <div
+  {userData.name?<div>
+      Log Out
+      </div>:<div
+ onMouseEnter={()=>setisCheckLogininputs(true)}
+ onMouseLeave={()=>setisCheckLogininputs(false)}
   onClick={()=>addNewUser()}
-  className='text-3xl pt-3  hover:bg-stone-300 transition-all'>
-    Create Account
+  className={`text-3xl   ${!Userpasswordinput? 'hover:bg-red-700 hover:text-gray-300':'bg-amber-900 hover:bg-stone-300 '}transition-all   `}>
+    {isCheckLogininputs?<div className='border py-2'>
+      {!Userpasswordinput ? <div className=' text-white transition-all'>
+        Please enter missing inputs
+      </div>:<div>
+          Submit
+        </div>}
+    </div>:
+    <div className='py-2' >
+      Submit
+      </div>}
+      
     </div>}
 
+    {/* <div className='text-2xl'>
+      Login
+    </div> */}
+ 
+
 </div>
-        </div>}
+        </div>
+        
+        }
         
      
     </div>

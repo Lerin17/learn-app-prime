@@ -6,7 +6,7 @@ import {app, database} from '../firebaseConfig'
 import {collection, addDoc, getDoc, setDoc, doc } from 'firebase/firestore'
 import { async } from '@firebase/util';
 import e from 'express';
-import useNotification from '../hooks/notification';
+import useNotification from '../hooks/Notification';
 
 
 const UserContext = React.createContext<Iusercontext | null>(null)
@@ -24,6 +24,8 @@ const UserContextProvider = (props:any) => {
     const [Userpasswordinput, setUserpasswordinput] = React.useState('');
 
     const [Useremailinput, setUseremailinput] = React.useState('');
+
+
 
     const [userData, setuserData] = React.useState<Iuserdata>({
       name:'',

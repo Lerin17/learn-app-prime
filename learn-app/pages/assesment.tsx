@@ -93,7 +93,7 @@ const assesment:NextPage = () => {
           transition={isQuestionHome? {
             duration:0.6,
             type:'spring',
-            stiffness:50,
+            stiffness:40,
             delay:0.7  
           }:{
             // duration:0.4,
@@ -110,9 +110,7 @@ const assesment:NextPage = () => {
           </AnimatePresence>
 
 
-<AnimatePresence>
-
-          
+<AnimatePresence>    
 {isCreateQuestionsOpen &&
 
 <motion.div className=''
@@ -166,7 +164,7 @@ animate={ {
 transition={ {
   duration:0.6,
   type:'spring',
-  stiffness:50,
+  stiffness:40,
   delay:0.7
 
   
@@ -243,7 +241,7 @@ animate={ {
 transition={ {
   duration:0.6,
   type:'spring',
-  stiffness:50,
+  stiffness:40,
   delay:0.7
 
   

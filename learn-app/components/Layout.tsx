@@ -33,7 +33,7 @@ const {isUserStudent, userData, notficationState} = React.useContext(UserContext
   React.useEffect(() => {
     if(notficationState === 'success'){
       setbackgroundstyle('papersuccess')
-    }else if(notficationState === 'stable'){
+    }else if(!notficationState){
       setbackgroundstyle('paper')
     }
   }, [notficationState]);
@@ -70,10 +70,11 @@ const {isUserStudent, userData, notficationState} = React.useContext(UserContext
       height:32,
       width:32,
       backgroundColor:'#a1a1aa',
-      borderRadius:'20%',
+      borderRadius:'50%',
+      // opacity:'50%',
       // backgroundColor:'#a1a1aa',
-      scale:2,
-      mixBlendMode:'exclusion',
+
+      // mixBlendMode:'exclusion',
 
 
 
@@ -95,7 +96,7 @@ const {isUserStudent, userData, notficationState} = React.useContext(UserContext
       <motion.div
       variants={cursorVariants}
       animate={currentCursorVariant}
-      className={`custom-cursor animate-pulse`} >
+      className={`custom-cursor opacity-75 `} >
         
       </motion.div>
 
