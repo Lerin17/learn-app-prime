@@ -9,6 +9,8 @@ const UtilityContextProvider = (props:any) => {
     const [screenWidth, setscreenWidth] = React.useState(0);
 
 
+    
+
     const [mousePosition, setmousePosition] = React.useState({
         x:0,
         y:0
