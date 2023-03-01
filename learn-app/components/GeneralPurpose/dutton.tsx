@@ -42,11 +42,17 @@ const DuttonSmall = (props:duttonProps) => {
 
 const DuttonAlt = (props:duttonProps) => {
   return (
-    <div 
+    <motion.div
+        onClick={props.handleClick} 
+    whileTap={{
+      x:15
+    }}
+    >
+         <div 
  
-    onClick={props.handleClick} 
-     className='flex text-center text-stone-300 items-center font-header9 text-2xl hover:bg-red-800  py-1    px-1 cursor-pointer font-header12 hover:text-stone-200 transition-all '>
-      <span className=' text-stone-300' >
+
+     className='flex text-center text-stone-300 items-center font-header9 text-2xl hover:bg-stone-300  py-1  text-stone-300  px-1 cursor-pointer font-header12 hover:text-stone-800 transition-all'>
+      <span className='font-header9 text-stone-300' >
         [
       </span>
      
@@ -54,10 +60,12 @@ const DuttonAlt = (props:duttonProps) => {
          {props.icon}
       </motion.div>
 
-      <span className='text-stone-300' >
+      <span className='font-header9 text-stone-300' >
          ]
       </span>
       </div>
+    </motion.div>
+   
   )
 }
 

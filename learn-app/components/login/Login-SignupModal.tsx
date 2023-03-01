@@ -88,7 +88,7 @@ const Login = () => {
 
 
   return (
-    
+     
     <div className='flex justify-center font-header12'>
  
       {notficationState ==  'success' || notficationState == 'error'?
@@ -106,16 +106,23 @@ const Login = () => {
           height:450
          }}
          className='w-8/12 '>
-               <div className='flex items-end'>
-                <div 
+               <div className='flex items-center'>
+                <div className={`${isLoginModal?'border-b-4':''}`} >
+                  <DuttonAlt
+                  icon={'Login'}
+                  handleClick={()=>setisLoginModal(true)}
+                  />
+                </div>
+             
+                {/* <div 
                 onClick={()=>setisLoginModal(true)}
                 className={`${isLoginModal?'text-3xl':'text-2xl'}  transition-all  `} >
                 [Login]
-                </div>
-                  <div className={` ${!isLoginModal?'':''}  px-1`}>
-                    /
+                </div> */}
+                  <div className='text-2xl px-1'>
+                    or
                   </div>
-                  <div>
+                  <div className={`${!isLoginModal?'border-b-4':''}`} >
                     <DuttonAlt
                     handleClick={()=>setisLoginModal(false)}
                     icon={'Create an account'}
@@ -200,9 +207,16 @@ const Login = () => {
 
 }
 <div>
-  {userData.name?<div>
+
+  <DuttonAlt
+  icon={'Submit'}
+  handleClick={()=>addNewUser()}
+  />
+  {/* {userData.name?
+  <div>
       Log Out
-      </div>:<div
+      </div>:
+      <div
  onMouseEnter={()=>setisCheckLogininputs(true)}
  onMouseLeave={()=>setisCheckLogininputs(false)}
   onClick={()=>addNewUser()}
@@ -218,7 +232,7 @@ const Login = () => {
       Submit
       </div>}
       
-    </div>}
+    </div>} */}
 
     {/* <div className='text-2xl'>
       Login
