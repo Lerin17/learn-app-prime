@@ -8,6 +8,8 @@ import { async } from '@firebase/util';
 import e from 'express';
 import useNotification from '../hooks/Notification';
 
+import uniqid from 'uniqid';
+import { type } from 'os';
 
 const UserContext = React.createContext<Iusercontext | null>(null)
 
@@ -15,7 +17,7 @@ const UserContextProvider = (props:any) => {
 
     const [isUserStudent, setisUserStudent] = React.useState<boolean>(true);
 
-    const {notficationState, notificationMessage, setnotficationState, setnotificationMessage} = useNotification()
+    const {notfication, setnotfication} = useNotification()
 
     const databaseRef = collection(database, 'Users')
 
@@ -32,42 +34,94 @@ const UserContextProvider = (props:any) => {
       hashedpassword:'',
       email:'',
       networks:[],
-      packages:[]
+      packages:[],
+      id:''
     });
 
     const [isLoginPage, setisLoginPage] = React.useState<boolean>(true);
 
-    console.log(notficationState,'exxexeqqqqqqqqqqqqqqqqqqq')
+    console.log(notfication,'exxexeqqqqqqqqqqqqqqqqqqq')
 
    React.useEffect(() => {
     if(userData.name){
       console.log(userData.name, 'exeexexexxewxexexe2xe1e')
-      setnotficationState('success')
-      setnotificationMessage(`${userData.name} successfully logged in`)
+      setnotfication({
+        type:'success',
+        message:'successfully logged in'
+      })
     }
    }, [userData]);
 
     const addNewUser =  () => {
       setDoc(doc(databaseRef, Usernameinput) ,{name:Usernameinput, password:Userpasswordinput,
-      email:Useremailinput}).then(() => {
+      email:Useremailinput, id:uniqid()}).then(() => {
       alert('Data Sent')
     }).then(async ()=>{
-      const getx = await getDoc(doc(database, 'Users', Usernameinput))
+      const getdata = await getDoc(doc(database, 'Users', Usernameinput))
 
-      console.log(getx.data())
-const Data:any = getx.data()
+      // console.log(getdata.data())
+const Data:any = getdata.data()
       setuserData({
         hashedpassword:Data.password,
         name:Data.name,
         email:Data.email,
         networks:[],
-        packages:[]
+        packages:[],
+        id:Data.id
+      })
 
+      setnotfication({
+        type:'success',
+        message:'Lerin, Welcome to Brown'
       })
 
     }).catch((err) => {
       console.log(err)
     })
+    }
+
+ 
+
+    const logininUser = async () => {
+      const docRef = doc(database, 'Users', Usernameinput)
+      try {
+        const docSnap = await getDoc(docRef)
+        
+        if(docSnap.exists()){      
+    const Data:any = docSnap.data()
+
+          console.log(docSnap.data(), 'datatatatata')
+          if(Data.password === Userpasswordinput){
+            setuserData({
+              hashedpassword:Data.password,
+              name:Data.name,
+              email:Data.email,
+              networks:[],
+              packages:[],
+              id:Data.id
+            })
+
+            setnotfication({
+              type:'success',
+              message:'successfully logged in'
+            })
+          }else{
+            setnotfication({
+              type:'error',
+              message:'Error logging in'
+            })
+          }
+        }else{
+          console.log('No such doc')
+        }
+        
+      } catch (error) {
+        alert('error')
+        console.log(error, 'error')
+      }
+      
+
+      
     }
 
     const updateUser = async () => {
@@ -90,7 +144,7 @@ const Data:any = getx.data()
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notficationState
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser
     }} >
         {props.children}
     </UserContext.Provider>

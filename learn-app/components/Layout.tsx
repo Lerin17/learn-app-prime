@@ -20,7 +20,7 @@ export const Layout = (prop:any) => {
 
 const {mousePosition, currentCursorVariant} = React.useContext(UtilityContext) as Iutilitycontext
 
-const {isUserStudent, userData, notficationState} = React.useContext(UserContext) as Iusercontext
+const {isUserStudent, userData, notfication} = React.useContext(UserContext) as Iusercontext
 
   const [windowHeight, setwindowHeight] = React.useState<number>();
 
@@ -31,12 +31,12 @@ const {isUserStudent, userData, notficationState} = React.useContext(UserContext
   const [backgroundstyle, setbackgroundstyle] = React.useState('paper');
 
   React.useEffect(() => {
-    if(notficationState === 'success'){
+    if(notfication?.type === 'success'){
       setbackgroundstyle('papersuccess')
-    }else if(!notficationState){
+    }else if(!notfication?.type){
       setbackgroundstyle('paper')
     }
-  }, [notficationState]);
+  }, [notfication]);
 
 
   //create windowHeight conditional to deal with changes in height and their effect on ui
@@ -127,8 +127,19 @@ const {isUserStudent, userData, notficationState} = React.useContext(UserContext
  
 
   <div className='h-full ' >
-
+    {notfication?.type === 'success'? <div className='w-8/12 pt-4 text-7xl text-green-200 px-2'>
+            <div>
+              Lerin17,
+            </div>
+            <div className=' text-6xl leading-tight'>
+            {notfication.message}
+            </div>
+            
+          </div>:<div>
     {prop.children} 
+      </div>}
+
+  
   {/* <div
   style={{
     height:300,

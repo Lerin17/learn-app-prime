@@ -2,6 +2,7 @@ export interface Iusercontext {
     isUserStudent:boolean
     setisUserStudent: React.Dispatch<React.SetStateAction<boolean>>
     addNewUser:() => void
+    logininUser:()=>void
     isLoginPage:boolean
     setisLoginPage: React.Dispatch<React.SetStateAction<boolean>>
     userData:Iuserdata
@@ -12,9 +13,21 @@ export interface Iusercontext {
      setUseremailinput:React.Dispatch<React.SetStateAction<string>>
      Usernameinput:string
     setUsernameinput:React.Dispatch<React.SetStateAction<string>>
-    notficationState:string
+    notfication:Tnotification
     
 }
+
+type Tnotification = {
+    type:'success',
+    message:string
+  } | {type:'error',
+    message:string} | {
+    type:'Xerror',
+    message:string
+  } | {
+    type:'Xsuccess',
+    message:string
+  }| null
 
 export interface Iuserdata {
     name:string
@@ -22,4 +35,5 @@ export interface Iuserdata {
     email:string
     networks:[]
     packages:[]
+    id:string
 }

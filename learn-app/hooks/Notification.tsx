@@ -2,19 +2,31 @@ import React from 'react'
 
 const useNotification = () => {
 
-    const [notficationState, setnotficationState] = React.useState<any>(null);
+    const [notfication, setnotfication] = React.useState<Tnotification>(null);
 
-    const [notificationMessage, setnotificationMessage] = React.useState<string>('');
+    type Tnotification = {
+      type:'success',
+      message:string
+    } | {type:'error',
+      message:string} | {
+      type:'Xerror',
+      message:string
+    } | {
+      type:'Xsuccess',
+      message:string
+    }| null
+
+
 
     let runReset:any
 
     
 
     React.useEffect(() => {
-      if(notficationState){
-        console.log(  console.log(notficationState,'notiixexexxexexexexexexexxdexzf'))
+      if(notfication){
+        console.log(  console.log(notfication,'notiixexexxexexexexexexexxdexzf'))
         runReset = setTimeout(() => {
-            setnotficationState(null)
+            setnotfication(null)
         }, 2000);
       }
       return () => {
@@ -23,10 +35,10 @@ const useNotification = () => {
         }
         
       }
-    }, [notficationState]);
+    }, [notfication]);
 
   return (
-    {notficationState, notificationMessage, setnotificationMessage, setnotficationState}
+    {notfication, setnotfication}
   )
 }
 
