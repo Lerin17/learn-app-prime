@@ -63,6 +63,8 @@ const CourseContextProvider = (props:any) => {
       setisTopicPanelOpen(prev => !prev)
     }
 
+    
+
     const addDayOfWeek = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       const dayofweek = e.target.innerText
       console.log(e.target)
