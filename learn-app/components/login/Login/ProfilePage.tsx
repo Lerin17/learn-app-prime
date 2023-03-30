@@ -50,13 +50,13 @@ const ProfilePage = ({userData}:IprofilePageprops) => {
               </div>
        
               <div>
-              <div className='border-dashed border-b px-4 text-2xl transition-all hover:border-solid  hover:border-b-8 hover:border-amber-900 hover:border-solid hover-scale-125'>
+              <div className='border-dashed border-b px-4 text-2xl transition-all hover:border-solid hover:bg-amber-800  hover:border-b-8 hover:border-amber-900 hover:border-solid hover-scale-125'>
                   math
                 </div>
-                <div className='border-dashed border-b px-4 text-2xl transition-all hover:border-solid  hover:border-b-8 hover:border-amber-900 hover:border-solid hover-scale-125'>
+                <div className='border-dashed border-b px-4 text-2xl transition-all hover:border-solid hover:bg-amber-800  hover:border-b-8 hover:border-amber-900 hover:border-solid hover-scale-125'>
                   math
                 </div>
-                <div className='border-dashed border-b px-4 text-2xl transition-all hover:border-solid  hover:border-b-8 hover:border-amber-900 hover:border-solid hover-scale-125'>
+                <div className='border-dashed border-b px-4 text-2xl transition-all hover:border-solid hover:bg-amber-800  hover:border-b-8 hover:border-amber-900 hover:border-solid hover-scale-125'>
                   math
                 </div>
               </div>

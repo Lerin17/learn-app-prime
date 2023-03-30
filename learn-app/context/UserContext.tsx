@@ -40,6 +40,8 @@ const UserContextProvider = (props:any) => {
 
     const [isLoginPage, setisLoginPage] = React.useState<boolean>(true);
 
+    const [isPackagesPage, setisPackagesPage] = React.useState<boolean>(false);
+
     console.log(notfication,'exxexeqqqqqqqqqqqqqqqqqqq')
 
    React.useEffect(() => {
@@ -144,7 +146,7 @@ const Data:any = getdata.data()
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage
     }} >
         {props.children}
     </UserContext.Provider>

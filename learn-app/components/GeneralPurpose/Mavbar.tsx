@@ -14,7 +14,7 @@ import { Iusercontext } from '../../types/context/usercontext'
 const Mavbar = () => {
   const {isCreateQuestionsOpen, setisCreateQuestionsOpen,    isQuestionHome, setisQuestionHome, setisQuestionList, isQuestionList, setisQuestionsTest} = React.useContext(AssesmentContext) as Iassesmentcontext
 
-  const {isLoginPage, setisLoginPage} = React.useContext(UserContext) as Iusercontext
+  const {isLoginPage, setisLoginPage, setisPackagesPage} = React.useContext(UserContext) as Iusercontext
 
 
   const returnHomeAssesment = () => {
@@ -26,6 +26,7 @@ const Mavbar = () => {
 
   const returnHomeYou = () => {
     setisLoginPage(false)
+    setisPackagesPage(false)
   }
 
   // React.useEffect(() => {

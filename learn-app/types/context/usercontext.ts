@@ -14,7 +14,8 @@ export interface Iusercontext {
      Usernameinput:string
     setUsernameinput:React.Dispatch<React.SetStateAction<string>>
     notfication:Tnotification
-    
+    isPackagesPage:boolean
+    setisPackagesPage: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type Tnotification = {
