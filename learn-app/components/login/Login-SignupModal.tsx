@@ -89,7 +89,9 @@ const Login = () => {
          }}
          className='w-8/12 '>
             {userData.name?<div>
-              <ProfilePage/>
+              <ProfilePage
+              userData = {userData}
+              />
             </div>:
   <div>
 

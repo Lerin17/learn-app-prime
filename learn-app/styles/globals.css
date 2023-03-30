@@ -254,7 +254,7 @@ radial-gradient(at 51% 71%, rgb(25, 25, 23) 0, hsla(75, 86%, 70%, 0) 50%);
   /* From https://css.glass */
 /* From https://css.glass */
 background: rgba(255, 230, 230, 0.2);
-border-radius: 16px;
+border-radius: 16px  16px 0;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(5px);
 -webkit-backdrop-filter: blur(5px);

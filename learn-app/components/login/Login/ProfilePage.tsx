@@ -1,6 +1,12 @@
 import React from 'react'
 
-const ProfilePage = () => {
+import { Iuserdata } from '../../../types/context/usercontext'
+
+interface IprofilePageprops  {
+  userData:Iuserdata
+}
+
+const ProfilePage = ({userData}:IprofilePageprops) => {
   return (
     <div
     style={{
@@ -19,7 +25,7 @@ const ProfilePage = () => {
           </div>
             
             <div className='text-3xl'>
-            Name: Lerin
+            Name: {userData.name}
             </div>
          
             <div>
@@ -32,14 +38,40 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          <div className='w-2/3 p-2 border-2 border-l-0'>
-            <div>
+          <div className='bg-amber-900 w-3'>
+            
+          </div>
+
+          <div className='w-2/3 p-2 pl-0  pt-0  border border-l-0  '>
+            <div className='flex h-full'>
+            <div className='w-1/2   border-r '>
+              <div className='px-4'>
               Courses
+              </div>
+       
+              <div>
+              <div className='border-dashed border-b px-4 text-2xl transition-all hover:border-solid  hover:border-b-8 hover:border-amber-900 hover:border-solid hover-scale-125'>
+                  math
+                </div>
+                <div className='border-dashed border-b px-4 text-2xl transition-all hover:border-solid  hover:border-b-8 hover:border-amber-900 hover:border-solid hover-scale-125'>
+                  math
+                </div>
+                <div className='border-dashed border-b px-4 text-2xl transition-all hover:border-solid  hover:border-b-8 hover:border-amber-900 hover:border-solid hover-scale-125'>
+                  math
+                </div>
+              </div>
             </div>
 
-            <div>
+            <div className='w-1/2 px-4'>
               Networks
             </div>
+
+            
+            <div className='w-1/2 px-4'>
+              Packages
+            </div>
+            </div>
+ 
             
           </div>
     </div>
