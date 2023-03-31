@@ -16,6 +16,16 @@ export interface Iusercontext {
     notfication:Tnotification
     isPackagesPage:boolean
     setisPackagesPage: React.Dispatch<React.SetStateAction<boolean>>
+    isCreatePackage:boolean
+    setisCreatePackage:React.Dispatch<React.SetStateAction<boolean>>
+    userPackagesArray:[]
+    setuserPackagesArray: React.Dispatch<React.SetStateAction<[]>>
+}
+
+type Tpackage = {
+  name:string,
+  description:string
+  courses:[],
 }
 
 type Tnotification = {
