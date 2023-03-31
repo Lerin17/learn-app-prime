@@ -27,6 +27,7 @@ const UserContextProvider = (props:any) => {
 
     const [Useremailinput, setUseremailinput] = React.useState('');
 
+    const [userPackagesArray, setuserPackagesArray] = React.useState<[]>([]);
 
 
     const [userData, setuserData] = React.useState<Iuserdata>({
@@ -41,6 +42,8 @@ const UserContextProvider = (props:any) => {
     const [isLoginPage, setisLoginPage] = React.useState<boolean>(true);
 
     const [isPackagesPage, setisPackagesPage] = React.useState<boolean>(false);
+
+    const [isCreatePackage, setisCreatePackage] = React.useState<boolean>(true);
 
     console.log(notfication,'exxexeqqqqqqqqqqqqqqqqqqq')
 
@@ -81,6 +84,10 @@ const Data:any = getdata.data()
       console.log(err)
     })
     }
+
+    // setTimeout(() => {
+    //   setisCreatePackage(false)
+    // }, 3000);
 
  
 
@@ -146,7 +153,7 @@ const Data:any = getdata.data()
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray
     }} >
         {props.children}
     </UserContext.Provider>
