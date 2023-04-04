@@ -15,6 +15,9 @@ import YouHome from "../components/you/YouHome";
 import AnimationContainer from "../components/GeneralPurpose/AnimationContainer";
 import YourPackeges from "../components/you/YourPackeges";
 
+// import { Icoursecontext } from "../types/context/coursecontext";
+// import { CourseContext } from "../context/CourseContext";
+
 
 function Aboot() {
 
