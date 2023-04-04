@@ -40,8 +40,37 @@ export const products = [
     { id: 5, name: 'emma' },
   ]
 
-  const courses = [
-
+ export const courses = [
+        {courseName:'Math',
+        courseCode:'mat114',
+        courseDesc:'some course',
+        NoWeeks:'exrrx',
+        courseId:'tctctt'
+      },
+      {courseName:'Math',
+      courseCode:'mat204',
+      courseDesc:'some course',
+      NoWeeks:'exrrx',
+        courseId:'tctcttrtgg'
+    },
+    {courseName:'Eng',
+    courseCode:'eng244',
+    courseDesc:'some course',
+    NoWeeks:'exrrx',
+      courseId:'tctcttwzrr'
+  },
+  {courseName:'Eng',
+  courseCode:'eng334',
+  courseDesc:'some course',
+  NoWeeks:'exrrx',
+    courseId:'tctctxrxrt'
+},
+{courseName:'Math',
+courseCode:'mat274',
+courseDesc:'some course',
+NoWeeks:'exrrx',
+  courseId:'txfxfeectctt'
+}
   ]
 
   const questions = [
@@ -99,4 +128,4 @@ export const products = [
 
 
 
-  module.exports = { products, people, questions }
+  module.exports = { products, people, questions, courses }

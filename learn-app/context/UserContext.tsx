@@ -1,12 +1,14 @@
 import React from 'react'
 import { Iusercontext, Iuserdata } from '../types/context/usercontext';
-
+import { Tpackage } from '../types/context/usercontext';
 import {app, database} from '../firebaseConfig'
 
 import {collection, addDoc, getDoc, setDoc, doc } from 'firebase/firestore'
 import { async } from '@firebase/util';
 import e from 'express';
 import useNotification from '../hooks/Notification';
+
+
 
 import uniqid from 'uniqid';
 import { type } from 'os';
@@ -27,7 +29,15 @@ const UserContextProvider = (props:any) => {
 
     const [Useremailinput, setUseremailinput] = React.useState('');
 
-    const [userPackagesArray, setuserPackagesArray] = React.useState<[]>([]);
+    const [currentUserPackage, setcurrentUserPackage] = React.useState<Tpackage>( {
+      name:'',
+      description:'',
+      courses:[]
+    });
+
+    const [userPackagesArray, setuserPackagesArray] = React.useState<Tpackage[]>([]);
+
+
 
 
     const [userData, setuserData] = React.useState<Iuserdata>({
@@ -39,7 +49,7 @@ const UserContextProvider = (props:any) => {
       id:''
     });
 
-    const [isLoginPage, setisLoginPage] = React.useState<boolean>(true);
+    const [isLoginPage, setisLoginPage] = React.useState<boolean>(false);
 
     const [isPackagesPage, setisPackagesPage] = React.useState<boolean>(false);
 
@@ -153,7 +163,7 @@ const Data:any = getdata.data()
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage
     }} >
         {props.children}
     </UserContext.Provider>

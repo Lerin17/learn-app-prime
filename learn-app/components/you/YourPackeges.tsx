@@ -4,13 +4,68 @@ import { DuttonAlt } from '../GeneralPurpose/dutton'
 import { AnimatePresence } from 'framer-motion'
 import { UserContext } from '../../context/UserContext'
 import { Iusercontext } from '../../types/context/usercontext'
+import { CourseContext } from '../../context/CourseContext'
 
 
+import { Icoursecontext } from '../../types/context/coursecontext'
 
 const YourPackages = () => {
 
+  const {coursesArray, courseGroupArray} = React.useContext(CourseContext) as Icoursecontext
+  
 
-  const {isCreatePackage, setisCreatePackage} = React.useContext(UserContext) as Iusercontext
+  const {isCreatePackage, setisCreatePackage, currentUserPackage, setcurrentUserPackage} = React.useContext(UserContext) as Iusercontext
+
+  const [courseSearchInput, setcourseSearchInput] = React.useState('');
+
+  
+  const getFilteredItems = () => {
+
+
+    return (
+      coursesArray.filter(item => {
+        if( item.courseName.includes('m')){
+          return (<div>
+            {item.courseName}
+          </div>)
+        }
+       
+      
+      })
+    )
+  }
+
+
+  const filtered = (item:any) => {
+    if( item.courseName.includes('M')){
+      return (<div>
+        {item.courseName}
+      </div>)
+    }
+  }
+
+  const getSearchCourses = !courseSearchInput? 
+   coursesArray
+:  coursesArray.filter(item => {
+  const itemcourseName = item.courseName.toLowerCase()
+  const searchInput = courseSearchInput.toLowerCase()
+    if( itemcourseName.includes(searchInput)){
+      return <div>
+        {item.courseName}
+      </div>
+    }
+  })
+
+  const AvailableCourses = getSearchCourses.map((item:any) => (<div 
+  onClick={()=>{setcurrentUserPackage(prev => ({...prev, courses:[item, ...prev.courses]}))}}
+  className='border-dashed transition-all hover:bg-amber-700 hover:border-b-4 hover:border-amber-900 hover:text-white hover:border-solid  px-4 border-b '>
+    {item.courseName}
+  </div>))
+
+  console.log(currentUserPackage, 'currentUserPackage')
+
+  console.log(getSearchCourses, 'getCOurseses')
+
 
   return (
     <div className='flex font-header12  justify-center'>
@@ -65,28 +120,44 @@ const YourPackages = () => {
 <div className='mt-4'>
             <div className='text-2xl flex  border-b'>
              
-             <div>
+             <div className='pr-6'>
              Name
              </div>
         
 
              <div className='w-full'>
               <input
+              value={currentUserPackage.name}
               className='bg-transparent transition-all border-b-2 focus:border-b-0  w-full'
+              onChange={(e) => {
+                setcurrentUserPackage(prev => ({
+                  name:e.target.value,
+                  description:prev.description,
+                  courses:prev.courses
+                }))
+              }}
               />
              </div>
             </div>
 
             <div className='text-2xl flex border-b'>
              
-             <div>
+             <div className='pr-6'>
              Description
              </div>
         
 
              <div className='w-full'>
-              <input
+             <input
+              value={currentUserPackage.description}
               className='bg-transparent transition-all border-b-2 focus:border-b-0  w-full'
+              onChange={(e) => {
+                setcurrentUserPackage(prev => ({
+                  name:prev.name,
+                  description:e.target.value,
+                  courses:prev.courses
+                }))
+              }}
               />
              </div>
             </div>
@@ -111,24 +182,45 @@ const YourPackages = () => {
                   Selected courses
                 </div>
 
-                <div>
-                <div className='px-2'>
-                  sss
-                </div>
-                <div className='px-2'>
-                  sss
-                </div>
-                <div className='px-2'>
-                  sss
-                </div>
+                <div 
+                style={{
+                  overflowY:'auto',
+                  height:250
+                }}
+                >
+                  
+                  {currentUserPackage.courses.length? currentUserPackage.courses.map(item => (
+                    <div>
+                      {item.courseName}
+                    </div>
+                  )):<div>
+                    No courses have been added
+                    </div>}
                 </div>
             
               </div>
 
-          <div className='text-xl  flex w-7/12 border'>
-             <div>
+          <div className='text-xl   w-7/12 border'>
+             <div className='flex' >
               Search
+              <input
+              onChange={(e)=>setcourseSearchInput(e.target.value)}
+              value={courseSearchInput}
+              className='border-b bg-transparent px-4 w-full'
+              />
              </div>
+
+             <div className=''>
+              {AvailableCourses}
+             </div>
+{/* 
+             <div
+             style={{
+              fontSize:180
+             }}
+             className=' px-4'>
+              ...
+             </div> */}
           </div>
               
 

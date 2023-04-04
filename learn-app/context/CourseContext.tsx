@@ -4,10 +4,12 @@ import React from 'react'
 
 import { Icoursecontext, Icourseobject, IsaveCurrentCourseArg, IcourseGroupObject, IinputCourseGroupDetailsArg, IsaveCurrentCourseGroupArg } from '../types/context/coursecontext';
 
+import { courses } from '../testdata/QuestionsArraysample';
+
 const CourseContext = React.createContext<Icoursecontext | null>(null)
 
 const CourseContextProvider = (props:any) => {
-    const [CoursesArray, setCoursesArray] = React.useState<Icourseobject[]>([]);
+    const [CoursesArray, setCoursesArray] = React.useState<Icourseobject[]>(courses);
 
     const [CourseObject, setCourseObject] = React.useState<Icourseobject>();
 
@@ -144,7 +146,7 @@ const CourseContextProvider = (props:any) => {
   
 
 
-    const [state, dispatch]:any = React.useReducer<any>(reducer, {coursesArray:[], courseGroupArray:[]})
+    const [state, dispatch]:any = React.useReducer<any>(reducer, {coursesArray:[...courses], courseGroupArray:[]})
 
     console.log(state, 'state')
 
