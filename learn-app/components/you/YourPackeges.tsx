@@ -174,7 +174,7 @@ const YourPackages = () => {
              </div>
             </div>
 
-            <div className='h-72 border-2 flex'>
+            <div className='h-72  flex'>
               
               <div className='h-full w-5/12 bg-amber-900'>
                 
