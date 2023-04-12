@@ -55,7 +55,7 @@ const UserContextProvider = (props:any) => {
 
     const [isCreatePackage, setisCreatePackage] = React.useState<boolean>(true);
 
-    console.log(notfication,'exxexeqqqqqqqqqqqqqqqqqqq')
+ 
 
    React.useEffect(() => {
     if(userData.name){
@@ -160,10 +160,33 @@ const Data:any = getdata.data()
 
     }
 
+   const clearUserPackage = () => {
+    setcurrentUserPackage({
+      name:'',
+      description:'',
+      courses:[]
+    })
+   }
+
+    const saveUserPackage = () => {
+      if(currentUserPackage.name===''){
+        console.log('damnnnn', notfication)
+        console.log(currentUserPackage)
+        setnotfication({
+          type:'error-mini',
+          message:'Please fill out input'
+        })
+      }else{
+        setuserPackagesArray(prev => [currentUserPackage, ...prev])
+        clearUserPackage()
+      }
+      
+    }
+
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage
     }} >
         {props.children}
     </UserContext.Provider>
