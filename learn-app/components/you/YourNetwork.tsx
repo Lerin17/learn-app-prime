@@ -3,7 +3,24 @@ import { DuttonAlt } from '../GeneralPurpose/dutton'
 
 const YourNetwork = () => {
   return (
-    <div className='flex justify-center font-header12'>
+    <div className='flex flex-col items-center font-header12'>
+
+      <div className='flex w-8/12 items-center mb-4 justify-start'>
+        <DuttonAlt
+        icon={'Subscribed to'}
+        handleClick={()=>console.log('exex')}
+        />
+
+        <div className='text-xl px-2'>
+        or
+        </div>
+   
+
+        <DuttonAlt
+        icon={'Subscriber list'}
+        handleClick={()=>console.log('exex')}
+        />
+      </div>
       <div 
       style={{
         height:500
@@ -28,7 +45,6 @@ const YourNetwork = () => {
           Y
           </div>
 
-          
           <div className='z-20 p-4 text-7xl text-stone-300 relative'>
           You Are Connected To....
           <div>

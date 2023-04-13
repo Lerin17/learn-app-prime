@@ -57,7 +57,7 @@ const UserContextProvider = (props:any) => {
 
     const [isCreatePackage, setisCreatePackage] = React.useState<boolean>(true);
 
- 
+    const [isSubscriberList, setisSubscriberList] = React.useState<boolean>(false);
 
    React.useEffect(() => {
     if(userData.name){
