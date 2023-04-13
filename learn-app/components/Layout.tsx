@@ -34,7 +34,7 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
     if(notfication?.type === 'success'){
       setbackgroundstyle('papersuccess')
     }else if(!notfication?.type){
-      setbackgroundstyle('paper')
+      setbackgroundstyle('paperblue')
     }
   }, [notfication]);
 
@@ -146,6 +146,7 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
     width:300
   }}
   className='earth w-2/6  bottom-56 left-20 absolute z-10'>
+  
     x
   </div> */}
 {/* 

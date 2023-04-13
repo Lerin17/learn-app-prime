@@ -35,17 +35,19 @@ const TextAlt = (props:any) => {
                 <motion.div
                             animate={{
                                 y:0,
-                                display:'block'
+                                display:'block',
+                               
                             }}
                 
                             initial={{
                                 y:-26,
-                                display:'none'
+                                display:'none',
+                              
                             }}
                 
                             transition={{
                                 duration:0.4,
-                                delay:0.4
+                                delay:0.38
                             }}
                 >
                        {item.text}
@@ -57,7 +59,7 @@ const TextAlt = (props:any) => {
     ))
 
     return (
-        <div className=''
+        <div className='transition-all'
         style={{
             height:32
         }}

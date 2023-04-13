@@ -22,6 +22,8 @@ export interface Iusercontext {
     setuserPackagesArray: React.Dispatch<React.SetStateAction<Tpackage[]>>
     currentUserPackage:Tpackage
     setcurrentUserPackage:React.Dispatch<React.SetStateAction<Tpackage>>
+    saveUserPackage:()=>void
+    clearUserPackage:()=>void
 }
 
 export type Tpackage = {
@@ -35,10 +37,10 @@ type Tnotification = {
     message:string
   } | {type:'error',
     message:string} | {
-    type:'Xerror',
+    type:'error-mini',
     message:string
   } | {
-    type:'Xsuccess',
+    type:'success-mini',
     message:string
   }| null
 

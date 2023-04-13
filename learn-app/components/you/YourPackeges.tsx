@@ -8,13 +8,16 @@ import { CourseContext } from '../../context/CourseContext'
 
 
 import { Icoursecontext } from '../../types/context/coursecontext'
+import useNotification from '../../hooks/Notification'
 
 const YourPackages = () => {
 
   const {coursesArray, courseGroupArray} = React.useContext(CourseContext) as Icoursecontext
   
 
-  const {isCreatePackage, setisCreatePackage, currentUserPackage, setcurrentUserPackage} = React.useContext(UserContext) as Iusercontext
+  const {isCreatePackage, setisCreatePackage, currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage} = React.useContext(UserContext) as Iusercontext
+
+  const {setnotfication, notfication} = useNotification()
 
   const [courseSearchInput, setcourseSearchInput] = React.useState('');
 
@@ -58,7 +61,7 @@ const YourPackages = () => {
 
   const AvailableCourses = getSearchCourses.map((item:any) => (<div 
   onClick={()=>{setcurrentUserPackage(prev => ({...prev, courses:[item, ...prev.courses]}))}}
-  className='border-dashed transition-all hover:bg-amber-700 hover:border-b-4 hover:border-amber-900 hover:text-white hover:border-solid  px-4 border-b '>
+  className='border-dashed transition-all hover:bg-amber-700 hover:border-b-4 hover:border-amber-900 text-stone-900 hover:text-white hover:border-solid  px-4 border-b '>
     {item.courseName}
   </div>))
 
@@ -71,15 +74,23 @@ const YourPackages = () => {
     <div className='flex font-header12  justify-center'>
               <div 
               style={{
-                height:450,
+                height:550,
                 overflow:'hidden'
               }}
     className=' w-8/12'
     >
-    <div className='text-4xl '>
+    <div className='text-4xl flex items-center'>
        <DuttonAlt
-        icon={'Create Packages'}
-        handleClick={()=>setisCreatePackage(prev => !prev)}
+        icon={`${'View Your Packages'}`}
+        handleClick={()=>setisCreatePackage(false)}
+        />
+        <div className='text-xl px-1'>
+        or
+        </div>
+        
+        <DuttonAlt
+        icon={`${'Create a Package'}`}
+        handleClick={()=>setisCreatePackage(true)}
         />
     </div>
 
@@ -128,7 +139,7 @@ const YourPackages = () => {
              <div className='w-full'>
               <input
               value={currentUserPackage.name}
-              className='bg-transparent transition-all border-b-2 focus:border-b-0  w-full'
+              className='bg-transparent transition-all border-b-2 focus:border-b-0 focus:text-stone-900 text-stone-400 w-full'
               onChange={(e) => {
                 setcurrentUserPackage(prev => ({
                   name:e.target.value,
@@ -150,7 +161,7 @@ const YourPackages = () => {
              <div className='w-full'>
              <input
               value={currentUserPackage.description}
-              className='bg-transparent transition-all border-b-2 focus:border-b-0  w-full'
+              className='bg-transparent transition-all border-b-2 focus:border-b-0 focus:text-stone-900 text-stone-400 w-full'
               onChange={(e) => {
                 setcurrentUserPackage(prev => ({
                   name:prev.name,
@@ -167,40 +178,93 @@ const YourPackages = () => {
                     Courses
                     </div>
       
-                  <div className='w-full'>
+                  {/* <div className='w-full'>
                     <input
                     className='bg-transparent w-full'
                     />
-             </div>
+             </div> */}
             </div>
 
-            <div className='h-72  flex'>
+            <div
+            style={{
+              height:400
+            }}
+            className='  flex'>
               
-              <div className='h-full w-5/12 bg-amber-900'>
+              <div
+              style={{
+                background:"#43160A"
+              }}
+              className='h-full w-7/12 polka transition-all border-l-8 border-amber-800'>
                 
-                <div className='px-2'>
-                  Selected courses
+                <div className=' flex'>
+                  
+
+                  <DuttonAlt
+                  icon={<div className='text-lg'>
+                    Clear selected Coures
+                  </div>}
+                  handleClick={()=>clearUserPackage()}
+                  />
+
+                  
+                </div>
+
+                <div className='border-y px-2'>
+                  Selected Course
                 </div>
 
                 <div 
+                className=''
                 style={{
-                  overflowY:'auto',
-                  height:250
+                 
+                  // width:400
                 }}
                 >
                   
-                  {currentUserPackage.courses.length? currentUserPackage.courses.map(item => (
-                    <div>
-                      {item.courseName}
-                    </div>
-                  )):<div>
-                    No courses have been added
-                    </div>}
+                  <div
+                  className={`flex ${currentUserPackage.courses.length?' border':''}   w-full flex-wrap `}
+                  style={{
+                    overflowY:'auto',
+                    height:currentUserPackage.courses.length > 21? 350:'100%'
+                  }}
+                  >
+                      {currentUserPackage.courses.length? currentUserPackage.courses.map(item => (
+                        <div className={` ${currentUserPackage.courses.length > 7? 'w-1/3 ':'w-full'}  `}>
+                            <motion.div
+                            initial={{
+                              x:30
+                            }}
+                            animate={{
+                              x:0
+                            }}
+                            className={`text-xl hover:bg-rose-700 ${currentUserPackage.courses.length?' border':''}  h-full w-full flex items-top `}>
+                              <div className='p-1 m-1 bg-stone-300 w-2/12 text-lg flex justify-center text-amber-900  flex '>
+                              <div className=''>
+                                {currentUserPackage.courses.indexOf(item)+1}
+                              </div>
+                          {/* <div className='w-2 h-2 bg-stone-300 '>
+                            
+                          </div> */}
+                              </div>
+                             
+                          <div className='textShadow1   py-2 px-3 text-stone-300 '>
+                          {item.courseName}
+                          </div>
+                         
+                        </motion.div>
+                        </div>
+                        
+                      )):<div className='text-7xl text-white px-1 my-2 '>
+                        No courses added.
+                        </div>}
+                  </div>
+                 
                 </div>
             
               </div>
 
-          <div className='text-xl   w-7/12 border'>
+          <div className='text-xl   w-5/12 border border-b-0'>
              <div className='flex' >
               Search
               <input
@@ -212,6 +276,13 @@ const YourPackages = () => {
 
              <div className=''>
               {AvailableCourses}
+             </div>
+
+             <div>
+              <DuttonAlt
+        icon={'Save Packages'}
+        handleClick={()=>saveUserPackage()}
+        />
              </div>
 {/* 
              <div

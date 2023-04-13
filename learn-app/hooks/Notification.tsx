@@ -9,10 +9,10 @@ const useNotification = () => {
       message:string
     } | {type:'error',
       message:string} | {
-      type:'Xerror',
+      type:'error-mini',
       message:string
     } | {
-      type:'Xsuccess',
+      type:'success-mini',
       message:string
     }| null
 
@@ -27,7 +27,7 @@ const useNotification = () => {
         console.log(  console.log(notfication,'notiixexexxexexexexexexexxdexzf'))
         runReset = setTimeout(() => {
             setnotfication(null)
-        }, 2000);
+        }, 4000);
       }
       return () => {
         if(runReset){
