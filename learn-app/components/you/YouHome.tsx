@@ -10,7 +10,7 @@ import { Iusercontext } from '../../types/context/usercontext'
 const YouHome = () => {
 
     
-const {addNewUser, setisLoginPage, setisPackagesPage} = React.useContext(UserContext) as Iusercontext
+const {addNewUser, setisLoginPage, setisPackagesPage, setisNetworkPage} = React.useContext(UserContext) as Iusercontext
 
   return (
     <div
@@ -28,7 +28,8 @@ const {addNewUser, setisLoginPage, setisPackagesPage} = React.useContext(UserCon
 </div>
 {/* ()=>addNewUser() */}
 
-       <div onClick={()=>{
+<div className='flex'>
+<div onClick={()=>{
         console.log('damsn')
         setisLoginPage(prev => !prev)}} className="   text-7xl  font-header12  transition-all hover:text-stone-800 text-stone-200 textshadow flex" >
             <div className=''>
@@ -45,7 +46,10 @@ const {addNewUser, setisLoginPage, setisPackagesPage} = React.useContext(UserCon
           </div>,
        </div>
 
-       <div  className=" flex  text-7xl  font-header12 transition-all hover:text-stone-800 text-stone-200 textshadow pt-3" >
+</div>
+   
+<div className='flex'>
+<div  className=" flex  text-7xl   font-header12 transition-all hover:text-stone-800 text-stone-200 textshadow pt-3" >
          Tour Your  Packages <div>
                 <DuttonLarge
                 handleClick={()=>setisPackagesPage(true)}
@@ -55,8 +59,12 @@ const {addNewUser, setisLoginPage, setisPackagesPage} = React.useContext(UserCon
                 />
             </div>,
        </div>
+</div>
+     
 
-       <div  className="   text-7xl  font-header12 transition-all text-stone-200 hover:text-stone-800 pt-3 textshadow" >
+       <div 
+       onClick={()=>setisNetworkPage(true)}
+       className="   text-7xl  font-header12 transition-all text-stone-200 hover:text-stone-800 pt-3 textshadow" >
            Tour Your Network.
        </div> 
     </div>

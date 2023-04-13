@@ -24,6 +24,8 @@ export interface Iusercontext {
     setcurrentUserPackage:React.Dispatch<React.SetStateAction<Tpackage>>
     saveUserPackage:()=>void
     clearUserPackage:()=>void
+    isNetworkPage:boolean
+    setisNetworkPage:React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export type Tpackage = {

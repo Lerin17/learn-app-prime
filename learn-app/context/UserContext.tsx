@@ -53,6 +53,8 @@ const UserContextProvider = (props:any) => {
 
     const [isPackagesPage, setisPackagesPage] = React.useState<boolean>(false);
 
+    const [isNetworkPage, setisNetworkPage] = React.useState<boolean>(false);
+
     const [isCreatePackage, setisCreatePackage] = React.useState<boolean>(true);
 
  
@@ -66,6 +68,15 @@ const UserContextProvider = (props:any) => {
       })
     }
    }, [userData]);
+
+   React.useEffect(() => {
+    if(userPackagesArray.length){
+      setnotfication({
+        type:'success-mini',
+        message:'Packages successfully saved'
+      })
+    }
+   }, [userPackagesArray]);
 
     const addNewUser =  () => {
       setDoc(doc(databaseRef, Usernameinput) ,{name:Usernameinput, password:Userpasswordinput,
@@ -186,7 +197,7 @@ const Data:any = getdata.data()
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage
     }} >
         {props.children}
     </UserContext.Provider>

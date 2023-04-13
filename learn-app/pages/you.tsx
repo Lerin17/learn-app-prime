@@ -14,6 +14,7 @@ import Login from "../components/login/Login-SignupModal";
 import YouHome from "../components/you/YouHome";
 import AnimationContainer from "../components/GeneralPurpose/AnimationContainer";
 import YourPackeges from "../components/you/YourPackeges";
+import YourNetwork from "../components/you/YourNetwork";
 
 // import { Icoursecontext } from "../types/context/coursecontext";
 // import { CourseContext } from "../context/CourseContext";
@@ -21,7 +22,7 @@ import YourPackeges from "../components/you/YourPackeges";
 
 function Aboot() {
 
-const {addNewUser, isLoginPage, isPackagesPage} = React.useContext(UserContext) as Iusercontext
+const {addNewUser, isLoginPage, isPackagesPage, isNetworkPage} = React.useContext(UserContext) as Iusercontext
 
     return (
       <div>
@@ -29,9 +30,9 @@ const {addNewUser, isLoginPage, isPackagesPage} = React.useContext(UserContext) 
 
         
         <AnimatePresence>
-          {Boolean(!isLoginPage && !isPackagesPage)  && <AnimationContainer
+          {Boolean(!isLoginPage && !isPackagesPage && !isNetworkPage)  && <AnimationContainer
           Component={<YouHome/>}
-          condition={Boolean(!isLoginPage && !isPackagesPage) }
+          condition={Boolean(!isLoginPage && !isPackagesPage && !isNetworkPage) }
           /> }
           
         </AnimatePresence>
@@ -57,6 +58,14 @@ const {addNewUser, isLoginPage, isPackagesPage} = React.useContext(UserContext) 
           {isLoginPage && <AnimationContainer
           Component={<Login/>}
           condition={isLoginPage}
+          /> }
+          
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {isNetworkPage && <AnimationContainer
+          Component={<YourNetwork/>}
+          condition={isNetworkPage}
           /> }
           
         </AnimatePresence>

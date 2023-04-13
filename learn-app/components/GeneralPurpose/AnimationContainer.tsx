@@ -25,7 +25,7 @@ const AnimationContainer = (props:Ianimationcontainerprops) => {
       scale:1.6,
       x:-570,
       y:-480,
-      opacity:0.05
+      opacity:0.02
        }}
 
        initial={{

@@ -15,7 +15,7 @@ const YourPackages = () => {
   const {coursesArray, courseGroupArray} = React.useContext(CourseContext) as Icoursecontext
   
 
-  const {isCreatePackage, setisCreatePackage, currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage} = React.useContext(UserContext) as Iusercontext
+  const {isCreatePackage, setisCreatePackage, currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage, userPackagesArray} = React.useContext(UserContext) as Iusercontext
 
   const {setnotfication, notfication} = useNotification()
 
@@ -59,11 +59,26 @@ const YourPackages = () => {
     }
   })
 
-  const AvailableCourses = getSearchCourses.map((item:any) => (<div 
+  const PackagesListDisplay = userPackagesArray.map((item, i) => (
+    <div
+    className='border-dashed border-b px-4 text-3xl transition-all hover:border-solid hover:bg-amber-800  hover:border-b-8 hover:border-amber-900 hover:border-solid  hover:text-4xl'
+    key={i}>
+      {i}
+      {item.name}
+    </div>
+  ))
+
+  const AvailableCourses = getSearchCourses.map((item:any, i) => (<div 
   onClick={()=>{setcurrentUserPackage(prev => ({...prev, courses:[item, ...prev.courses]}))}}
   className='border-dashed transition-all hover:bg-amber-700 hover:border-b-4 hover:border-amber-900 text-stone-900 hover:text-white hover:border-solid  px-4 border-b '>
     {item.courseName}
   </div>))
+
+  const SelectedCourses = ''
+
+  React.useEffect(() => {
+    
+  }, []);
 
   console.log(currentUserPackage, 'currentUserPackage')
 
@@ -71,7 +86,7 @@ const YourPackages = () => {
 
 
   return (
-    <div className='flex font-header12  justify-center'>
+    <div className='flex font-header12   justify-center'>
               <div 
               style={{
                 height:550,
@@ -80,18 +95,24 @@ const YourPackages = () => {
     className=' w-8/12'
     >
     <div className='text-4xl flex items-center'>
-       <DuttonAlt
+      <div className={`${!isCreatePackage?'border-b-4':''}`}>
+      <DuttonAlt
         icon={`${'View Your Packages'}`}
         handleClick={()=>setisCreatePackage(false)}
         />
+      </div>
+      
         <div className='text-xl px-1'>
         or
         </div>
         
-        <DuttonAlt
-        icon={`${'Create a Package'}`}
-        handleClick={()=>setisCreatePackage(true)}
-        />
+        <div className={`${isCreatePackage?'border-b-4':''}`}>
+          <DuttonAlt
+          icon={`${'Create a Package'}`}
+          handleClick={()=>setisCreatePackage(true)}
+          />
+        </div>
+      
     </div>
 
 <AnimatePresence>
@@ -202,7 +223,7 @@ const YourPackages = () => {
 
                   <DuttonAlt
                   icon={<div className='text-lg'>
-                    Clear selected Coures
+                    Clear selected Courses
                   </div>}
                   handleClick={()=>clearUserPackage()}
                   />
@@ -226,10 +247,12 @@ const YourPackages = () => {
                   className={`flex ${currentUserPackage.courses.length?' border':''}   w-full flex-wrap `}
                   style={{
                     overflowY:'auto',
-                    height:currentUserPackage.courses.length > 21? 350:'100%'
+                    height:currentUserPackage.courses.length > 21? 320:'100%',
+                    // marginBottom:'30px',
+                    // background:"red"
                   }}
                   >
-                      {currentUserPackage.courses.length? currentUserPackage.courses.map(item => (
+                      {currentUserPackage.courses.length? currentUserPackage.courses.map((item, i) => (
                         <div className={` ${currentUserPackage.courses.length > 7? 'w-1/3 ':'w-full'}  `}>
                             <motion.div
                             initial={{
@@ -238,10 +261,10 @@ const YourPackages = () => {
                             animate={{
                               x:0
                             }}
-                            className={`text-xl hover:bg-rose-700 ${currentUserPackage.courses.length?' border':''}  h-full w-full flex items-top `}>
+                            className={`text-xl  ${currentUserPackage.courses.length?' border':''}  h-full w-full flex items-top `}>
                               <div className='p-1 m-1 bg-stone-300 w-2/12 text-lg flex justify-center text-amber-900  flex '>
                               <div className=''>
-                                {currentUserPackage.courses.indexOf(item)+1}
+                               {i}
                               </div>
                           {/* <div className='w-2 h-2 bg-stone-300 '>
                             
@@ -355,6 +378,8 @@ initial={{
             <div className='border-dashed border-b px-4 text-3xl transition-all hover:border-solid hover:bg-amber-800  hover:border-b-8 hover:border-amber-900 hover:border-solid  hover:text-4xl '>
               math
             </div>
+
+            {PackagesListDisplay}
 </div>
 </motion.div>
     </motion.div>

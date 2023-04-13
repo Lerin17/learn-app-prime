@@ -16,7 +16,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 const Mavbar = () => {
   const {isCreateQuestionsOpen, setisCreateQuestionsOpen,    isQuestionHome, setisQuestionHome, setisQuestionList, isQuestionList, setisQuestionsTest, } = React.useContext(AssesmentContext) as Iassesmentcontext
 
-  const {isLoginPage, setisLoginPage, setisPackagesPage, notfication} = React.useContext(UserContext) as Iusercontext
+  const {isLoginPage, setisLoginPage, setisPackagesPage, notfication, setisNetworkPage} = React.useContext(UserContext) as Iusercontext
 
   
   const returnHomeAssesment = () => {
@@ -29,6 +29,8 @@ const Mavbar = () => {
   const returnHomeYou = () => {
     setisLoginPage(false)
     setisPackagesPage(false)
+    setisNetworkPage(false)
+    
   }
 
   const routerPathName = useRouter().asPath
@@ -62,6 +64,10 @@ const Mavbar = () => {
       animate={{
         x:0
       }}
+
+      // exit={{
+      //   x:300
+      // }}
 
       initial={{
         x:300
