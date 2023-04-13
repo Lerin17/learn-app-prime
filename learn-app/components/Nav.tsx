@@ -65,6 +65,11 @@ export const Nav = () => {
         locationURL= '/liveclasses'
         />
 
+        <NavOption
+        text = 'xyou'
+        locationURL= '/you/youhome'
+        />
+
      
        
     </div>

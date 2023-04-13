@@ -334,7 +334,7 @@ const YourPackages = () => {
   <AnimatePresence>
     {!isCreatePackage &&
     <motion.div exit={{
-      x:-300,
+      x:-400,
       opacity:0.1
     }}
     
