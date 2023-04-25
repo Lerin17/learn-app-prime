@@ -12,28 +12,42 @@ import { UtilityContextProvider } from '../context/UtilityContext'
 import { CourseContextProvider } from '../context/CourseContext'
 import { AssesmentContextProvider } from '../context/AssesmentContext'
 import { UserContextProvider } from '../context/UserContext'
+import { AnimatePresence } from 'framer-motion'
+import Router, { useRouter } from 'next/router'
+
+
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+  const router = useRouter().asPath
+
   return (
     <ThemeProvider theme={theme} >
     <StyledEngineProvider injectFirst >
+      <UtilityContextProvider>
       <UserContextProvider>
       <CourseContextProvider>
       <AssesmentContextProvider>
-      <UtilityContextProvider>
+      
           <StudentContextProvider>
            <CalendarContextProvider>
             <SocketContextProvider>
             <Layout>
-                  <Component {...pageProps} />
+                  <AnimatePresence
+                  initial={false}
+                  >
+                  <Component key={router} {...pageProps} />
+                  </AnimatePresence>
               </Layout>
             </SocketContextProvider>     
           </CalendarContextProvider>
         </StudentContextProvider> 
-      </UtilityContextProvider>
+      
       </AssesmentContextProvider>
       </CourseContextProvider>
       </UserContextProvider>
+      </UtilityContextProvider>
+      
 
 
     </StyledEngineProvider>

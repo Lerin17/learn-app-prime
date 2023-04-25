@@ -15,7 +15,7 @@ const AnimationContainer = (props:Ianimationcontainerprops) => {
       duration:0.5,
       type:'tween',   
       ease:'easeIn',
-      delay:0.2
+      // delay:0.2
     }}
 
 
@@ -25,7 +25,9 @@ const AnimationContainer = (props:Ianimationcontainerprops) => {
       scale:1.6,
       x:-570,
       y:-480,
-      opacity:0.02
+      opacity:0.02,
+      zIndex:'0',
+      display:'relative'
        }}
 
        initial={{
@@ -52,13 +54,12 @@ const AnimationContainer = (props:Ianimationcontainerprops) => {
       display:'block'
     }}
 
-    transition={props.condition? {
+    transition={ {
       duration:0.6,
       type:'spring',
       stiffness:40,
       delay:0.7  
-    }:{
-          //error if i use && instead of ? 
+         //error if i use && instead of ? 
     }}
       
       >

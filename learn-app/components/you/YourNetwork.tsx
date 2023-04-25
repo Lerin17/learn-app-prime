@@ -1,3 +1,4 @@
+import { random } from 'chroma-js'
 import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
 import { UserContext } from '../../context/UserContext'
@@ -6,14 +7,17 @@ import { DuttonAlt } from '../GeneralPurpose/dutton'
 
 
 
-const YourNetwork = () => {
+const YourNetwork = (props:any) => {
 
 
-  const {setisSubscriberList, isSubscriberList} = React.useContext(UserContext) as Iusercontext
+  const {setisSubscriberList, isSubscriberList, copyUserLink, subscribeToLinkInput, setsubscribeToLinkInput,subscribeToNetwork} = React.useContext(UserContext) as Iusercontext
+
+  React.useEffect(() => {
+    
+  }, []);
 
   return (
     <div
-   
     className='flex flex-col items-center font-header12'>
 
       <div
@@ -52,8 +56,8 @@ const YourNetwork = () => {
        <motion.div
        className=' w-full'
        exit={{
-         x:-400,
-         opacity:0.1
+         x:-500,
+         opacity:0.05
        }}
        
        transition={{
@@ -77,15 +81,15 @@ const YourNetwork = () => {
        }}
 
        style={{
-         height:500
+         height:480
        }}
-       className='w-full relative border-l-8 border-amber-700'>
-         <div className='bg-amber-700   absolute w-full h-full  py-2 opacity-50 text-transparent'>x</div>
+       className='w-full relative border-l-8 border-yellow-900'>
+         <div className='   absolute w-full h-full  py-2 opacity-50 text-transparent'>x</div>
  
-         <div className='relative z-10'>
+         <div className='relative h-full shadow z-10 border-r border-black'>
            <div 
            style={{
-            borderLeft:'1px solid black'
+            borderLeft:'2px solid black'
            }}
            className='text-xl px-2 border-y border-b'>
              Subscriber List
@@ -95,16 +99,17 @@ const YourNetwork = () => {
            <div 
            style={{
              opacity:'70%',
-             height:450
+             height:450,
+             backgroundColor:'rgb(45 30 30)'
            }}
-           className='text-7xl p-4 z-10 w-full h-full opacity-50 text-transparent   border-l border-black absolute bg-amber-900'>
+           className='text-7xl p-4 z-10 w-full h-full opacity-50 text-transparent   border-l-2 border-black absolute '>
            Y
            </div>
 
            <div className='z-20 relative '>
            <DuttonAlt
            icon={'Copy Subscribe Link'}
-           handleClick={()=>console.log('jack ')}
+           handleClick={()=>copyUserLink()}
            />
          </div>
  
@@ -130,10 +135,14 @@ const YourNetwork = () => {
        {!isSubscriberList && 
        
        <motion.div
+
+       style={{
+     
+       }}
        
        exit={{
-         x:-400,
-         opacity:0.1
+         x:-500,
+         opacity:0.05
        }}
        
        transition={{
@@ -158,39 +167,65 @@ const YourNetwork = () => {
        }}
 
        style={{
-         height:500
+         height:480
        }}
-       className='w-full relative border-l-8 border-amber-700'>
-         <div className='bg-amber-800   absolute w-full h-full  py-2 opacity-50 text-transparent'>x</div>
+       className='w-full relative  border-l-8 border-amber-700 '>
+         <div className=' border-b border-black absolute w-full h-full  py-2 opacity-50  text-transparent'>x</div>
  
-         <div className='relative z-10'>
-           <div className='text-xl px-2 border-y border-b'>
+         <div className='relative shadow z-10 h-full border-r border-gray-800'>
+           <div
+            style={{
+              borderLeft:'2px solid black'
+             }}
+           className='text-xl px-2  border-y'>
              Subscriber List
            </div>
          <div className='  '>
+
         
            <div 
            style={{
              opacity:'70%',
              height:450
            }}
-           className='text-7xl p-4 z-10 w-full h-full opacity-50 text-transparent  border-b border-l border-black absolute bg-amber-900'>
+           className='text-7xl p-4 z-10 w-full h-full opacity-50 text-transparent  border-b border-l-2 border-black absolute '>
            Y
            </div>
-{/* 
-           <div className='z-20 relative '>
-           <DuttonAlt
-           icon={'Copy Subscribe Link'}
-           handleClick={()=>console.log('jack ')}
+
+           <div className='z-20 relative flex items-end'>
+
+            <div className={`${props.isClearLink?'':'animate-pulse'}`}>
+            <DuttonAlt
+           icon={' Subscribe to'}
+           handleClick={() => {subscribeToNetwork( props.isClearLink), props.clearsubscribetoLink() }}
            />
-         </div> */}
+            </div>
+           
+
+            <div className='w-3/4 '>
+            <input
+            onChange={(e:any) => {
+              setsubscribeToLinkInput(e.target.value)
+            } }
+            value={Boolean(props.link && !props.isClearLink) ?props.link:subscribeToLinkInput}
+            placeholder='Enter link'
+           className='bg-transparent border-b px-3 py-1 text-xl w-full '
+           />
+            </div>
+          
+         </div>
  
            <div className='z-20 p-4 py-8 text-7xl text-stone-300 relative'>
+        
+
            <div>
              You are subscribed to, Nobody
            </div>
+
+           
            </div>
  
+         
          
          
          </div>

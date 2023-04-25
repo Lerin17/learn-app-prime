@@ -12,10 +12,16 @@ import useNotification from '../hooks/Notification';
 
 import uniqid from 'uniqid';
 import { type } from 'os';
+import { UtilityContext } from './UtilityContext';
+import { Iutilitycontext } from '../types/context/utilitycontext';
 
 const UserContext = React.createContext<Iusercontext | null>(null)
 
 const UserContextProvider = (props:any) => {
+
+  const {routerLocation} = React.useContext(UtilityContext) as Iutilitycontext
+
+  console.log(routerLocation, 'roorrrrrrr')
 
     const [isUserStudent, setisUserStudent] = React.useState<boolean>(true);
 
@@ -28,6 +34,8 @@ const UserContextProvider = (props:any) => {
     const [Userpasswordinput, setUserpasswordinput] = React.useState('');
 
     const [Useremailinput, setUseremailinput] = React.useState('');
+
+    const [subscribeToLinkInput, setsubscribeToLinkInput] = React.useState<string>('');
 
     const [currentUserPackage, setcurrentUserPackage] = React.useState<Tpackage>( {
       name:'',
@@ -58,6 +66,15 @@ const UserContextProvider = (props:any) => {
     const [isCreatePackage, setisCreatePackage] = React.useState<boolean>(true);
 
     const [isSubscriberList, setisSubscriberList] = React.useState<boolean>(false);
+
+    const path = routerLocation
+
+    const splitPath = path.split('/')
+    
+    const link = splitPath[splitPath.length - 1]
+
+    const [subscribeToUrlLink, setsubscribeToUrlLink] = React.useState<string>(link);
+
 
    React.useEffect(() => {
     if(userData.name){
@@ -179,6 +196,39 @@ const Data:any = getdata.data()
     })
    }
 
+   const copyUserLink = () => {
+    setnotfication({
+      type:'success-mini',
+      message:'Link successfully copied'
+    })
+   }
+
+   const subscribeToNetwork = async (isClearLink:boolean) => {
+    // setsubscribeToLinkInput('')
+    if(isClearLink){
+     setsubscribeToLinkInput('')
+      const docRef = doc(database, 'Users', subscribeToLinkInput)
+
+      try {
+        const docSnap = await getDoc(docRef)
+
+        if(docSnap.exists()){
+          const Data:any = docSnap.data()
+
+          setnotfication({
+            type:'success',
+            message:'Message in'
+          })
+        }
+      } catch (error) {
+        
+      }
+
+    }else{
+      console.log('what happens when Url Link is used')
+    }
+   }
+
     const saveUserPackage = () => {
       if(currentUserPackage.name===''){
         console.log('damnnnn', notfication)
@@ -197,7 +247,7 @@ const Data:any = getdata.data()
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeToLinkInput, setsubscribeToLinkInput,subscribeToNetwork, subscribeToUrlLink, setsubscribeToUrlLink
     }} >
         {props.children}
     </UserContext.Provider>

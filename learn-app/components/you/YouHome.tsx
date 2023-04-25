@@ -5,6 +5,7 @@ import { DuttonLarge } from '../GeneralPurpose/dutton';
 
 import { UserContext } from '../../context/UserContext'
 import { Iusercontext } from '../../types/context/usercontext'
+import Link from 'next/link';
 
 
 const YouHome = () => {
@@ -47,11 +48,19 @@ const {addNewUser, setisLoginPage, setisPackagesPage, setisNetworkPage} = React.
        </div>
 
 </div>
-   
-<div className='flex'>
-<div  className=" flex  text-7xl   font-header12 transition-all hover:text-stone-800 text-stone-200 textshadow pt-3" >
+
+
+
+  <Link
+  href={'/you/yourpackages'}
+  >
+        <div className='flex'>
+<div  
+
+className=" flex  text-7xl   font-header12 transition-all hover:text-stone-800 text-stone-200 textshadow pt-3" >
          Tour Your  Packages <div>
                 <DuttonLarge
+                // handleClick={()=>console.log('cap a ')}
                 handleClick={()=>setisPackagesPage(true)}
                 icon={<svg
                     className='fill-current text-amber-800'
@@ -60,13 +69,19 @@ const {addNewUser, setisLoginPage, setisPackagesPage, setisNetworkPage} = React.
             </div>,
        </div>
 </div>
-     
+  </Link>
 
-       <div 
+     
+  <Link
+  href={'/you/yournetwork'}
+  >
+  <div 
        onClick={()=>setisNetworkPage(true)}
        className="   text-7xl  font-header12 transition-all text-stone-200 hover:text-stone-800 pt-3 textshadow" >
            Tour Your Network.
        </div> 
+  </Link>
+       
     </div>
     </div>
   )

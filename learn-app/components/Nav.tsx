@@ -15,9 +15,9 @@ export const Nav = () => {
   const NavOption = (props:INavOptions) => {
 
     return (
-      <div className={`px-2 py-1  lg:px-8 md:px-6 lg:text-base md:text-base text-sm hover:bg-amber-800 hover:text-black transition-all text-white font-header1 font-normal z-40 block`} >
+      <div className={`px-2 py-1  lg:px-8 md:px-6 lg:text-base md:text-base text-sm   transition-all text-white font-header1 font-normal `} >
         <Link  href= {props.locationURL} >
-            <div className={`cursor-pointer ${props.one?'lg:text-5xl md:text-2xl font-black font-header7 text-black  uppercase ':'font-header7 text-black lg:text-2xl md:text-lg'}`} >
+            <div className={` ${props.one?'lg:text-5xl md:text-2xl font-black font-header7 text-stone-300  uppercase ':'font-header7 text-black lg:text-2xl md:text-lg'}`} >
               {props.text}
             </div>
         </Link>
@@ -29,9 +29,9 @@ export const Nav = () => {
     <div
     style={{
 
-     
+     backdropFilter:'blur(30px)'
     }}
-    className='text-white   flex flex-wrap justify-center bg-stone-300  w-full items-center  ' >
+    className='text-white bg-blur     flex flex-wrap justify-center bg-transparent  w-full items-center  ' >
         <NavOption
         text = 'Home'
         locationURL= "/"
@@ -49,10 +49,11 @@ export const Nav = () => {
         locationURL= '/students'
         />
 
-        <NavOption
+<NavOption
         text = 'Courses'
         locationURL= '/courses'
         />
+
         
         <NavOption
         text = 'Assesment'
@@ -65,10 +66,10 @@ export const Nav = () => {
         locationURL= '/liveclasses'
         />
 
-        <NavOption
+        {/* <NavOption
         text = 'xyou'
-        locationURL= '/you/youhome'
-        />
+        locationURL= '/you/yourpackages'
+        /> */}
 
      
        

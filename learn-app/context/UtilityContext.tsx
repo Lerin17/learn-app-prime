@@ -1,15 +1,45 @@
+import Router, { useRouter } from 'next/router';
 import React from 'react'
 
 import { Iutilitycontext } from '../types/context/utilitycontext';
 
+
+
 const UtilityContext = React.createContext<Iutilitycontext | null>(null)
+
+
 
 const UtilityContextProvider = (props:any) => {
 
     const [screenWidth, setscreenWidth] = React.useState(0);
 
+    const routerx = useRouter().asPath 
 
-    
+    React.useEffect(() => { 
+        console.log(routerx, 'routerxwz')
+        setrouterLocation(
+            routerx
+        )
+    }, []);
+
+    // console.log(routerx, 'Linkkkkkks')
+
+    // const [, set] = useState();
+
+    const [routerLocation, setrouterLocation] = React.useState<string>('zwzw');  
+
+    // React.useEffect(() => {
+    //     if(routerx){
+    //         // console.log('exexxexxexexexexexjxekxe')
+    //         setrouterLocation(routerx)
+    //     }
+    // }, [routerx]);
+
+    // React.useEffect(() => {
+    //     setrouterLocation(routerx)
+    //     console.log('casamigosssssssss')
+    //     console.log(routerLocation)
+    // }, [routerx]);
 
     const [mousePosition, setmousePosition] = React.useState({
         x:0,
@@ -71,7 +101,7 @@ setcurrentCursorVariant('default')
     
 
   return (
-    <UtilityContext.Provider value={{screenWidth, mousePosition, currentCursorVariant, setcurrentCursorVariant,  cursorLeave, cursorEnter}} >
+    <UtilityContext.Provider value={{screenWidth, mousePosition, currentCursorVariant, setcurrentCursorVariant,  cursorLeave, cursorEnter, routerLocation}} >
         {props.children}
     </UtilityContext.Provider>
   )

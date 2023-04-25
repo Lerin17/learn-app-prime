@@ -28,6 +28,12 @@ export interface Iusercontext {
     setisNetworkPage:React.Dispatch<React.SetStateAction<boolean>>
     isSubscriberList:boolean
     setisSubscriberList:React.Dispatch<React.SetStateAction<boolean>>
+    copyUserLink:()=>void
+    subscribeToLinkInput:string
+     setsubscribeToLinkInput:React.Dispatch<React.SetStateAction<string>>
+     subscribeToNetwork:(arg:boolean)=>void
+     subscribeToUrlLink:string
+    setsubscribeToUrlLink:React.Dispatch<React.SetStateAction<string>>
 }
 
 export type Tpackage = {

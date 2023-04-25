@@ -15,6 +15,11 @@ import YouHome from "../components/you/YouHome";
 import AnimationContainer from "../components/GeneralPurpose/AnimationContainer";
 import YourPackeges from "../components/you/YourPackeges";
 import YourNetwork from "../components/you/YourNetwork";
+import { useRouter } from "next/router";
+import { UtilityContext } from "../context/UtilityContext";
+import { Iutilitycontext } from "../types/context/utilitycontext";
+
+
 
 // import { Icoursecontext } from "../types/context/coursecontext";
 // import { CourseContext } from "../context/CourseContext";
@@ -24,53 +29,20 @@ function Aboot() {
 
 const {addNewUser, isLoginPage, isPackagesPage, isNetworkPage} = React.useContext(UserContext) as Iusercontext
 
+const {routerLocation} = React.useContext(UtilityContext) as Iutilitycontext
+
     return (
-      <div>
+  
         
-
-        
-        <AnimatePresence>
-          {Boolean(!isLoginPage && !isPackagesPage && !isNetworkPage)  && <AnimationContainer
+       <AnimationContainer
+          key={routerLocation}
           Component={<YouHome/>}
-          condition={Boolean(!isLoginPage && !isPackagesPage && !isNetworkPage) }
-          /> }
+          condition={Boolean(routerLocation == '/you') }
+          /> 
           
-        </AnimatePresence>
-
-
-        <AnimatePresence>
-          {isPackagesPage && <AnimationContainer
-          Component={<YourPackeges/>}
-          condition={isPackagesPage}
-          /> }
-          
-        </AnimatePresence>
-        {/* <AnimatePresence>
-          {!isLoginPage && 
-          <motion.div>
-                <YouHome/>
-          </motion.div>
         
-          }
-        </AnimatePresence> */}
 
-        <AnimatePresence>
-          {isLoginPage && <AnimationContainer
-          Component={<Login/>}
-          condition={isLoginPage}
-          /> }
-          
-        </AnimatePresence>
-
-        <AnimatePresence>
-          {isNetworkPage && <AnimationContainer
-          Component={<YourNetwork/>}
-          condition={isNetworkPage}
-          /> }
-          
-        </AnimatePresence>
-        {/* {!isLoginPage?<YouHome/>:<Login/>} */}
-      </div>
+     
       
     )
 }

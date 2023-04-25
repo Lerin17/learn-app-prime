@@ -5,4 +5,5 @@ export interface Iutilitycontext {
     setcurrentCursorVariant:React.Dispatch<React.SetStateAction<string>>
     cursorLeave:()=>void
     cursorEnter:()=>void
+    routerLocation:string
 }
