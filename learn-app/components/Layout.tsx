@@ -96,7 +96,7 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
       <motion.div
       variants={cursorVariants}
       animate={currentCursorVariant}
-      className={`custom-cursor opacity-75 `} >
+      className={`custom-cursor opacity-75`} >
         
       </motion.div>
 
@@ -113,8 +113,13 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
     // opacity:'20%'
     // backdropFilter: 'blur(1px)'
   }}
-  className='border-y-2  border-black bg-stone-300 relative z-40' >
-    <div className='border-y border-black my-1  '>
+  className=' bg-transparent relative z-30' >
+    <div
+    
+    className='text-lg absolute top-2 left-72 border text-transparent rounded-full  bg-rose-900 '>
+      xxexexexeddddddd
+    </div>
+    <div className='border-y py-1 border-black   '>
        <Nav/>
     </div>
     
