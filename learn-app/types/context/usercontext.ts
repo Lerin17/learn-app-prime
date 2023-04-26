@@ -59,6 +59,6 @@ export interface Iuserdata {
     hashedpassword:string
     email:string
     networks:[]
-    packages:[]
+    packages:Tpackage[]
     id:string
 }

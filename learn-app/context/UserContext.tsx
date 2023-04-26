@@ -14,6 +14,7 @@ import uniqid from 'uniqid';
 import { type } from 'os';
 import { UtilityContext } from './UtilityContext';
 import { Iutilitycontext } from '../types/context/utilitycontext';
+import { resolve } from 'node:path/win32';
 
 const UserContext = React.createContext<Iusercontext | null>(null)
 
@@ -87,13 +88,13 @@ const UserContextProvider = (props:any) => {
    }, [userData]);
 
    React.useEffect(() => {
-    if(userPackagesArray.length){
+    if(userData.packages.length){
       setnotfication({
         type:'success-mini',
         message:'Packages successfully saved'
       })
     }
-   }, [userPackagesArray]);
+   }, [userData]);
 
     const addNewUser =  () => {
       setDoc(doc(databaseRef, Usernameinput) ,{name:Usernameinput, password:Userpasswordinput,
@@ -229,7 +230,7 @@ const Data:any = getdata.data()
     }
    }
 
-    const saveUserPackage = () => {
+    const saveUserPackage = async () => {
       if(currentUserPackage.name===''){
         console.log('damnnnn', notfication)
         console.log(currentUserPackage)
@@ -238,11 +239,76 @@ const Data:any = getdata.data()
           message:'Please fill out input'
         })
       }else{
+        if(userData.name){
+
+          try {
+          const res =  await setDoc(doc (database, 'Users', 'pack'), {
+              name:'pack2',
+              age:45
+            })
+
+
+            setuserData(prev => ({
+              ...prev,
+              packages: [...prev.packages, currentUserPackage]
+            }))
+
+            setnotfication({
+              type:'success-mini',
+              message:'success saving package'
+            })
+          } catch (error) {
+            console.log(error)
+
+            setnotfication({
+              type:'error-mini',
+              message:'error saving package'
+            })
+            
+          }
+
+          // const savePackagePromise = new Promise<void>((resolve, reject) => {
+          //   setDoc(doc (database, 'Users', 'pack'), {
+          //     name:'pack2',
+          //     age:45
+          //   })
+
+            
+          // }).then( async (resolvexPromise) => {
+
+          //    const docRef = doc(database, 'Users', 'pack2')
+
+          //     const docSnap = await getDoc(docRef)
+
+          //     if(docSnap.exists()){
+          //       return docSnap.data()
+          //     }
+              
+          // })
+
+        
+        }else{
+          setnotfication({
+            type:'error-mini',
+            message:'Please Login'
+          })
+        }
+      
+    
         setuserPackagesArray(prev => [currentUserPackage, ...prev])
         clearUserPackage()
       }
-      
     }
+
+    // React.useEffect(() => {
+    //   if(userData.name){
+    //     setuserPackagesArray
+    //   }
+    // }, [userData]);
+
+    // React.useEffect(() => {
+    //   if(userPackagesArray.length =)
+    // }, []);
 
 
   return (

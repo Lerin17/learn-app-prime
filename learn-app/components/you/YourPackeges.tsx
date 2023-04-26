@@ -15,7 +15,7 @@ const YourPackages = () => {
   const {coursesArray, courseGroupArray} = React.useContext(CourseContext) as Icoursecontext
   
 
-  const {isCreatePackage, setisCreatePackage, currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage, userPackagesArray} = React.useContext(UserContext) as Iusercontext
+  const {isCreatePackage, setisCreatePackage, currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage, userPackagesArray, userData} = React.useContext(UserContext) as Iusercontext
 
   const {setnotfication, notfication} = useNotification()
 
@@ -59,14 +59,19 @@ const YourPackages = () => {
     }
   })
 
-  const PackagesListDisplay = userPackagesArray.map((item, i) => (
+  const PackagesListDisplay = userData.name? userData.packages.length? userData.packages.map((item, i) => (
     <div
     className='border-dashed border-b px-4 text-3xl transition-all hover:border-solid hover:bg-amber-800  hover:border-b-8 hover:border-amber-900 hover:border-solid  hover:text-4xl'
     key={i}>
       {i}
       {item.name}
     </div>
-  ))
+  )): <div>
+    No userPackages Created
+  </div>: <div
+  >
+    Please Login
+  </div>
 
   const AvailableCourses = getSearchCourses.map((item:any, i) => (<div 
   onClick={()=>{setcurrentUserPackage(prev => ({...prev, courses:[item, ...prev.courses]}))}}
