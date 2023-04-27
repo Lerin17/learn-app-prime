@@ -222,7 +222,10 @@ const Data:any = getdata.data()
           })
         }
       } catch (error) {
-        
+        setnotfication({
+          type:'error-mini',
+          message:'Error subscriing to network'
+        })
       }
 
     }else{

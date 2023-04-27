@@ -116,7 +116,7 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
   className=' bg-transparent relative z-30' >
     <div
     
-    className='text-lg absolute top-2 left-72 border text-transparent rounded-full  bg-rose-900 '>
+    className='text-lg absolute top-2 left-72 border text-transparent rounded-full  bg-slate-900 '>
       xxexexexeddddddd
     </div>
     <div className='border-y py-1 border-black   '>

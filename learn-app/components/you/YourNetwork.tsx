@@ -197,7 +197,8 @@ const YourNetwork = (props:any) => {
             <div className={`${props.isClearLink?'':'animate-pulse'}`}>
             <DuttonAlt
            icon={' Subscribe to'}
-           handleClick={() => {subscribeToNetwork( props.isClearLink), props.clearsubscribetoLink() }}
+           handleClick={() => {subscribeToNetwork( props.isClearLink),
+             props.clearsubscribetoLink() }}
            />
             </div>
            

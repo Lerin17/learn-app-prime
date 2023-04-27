@@ -27,6 +27,8 @@ const Link = () => {
       setsubscribeToUrlLink('')
       setisClearLink(true)
     }
+
+    console.log(isClearLink, 'isClearLink')
     
   return (
     <div className='text-stone-300'>
