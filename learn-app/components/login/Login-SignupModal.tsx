@@ -87,7 +87,7 @@ const Login = () => {
          style={{
           height:450
          }}
-         className='w-8/12 '>
+         className='lg:w-8/12 md:w-10/12   w-11/12 '>
             {userData.name?<div>
               <ProfilePage
               userData = {userData}
@@ -130,7 +130,7 @@ const Login = () => {
   </div>
 
 <div className='flex flex-col'>
-<div className='flex border-b-2 text-7xl' >
+<div className='flex border-b-2 lg:text-7xl md:text-4xl xs:text-xl' >
   Name
   <div className='w-full'>
     <input
@@ -143,7 +143,7 @@ const Login = () => {
   </div>
 </div>
 
-<div className='flex text-7xl border-b-2' >
+<div className='flex lg:text-7xl md:text-4xl xs:text-x border-b-2' >
   Password
   <div className='w-full'>
     <input

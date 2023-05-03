@@ -90,8 +90,9 @@ const QuestionsList = () => {
 
   }
   return (
-    <div>
-        <div className='border bg-white w-full' >
+    <div className='flex justify-center'>
+                  <div className='xl:w-8/12 lg:w-9/12 md:w-10/12 w-11/12 justify-center '>
+        <div className='border bg-white ' >
         <ReactSelect
   className='text-base focus:border-none z-30 block'
    options={TagsOptions}
@@ -159,6 +160,8 @@ const QuestionsList = () => {
 
     
     </div>
+    </div>
+  
   )
 }
 

@@ -170,7 +170,8 @@ const YourPackages = () => {
                 setcurrentUserPackage(prev => ({
                   name:e.target.value,
                   description:prev.description,
-                  courses:prev.courses
+                  courses:prev.courses,
+                  id:prev.id
                 }))
               }}
               />
@@ -192,7 +193,8 @@ const YourPackages = () => {
                 setcurrentUserPackage(prev => ({
                   name:prev.name,
                   description:e.target.value,
-                  courses:prev.courses
+                  courses:prev.courses,
+                  id:prev.id
                 }))
               }}
               />

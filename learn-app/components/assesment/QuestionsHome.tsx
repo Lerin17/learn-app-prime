@@ -9,7 +9,7 @@ import { UtilityContext } from '../../context/UtilityContext'
 import { Iutilitycontext } from '../../types/context/utilitycontext'
 // import { motion } from 'framer-motion'
 
-
+import Link from 'next/link';
 
 const QuestionsHome = () => {
   const {isCreateQuestionsOpen, setisCreateQuestionsOpen, QuestionsArray,setisQuestionList,  setisQuestionHome, isQuestionsTest, setisQuestionsTest} = React.useContext(AssesmentContext) as Iassesmentcontext
@@ -22,7 +22,7 @@ const QuestionsHome = () => {
   // }, [isPresent])
 
   return (
-<div className='flex justify-start relative '>
+<div className='flex justify-center relative '>
 <motion.div exit={{
   // y:40,
   // opacity:0
@@ -30,8 +30,9 @@ const QuestionsHome = () => {
 style={{
   // fontSize:65
 }}
-className='text-7xl  font-header12 flex flex-col justify-center '>
-    <div 
+className='text-7xl pt-3 xl:text-7xl lg:text-5xl md:text-4xl text-2xl text-white xl:w-8/12 lg:w-9/12 md:w-10/12 w-11/12  font-header12 flex flex-col justify-center '>
+    <Link 
+    href={'/assesment/questionsInventory'}
        onMouseEnter={()=>cursorEnter()}
        onMouseLeave={()=>cursorLeave()}
     onClick={()=>{
@@ -39,8 +40,8 @@ className='text-7xl  font-header12 flex flex-col justify-center '>
       setisQuestionList(true)}} style={{
        
       // backgroundColor:'#A46741'
-    }} className='textshadow  hover:text-stone-800 text-stone-200 '>
-      {QuestionsArray.length?<div className='flex   pt-3 transition-all'>
+    }} className='    '>
+      {QuestionsArray.length?<div className='flex textshadow text-stone-300 hover:text-stone-800  pt-3 transition-all'>
       Tour Questions Inventory
       <DuttonLarge
       handleClick={()=>{
@@ -52,8 +53,11 @@ className='text-7xl  font-header12 flex flex-col justify-center '>
 
       </div> :'No Questisons Created yet ,'}
        
-      </div>
-      <div 
+      </Link>
+
+<Link href={'/assesment/createQuestions'}>
+<div
+      
       onMouseEnter={()=>cursorEnter()}
       onMouseLeave={()=>cursorLeave()}
       style={{
@@ -71,8 +75,13 @@ icon={ <svg className='fill-current text-amber-800' xmlns="http://www.w3.org/200
 
   <span className='font-header12' >,</span> 
   </div>
+</Link>
+    
+<Link
+  href={'/assesment/createTest'}
+>
+<div
 
-  <div
      onMouseEnter={()=>cursorEnter()}
      onMouseLeave={()=>cursorLeave()}
   style={{
@@ -100,6 +109,8 @@ icon={<div className='flex'> <svg style={{
 
 
   <span className='font-header6' >,</span> </div>
+</Link>
+ 
 </motion.div>
 </div>
 

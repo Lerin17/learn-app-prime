@@ -29,7 +29,7 @@ const ProfilePage = ({userData}:IprofilePageprops) => {
             </div>
          
             <div>
-              Email: Lerinowoade@gmail.com
+              Email: {userData.email}
             </div>
 
             
@@ -37,10 +37,10 @@ const ProfilePage = ({userData}:IprofilePageprops) => {
               Network id: Lerin2445
             </div>
           </div>
-
+{/* 
           <div className='bg-amber-900 w-3'>
             
-          </div>
+          </div> */}
 
           <div className='w-2/3 p-2 pl-0  pt-0  border border-l-0  '>
             <div className='flex h-full'>

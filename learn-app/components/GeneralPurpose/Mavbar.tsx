@@ -53,7 +53,7 @@ const Mavbar = () => {
         style={{
           overflow:'hidden'
       }}
-        className= {`transition-all xl:w-8/12 lg:w-9/12 w-11/12   z-40`}  >
+        className= {`transition-all  md:w-10/12   w-11/12 xl:w-8/12 lg:w-9/12 w-11/12 lg:text-xl md:text-lg text-xs  z-40`}  >
     
     
     
@@ -98,7 +98,7 @@ const Mavbar = () => {
                 }}
                 className={` flex     justify-between  py-1   font-header10 text-gray-300 bg-transparent  w-full `}>
                   
-                  <div className='flex w-full  transition-all   text-xl' >
+                  <div className='flex w-full  transition-all   ' >
                   <TextAlt
                   possibleStringsArray={[
                     {isAnimate:Boolean(useRouter().asPath=='/assesment') , text:'Assement'},

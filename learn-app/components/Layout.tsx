@@ -18,11 +18,21 @@ export const Layout = (prop:any) => {
 
   console.log(useRouter().asPath, 'as path')
 
-const {mousePosition, currentCursorVariant} = React.useContext(UtilityContext) as Iutilitycontext
+  const path = useRouter().asPath
+
+const {mousePosition, currentCursorVariant, navBarOptionLocation, setnavBarOptionLocation, updateNavBarOptionLocation} = React.useContext(UtilityContext) as Iutilitycontext
 
 const {isUserStudent, userData, notfication} = React.useContext(UserContext) as Iusercontext
 
   const [windowHeight, setwindowHeight] = React.useState<number>();
+
+  const [haloLocation, sethaloLocation] = React.useState<any>();
+
+  const updateLocation = (data:any) => {
+    setnavBarOptionLocation(data)
+  }
+
+  console.log(navBarOptionLocation, 'navx')
 
   const handleResize = () => {
     setwindowHeight(window.innerHeight)
@@ -56,10 +66,11 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
     default:{
       x: mousePosition.x - 16,
       y:mousePosition.y - 16,
-      backgroundColor:'#a1a1aa',
+      backgroundColor:'#92400e',
       height:32,
       width:32,
-      borderRadius:'50%'
+      borderRadius:'50%',
+      
       
 
 
@@ -82,7 +93,18 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
     }
   }
 
+
+
+  console.log(navBarOptionLocation, 'navbarloaction')
   
+  React.useEffect(() => {
+    const halolox = document.getElementById('halo')?.getBoundingClientRect()
+
+    sethaloLocation(halolox)
+    
+  }, [path]);
+
+  console.log(haloLocation, 'haloLocation')
 
   return (
     <div style={{
@@ -96,7 +118,7 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
       <motion.div
       variants={cursorVariants}
       animate={currentCursorVariant}
-      className={`custom-cursor opacity-75`} >
+      className={`custom-cursor opacity-75 z-20`} >
         
       </motion.div>
 
@@ -113,14 +135,30 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
     // opacity:'20%'
     // backdropFilter: 'blur(1px)'
   }}
-  className=' bg-transparent relative z-30' >
-    <div
+  className=' bg-transparent   relative w-full z-10' >
+    <motion.div
+    animate={{
+      x:navBarOptionLocation? navBarOptionLocation.x :0
+    }}
+
+    transition={{
+      duration:0.4,
+      ease:'easeInOut'
+    }}
     
-    className='text-lg absolute top-2 left-72 border text-transparent rounded-full  bg-slate-900 '>
+    style={{
+      width: navBarOptionLocation?navBarOptionLocation.width:''
+    }}
+    id='halo'
+    className='text-lg absolute top-1/2 text-transparent  border-b-4   border-amber-900   '>
+      
       xxexexexeddddddd
-    </div>
-    <div className='border-y py-1 border-black   '>
-       <Nav/>
+    </motion.div>
+    <div className='border-b  border-black   '>
+       <Nav
+     
+       updateNavBarOptionLocation={updateNavBarOptionLocation}
+       />
     </div>
     
   </div>
@@ -132,7 +170,8 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
  
 
   <div className='h-full ' >
-    {notfication?.type === 'success'? <div className='w-8/12 pt-4 text-7xl text-green-200 px-2'>
+    {notfication?.type === 'success'?
+     <div className='w-8/12 pt-4 text-7xl text-green-200 px-2'>
             <div>
               Lerin17,
             </div>

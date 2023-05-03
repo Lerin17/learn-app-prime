@@ -19,8 +19,8 @@ const {addNewUser, setisLoginPage, setisPackagesPage, setisNetworkPage} = React.
         height:450,
         // backdropFilter: 'blur(10px)'
     }}
-    className="flex justify-center ">
-                  <div className="pt-3  text-white  w-8/12 " >
+    className="flex w-full  justify-center ">
+                  <div className="pt-3 xl:text-7xl lg:text-5xl md:text-4xl text-2xl text-white xl:w-8/12 lg:w-9/12 md:w-10/12 w-11/12" >
        {/* <CalendarCom/> */}
 <div>
 {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 21.193l-.003.807h-19.993l-.004-.833c-.009-2.224.088-3.495 2.647-4.086 2.805-.647 5.573-1.227 4.242-3.682-3.943-7.275-1.123-11.399 3.111-11.399 4.153 0 7.043 3.971 3.11 11.398-1.292 2.44 1.375 3.02 4.242 3.682 2.57.594 2.657 1.873 2.648 4.113zm4-17.193h-7v2h7v-2zm0 4h-7v2h7v-2zm0 4h-7v2h7v-2z"/></svg> */}
@@ -29,10 +29,11 @@ const {addNewUser, setisLoginPage, setisPackagesPage, setisNetworkPage} = React.
 </div>
 {/* ()=>addNewUser() */}
 
+<Link href={'/you/youraccount'}>
 <div className='flex'>
 <div onClick={()=>{
         console.log('damsn')
-        setisLoginPage(prev => !prev)}} className="   text-7xl  font-header12  transition-all hover:text-stone-800 text-stone-200 textshadow flex" >
+        setisLoginPage(prev => !prev)}} className="     font-header12  transition-all hover:text-stone-800 text-stone-200 textshadow flex" >
             <div className=''>
             Create Your Unique Profile
             </div>
@@ -49,6 +50,8 @@ const {addNewUser, setisLoginPage, setisPackagesPage, setisNetworkPage} = React.
 
 </div>
 
+</Link>
+
 
 
   <Link
@@ -57,7 +60,7 @@ const {addNewUser, setisLoginPage, setisPackagesPage, setisNetworkPage} = React.
         <div className='flex'>
 <div  
 
-className=" flex  text-7xl   font-header12 transition-all hover:text-stone-800 text-stone-200 textshadow pt-3" >
+className=" flex     font-header12 transition-all hover:text-stone-800 text-stone-200 textshadow  lg:pt-3 md:pt-2 pt-1" >
          Tour Your  Packages <div>
                 <DuttonLarge
                 // handleClick={()=>console.log('cap a ')}
@@ -77,7 +80,7 @@ className=" flex  text-7xl   font-header12 transition-all hover:text-stone-800 t
   >
   <div 
        onClick={()=>setisNetworkPage(true)}
-       className="   text-7xl  font-header12 transition-all text-stone-200 hover:text-stone-800 pt-3 textshadow" >
+       className="   font-header12 transition-all text-stone-200 hover:text-stone-800 lg:pt-3 md:pt-2 pt-1 textshadow" >
            Tour Your Network.
        </div> 
   </Link>

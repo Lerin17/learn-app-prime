@@ -13,7 +13,13 @@ const UtilityContextProvider = (props:any) => {
 
     const [screenWidth, setscreenWidth] = React.useState(0);
 
+    const [navBarOptionLocation, setnavBarOptionLocation] = React.useState<any>();
+
     const routerx = useRouter().asPath 
+
+    const updateNavBarOptionLocation = (data:any) => {
+        setnavBarOptionLocation(data)
+    }
 
     React.useEffect(() => { 
         console.log(routerx, 'routerxwz')
@@ -101,7 +107,7 @@ setcurrentCursorVariant('default')
     
 
   return (
-    <UtilityContext.Provider value={{screenWidth, mousePosition, currentCursorVariant, setcurrentCursorVariant,  cursorLeave, cursorEnter, routerLocation}} >
+    <UtilityContext.Provider value={{screenWidth, mousePosition, currentCursorVariant, setcurrentCursorVariant,  cursorLeave, cursorEnter, routerLocation, navBarOptionLocation, setnavBarOptionLocation, updateNavBarOptionLocation}} >
         {props.children}
     </UtilityContext.Provider>
   )

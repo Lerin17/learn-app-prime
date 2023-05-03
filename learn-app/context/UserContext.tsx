@@ -3,7 +3,7 @@ import { Iusercontext, Iuserdata } from '../types/context/usercontext';
 import { Tpackage } from '../types/context/usercontext';
 import {app, database} from '../firebaseConfig'
 
-import {collection, addDoc, getDoc, setDoc, doc } from 'firebase/firestore'
+import {collection, addDoc, getDoc, setDoc, doc , updateDoc, arrayUnion} from 'firebase/firestore'
 import { async } from '@firebase/util';
 import e from 'express';
 import useNotification from '../hooks/Notification';
@@ -38,10 +38,13 @@ const UserContextProvider = (props:any) => {
 
     const [subscribeToLinkInput, setsubscribeToLinkInput] = React.useState<string>('');
 
+    const [subscriberDetails, setsubscriberDetails] = React.useState<null | object>(null);
+
     const [currentUserPackage, setcurrentUserPackage] = React.useState<Tpackage>( {
       name:'',
       description:'',
-      courses:[]
+      courses:[],
+      id:uniqid()
     });
 
     const [userPackagesArray, setuserPackagesArray] = React.useState<Tpackage[]>([]);
@@ -55,7 +58,9 @@ const UserContextProvider = (props:any) => {
       email:'',
       networks:[],
       packages:[],
-      id:''
+      id:'',
+      subscribers:[],
+      yourSubscriptions:[]
     });
 
     const [isLoginPage, setisLoginPage] = React.useState<boolean>(false);
@@ -76,6 +81,8 @@ const UserContextProvider = (props:any) => {
 
     const [subscribeToUrlLink, setsubscribeToUrlLink] = React.useState<string>(link);
 
+    const [isWaiting, setisWaiting] = React.useState<boolean>(false);
+
 
    React.useEffect(() => {
     if(userData.name){
@@ -87,18 +94,18 @@ const UserContextProvider = (props:any) => {
     }
    }, [userData]);
 
-   React.useEffect(() => {
-    if(userData.packages.length){
-      setnotfication({
-        type:'success-mini',
-        message:'Packages successfully saved'
-      })
-    }
-   }, [userData]);
+  //  React.useEffect(() => {
+  //   if(userData.packages.length){
+  //     setnotfication({
+  //       type:'success-mini',
+  //       message:'Packages successfully saved'
+  //     })
+  //   }
+  //  }, [userData]);
 
     const addNewUser =  () => {
       setDoc(doc(databaseRef, Usernameinput) ,{name:Usernameinput, password:Userpasswordinput,
-      email:Useremailinput, id:uniqid()}).then(() => {
+      email:Useremailinput, id:uniqid(), networks:[], packages:[], subscribers:[], yourSubscriptions:[]}).then(() => {
       alert('Data Sent')
     }).then(async ()=>{
       const getdata = await getDoc(doc(database, 'Users', Usernameinput))
@@ -111,7 +118,9 @@ const Data:any = getdata.data()
         email:Data.email,
         networks:[],
         packages:[],
-        id:Data.id
+        id:Data.id,
+        subscribers:[],
+        yourSubscriptions:[]
       })
 
       setnotfication({
@@ -144,9 +153,11 @@ const Data:any = getdata.data()
               hashedpassword:Data.password,
               name:Data.name,
               email:Data.email,
-              networks:[],
-              packages:[],
-              id:Data.id
+              networks:Data.networks,
+              packages:Data.packages,
+              id:Data.id,
+              subscribers: Data.subscribers,
+              yourSubscriptions:Data.yourSubscriptions
             })
 
             setnotfication({
@@ -193,7 +204,8 @@ const Data:any = getdata.data()
     setcurrentUserPackage({
       name:'',
       description:'',
-      courses:[]
+      courses:[],
+      id:uniqid()
     })
    }
 
@@ -204,22 +216,74 @@ const Data:any = getdata.data()
     })
    }
 
-   const subscribeToNetwork = async (isClearLink:boolean) => {
-    // setsubscribeToLinkInput('')
-    if(isClearLink){
-     setsubscribeToLinkInput('')
-      const docRef = doc(database, 'Users', subscribeToLinkInput)
+   ///FIX UP FOR SUBSCRIBE AFTER SEARCH
+   const subscribex = async (packageOwnerID:any, packageSubscriberID:any) => {
 
+    const packageOwnerDocRef = doc(database, 'Users', packageOwnerID)
+
+    const packageSubscriberDocRef = doc(database, 'Users', packageSubscriberID)
+
+    try {
+
+      if(userData.name){
+         await updateDoc(packageOwnerDocRef, {subscribers: arrayUnion('')})
+
+         await updateDoc(packageSubscriberDocRef, {yourSubscriptions: arrayUnion('')})
+      }else{
+        setnotfication({
+          type:"error-mini",
+          message:'please Login '
+        })
+      }
+
+     
+    } catch (error) {
+      
+    }
+   }
+
+   const searchForNetwork = async (isClearLink:boolean) => {
+    // setsubscribeToLinkInput('')
+    if(!isClearLink){
+     setsubscribeToLinkInput('')
+
+     setisWaiting(true)
+
+     const userName = subscribeToLinkInput.split('-')[0]
+     const packageid = subscribeToLinkInput.split('-')[1]
+
+     const docRef = doc(database, 'Users', userName)
+
+     if(!packageid){
+      
+     }else if(userName && packageid){
       try {
         const docSnap = await getDoc(docRef)
+
 
         if(docSnap.exists()){
           const Data:any = docSnap.data()
 
+          console.log(Data)
+        
           setnotfication({
-            type:'success',
-            message:'Message in'
+            type:'success-mini',
+            message:'User found'
           })
+
+          console.log(Data.packages)
+
+          const searchedPackage = Data.packages.find((item:any) => item.name == packageid)
+
+          if(!searchedPackage){
+            setnotfication({
+              type:'error-mini',
+              message:'Package does not exist'
+            })
+          }
+
+          setsubscriberDetails({name: Data.name, SearchedPackage: searchedPackage})
+          setisWaiting(false)
         }
       } catch (error) {
         setnotfication({
@@ -228,13 +292,19 @@ const Data:any = getdata.data()
         })
       }
 
+     }else{
+
+     }
+    
+
+     
     }else{
       console.log('what happens when Url Link is used')
     }
    }
 
     const saveUserPackage = async () => {
-      if(currentUserPackage.name===''){
+      if(currentUserPackage.name === ''){
         console.log('damnnnn', notfication)
         console.log(currentUserPackage)
         setnotfication({
@@ -245,10 +315,26 @@ const Data:any = getdata.data()
         if(userData.name){
 
           try {
-          const res =  await setDoc(doc (database, 'Users', 'pack'), {
-              name:'pack2',
-              age:45
-            })
+          // const j = await 
+
+          // const x = await database.collection()
+        
+        //   await updateDoc(frankDocRef, {
+        //     "age": 13,
+        //     "favorites.color": "Red"
+        // })
+
+      //   await updateDoc(washingtonRef, {
+      //     regions: arrayUnion("greater_virginia")
+      // });
+
+      const userRef = doc(database, 'Users', userData.name)
+
+      await updateDoc(userRef, {
+        packages: arrayUnion(currentUserPackage)
+      })
+      
+        
 
 
             setuserData(prev => ({
@@ -258,7 +344,7 @@ const Data:any = getdata.data()
 
             setnotfication({
               type:'success-mini',
-              message:'success saving package'
+              message:'package saved successfully'
             })
           } catch (error) {
             console.log(error)
@@ -316,7 +402,7 @@ const Data:any = getdata.data()
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeToLinkInput, setsubscribeToLinkInput,subscribeToNetwork, subscribeToUrlLink, setsubscribeToUrlLink
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeToLinkInput, setsubscribeToLinkInput,searchForNetwork, subscribeToUrlLink, setsubscribeToUrlLink, subscriberDetails, isWaiting
     }} >
         {props.children}
     </UserContext.Provider>
