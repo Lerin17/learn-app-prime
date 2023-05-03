@@ -31,15 +31,24 @@ export interface Iusercontext {
     copyUserLink:()=>void
     subscribeToLinkInput:string
      setsubscribeToLinkInput:React.Dispatch<React.SetStateAction<string>>
-     subscribeToNetwork:(arg:boolean)=>void
+     searchForNetwork:(arg:boolean)=>void
      subscribeToUrlLink:string
     setsubscribeToUrlLink:React.Dispatch<React.SetStateAction<string>>
+    subscriberDetails:any
+    isWaiting:boolean
+   
+
 }
 
 export type Tpackage = {
   name:string,
   description:string
   courses:any[],
+  id:string
+}
+
+export type Tpackagesubscribers = {
+  name:string
 }
 
 type Tnotification = {
@@ -60,5 +69,7 @@ export interface Iuserdata {
     email:string
     networks:[]
     packages:Tpackage[]
+    subscribers: Tpackagesubscribers[]
+    yourSubscriptions:[]
     id:string
 }
