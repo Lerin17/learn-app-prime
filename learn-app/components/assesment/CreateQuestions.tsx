@@ -199,7 +199,7 @@ const [lunch, setlunch] = React.useState('');
         <div>
           <span style={{
             wordWrap:'break-word'
-          }} className='bg-orange-700 w-fit inline'>
+          }} className='text-xs w-fit  text-stone-800 inline'>
           {props.question}
           </span>
         </div>
@@ -247,10 +247,10 @@ const [lunch, setlunch] = React.useState('');
       // if(e.target.id !== 'optionSelect' || e.target.id !== 'textArea'){
 
       // }
-    }} className='flex  justify-between relative '>
+    }} className='flex  justify-center relative '>
      
 
-    <div className='w-full lg:w-9/12 md:w-9/12 '>
+    <div className=' lg:w-6/12 md:w-9/12 '>
 
       
 {/* <div style={{
@@ -272,6 +272,15 @@ const [lunch, setlunch] = React.useState('');
   className='text-base focus:border-none'
    options={TagsOptions}
    isMulti
+       theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 1,
+                    colors: {
+                      ...theme.colors,
+                      primary25: 'gray',
+                      primary: 'black',
+                    },
+                  })}
    onChange={(e:any)=>{
     handleSelectChange(e)
     // console.log(v)
@@ -479,14 +488,15 @@ handleClick={isTextRaw? ()=>processQuestionRaw():()=>processQuestionsInput()}
   </div>
 
   <div style={{
+    backdropFilter:'blur(10px)',
     height:isTextRaw? 500:400,
     width:isOpenSideBarQuestion? 300:250,
     backgroundColor:isOpenSideBarQuestion?'black':'',
     overflowY:'auto',
     overflowX:'hidden',
     wordWrap:'break-word'
-  }} className={`text-sm text-wrap font-header8 ${isOpenSideBarQuestion?'right-0 absolute border border-r-0 z-10 ':""}  text-black  p-2 pt-0  mt-6  transition-all hidden lg:block md:block font-bold  `}>
-    <div className={`opacity-100 text-xl polkachild  border-b pt-2 flex justify-between ${isOpenSideBarQuestion?'fixed ':''}`}>
+  }} className={`text-sm  text-wrap font-header8 ${isOpenSideBarQuestion?'right-0 absolute border border-r-0 z-10 ':""}  text-black  p-2 pt-0  mt-6  transition-all hidden   lg:block md:block font-bold  `}>
+    <div className={`opacity-100 text-xl polkachild  border-b font-header12 text-stone-300 pt-2 flex justify-between ${isOpenSideBarQuestion?'fixed ':''}`}>
       <div className={`cursor-pointer ${isOpenSideBarQuestion?' bg-amber-800 ':'hidden'} `} onClick={()=>{setisOpenSideBarQuestion(false)}} >[x]</div>
       {!isOpenSideBarQuestion && 'Questions'}
       

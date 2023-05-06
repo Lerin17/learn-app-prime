@@ -143,7 +143,7 @@ const Login = () => {
   </div>
 </div>
 
-<div className='flex lg:text-7xl md:text-4xl xs:text-x border-b-2' >
+<div className='flex lg:text-7xl md:text-4xl xs:text-xl border-b-2' >
   Password
   <div className='w-full'>
     <input

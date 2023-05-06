@@ -19,12 +19,12 @@ const CreateCourseGroup = () => {
         // }, 5000);
 
     return (
-    <div>{
-        isCreateCourseGroupOpen &&
+    <div className='flex justify-center' >{
+        
         <AnimatePresence>
             <motion.div style={{
                 height: 600
-            }}  className=' p-2' initial={{y:200}}
+            }}  className=' p-2 w-8/12' initial={{y:200}}
                  animate={{y:0}}
                  transition={{type:"spring", stiffness:100}}
                  exit={{ opacity:0.1, y:400, display:'none'}} >
@@ -32,8 +32,8 @@ const CreateCourseGroup = () => {
                     <div className=' h-full flex flex-col'>
                     <div className='w-full' >
                     {/* createCourseGroup */}
-                    <div className='text-4xl font-header9 px-2 h-1/2 bg-gradient-to-r from-red-700 to-amber-800   py-8 pt-4 relative'>
-
+                    <div className='text-4xl font-header12   px-2 h-1/2    py-8 pt-4 relative'>
+{/* 
                         <div className='flex justify-end' >
                             <div onClick={()=>{
                             setisCreateCourseGroupOpen(false)
@@ -41,37 +41,37 @@ const CreateCourseGroup = () => {
                             }}>
                                 [X]
                             </div>
-                        </div>
-                        <div className='flex text-5xl items-center bg-gradient-to-r from-red-800 to-amber-800 text-gray-300 py-4 px-2'>
+                        </div> */}
+                        <div className='flex  lg:text-7xl md:text-4xl xs:text-x border-b-2  text-gray-300  px-2'>
                             Name:
-                            <InputBase 
+                            <input 
                             value={currentCourseGroupName}
                             onChange={(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{inputCourseGroupDetails({name:e.target.value, abv:currentCourseGroupAbv, desc:currentCourseGroupDesc})}}
                             placeholder='Course Group Name'
-                            className='text-base w-full mx-2 text-white px-2 border-b-2  font-header8'
+                            className='w-full focus:border-none focus:text-stone-800 text-stone-400  bg-transparent transition-all  border-b-4 pl-4'
                             />
                         </div>
 
 
-                        <div className='text-3xl flex  items-center text-gray-300 bg-gradient-to-r from-red-800 to-amber-800 font-header9  py-4 px-2'>
+                        <div className='flex lg:text-7xl md:text-4xl xs:text-xl border-b-2 bg-gradient-to-r from-red-800 to-amber-800   '>
                         Abv:
-                        <InputBase 
+                        <input
                         value={currentCourseGroupAbv}
                           onChange={(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{inputCourseGroupDetails({name:currentCourseGroupName,
                             abv:e.target.value, desc:currentCourseGroupDesc})}}
                         placeholder='Course Group Name'
-                        className='text-base mx-2 text-white w-full px-2 border-b-2  font-header8 '
+                        className='w-full focus:border-none focus:text-stone-800 text-stone-400  bg-transparent transition-all  border-b-4 pl-4 '
                         />
                         </div>
 
 
-                        <div className='text-2xl flex  items-center font-header9  bg-gradient-to-r from-red-800 to-amber-800 py-4 text-gray-300 px-2'>
-                        desc:
-                        <InputBase 
+                        <div className='flex lg:text-7xl md:text-4xl xs:text-xl border-b-2 font-header12'>
+                        Desc:
+                        <input 
                         value={currentCourseGroupDesc}
                           onChange={(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{inputCourseGroupDetails({name:currentCourseGroupName, abv:currentCourseGroupAbv, desc:e.target.value})}}
-                        placeholder='Course Group Name'
-                        className='text-base mx-2 text-white w-full px-2 border-b-2  font-header8 '
+                        placeholder='Description'
+                        className='w-full focus:border-none focus:text-stone-800 text-stone-400  bg-transparent transition-all  border-b-4 pl-4 '
                         />
                         </div>
                   

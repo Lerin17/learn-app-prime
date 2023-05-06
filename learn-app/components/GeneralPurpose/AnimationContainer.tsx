@@ -12,7 +12,7 @@ const AnimationContainer = (props:Ianimationcontainerprops) => {
     <motion.div 
     // className='border'
     transition={{
-      duration:0.5,
+      duration:0.4,
       type:'tween',   
       ease:'easeIn',
       // delay:0.2
@@ -55,10 +55,10 @@ const AnimationContainer = (props:Ianimationcontainerprops) => {
     }}
 
     transition={ {
-      duration:0.6,
+      duration:0.5,
       type:'spring',
       stiffness:40,
-      delay:0.7  
+      delay:0.6  
          //error if i use && instead of ? 
     }}
       

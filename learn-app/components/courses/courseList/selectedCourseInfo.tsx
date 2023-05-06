@@ -6,7 +6,7 @@ import { InputBase } from '@mui/material';
 
 
 const SelectedCourseInfo = () => {
-    const {setcourseListSelectedCourse, setisNewCoursePanelOpen,    setisCourseList} = React.useContext(CourseContext) as Icoursecontext
+    const {setcourseListSelectedCourse, setisNewCoursePanelOpen, courseListSelectedCourse,   setisCourseList} = React.useContext(CourseContext) as Icoursecontext
 
     const [selectedCourseInfoOption, setselectedCourseInfoOption, ] = React.useState('basicInfo');
 
@@ -36,15 +36,15 @@ const SelectedCourseInfo = () => {
         return (
           
             <AnimatePresence>
-                    <motion.div transition={{type:'spring', stiffness:40}} initial={{x:20}} animate={{x:0}} exit={{y:200}} className=''>
+                    <motion.div transition={{type:'spring', stiffness:40}} initial={{x:0}} animate={{x:0}} exit={{y:200}} className=''>
                <div className='flex ' >
                    <div className='w-2/6' >
-                   <div className=' px-2 bg-amber-900 text-3xl font-bold font-header7' >
-                       NAME:MATH101
+                   <div className=' px-2 bg-amber-900 text-3xl font-bold font-header7 uppercase' >
+                       NAME: {courseListSelectedCourse?.courseName} {courseListSelectedCourse?.courseCode}
                    </div>
                
                    <div className='bg-amber-800 px-2 text-2xl' >
-                       DURATION:4WEEKS(3r)
+                       DURATION: {courseListSelectedCourse?.NoWeeks}
                    </div>
                
                    <div className='bg-amber-700 px-2 text-xl' >
@@ -99,12 +99,12 @@ return (
 <motion.div exit={{y:200}} className=''>
    <div className='flex ' >
        <div className='w-2/6' >
-       <div className=' px-2 bg-amber-900 text-3xl font-bold font-header7' >
-           NAME:MATH101
+       <div className=' px-2 bg-amber-900 text-3xl font-bold font-header7 uppercase' >
+           NAME:{courseListSelectedCourse?.courseName} {courseListSelectedCourse?.courseCode}
        </div>
    
        <div className='bg-amber-800 px-2 text-2xl' >
-           DURATION:4WEEKS(3r)
+           DURATION: {courseListSelectedCourse?.NoWeeks}
        </div>
    
        <div className='bg-amber-700 px-2 text-xl' >
@@ -147,7 +147,7 @@ return (
 
   return (
     <div 
-    className=' h-full   border-dotted bg-gradient-to-b from-amber-700 to-amber-800'
+    className=' h-full  w-8/12 border-dotted text-black bg-gradient-to-b from-amber-700 to-amber-800'
     style={{
     height:500,
     // borderRadius: '22% 20% 25% 25% / 41% 43% 44% 46%',
@@ -159,10 +159,10 @@ return (
         
         <div className={`flex justify-between items-center py-2 px-2 `} >
             <div className='font-bold text-3xl font-header9' >
-                MATH
+                {courseListSelectedCourse?.courseName}
             </div>
             <div onClick={()=>{setcourseListSelectedCourse(null)
-               setisCourseList(true)
+              
             }} className='text-3xl hover:scale-110 transition-all cursor-pointer hover:text-gray-300 transition-all ' >
                 [X]
             </div>

@@ -64,15 +64,12 @@ const CreateCourse = () => {
     }
 
   return (
-    <div>
-        {isNewCoursePanelOpen && 
+    <div className='flex justify-center' >
+        { 
 
-            <AnimatePresence>
-                      <motion.div 
-                      initial={{y:200}}
-                 animate={{y:0}}
-                 transition={{type:"spring", stiffness:100}}
-                 exit={{ opacity:0.1, y:400, display:'none'}} 
+          
+                      <div 
+                  className='w-8/12'
                       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>)=>{
                 if(isDowCarousel && e.target.id !== 'dowCarousel' || !e){
         
@@ -242,8 +239,8 @@ const CreateCourse = () => {
                 </div>
            
               
-            </motion.div>
-            </AnimatePresence>
+            </div>
+           
           
         }
     </div>

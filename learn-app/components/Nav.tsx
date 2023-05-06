@@ -25,7 +25,9 @@ console.log(navOptionRef.current, 'locationcurrent')
 
 // console.log(navOptionRef.current)
 
-const path = useRouter().asPath
+const path = useRouter().asPath.split('/')[1]
+
+console.log(path, 'path')
 
 // if(document){
 //   console.log('ze')
@@ -74,7 +76,7 @@ React.useEffect(() => {
 
     return (
       <div 
-      id={path == props.locationURL? 'jack':''}
+      id={`/${path}` == props.locationURL? 'jack':''}
       ref = {path == props.locationURL? navOptionRef:null}
       className={`px-2 py-1  lg:px-8 md:px-6 lg:text-base md:text-base text-sm   transition-all text-white font-header1 font-normal `} >
         <Link
@@ -82,7 +84,9 @@ React.useEffect(() => {
         href= {props.locationURL} >
             <div 
             
-            className={` ${path == props.locationURL?'lg:text-5xl md:text-2xl font-black font-header7 text-stone-800 uppercase ':'font-header7 text-stone-300 lg:text-2xl md:text-lg'} textshadow`} >
+            className=
+            {`/${path}` == props.locationURL?'lg:text-5xl md:text-2xl font-black font-header7 text-stone-800 textshadow uppercase':'font-header7 text-stone-300 lg:text-2xl md:text-lg textshadow'}
+           >
               {props.text}
             </div>
         </Link>

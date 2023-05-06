@@ -14,7 +14,7 @@ const CoursesHome = () => {
          </Link>
 
 
-         <Link href={'/courses/createcoursegroup'}>
+         <Link href={'/courses/coursegroups'}>
          <div className='textshadow pt-2 text-stone-300 hover:text-stone-800'>
          Create Course Group,
             </div>
