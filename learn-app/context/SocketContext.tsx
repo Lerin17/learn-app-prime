@@ -8,6 +8,8 @@ const SocketContext = React.createContext <Isocketcontext | null > (null)
 import { Isocketcontext } from '../types/context/socketcontext'
 import axios from 'axios'
 import { containerClasses } from '@mui/system'
+import { UserContext } from './UserContext'
+import { Iusercontext } from '../types/context/usercontext'
 
 
 
@@ -37,6 +39,8 @@ const socket = io('http://localhost:3023', {
   const [myPeer, setmyPeer] = React.useState<any>();
   const [first, setfirst] = React.useState(1);
 
+ 
+  const {userData} = React.useContext(UserContext) as Iusercontext
 
   const myVideo = React.useRef<any>()
   const userVideo = React.useRef<any>()
@@ -70,8 +74,14 @@ const socket = io('http://localhost:3023', {
       callx()
     }, 30);
     
-  
-    socket.on('me', (id) => setMe(id))
+    if(!userData.name){
+    socket.disconnect()
+    }else{
+      socket.on('me', (id) => setMe(id))
+    }
+
+
+   
 
     // socket.on('callUser', ({from, name: callerName,  signal}) => {
     //   setCall({isReceivedCall: true, from, name: callerName, signal})
