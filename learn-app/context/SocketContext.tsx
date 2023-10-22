@@ -369,9 +369,33 @@ const socket = io('http://localhost:3023', {
       const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
       'credential': 'muazkh',
        'username': 'webrtc@live.com'}]}
+
+       
+
   
     
        const peerConnection = new RTCPeerConnection(configuration);
+
+       if(isConsumer){  
+        peerConnection.addEventListener('track', 
+        (event:any) => {
+         const remoteStream = event.streams;
+         console.log('received track from broadcaster')
+         // console.log(userVideo)
+         // console.log(remoteStream, 'remotestream')
+         if(userVideo.current){
+           console.log('remotestream')
+           console.log(remoteStream)
+           userVideo.current.srcObject = remoteStream[0];
+         }  
+       });
+  
+      }else{
+        stream.getTracks().forEach((track:any) => {
+          console.log('added', stream)
+          peerConnection.addTrack(track, stream)});
+    
+      }
 
        const  offer = await peerConnection.createOffer()
        await peerConnection.setLocalDescription(offer);
@@ -423,37 +447,6 @@ const socket = io('http://localhost:3023', {
         }
     });
 
-    if(isConsumer){  
-      peerConnection.addEventListener('track', 
-      (event:any) => {
-       const remoteStream = event.streams;
-       console.log('received track from broadcaster')
-       // console.log(userVideo)
-       // console.log(remoteStream, 'remotestream')
-       if(userVideo.current){
-         console.log('remotestream')
-         console.log(remoteStream)
-         userVideo.current.srcObject = remoteStream[0];
-       }  
-     });
-
-    }else{
-      peerConnection.addEventListener('connectionstatechange', event => {
-        if (peerConnection.connectionState === 'connected') {
-            console.log('broadcaster peer connected')
-  
-            //IF PEER IS CONNECTED ADDTRACK
-  
-            stream.getTracks().forEach((track:any) => {
-              console.log('added', stream)
-              peerConnection.addTrack(track, stream)});
-  
-          //   localStream.getTracks().forEach(track => {
-          //     peerConnection.addTrack(track, localStream);
-          // });npm 
-        }
-    });
-    }
 
 
 
@@ -476,6 +469,21 @@ const socket = io('http://localhost:3023', {
     // }, 6000);
 
     const CreateClass2 = () => {
+          //IMPORTANT
+    axios({
+      method: 'post',
+      url: `http://localhost:3022/api/broadcast/${classSessionID}`,
+      data: {
+        signalData: {}
+      },
+      // headers: {'Authorization': 'Bearer ...'}
+    }).then((res) => {
+      console.log(res)
+      // socket.emit('sendServerDetails', Me)
+    }).catch((e) => {
+      console.log(e)
+    })
+
       createPeer2({stream, isConsumer:false})
     }
 
