@@ -16,4 +16,5 @@ export interface Isocketcontext {
     JoinClass: () => any
     CreateClass: () => any
     CreateClass2:() => any
+    JoinClass2: () => any
 }

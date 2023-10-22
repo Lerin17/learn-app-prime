@@ -66,6 +66,9 @@ server.listen(PORT, ()=> {
     })
 
     socket.on('Sbroadcast-message', async ({to, offer}) => {
+
+        const broadcasterID = to
+
         const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
         'credential': 'muazkh',
          'username': 'webrtc@live.com'}]}
@@ -93,22 +96,63 @@ server.listen(PORT, ()=> {
             }
         })
 
-        peer.addEventListener('icecandidate', async (event:any) => {
+        peer.addEventListener('icecandidate',  (event:any) => {
+            console.log(event, 'icecandidate')
             if(event.candidate){
                 socket.emit('new-ice-candidate-from-server', {to, candidate:event.candidate})
            //   socket.emit('iceCandidate', {to:Call.from, candidate})  
             }
           })
 
-          
+          //initial id, default 555
 
-        // signalingChannel.addEventListener('message', async message => {
-        //     if (message.answer) {
-        //         const remoteDesc = new RTCSessionDescription(message.answer);
-        //         await peerConnection.setRemoteDescription(remoteDesc);
-        //     }
-        // });
+          const classSessionID = to
+
+          peer.ontrack = (e:any) => {
+        
+            senderStream = e.streams[0]
+    
+            const mediaStream = e.streams[0]
+    
+            console.log('Broadcaster Track obtained')
+    
+
+            const streamObj = {
+                Mediastream: mediaStream,
+                id: classSessionID
+            }
+    
+            senderStreamArray.push(streamObj)
+        }
+
+       
+
+        //senderStream variable is declared globally, declaring it locally will cause variable resets as the function is called multiple times
+        const broadcasterObj = senderStreamArray.find((item:any) => item.id == classSessionID)
+    
+        const Stream = broadcasterObj?.Mediastream
+
+        if(peer.connectionstate === 'connected'){
+
+            console.log('server peer connected')
+
+            if(Stream){
+                Stream.getTracks().forEach((track:any) => {
+                    console.log(Stream, 'stream')
+                    console.log('broadcaster stream received')
+                    peer.addTrack(track, Stream)
+                   })
+            }else{
+                console.log('broadcaster has not send stream')
+            }
+       
+        }
     })
+    
+    // peer.addEventListener('connectionstatechange', (event:any) => {
+      
+ 
+    // })
 
    //ADD ICE
    socket.on('iceCandidateReceive', async ({candidates}) => {

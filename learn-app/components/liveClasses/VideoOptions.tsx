@@ -12,7 +12,7 @@ import {MdWifiCalling2, MdCallEnd,} from 'react-icons/md'
 
 
 const VideoOptions = () => {
-  const {Me, callAccepted, name, setname, callEnded, leaveCall, CreateClass2 ,JoinClass, CreateClass} = React.useContext(SocketContext) as Isocketcontext
+  const {Me, callAccepted, name, setname, callEnded, leaveCall, CreateClass2 ,JoinClass2, CreateClass, JoinClass} = React.useContext(SocketContext) as Isocketcontext
 
   const [idToCall, setidToCall] = React.useState('');
 
@@ -33,7 +33,7 @@ const VideoOptions = () => {
         <RiSignalTowerFill/>
       </Button>
 
-      <Button className='text-2xl text-blue-600 p-0 hover:scale-110 transition-all' onClick={()=>JoinClass()} >
+      <Button className='text-2xl text-blue-600 p-0 hover:scale-110 transition-all' onClick={()=>JoinClass2()} >
        <MdWifiCalling2/>
       </Button>
 

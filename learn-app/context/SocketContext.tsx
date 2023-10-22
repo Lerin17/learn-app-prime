@@ -388,10 +388,15 @@ const socket = io('http://localhost:3023', {
         //       }
         //   // seticeCandidates(candidate)
         // })
+        //Broadcast message
+        socket.emit('broadcast-message', {to: 555, offer}) 
 
         //Receive answer
 
         socket.on('Sbroadcast-message-reply', async ({to, answer}) => {
+
+          console.log('received answer')
+
           const remoteDesc = new RTCSessionDescription(answer);
             await peerConnection.setRemoteDescription(remoteDesc);
         })
@@ -407,9 +412,10 @@ const socket = io('http://localhost:3023', {
         }
         })
 
-       socket.emit('broadcast-message', {to: 555, offer})  
+     
        
        peerConnection.addEventListener('icecandidate', event => {
+        console.log(event, 'icecandidate')
         if (event.candidate) {
 
           socket.emit('new-ice-candidate-from-broadcaster', {to:555, candidate:event.candidate})
@@ -417,35 +423,43 @@ const socket = io('http://localhost:3023', {
         }
     });
 
-    peerConnection.addEventListener('connectionstatechange', event => {
-      if (peerConnection.connectionState === 'connected') {
-          console.log('peers connected')
+    if(isConsumer){  
+      peerConnection.addEventListener('track', 
+      (event:any) => {
+       const remoteStream = event.streams;
+       console.log('received track from broadcaster')
+       // console.log(userVideo)
+       // console.log(remoteStream, 'remotestream')
+       if(userVideo.current){
+         console.log('remotestream')
+         console.log(remoteStream)
+         userVideo.current.srcObject = remoteStream[0];
+       }  
+     });
 
-          //IF PEER IS CONNECTED ADDTRACK
-          stream.getTracks().forEach((track:any) => {
-            console.log('added', stream)
-            peerConnection.addTrack(track, stream)});
+    }else{
+      peerConnection.addEventListener('connectionstatechange', event => {
+        if (peerConnection.connectionState === 'connected') {
+            console.log('broadcaster peer connected')
+  
+            //IF PEER IS CONNECTED ADDTRACK
+  
+            stream.getTracks().forEach((track:any) => {
+              console.log('added', stream)
+              peerConnection.addTrack(track, stream)});
+  
+          //   localStream.getTracks().forEach(track => {
+          //     peerConnection.addTrack(track, localStream);
+          // });npm 
+        }
+    });
+    }
 
-        //   localStream.getTracks().forEach(track => {
-        //     peerConnection.addTrack(track, localStream);
-        // });
-      }
-  });
+
 
   // const remoteVideo = document.querySelector('#remoteVideo');
 
-  peerConnection.addEventListener('track', 
-     (event:any) => {
-      const remoteStream = event.streams;
-      console.log('received track from broadcaster')
-      // console.log(userVideo)
-      // console.log(remoteStream, 'remotestream')
-      if(userVideo.current){
-        console.log('remotestream')
-        console.log(remoteStream)
-        userVideo.current.srcObject = remoteStream[0];
-      }  
-    });
+
 
 //   peerConnection.addEventListener('track', async (event) => {
 //     const [remoteStream] = event.streams;
@@ -653,7 +667,7 @@ peerConnection.addEventListener('connectionstatechange', event => {
 
 
   return (
-    <SocketContext.Provider value={{leaveCall,  myVideo, name,callAccepted, userVideo, stream, setname, callEnded, Me, Call, JoinClass, CreateClass,CreateClass2 }} >
+    <SocketContext.Provider value={{leaveCall,  myVideo, name,callAccepted, userVideo, stream, setname, callEnded, Me, Call, JoinClass, CreateClass,CreateClass2, JoinClass2 }} >
         {props.children}
     </SocketContext.Provider>
   )
