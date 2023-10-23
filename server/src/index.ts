@@ -51,7 +51,7 @@ const socket = io('http://localhost:3023')
 const PORT = process.env.PORT || 3022;
 
 server.listen(PORT, ()=> {
-    console.log('App listening at loclh')
+    console.log('App listening at loclhex')
 })
 
 
@@ -65,89 +65,89 @@ server.listen(PORT, ()=> {
         // socket.emit('id', id)
     })
 
-    socket.on('Sbroadcast-message', async ({to, offer}) => {
+    // socket.on('Sbroadcast-message', async ({to, offer}) => {
 
-        const broadcasterID = to
+    //     const broadcasterID = to
 
-        const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
-        'credential': 'muazkh',
-         'username': 'webrtc@live.com'}]}
+    //     const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
+    //     'credential': 'muazkh',
+    //      'username': 'webrtc@live.com'}]}
     
-         peer = new wrtc.RTCPeerConnection(configuration)
+    //      peer = new wrtc.RTCPeerConnection(configuration)
        
-        //  console.log(req.body.signalData.offer)
+    //     //  console.log(req.body.signalData.offer)
     
-        const desc = new wrtc.RTCSessionDescription(offer)
+    //     const desc = new wrtc.RTCSessionDescription(offer)
     
-        await peer.setRemoteDescription(desc)
+    //     await peer.setRemoteDescription(desc)
 
-        const answer = await peer.createAnswer()
+    //     const answer = await peer.createAnswer()
 
-        socket.emit('broadcast-message-reply', {to, answer})
+    //     socket.emit('broadcast-message-reply', {to, answer})
 
-        socket.on('Snew-ice-candidate-from-broadcaster', async ({to, candidate}) => {
-            console.log('server received ice candidates')
-            if (candidate) {
-                try {
-                    await peer.addIceCandidate(candidate);
-                } catch (e) {
-                    console.error('Error adding received ice candidate', e);
-                }
-            }
-        })
+    //     socket.on('Snew-ice-candidate-from-broadcaster', async ({to, candidate}) => {
+    //         console.log('server received ice candidates')
+    //         if (candidate) {
+    //             try {
+    //                 await peer.addIceCandidate(candidate);
+    //             } catch (e) {
+    //                 console.error('Error adding received ice candidate', e);
+    //             }
+    //         }
+    //     })
 
-        peer.addEventListener('icecandidate',  (event:any) => {
-            console.log(event, 'icecandidate')
-            if(event.candidate){
-                socket.emit('new-ice-candidate-from-server', {to, candidate:event.candidate})
-           //   socket.emit('iceCandidate', {to:Call.from, candidate})  
-            }
-          })
+    //     peer.addEventListener('icecandidate',  (event:any) => {
+    //         console.log(event, 'icecandidate')
+    //         if(event.candidate){
+    //             socket.emit('new-ice-candidate-from-server', {to, candidate:event.candidate})
+    //        //   socket.emit('iceCandidate', {to:Call.from, candidate})  
+    //         }
+    //       })
 
-          //initial id, default 555
+    //       //initial id, default 555
 
-          const classSessionID = to
+    //       const classSessionID = to
 
-          peer.ontrack = (e:any) => {
+    //       peer.ontrack = (e:any) => {
         
-            senderStream = e.streams[0]
+    //         senderStream = e.streams[0]
     
-            const mediaStream = e.streams[0]
+    //         const mediaStream = e.streams[0]
     
-            console.log('Broadcaster Track obtained')
+    //         console.log('Broadcaster Track obtained')
     
 
-            const streamObj = {
-                Mediastream: mediaStream,
-                id: classSessionID
-            }
+    //         const streamObj = {
+    //             Mediastream: mediaStream,
+    //             id: classSessionID
+    //         }
     
-            senderStreamArray.push(streamObj)
-        }
+    //         senderStreamArray.push(streamObj)
+    //     }
 
        
 
-        //senderStream variable is declared globally, declaring it locally will cause variable resets as the function is called multiple times
-        const broadcasterObj = senderStreamArray.find((item:any) => item.id == classSessionID)
+    //     //senderStream variable is declared globally, declaring it locally will cause variable resets as the function is called multiple times
+    //     const broadcasterObj = senderStreamArray.find((item:any) => item.id == classSessionID)
     
-        const Stream = broadcasterObj?.Mediastream
+    //     const Stream = broadcasterObj?.Mediastream
 
-        if(peer.connectionstate === 'connected'){
+     
 
-            console.log('server peer connected')
+    //         console.log('server peer connected')
 
-            if(Stream){
-                Stream.getTracks().forEach((track:any) => {
-                    console.log(Stream, 'stream')
-                    console.log('broadcaster stream received')
-                    peer.addTrack(track, Stream)
-                   })
-            }else{
-                console.log('broadcaster has not send stream')
-            }
+    //         if(Stream){
+    //             Stream.getTracks().forEach((track:any) => {
+    //                 console.log(Stream, 'stream')
+    //                 console.log('broadcaster stream received')
+    //                 peer.addTrack(track, Stream)
+    //                })
+    //         }else{
+    //             console.log('broadcaster has not send stream')
+    //         }
        
-        }
-    })
+
+    // })
     
     // peer.addEventListener('connectionstatechange', (event:any) => {
       
@@ -226,21 +226,18 @@ app.post('/api/consumer/:id', async (req, res) => {
     //Find broadcaster Stream and Add to consumer
     const classSessionID = req.params.id 
 
-    //senderStream variable is declared globally
     const broadcasterObj = senderStreamArray.find((item:any) => item.id == classSessionID)
 
     const Stream = broadcasterObj?.Mediastream
 
-
    Stream.getTracks().forEach((track:any) => {
-    console.log(Stream, 'stream')
     console.log('broadcaster stream received')
-    peer.addTrack(track, Stream)
+    peer.addTrack(track, Stream )
    })
 
-    //ADD STREAM
+    //ADD STREAM   
     // senderStream.getTracks().forEach((track:any) => {
-    // // console.log('addedx')
+    //     // console.log('addedx')
     //     peer.addTrack(track, senderStream)} );
 
 
@@ -293,7 +290,6 @@ app.post('/api/broadcast/:id', async (req, res) => {
     peer = new wrtc.RTCPeerConnection(configuration)
 
     peer.ontrack = (e:any) => {
-        
         senderStream = e.streams[0]
 
         const mediaStream = e.streams[0]
@@ -307,11 +303,8 @@ app.post('/api/broadcast/:id', async (req, res) => {
 
         senderStreamArray.push(streamObj)
     }
-
-    // peer.onconnectionstatechange = (e:any) => {
-    //     console.log('connection state change')
-    // }
      
+    console.log(req.body.signalData.offer)
 //    peer.ontrack = handleTrackEvent
 
     const desc = new wrtc.RTCSessionDescription(req.body.signalData.offer)
@@ -354,6 +347,9 @@ app.post('/api/broadcast/:id', async (req, res) => {
     res.json({messages: 'what'})
 
 })
+
+    
+
 
 // app.post('/broadcast', async ({body}, res) => {
 //     const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',

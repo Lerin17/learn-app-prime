@@ -29,7 +29,7 @@ const VideoOptions = () => {
         </Button>
       </CopyToClipboard> */}
 
-      <Button className='text-2xl text-lime-400 p-0 hover:scale-110 transition-all' onClick={()=>CreateClass2()} >
+      <Button className='text-2xl text-lime-400 p-0 hover:scale-110 transition-all' onClick={()=>CreateClass()} >
         <RiSignalTowerFill/>
       </Button>
 

@@ -56,6 +56,10 @@ io.on('connection', (socket) => {
         //     console.log(id)
         // })
 
+        socket.on('broadcast-answer', (answer) => {
+            io.emit('Sbroadcast-answer', answer)
+        })
+
         socket.on('broadcast-message', ({to, offer})=>{
             console.log(offer, 'offer')
             io.emit('Sbroadcast-message', {to, offer})
