@@ -120,7 +120,7 @@ const socket = io('http://localhost:3023', {
 
 
  const leaveCall = () => {
-  console.log('leave cll')
+  console.log('leave c')
  }
 
  
