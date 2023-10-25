@@ -2,7 +2,7 @@ const express = require('express')
 
 const app = express()
 
-const txry = require('./firebaseapp')
+// const txry = require('./firebaseapp')
 
 
 // const name:String = 'ss'
@@ -13,6 +13,7 @@ const txry = require('./firebaseapp')
 /////
 
 const bodyParser = require('body-parser')
+const { off } = require('process')
 
 const server = require('http').createServer(app)
 
@@ -33,10 +34,10 @@ const io = require('socket.io')(server, {
     }
 })
 
-app.post('/create',   (req, res) => {
-   txry(req, res)
+// app.post('/create',   (req, res) => {
+//    txry(req, res)
 
-})
+// })
 
 // const start = async () => {
 //     try {
@@ -51,11 +52,37 @@ io.on('connection', (socket) => {
     //used a timeout previously
         socket.emit('me', socket.id)
 
+        // socket.emit('id', (id) => {
+        //     console.log(id)
+        // })
+
+        socket.on('broadcast-answer', (answer) => {
+            io.emit('Sbroadcast-answer', answer)
+        })
+
+        socket.on('broadcast-message', ({to, offer})=>{
+            console.log(offer, 'offer')
+            io.emit('Sbroadcast-message', {to, offer})
+        })
+
+        socket.on('broadcast-message-reply', ({to, answer})=>{
+            console.log(answer, 'offer')
+            io.emit('Sbroadcast-message-reply', {to, answer})
+        })
+
         socket.on('iceCandidateBroadcast', ({candidates}) => {
             console.log(candidates, 'candidatesSentfromBroad')
             io.emit('iceCandidateReceive', {candidates})
 
             // io.to(to).emit('iceSend', {candidate})
+        })
+
+        socket.on('new-ice-candidate-from-broadcaster', ({to, candidate}) => {
+            io.emit('Snew-ice-candidate-from-broadcaster', ({to, candidate}))
+        })
+
+        socket.on('new-ice-candidate-from-server', ({to, candidate}) => {
+            io.emit('Snew-ice-candidate-from-server', ({to, candidate}))
         })
         
         socket.on('SiceCandidateBroadcast', ({candidates}) => {

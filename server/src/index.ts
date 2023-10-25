@@ -11,6 +11,7 @@
 console.log('hello worl')
 
 import { constants } from "buffer";
+import e from "cors";
 import { Socket } from "dgram";
 // import { Socket } from "dgram";
 import  express from "express";
@@ -50,15 +51,108 @@ const socket = io('http://localhost:3023')
 const PORT = process.env.PORT || 3022;
 
 server.listen(PORT, ()=> {
-    console.log('App listening at loclh')
+    console.log('App listening at loclhex')
 })
 
 
-
+    socket.on('connect', () => {
+        console.log(socket.id, 'myid'),
+        socket.emit('main', socket.id)
+    })
 
     socket.on('me', id => {
         console.log(id)
+        // socket.emit('id', id)
     })
+
+    // socket.on('Sbroadcast-message', async ({to, offer}) => {
+
+    //     const broadcasterID = to
+
+    //     const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
+    //     'credential': 'muazkh',
+    //      'username': 'webrtc@live.com'}]}
+    
+    //      peer = new wrtc.RTCPeerConnection(configuration)
+       
+    //     //  console.log(req.body.signalData.offer)
+    
+    //     const desc = new wrtc.RTCSessionDescription(offer)
+    
+    //     await peer.setRemoteDescription(desc)
+
+    //     const answer = await peer.createAnswer()
+
+    //     socket.emit('broadcast-message-reply', {to, answer})
+
+    //     socket.on('Snew-ice-candidate-from-broadcaster', async ({to, candidate}) => {
+    //         console.log('server received ice candidates')
+    //         if (candidate) {
+    //             try {
+    //                 await peer.addIceCandidate(candidate);
+    //             } catch (e) {
+    //                 console.error('Error adding received ice candidate', e);
+    //             }
+    //         }
+    //     })
+
+    //     peer.addEventListener('icecandidate',  (event:any) => {
+    //         console.log(event, 'icecandidate')
+    //         if(event.candidate){
+    //             socket.emit('new-ice-candidate-from-server', {to, candidate:event.candidate})
+    //        //   socket.emit('iceCandidate', {to:Call.from, candidate})  
+    //         }
+    //       })
+
+    //       //initial id, default 555
+
+    //       const classSessionID = to
+
+    //       peer.ontrack = (e:any) => {
+        
+    //         senderStream = e.streams[0]
+    
+    //         const mediaStream = e.streams[0]
+    
+    //         console.log('Broadcaster Track obtained')
+    
+
+    //         const streamObj = {
+    //             Mediastream: mediaStream,
+    //             id: classSessionID
+    //         }
+    
+    //         senderStreamArray.push(streamObj)
+    //     }
+
+       
+
+    //     //senderStream variable is declared globally, declaring it locally will cause variable resets as the function is called multiple times
+    //     const broadcasterObj = senderStreamArray.find((item:any) => item.id == classSessionID)
+    
+    //     const Stream = broadcasterObj?.Mediastream
+
+     
+
+    //         console.log('server peer connected')
+
+    //         if(Stream){
+    //             Stream.getTracks().forEach((track:any) => {
+    //                 console.log(Stream, 'stream')
+    //                 console.log('broadcaster stream received')
+    //                 peer.addTrack(track, Stream)
+    //                })
+    //         }else{
+    //             console.log('broadcaster has not send stream')
+    //         }
+       
+
+    // })
+    
+    // peer.addEventListener('connectionstatechange', (event:any) => {
+      
+ 
+    // })
 
    //ADD ICE
    socket.on('iceCandidateReceive', async ({candidates}) => {
@@ -210,6 +304,7 @@ app.post('/api/broadcast/:id', async (req, res) => {
         senderStreamArray.push(streamObj)
     }
      
+    console.log(req.body.signalData.offer)
 //    peer.ontrack = handleTrackEvent
 
     const desc = new wrtc.RTCSessionDescription(req.body.signalData.offer)
@@ -252,6 +347,9 @@ app.post('/api/broadcast/:id', async (req, res) => {
     res.json({messages: 'what'})
 
 })
+
+    
+
 
 // app.post('/broadcast', async ({body}, res) => {
 //     const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
