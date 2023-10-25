@@ -22,7 +22,7 @@ const UtilityContextProvider = (props:any) => {
     }
 
     React.useEffect(() => { 
-        console.log(routerx, 'routerxwz')
+        console.log(routerx, 'routerxwez')
         setrouterLocation(
             routerx
         )
