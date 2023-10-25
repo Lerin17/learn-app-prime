@@ -12,11 +12,12 @@ import {MdBackHand} from 'react-icons/md'
 
 
  const VideoPlayer = () => {
-    const {myVideo, userVideo, name, callAccepted,  callEnded, stream, callUser, Call} = React.useContext(SocketContext) as Isocketcontext
+    const {myVideo, userVideo, name, callAccepted,  callEnded, stream,  Call} = React.useContext(SocketContext) as Isocketcontext
 
     console.log(callAccepted)
 
 if(userVideo.current){
+    console.log(userVideo, 'userVideoRaw')
     console.log(userVideo.current.srcObject, 'userVideo')
     // if(userVideo.current.srcObject){
     //     //   userVideo.current.load();
@@ -44,11 +45,14 @@ if(userVideo.current){
             playsInline muted ref={myVideo} autoPlay 
             />
 
-        {/* <div className='h-36 bg-red-400' >
-          ss
-        </div> */}
+<video className='bg-black border-2 border-red-500' style={{
+                   width: '600px',
+                   height: '100%'
+               }}
+               playsInline  ref={userVideo} autoPlay 
+               />
 
-            <div className='absolute z-20 top-4 lg:right-20 right-8   border w-72 h-48' >
+            {/* <div className='absolute z-20 top-4 lg:right-20 right-8   border w-72 h-48' >
             <Paper>
                <video className='bg-black' style={{
                    width: '600px',
@@ -57,7 +61,7 @@ if(userVideo.current){
                playsInline  ref={userVideo} autoPlay 
                />
            </Paper> 
-            </div>
+            </div> */}
 
         <div style={{
           transform: "translate(-50%, -50%)"

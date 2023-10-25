@@ -12,7 +12,7 @@ import {MdWifiCalling2, MdCallEnd,} from 'react-icons/md'
 
 
 const VideoOptions = () => {
-  const {Me, callAccepted, name, setname, callEnded, leaveCall, callUser, JoinClass, CreateClass} = React.useContext(SocketContext) as Isocketcontext
+  const {Me, callAccepted, name, setname, callEnded, leaveCall, CreateClass2 ,JoinClass2, CreateClass, JoinClass} = React.useContext(SocketContext) as Isocketcontext
 
   const [idToCall, setidToCall] = React.useState('');
 
