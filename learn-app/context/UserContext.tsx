@@ -1,6 +1,6 @@
 import React from 'react'
-import { Iusercontext, Iuserdata } from '../types/context/usercontext';
-import { Tpackage } from '../types/context/usercontext';
+import { Iusercontext, Iuserdata, TsubscriberDetails } from '../types/context/usercontext';
+import { Tpackage,  } from '../types/context/usercontext';
 import {app, database} from '../firebaseConfig'
 
 import {collection, addDoc, getDoc, setDoc, doc , updateDoc, arrayUnion} from 'firebase/firestore'
@@ -36,9 +36,9 @@ const UserContextProvider = (props:any) => {
 
     const [Useremailinput, setUseremailinput] = React.useState('');
 
-    const [subscribeToLinkInput, setsubscribeToLinkInput] = React.useState<string>('');
+    const [subscribeLinkInput, setsubscribeLinkInput] = React.useState<string>('');
 
-    const [subscriberDetails, setsubscriberDetails] = React.useState<null | object>(null);
+    const [subscriberDetails, setsubscriberDetails] = React.useState<null | TsubscriberDetails>(null);
 
     const [currentUserPackage, setcurrentUserPackage] = React.useState<Tpackage>( {
       name:'',
@@ -242,15 +242,34 @@ const Data:any = getdata.data()
     }
    }
 
+
+   const subscribedToNetwork = async () => {
+    if(subscriberDetails){
+       const docRef = doc(database, 'Users', subscriberDetails.name)
+
+       const docSnap = await getDoc(docRef)
+
+       if(docSnap.exists()){
+        const userRef = doc(database, 'Users', userData.name)
+
+        await updateDoc(userRef, {
+          packages: arrayUnion(currentUserPackage)
+        })
+        
+       }
+    }
+   }
+
+
    const searchForNetwork = async (isClearLink:boolean) => {
     // setsubscribeToLinkInput('')
     if(!isClearLink){
-     setsubscribeToLinkInput('')
+     setsubscribeLinkInput('')
 
      setisWaiting(true)
 
-     const userName = subscribeToLinkInput.split('-')[0]
-     const packageid = subscribeToLinkInput.split('-')[1]
+     const userName = subscribeLinkInput.split('-')[0]
+     const packageid = subscribeLinkInput.split('-')[1]
 
      const docRef = doc(database, 'Users', userName)
 
@@ -302,6 +321,9 @@ const Data:any = getdata.data()
       console.log('what happens when Url Link is used')
     }
    }
+
+
+
 
     const saveUserPackage = async () => {
       if(currentUserPackage.name === ''){
@@ -402,7 +424,7 @@ const Data:any = getdata.data()
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeToLinkInput, setsubscribeToLinkInput,searchForNetwork, subscribeToUrlLink, setsubscribeToUrlLink, subscriberDetails, isWaiting
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeLinkInput, setsubscribeLinkInput,searchForNetwork, subscribeToUrlLink, setsubscribeToUrlLink, subscriberDetails, isWaiting
     }} >
         {props.children}
     </UserContext.Provider>

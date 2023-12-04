@@ -29,15 +29,20 @@ export interface Iusercontext {
     isSubscriberList:boolean
     setisSubscriberList:React.Dispatch<React.SetStateAction<boolean>>
     copyUserLink:()=>void
-    subscribeToLinkInput:string
-     setsubscribeToLinkInput:React.Dispatch<React.SetStateAction<string>>
+    subscribeLinkInput:string
+     setsubscribeLinkInput:React.Dispatch<React.SetStateAction<string>>
      searchForNetwork:(arg:boolean)=>void
      subscribeToUrlLink:string
     setsubscribeToUrlLink:React.Dispatch<React.SetStateAction<string>>
-    subscriberDetails:any
+    subscriberDetails: null | TsubscriberDetails
     isWaiting:boolean
    
 
+}
+
+export type TsubscriberDetails = {
+  name:string,
+  SearchedPackage:any
 }
 
 export type Tpackage = {
@@ -62,6 +67,7 @@ type Tnotification = {
     type:'success-mini',
     message:string
   }| null
+
 
 export interface Iuserdata {
     name:string

@@ -10,7 +10,7 @@ import { DuttonAlt } from '../GeneralPurpose/dutton'
 const YourNetwork = (props:any) => {
 
 
-  const {setisSubscriberList, isSubscriberList, copyUserLink, subscribeToLinkInput, setsubscribeToLinkInput,   searchForNetwork, subscriberDetails, isWaiting} = React.useContext(UserContext) as Iusercontext
+  const {setisSubscriberList, isSubscriberList, copyUserLink, subscribeLinkInput, setsubscribeLinkInput,   searchForNetwork, subscriberDetails, isWaiting} = React.useContext(UserContext) as Iusercontext
 
   React.useEffect(() => {
     
@@ -205,9 +205,9 @@ const YourNetwork = (props:any) => {
             <div className='w-3/4 '>
             <input
             onChange={(e:any) => {
-              setsubscribeToLinkInput(e.target.value)
+              setsubscribeLinkInput(e.target.value)
             } }
-            value={Boolean(props.link && !props.isClearLink) ?props.link:subscribeToLinkInput}
+            value={Boolean(props.link && !props.isClearLink) ?props.link:subscribeLinkInput}
             placeholder='Enter link'
            className='bg-transparent border-b px-3 py-1 lg:text-2xl md:text-xl text-xs  w-full '
            />
