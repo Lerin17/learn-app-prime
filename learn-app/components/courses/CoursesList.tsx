@@ -48,7 +48,7 @@ const CoursesList = () => {
              
                 <motion.div  className='mt-4  w-full'
                   onClick={()=>{
-                   console.log('xe')
+                  //  console.log('xe')
                     openSingleCourse(props.id)}}
                   key={props.courseId}
                   initial={{x:20, y:20}} 

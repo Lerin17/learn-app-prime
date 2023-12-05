@@ -21,7 +21,7 @@ const CourseContextProvider = (props:any) => {
 
     const [currentNoWeeks, setcurrentNoWeeks] = React.useState<string>('');
 
-    const [currentDayOfWeek, setcurrentDayOfWeek] = React.useState<string[]>([]);
+    const [currentDaysOfWeek, setcurrentDaysOfWeek] = React.useState<string[]>([]);
 
     const [currentCourseGroup, setcurrentCourseGroup] = React.useState({});
 
@@ -74,7 +74,7 @@ const CourseContextProvider = (props:any) => {
 
       
       // console.log(e.target.textContent, 'event')
-      setcurrentDayOfWeek((prev:string[]):any => {
+      setcurrentDaysOfWeek((prev:string[]):any => {
         if (prev.includes(dayofweek)){
           return [...prev]
         }else{
@@ -83,7 +83,7 @@ const CourseContextProvider = (props:any) => {
         })
     }
 
-    console.log(currentDayOfWeek, 'currentDays')
+    console.log(currentDaysOfWeek, 'currentDays')
 
     const ACTIONS = {
       SAVE_NEW_COURSE:'SAVE1',
@@ -179,7 +179,7 @@ const CourseContextProvider = (props:any) => {
 
 
   return (
-    <CourseContext.Provider value={{CourseObject, CoursesArray, toggleNewCoursePanel, isNewCoursePanelOpen, setisNewCoursePanelOpen, isTopicPanelOpen, toggleTopicPanel, currentCourseName,currentCodeDesc,currentCourseCode,currentNoWeeks, setcurrentCourseName, setcurrentCodeDesc, setcurrentCourseCode, setcurrentNoWeeks, saveCurrentCourse,  coursesArray, toggleisDowCarousel, isDowCarousel, setisDowCarousel, addDayOfWeek, currentDayOfWeek, setcurrentDayOfWeek, courseListSelectedCourse, setcourseListSelectedCourse, setisCourseList, isCourseList, isParentCourse, setisParentCourse, isCreateCourseGroupOpen, setisCreateCourseGroupOpen,currentCourseGroupName,currentCourseGroupAbv,
+    <CourseContext.Provider value={{CourseObject, CoursesArray, toggleNewCoursePanel, isNewCoursePanelOpen, setisNewCoursePanelOpen, isTopicPanelOpen, toggleTopicPanel, currentCourseName,currentCodeDesc,currentCourseCode,currentNoWeeks, setcurrentCourseName, setcurrentCodeDesc, setcurrentCourseCode, setcurrentNoWeeks, saveCurrentCourse,  coursesArray, toggleisDowCarousel, isDowCarousel, setisDowCarousel, addDayOfWeek, currentDaysOfWeek, setcurrentDaysOfWeek, courseListSelectedCourse, setcourseListSelectedCourse, setisCourseList, isCourseList, isParentCourse, setisParentCourse, isCreateCourseGroupOpen, setisCreateCourseGroupOpen,currentCourseGroupName,currentCourseGroupAbv,
 currentCourseGroupDesc,currentCourseGroupCourseArray,inputCourseGroupDetails,saveCurrentCourseGroup, courseGroupArray,currentCourseGroup, setcurrentCourseGroup
      }}>
         {props.children}

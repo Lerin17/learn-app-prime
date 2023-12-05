@@ -104,7 +104,7 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
     
   }, [path]);
 
-  console.log(haloLocation, 'haloLocation')
+  // console.log(haloLocation, 'haloLocation')
 
   return (
     <div style={{

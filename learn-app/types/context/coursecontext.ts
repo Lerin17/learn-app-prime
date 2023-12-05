@@ -20,8 +20,8 @@ setcurrentCourseCode:React.Dispatch<React.SetStateAction<string>>
 setcurrentNoWeeks:React.Dispatch<React.SetStateAction<string>>
 saveCurrentCourse:({currentCourseName, currentCodeDesc, currentCourseCode}:IsaveCurrentCourseArg)=>void
 addDayOfWeek:(e:React.MouseEvent<HTMLDivElement, MouseEvent>)=>void
-currentDayOfWeek:string[]
-setcurrentDayOfWeek:React.Dispatch<React.SetStateAction<string[]>>
+currentDaysOfWeek:string[]
+setcurrentDaysOfWeek:React.Dispatch<React.SetStateAction<string[]>>
 courseListSelectedCourse:Icourseobject | undefined | null
 setcourseListSelectedCourse:React.Dispatch<React.SetStateAction<Icourseobject | undefined | null>>
 setisCourseList:React.Dispatch<React.SetStateAction<boolean>>
@@ -71,6 +71,7 @@ export interface Icourseobject {
     courseCode:string
     courseDesc:string
     NoWeeks:string
+    daysOfTheWeek:string[]
     courseId:string 
 }
 

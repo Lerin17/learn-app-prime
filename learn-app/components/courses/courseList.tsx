@@ -40,7 +40,7 @@ const CourseList = () => {
     React.useEffect(() => {
         setCourseArray(MultiCourseArray)
     }, [coursesArray]);
-    const [isSinglei, setisSinglei] = useState();
+    const [isSinglei, setisSinglei] = React.useState();
 
     setTimeout(()=>{
         setis(false)

@@ -42,7 +42,8 @@ export interface Iusercontext {
 
 export type TsubscriberDetails = {
   name:string,
-  SearchedPackage:any
+  SearchedPackage:any,
+  data:{}
 }
 
 export type Tpackage = {

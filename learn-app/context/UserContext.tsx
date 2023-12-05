@@ -223,12 +223,33 @@ const Data:any = getdata.data()
 
     const packageSubscriberDocRef = doc(database, 'Users', packageSubscriberID)
 
+    // const userDatax = userData
+
+    // const {name, hashedpassword, ...userDatax} = userDatax
+
+    
+    const subscriberObject = {
+      name:userData.name,
+      id:userData.id,
+      email:userData.email
+    }
+
+    const yourSubscriptionsObject = {
+      name:subscriberDetails?.name,
+      packageSubscribedTo: [subscriberDetails?.SearchedPackage],
+    }
+
+    
+
+    
+
     try {
 
-      if(userData.name){
-         await updateDoc(packageOwnerDocRef, {subscribers: arrayUnion('')})
 
-         await updateDoc(packageSubscriberDocRef, {yourSubscriptions: arrayUnion('')})
+      if(userData.name){
+         await updateDoc(packageOwnerDocRef, {subscribers: arrayUnion({subscriberObject})})
+
+         await updateDoc(packageSubscriberDocRef, {yourSubscriptions: arrayUnion(yourSubscriptionsObject)})
       }else{
         setnotfication({
           type:"error-mini",
@@ -301,7 +322,7 @@ const Data:any = getdata.data()
             })
           }
 
-          setsubscriberDetails({name: Data.name, SearchedPackage: searchedPackage})
+          setsubscriberDetails({name: Data.name, SearchedPackage: searchedPackage, data:Data})
           setisWaiting(false)
         }
       } catch (error) {

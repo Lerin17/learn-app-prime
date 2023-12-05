@@ -45,31 +45,36 @@ export const products = [
         courseCode:'mat114',
         courseDesc:'some course',
         NoWeeks:'exrrx',
-        courseId:'tctctt'
+        courseId:'tctctt',
+        daysOfTheWeek:['']
       },
       {courseName:'Math',
       courseCode:'mat204',
       courseDesc:'some course',
       NoWeeks:'exrrx',
-        courseId:'tctcttrtgg'
+      courseId:'tctcttrtgg',
+      daysOfTheWeek:['']
     },
     {courseName:'Eng',
     courseCode:'eng244',
     courseDesc:'some course',
     NoWeeks:'exrrx',
-      courseId:'tctcttwzrr'
+    courseId:'tctcttwzrr',
+    daysOfTheWeek:['']
   },
   {courseName:'Eng',
   courseCode:'eng334',
   courseDesc:'some course',
   NoWeeks:'exrrx',
-    courseId:'tctctxrxrt'
+  courseId:'tctctxrxrt',
+  daysOfTheWeek:['']
 },
 {courseName:'Math',
 courseCode:'mat274',
 courseDesc:'some course',
 NoWeeks:'exrrx',
-  courseId:'txfxfeectctt'
+  courseId:'txfxfeectctt',
+daysOfTheWeek:['']
 }
   ]
 
