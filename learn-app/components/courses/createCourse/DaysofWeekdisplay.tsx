@@ -12,11 +12,11 @@ const DaysofWeekdisplay = () => {
     ]
 
 
-    const {currentDayOfWeek} = React.useContext(CourseContext) as Icoursecontext
+    const {currentDaysOfWeek} = React.useContext(CourseContext) as Icoursecontext
     
-    const DaysSelected = currentDayOfWeek.map((item:string) => {
+    const DaysSelected = currentDaysOfWeek.map((item:string) => {
         return {
-            index:currentDayOfWeek.indexOf(item),
+            index:currentDaysOfWeek.indexOf(item),
             name:item
         }
     })
@@ -54,7 +54,7 @@ const DaysofWeekdisplay = () => {
 
 
   return (
-    <div>{currentDayOfWeek}</div>
+    <div>{currentDaysOfWeek}</div>
   )
 }
 

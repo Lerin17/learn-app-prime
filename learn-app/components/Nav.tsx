@@ -21,13 +21,13 @@ export const Nav = (props:any) => {
 
 const navOptionRef = useRef(null)
 
-console.log(navOptionRef.current, 'locationcurrent')
+// console.log(navOptionRef.current, 'locationcurrent')
 
 // console.log(navOptionRef.current)
 
 const path = useRouter().asPath.split('/')[1]
 
-console.log(path, 'path')
+// console.log(path, 'path')
 
 // if(document){
 //   console.log('ze')
@@ -35,7 +35,7 @@ console.log(path, 'path')
 
 const [navOptionLocation, setnavOptionLocation] = React.useState<any>();
 
-console.log(props, 'update')
+// console.log(props, 'update')
 
 // const updateNavBarOption = (data:any) => {
 //   setnavBarOptionLocation(data)

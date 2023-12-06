@@ -46,35 +46,35 @@ export const products = [
         courseDesc:'some course',
         NoWeeks:'exrrx',
         courseId:'tctctt',
-        daysOfTheWeek:['']
+        daysOfTheWeek:[ 'Monday','Tuesday','Thursday','Friday']
       },
       {courseName:'Math',
       courseCode:'mat204',
       courseDesc:'some course',
       NoWeeks:'exrrx',
       courseId:'tctcttrtgg',
-      daysOfTheWeek:['']
+      daysOfTheWeek:[ 'Tuesday','Wednesday','Thursday','Friday']
     },
     {courseName:'Eng',
     courseCode:'eng244',
     courseDesc:'some course',
     NoWeeks:'exrrx',
     courseId:'tctcttwzrr',
-    daysOfTheWeek:['']
+    daysOfTheWeek:[ 'Monday','Thursday','Friday',]
   },
   {courseName:'Eng',
   courseCode:'eng334',
   courseDesc:'some course',
   NoWeeks:'exrrx',
   courseId:'tctctxrxrt',
-  daysOfTheWeek:['']
+  daysOfTheWeek:['Monday','Wednesday','Friday']
 },
 {courseName:'Math',
 courseCode:'mat274',
 courseDesc:'some course',
 NoWeeks:'exrrx',
   courseId:'txfxfeectctt',
-daysOfTheWeek:['']
+daysOfTheWeek:[ ,'Monday','Tuesday','Wednesday','Thursday']
 }
   ]
 

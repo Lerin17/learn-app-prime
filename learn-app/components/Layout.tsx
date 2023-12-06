@@ -16,7 +16,7 @@ import { Iutilitycontext } from '../types/context/utilitycontext'
 
 export const Layout = (prop:any) => {
 
-  console.log(useRouter().asPath, 'as path')
+  // console.log(useRouter().asPath, 'as path')
 
   const path = useRouter().asPath
 
@@ -32,7 +32,7 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
     setnavBarOptionLocation(data)
   }
 
-  console.log(navBarOptionLocation, 'navx')
+  // console.log(navBarOptionLocation, 'navx')
 
   const handleResize = () => {
     setwindowHeight(window.innerHeight)
@@ -95,7 +95,7 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
 
 
 
-  console.log(navBarOptionLocation, 'navbarloaction')
+  // console.log(navBarOptionLocation, 'navbarloaction')
   
   React.useEffect(() => {
     const halolox = document.getElementById('halo')?.getBoundingClientRect()

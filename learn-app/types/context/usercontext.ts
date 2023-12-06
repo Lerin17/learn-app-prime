@@ -32,18 +32,20 @@ export interface Iusercontext {
     subscribeLinkInput:string
      setsubscribeLinkInput:React.Dispatch<React.SetStateAction<string>>
      searchForNetwork:(arg:boolean)=>void
-     subscribeToUrlLink:string
-    setsubscribeToUrlLink:React.Dispatch<React.SetStateAction<string>>
+    //  subscribeToUrlLink:string
+    // setsubscribeToUrlLink:React.Dispatch<React.SetStateAction<string>>
     subscriberDetails: null | TsubscriberDetails
+    setsubscriberDetails: React.Dispatch<React.SetStateAction<TsubscriberDetails | null>>
     isWaiting:boolean
    
 
 }
 
 export type TsubscriberDetails = {
-  name:string,
+  name:string | undefined,
   SearchedPackage:any,
-  data:{}
+  data:{} | undefined,
+  allPackages:any[] | null
 }
 
 export type Tpackage = {

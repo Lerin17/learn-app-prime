@@ -9,22 +9,25 @@ import { Iusercontext } from '../../../types/context/usercontext'
 
 const Link = () => {
 
-    const {subscribeToUrlLink, setsubscribeToUrlLink} = React.useContext(UserContext) as Iusercontext
+    // const {subscribeToUrlLink, setsubscribeToUrlLink} = React.useContext(UserContext) as Iusercontext
 
     const path = useRouter().asPath
 
     const splitPath = path.split('/')
 
-    const Link = `${splitPath[splitPath.length - 1]}-${splitPath[splitPath.length - 2]}` 
+    console.log(splitPath, 'splitPath')
 
     
+    const Link = `${splitPath[splitPath.length - 1]}` 
+
+    console.log(Link, 'splitLink')
 
     const [subscribeUrlLink, setsubscribeUrlLink] = React.useState(Link);
 
     const [isClearLink, setisClearLink] = React.useState(false);
 
     const clearsubscribetoLink = () => {
-      setsubscribeToUrlLink('')
+      // setsubscribeToUrlLink('')
       setisClearLink(true)
     }
 

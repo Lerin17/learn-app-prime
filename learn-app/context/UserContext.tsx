@@ -75,11 +75,11 @@ const UserContextProvider = (props:any) => {
 
     const path = routerLocation
 
-    const splitPath = path.split('/')
+    // const splitPath = path.split('/')
     
-    const link = splitPath[splitPath.length - 1]
+    // const link = splitPath[splitPath.length - 1]
 
-    const [subscribeToUrlLink, setsubscribeToUrlLink] = React.useState<string>(link);
+    // const [subscribeToUrlLink, setsubscribeToUrlLink] = React.useState<string>(link);
 
     const [isWaiting, setisWaiting] = React.useState<boolean>(false);
 
@@ -264,22 +264,22 @@ const Data:any = getdata.data()
    }
 
 
-   const subscribedToNetwork = async () => {
-    if(subscriberDetails){
-       const docRef = doc(database, 'Users', subscriberDetails.name)
+  //  const subscribedToNetwork = async () => {
+  //   if(subscriberDetails){
+  //      const docRef = doc(database, 'Users', subscriberDetails.name)
 
-       const docSnap = await getDoc(docRef)
+  //      const docSnap = await getDoc(docRef)
 
-       if(docSnap.exists()){
-        const userRef = doc(database, 'Users', userData.name)
+  //      if(docSnap.exists()){
+  //       const userRef = doc(database, 'Users', userData.name)
 
-        await updateDoc(userRef, {
-          packages: arrayUnion(currentUserPackage)
-        })
+  //       await updateDoc(userRef, {
+  //         packages: arrayUnion(currentUserPackage)
+  //       })
         
-       }
-    }
-   }
+  //      }
+  //   }
+  //  }
 
 
    const searchForNetwork = async (isClearLink:boolean) => {
@@ -295,6 +295,38 @@ const Data:any = getdata.data()
      const docRef = doc(database, 'Users', userName)
 
      if(!packageid){
+
+      try {
+        const docSnap = await getDoc(docRef)
+
+        if(docSnap.exists()){
+          const Data:any = docSnap.data()
+
+          console.log(Data)
+        
+          setnotfication({
+            type:'success-mini',
+            message:'User found'
+          })
+
+          // console.log(Data.packages)
+
+          // const searchedPackage = Data.packages.find((item:any) => item.name == packageid)
+
+          // if(!searchedPackage){
+          //   setnotfication({
+          //     type:'error-mini',
+          //     message:'Package does not exist'
+          //   })
+          // }
+
+          setsubscriberDetails({name: Data.name, allPackages:Data.packages, SearchedPackage:null , data:Data})
+          setisWaiting(false)
+        }
+
+      } catch (error) {
+        
+      }
       
      }else if(userName && packageid){
       try {
@@ -322,7 +354,7 @@ const Data:any = getdata.data()
             })
           }
 
-          setsubscriberDetails({name: Data.name, SearchedPackage: searchedPackage, data:Data})
+          setsubscriberDetails({name: Data.name, SearchedPackage: searchedPackage, data:Data, allPackages:Data.packages})
           setisWaiting(false)
         }
       } catch (error) {
@@ -445,7 +477,7 @@ const Data:any = getdata.data()
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeLinkInput, setsubscribeLinkInput,searchForNetwork, subscribeToUrlLink, setsubscribeToUrlLink, subscriberDetails, isWaiting
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeLinkInput, setsubscribeLinkInput,searchForNetwork, subscriberDetails, setsubscriberDetails, isWaiting
     }} >
         {props.children}
     </UserContext.Provider>

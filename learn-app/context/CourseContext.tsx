@@ -9,6 +9,7 @@ import { courses } from '../testdata/QuestionsArraysample';
 const CourseContext = React.createContext<Icoursecontext | null>(null)
 
 const CourseContextProvider = (props:any) => {
+  //ignore, it is not used
     const [CoursesArray, setCoursesArray] = React.useState<Icourseobject[]>(courses);
 
     const [CourseObject, setCourseObject] = React.useState<Icourseobject>();

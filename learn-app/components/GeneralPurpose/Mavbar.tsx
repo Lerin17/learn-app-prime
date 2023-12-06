@@ -35,7 +35,7 @@ const Mavbar = () => {
 
   const routerPathName = useRouter().asPath
 
-  console.log(notfication,'exxexeqqqqqqqqqqqqqqqqqqq')
+  // console.log(notfication,'exxexeqqqqqqqqqqqqqqqqqqq')
 
   // React.useEffect(() => {
     
