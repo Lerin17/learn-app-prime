@@ -7,24 +7,21 @@ import { Iusercontext,  Tpackage} from '../../../types/context/usercontext'
 
 const ChannelDetails = (props:any) => {
 
-    const {subscriberDetails, setsubscriberDetails} = useContext(UserContext) as Iusercontext
+    const {channelDetails, setchannelDetails} = useContext(UserContext) as Iusercontext
 
-    console.log(subscriberDetails, 'subscriber')
+    console.log(channelDetails, 'subscriber')
 
 
 const SinglePackage = (packageObj:Tpackage) => {
 
-    const ChannelDetails = {
-        packageObj
-    }
 
     return (<div onClick={() => {
-        if(setsubscriberDetails){
-            // const channelName = subscriberDetails?.name
-            setsubscriberDetails({
-                name:subscriberDetails?.name,
+        if(setchannelDetails){
+            // const channelName = channelDetails?.name
+            setchannelDetails({
+                name:channelDetails?.name,
                 SearchedPackage:packageObj,
-                data:subscriberDetails?.data,
+                data:channelDetails?.data,
                 allPackages:null
             })
         }
@@ -35,8 +32,8 @@ const SinglePackage = (packageObj:Tpackage) => {
     </div>)
 }
 
-if(subscriberDetails){
-    if(subscriberDetails.SearchedPackage){
+if(channelDetails){
+    if(channelDetails.SearchedPackage){
         return (
     
             <div                  
@@ -70,21 +67,21 @@ if(subscriberDetails){
                 className='flex  relative  flex-col lg:text-2xl md:text-lg text-xs  h-full bg-amber-900'>
         
                 <div className='w-full  border-y lg:text-lg md:text-lg text-xs '>
-                {subscriberDetails?.name} Package
+                {channelDetails?.name} Package
                 </div>
         
                 <div className='p-2'>
                 <div>
-                Name {subscriberDetails?.name}
+                Name {channelDetails?.name}
                 </div>
            
         
                 <div>
-                Duration {subscriberDetails.SearchedPackage.description}
+                Duration {channelDetails.SearchedPackage.description}
                 </div>
         
                 <div>
-                  Description: {subscriberDetails.SearchedPackage.description}
+                  Description: {channelDetails.SearchedPackage.description}
                 </div> 
                 </div>
                   
@@ -101,7 +98,7 @@ if(subscriberDetails){
               </div>
             </div>
           )
-    }else if(subscriberDetails.allPackages && !subscriberDetails.SearchedPackage){
+    }else if(channelDetails.allPackages && !channelDetails.SearchedPackage){
         return <div>
             <div                  
             className='flex lg:h-72 h-52 r  w-full'>
@@ -134,16 +131,16 @@ if(subscriberDetails){
                 className='flex  relative  flex-col lg:text-2xl md:text-lg text-xs  h-full bg-amber-900'>
         
                 <div className='w-full  border-y lg:text-lg md:text-lg text-xs '>
-                {subscriberDetails?.name} Package
+                {channelDetails?.name} Package
                 </div>
         
                 <div className='p-2'>
                 <div>
-                Name {subscriberDetails?.name}
+                Name {channelDetails?.name}
                 </div>
            
         
-                {subscriberDetails.allPackages.map(item => (
+                {channelDetails.allPackages.map(item => (
                 <div>
                     <SinglePackage
                     {...item}
@@ -160,12 +157,12 @@ if(subscriberDetails){
     
     }else{
         return <div>
-        Not going to be returned
+        Not going to be returned x
     </div>
     }
 }else {
     return <div>
-            Not going to be returned
+            Not going to be returned x
         </div>
 }
 

@@ -27,7 +27,7 @@ const CreateCourse = () => {
     // console.log(array2 === Array1, 'reals')
     
 
-    const {isTopicPanelOpen, toggleTopicPanel, currentCourseName, currentCodeDesc, currentCourseCode, setcurrentCodeDesc, setcurrentCourseName, setcurrentCourseCode, currentNoWeeks, setcurrentNoWeeks, saveCurrentCourse, setisNewCoursePanelOpen, isNewCoursePanelOpen ,isDowCarousel,toggleisDowCarousel, setisDowCarousel, addDayOfWeek, currentDayOfWeek,isCourseList, setisCourseList, isParentCourse,setisParentCourse} = React.useContext(CourseContext) as Icoursecontext
+    const {isTopicPanelOpen, toggleTopicPanel, currentCourseName, currentCodeDesc, currentCourseCode, setcurrentCodeDesc, setcurrentCourseName, setcurrentCourseCode, currentNoWeeks, setcurrentNoWeeks, saveCurrentCourse, setisNewCoursePanelOpen, isNewCoursePanelOpen ,isDowCarousel,toggleisDowCarousel, setisDowCarousel, addDayOfWeek, currentDaysOfWeek,isCourseList, setisCourseList, isParentCourse,setisParentCourse} = React.useContext(CourseContext) as Icoursecontext
 
     const parentVariant = {
         move: {
@@ -69,7 +69,7 @@ const CreateCourse = () => {
 
           
                       <div 
-                  className='w-8/12'
+                  className='xl:w-8/12 lg:w-9/12 md:w-10/12 w-11/12 '
                       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>)=>{
                 if(isDowCarousel && e.target.id !== 'dowCarousel' || !e){
         
@@ -98,41 +98,63 @@ const CreateCourse = () => {
         
                     </div>
         
-                    <div className='bg-yellow-600  border text-white  font-header9 flex ' ><div className='flex bg-yellow-600 px-2'>
+                    <div className='   text-white  font-header12 flex ' ><div className='flex'>
                     BASIC INFORMATION
                         </div></div>
-                    <div className='flex w-full mx-8' >
-                        <div className='w-3/4 mr-2 flex items-center' >
-                            {/* <div className='font-header9 text-3xl '>
-                                NAME
-                            </div> */}
-                            <InputBase
-                            placeholder='NAME' 
-                            value={currentCourseName} 
-                            onChange={(e)=>{setcurrentCourseName(e.target.value)}}
-                            className='w-full  text-3xl border-b border-gray-400   bg-amber-800 font-header8 text-black' 
-                            />
-                            {/* <input
-                            placeholder='Name' 
-                            value={currentCourseName} 
-                            onChange={(e)=>{setcurrentCourseName(e.target.value)}}
-                            className='w-full  text-3xl border-b my-1  bg-amber-800' /> */}
+                    <div className='flex w-full  font-header12' >
+                        <div className='w-7/12 mr-4  flex flex-col items-start ' >
+                            <div className='text-xs'>
+                                name
                             </div>
-                        <div className='w-1/4 mx-8' >
-                            <InputBase 
-                            placeholder='CODE'
-                            value={currentCourseCode}
-                            onChange={(e)=>{setcurrentCourseCode(e.target.value)}}
-                            className='w-full  border-b my-1 bg-amber-800 text-3xl font-header8 text-black'  />
+
+                            <div className='flex border-b-2 lg:text-3xl md:text-xl xs:text-base w-full' >
+                             Name
+                            <div className='w-full'>
+                                <input
+                                placeholder='ABC-101'
+                                value={currentCourseName}
+                                onChange={(e)=>{
+                                setcurrentCourseName(e.target.value)
+                                }}
+                                className='w-full text-stone-400  bg-transparent focus:border-none focus:text-stone-800 transition-all lg:border-b-4 md:border-b-2 border-b pl-4'
+                                />
                             </div>
+                            </div>
+
+                            </div>
+
+                        <div className='w-5/12 flex flex-col' >
+                            <div className='text-xs'>
+                                code
+                            </div>
+
+                            
+                            <div className='flex border-b-2 lg:text-3xl md:text-xl xs:text-base w-full' >
+                             Code
+                            <div className='w-full'>
+                                <input
+                                placeholder='ABC-101'
+                                value={currentCourseCode}
+                                onChange={(e)=>{
+                                setcurrentCourseCode(e.target.value)
+                                }}
+                                className='w-full text-stone-400  bg-transparent focus:border-none focus:text-stone-800 transition-all lg:border-b-4 md:border-b-2 border-b pl-4'
+                                />
+                            </div>
+                            </div>
+                            
+                    </div>
                     </div>
         
-                    <div  className='mx-4'>
+                    <div  className='flex mt-4 flex-col'>
+                        <div className='text-xs '>
+                            description
+                        </div>
                         <textarea 
                         placeholder='description'
                         value={currentCodeDesc}
                         onChange={(e)=>setcurrentCodeDesc(e.target.value)}
-                        className='w-full  text-2xl bg-amber-800 border-b h-20' />
+                        className='w-full font-header12 text-xl bg-transparent my-1 border-b h-20' />
         
                     </div>
         
@@ -163,7 +185,8 @@ const CreateCourse = () => {
                             </div>
         
                         <div className=' w-full' >
-                            {!isDowCarousel? <div className={`${isDowCarousel?'lg:w-6/12 w-7/12':'lg:w-8/12  w-7/12'} flex text-xl    justify-start items-end`} >
+                            {!isDowCarousel? 
+                            <div className={`${isDowCarousel?'lg:w-6/12 w-7/12':'lg:w-8/12  w-7/12'} flex text-xl    justify-start items-end`} >
                             
                             
                                     <div>
@@ -179,7 +202,7 @@ const CreateCourse = () => {
                                 Weeks
                             </div>
                             </div>:<div className='text-xl ml-4 flex'>
-                                {currentDayOfWeek.length?``:``}
+                                {currentDaysOfWeek.length?``:``}
                                <DaysofWeekdisplay/>
                                <span className='ml-2'>
                                for 3week

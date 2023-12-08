@@ -16,6 +16,8 @@ function CalendarContextProvider(props:any) {
     const [isDateTerminal, setisDateTerminal] = React.useState<boolean>(false);
 
     const [SelectedDateInfoList, setSelectedDateInfoList] = React.useState([]);
+
+    const [rangeMin, setrangeMin] = React.useState();
     // console.log(Date())
 
     const DaysoftheWeek = [
@@ -27,11 +29,13 @@ function CalendarContextProvider(props:any) {
         "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
     ]
 
+    let today:any
+    let tomorrow:any
 
     React.useEffect(() => {
         let currentDateInfoArray = Date().split(' ')
         
-        const todayDay:String | any = DaysoftheWeek.find(item => item.substring(0, 3) == currentDateInfoArray[0])
+        const todayDay:String | undefined = DaysoftheWeek.find(item => item.substring(0, 3) == currentDateInfoArray[0])
 
         const todayMonth:String | any =  MonthsoftheYear.find(item => item.substring(0, 3) == currentDateInfoArray[1])
 
@@ -44,15 +48,22 @@ function CalendarContextProvider(props:any) {
 
         // const tommorowDateIndex = DaysoftheWeek.indexOf(todayDay) + 1
 
-        const tomorrowDay = DaysoftheWeek.find((item, i) => i == DaysoftheWeek.indexOf(todayDay) + 1)
+        const tomorrowDay = DaysoftheWeek.find((item, i) => i == DaysoftheWeek.indexOf(todayDay as string) + 1)
+
 
         const tomorrowDate = Number(todayDate) + 1
         const tommorowYear = todayYear
 
-        const today = new Date()
-        const tomorrow = new Date(today)
+         today = new Date()
+         tomorrow = new Date(today)
+
+         console.log('return', today)
+
+    
 
         tomorrow.setDate(tomorrow.getDate() + 1)
+
+   
 
         // console.log(tomorrow)
 
@@ -98,7 +109,7 @@ function CalendarContextProvider(props:any) {
         // console.log(Date())
 
      
-        console.log(e.getDate())
+        console.log(e, TodayDateInfo, tomorrow, 'return')
 
         const getselectedDay = DaysoftheWeek.find((item, i) => i == dayinfo)
 

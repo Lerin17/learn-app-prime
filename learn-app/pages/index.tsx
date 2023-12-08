@@ -12,10 +12,15 @@ import { CalendarCom } from '../components/Home/CalenderCom'
 import CalenderInt from '../components/Home/CalenderNextday'
 import CalendarDateTerminal from '../components/Home/CalendarTerminal'
 
+import { CourseContext } from '../context/CourseContext'
+
+import { Icoursecontext } from '../types/context/coursecontext'
 
 const Home: NextPage = (props:any) => {
 
   const gradient = new Gradient()
+
+  const {coursesArray} = React.useContext(CourseContext) as Icoursecontext
 
   // // Call `initGradient` with the selector to your canvas
   // gradient.initGradient('#gradient-canvas')
@@ -30,8 +35,8 @@ const Home: NextPage = (props:any) => {
               ddd
           </div> */}
 
-          <div className='hidden md:block lg:block border-r-2 border-b-2 rounded border-lime-400 lg:mr-10 md:mr-10 w-3/4 ' >
-            <div className='flex  ' >
+          <div className='hidden md:block lg:block border-r-2 border-b-2 rounded border-lime-400 lg:mr-10 md:mr-10 w-3/4  ' >
+            <div className='flex' >
                <div style={{
                     wordBreak: 'break-all'
                   }} className='w-28  text-gray-300 flex flex-start font-header2 text-center  h-fit  text-5xl' >
@@ -47,7 +52,20 @@ const Home: NextPage = (props:any) => {
             </div>
                 
 
-              
+              <div className=''>
+                <div>
+                  my channel
+                </div>
+
+                <div>
+                 {coursesArray.map(item => (
+                  <div className='flex text-white bg-blue-500 mt-2'>
+                    {item.courseName}
+                    {item.NoWeeks}
+                  </div>
+                 ))}
+                </div>
+              </div>
             {/* <canvas id="gradient-canvas" data-transition-in /> */}
             </div>
 

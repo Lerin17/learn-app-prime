@@ -13,7 +13,12 @@ import { Icalendarcontext } from '../../types/context/calendarcontext';
   return (
     <div>
         <div className=''   >
-            <Calendar onClickDay={(e)=>{getDateInfo(e)}} tileContent={'*'}  tileClassName={'bg-red-400 border'} className={`text-gray-300 text-lg lg:rounded-l-none border-y-2  border-lime-400 rounded mx-auto  font-header6`} onChange={onChange} value={value} />
+            <Calendar onClickDay={(e)=>{getDateInfo(e)}} tileContent={'*'}  tileClassName={'bg-red-400 border'} className={`text-gray-300 text-lg lg:rounded-l-none border-y-2  border-lime-400 rounded mx-auto  font-header6`} onChange={onChange} value={value}
+            selectRange
+            // minDate={}
+            // maxDate={}
+
+            />
         </div>
     </div>
   )

@@ -42,7 +42,6 @@ const [lunch, setlunch] = React.useState('');
 
   const selectStyles:StylesConfig = {
     control: (styles) => ({ ...styles, backgroundColor: 'white' , border:'none'})
-
   }
 
   const inputvalue = ({e,props}:any) => {

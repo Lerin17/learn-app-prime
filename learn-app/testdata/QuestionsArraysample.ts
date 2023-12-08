@@ -74,7 +74,7 @@ courseCode:'mat274',
 courseDesc:'some course',
 NoWeeks:'exrrx',
   courseId:'txfxfeectctt',
-daysOfTheWeek:[ ,'Monday','Tuesday','Wednesday','Thursday']
+daysOfTheWeek:[ 'Monday','Tuesday','Wednesday','Thursday']
 }
   ]
 

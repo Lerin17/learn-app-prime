@@ -7,8 +7,8 @@ export interface Icalendarcontext {
 }
 
 export interface Idateinfo {  
-    Day: String
-    Month: String
-    Year: String,
-    Date: String
+    Day: String | undefined
+    Month: String | undefined
+    Year: String | undefined
+    Date: String | undefined
 }

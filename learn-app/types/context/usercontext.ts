@@ -34,14 +34,14 @@ export interface Iusercontext {
      searchForNetwork:(arg:boolean)=>void
     //  subscribeToUrlLink:string
     // setsubscribeToUrlLink:React.Dispatch<React.SetStateAction<string>>
-    subscriberDetails: null | TsubscriberDetails
-    setsubscriberDetails: React.Dispatch<React.SetStateAction<TsubscriberDetails | null>>
+    channelDetails: null | TchannelDetails
+    setchannelDetails: React.Dispatch<React.SetStateAction<TchannelDetails | null>>
     isWaiting:boolean
    
 
 }
 
-export type TsubscriberDetails = {
+export type TchannelDetails = {
   name:string | undefined,
   SearchedPackage:any,
   data:{} | undefined,

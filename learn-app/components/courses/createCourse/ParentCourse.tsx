@@ -4,7 +4,7 @@ import { CourseContext } from '../../../context/CourseContext';
 import { Icoursecontext } from '../../../types/context/coursecontext';
 
 import {FormControl, InputLabel} from '@mui/material';
-
+import ReactSelect, {StylesConfig} from 'react-select'
 
 const ParentCourse = () => {
 
@@ -12,10 +12,18 @@ const ParentCourse = () => {
 
   const [selectedCourseGroup, setselectedCourseGroup] = React.useState<any>('');
   
+  const options = [   
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+
 
   console.log(selectedCourseGroup,' selected')
 
-
+  const selectStyles:StylesConfig = {
+    control: (styles) => ({ ...styles, backgroundColor: 'white' , border:'none'})
+  }
 
 const names = [
   'Oliver Hansen',
@@ -34,13 +42,38 @@ const handleChange = () => {
 
 }
 
-const inputLabel = courseGroupArray.length?'Course Group':'No Course Groups'
+const inputLabel = 'Course groups'
 
 
 
   return (
-    <div className='flex flex-col  w-full justify-between font-header9'>
-      <div className='mx-2 flex'>
+    <div className='flex w-full justify-center font-header9 border-b border-amber-900'>
+
+<ReactSelect
+  placeholder='Tags for Questions'
+  className='text-base w-full focus:border-none'
+   options={options}
+   isMulti
+       theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 1,
+                    colors: {
+                      ...theme.colors,
+                      primary25: 'gray',
+                      primary: 'black',
+                    },
+                  })}
+   onChange={(e:any)=>{
+    
+    console.log(e)
+   }}
+   styles={
+    selectStyles
+    // display:'absolute'
+   }
+  />
+
+      {/* <div className='mx-2 flex'>
 
       <div className='text-4xl font-header9'>
         [/]
@@ -59,41 +92,8 @@ const inputLabel = courseGroupArray.length?'Course Group':'No Course Groups'
       </div>
 
       <InputBase className=' border-b w-full' />
-      </div>
-      <FormControl className='w-full px-2 mt-4' sx={{ m: 1 }} size="small">
-      <InputLabel id="demo-select-small">{inputLabel}</InputLabel>
-      <Select
-      className='w-full'
-      label='CourseGroups'
-      value={selectedCourseGroup?selectedCourseGroup.courseGroupName:'Nothing'}
-      placeholder='No CourseGroups'
-      onChange={handleChange}
-      // size='small'
-      >
-        {
-          courseGroupArray.map(item => (
-            <MenuItem onClick={()=>{
-              setcurrentCourseGroup(item)
-              setselectedCourseGroup
-            (item)}}
-            value={item.courseGroupName}
-            >
-            {item.courseGroupName}
-            </MenuItem>
-          ))
-        }
-      {/* {names.map((name) => (
-            <MenuItem
-            onClick={()=>{setselectedCourseGroup(name)}}
-              key={name}
-              value={name}
-              // style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))} */}
-      </Select>
-      </FormControl>
+      </div> */}
+     
     
       {/* <div>ddd</div>
       <div>ddd</div> */}

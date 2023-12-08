@@ -1,5 +1,5 @@
 import React from 'react'
-import { Iusercontext, Iuserdata, TsubscriberDetails } from '../types/context/usercontext';
+import { Iusercontext, Iuserdata, TchannelDetails } from '../types/context/usercontext';
 import { Tpackage,  } from '../types/context/usercontext';
 import {app, database} from '../firebaseConfig'
 
@@ -38,7 +38,7 @@ const UserContextProvider = (props:any) => {
 
     const [subscribeLinkInput, setsubscribeLinkInput] = React.useState<string>('');
 
-    const [subscriberDetails, setsubscriberDetails] = React.useState<null | TsubscriberDetails>(null);
+    const [channelDetails, setchannelDetails] = React.useState<null | TchannelDetails>(null);
 
     const [currentUserPackage, setcurrentUserPackage] = React.useState<Tpackage>( {
       name:'',
@@ -235,8 +235,8 @@ const Data:any = getdata.data()
     }
 
     const yourSubscriptionsObject = {
-      name:subscriberDetails?.name,
-      packageSubscribedTo: [subscriberDetails?.SearchedPackage],
+      name:channelDetails?.name,
+      packageSubscribedTo: [channelDetails?.SearchedPackage],
     }
 
     
@@ -265,8 +265,8 @@ const Data:any = getdata.data()
 
 
   //  const subscribedToNetwork = async () => {
-  //   if(subscriberDetails){
-  //      const docRef = doc(database, 'Users', subscriberDetails.name)
+  //   if(channelDetails){
+  //      const docRef = doc(database, 'Users', channelDetails.name)
 
   //      const docSnap = await getDoc(docRef)
 
@@ -320,7 +320,7 @@ const Data:any = getdata.data()
           //   })
           // }
 
-          setsubscriberDetails({name: Data.name, allPackages:Data.packages, SearchedPackage:null , data:Data})
+          setchannelDetails({name: Data.name, allPackages:Data.packages, SearchedPackage:null , data:Data})
           setisWaiting(false)
         }
 
@@ -354,7 +354,7 @@ const Data:any = getdata.data()
             })
           }
 
-          setsubscriberDetails({name: Data.name, SearchedPackage: searchedPackage, data:Data, allPackages:Data.packages})
+          setchannelDetails({name: Data.name, SearchedPackage: searchedPackage, data:Data, allPackages:Data.packages})
           setisWaiting(false)
         }
       } catch (error) {
@@ -477,7 +477,7 @@ const Data:any = getdata.data()
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeLinkInput, setsubscribeLinkInput,searchForNetwork, subscriberDetails, setsubscriberDetails, isWaiting
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeLinkInput, setsubscribeLinkInput,searchForNetwork, channelDetails, setchannelDetails, isWaiting
     }} >
         {props.children}
     </UserContext.Provider>

@@ -138,7 +138,7 @@ const Login = () => {
     onChange={(e)=>{
      setUsernameinput(e.target.value)
     }}
-    className='w-full text-stone-400  bg-transparent focus:border-none focus:text-stone-800 transition-all border-b-4 pl-4'
+    className='w-full text-stone-400  bg-transparent focus:border-none focus:text-stone-800 transition-all lg:border-b-4 border-b-2 pl-4'
     />
   </div>
 </div>
