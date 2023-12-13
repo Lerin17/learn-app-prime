@@ -17,7 +17,11 @@ function CalendarContextProvider(props:any) {
 
     const [SelectedDateInfoList, setSelectedDateInfoList] = React.useState([]);
 
+    const [isSelectRange, setisSelectRange] = React.useState<Boolean>(false);
+
     const [rangeMin, setrangeMin] = React.useState();
+
+    const [rangeMax, setrangeMax] = React.useState();
     // console.log(Date())
 
     const DaysoftheWeek = [
@@ -57,7 +61,7 @@ function CalendarContextProvider(props:any) {
          today = new Date()
          tomorrow = new Date(today)
 
-         console.log('return', today)
+        //  console.log('return', today)
 
     
 
@@ -108,14 +112,21 @@ function CalendarContextProvider(props:any) {
         let dateinfo = e.getDate()
         // console.log(Date())
 
-     
-        console.log(e, TodayDateInfo, tomorrow, 'return')
+        console.log(TodayDateInfo, tomorrow, )
+        console.log(e,'return')
 
         const getselectedDay = DaysoftheWeek.find((item, i) => i == dayinfo)
 
         const getselectedYear = yearinfo + 1900
 
         const getselectedMonth = MonthsoftheYear.find((item,i)=> i == monthinfo )
+
+        return ({
+            Day: String( getselectedDay),
+            Month: String(getselectedMonth),
+            Year: String(getselectedYear) ,
+            Date: String(dateinfo)
+        })
         // let dateinfoArray = dateinfo.split(' ')
 
         setDateInfo({
@@ -128,10 +139,12 @@ function CalendarContextProvider(props:any) {
         toggleisDateTerminal()
     }
 
- 
+ const updateDateInfo = (e:any) => {
+    setDateInfo(getDateInfo(e))
+ }
 
     return (
-        <CalendarContext.Provider value={{DateInfo, getDateInfo, TommorowDateInfo, isDateTerminal, toggleisDateTerminal}}>
+        <CalendarContext.Provider value={{DateInfo, getDateInfo, TommorowDateInfo, isDateTerminal, toggleisDateTerminal,isSelectRange, setisSelectRange, rangeMin, setrangeMin,rangeMax, setrangeMax, setDateInfo,updateDateInfo}}>
             {props.children}
         </CalendarContext.Provider>
     )

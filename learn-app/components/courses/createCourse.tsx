@@ -10,6 +10,8 @@ import DaysofWeekdisplay from './createCourse/DaysofWeekdisplay'
 import ParentCourse from './createCourse/ParentCourse'
 
 import Select from '@mui/material/Select'
+import DurationModal from './createCourse/DurationModal'
+import { DuttonMid, DuttonSmall } from '../GeneralPurpose/dutton'
 
 
 const CreateCourse = () => {
@@ -27,7 +29,9 @@ const CreateCourse = () => {
     // console.log(array2 === Array1, 'reals')
     
 
-    const {isTopicPanelOpen, toggleTopicPanel, currentCourseName, currentCodeDesc, currentCourseCode, setcurrentCodeDesc, setcurrentCourseName, setcurrentCourseCode, currentNoWeeks, setcurrentNoWeeks, saveCurrentCourse, setisNewCoursePanelOpen, isNewCoursePanelOpen ,isDowCarousel,toggleisDowCarousel, setisDowCarousel, addDayOfWeek, currentDaysOfWeek,isCourseList, setisCourseList, isParentCourse,setisParentCourse} = React.useContext(CourseContext) as Icoursecontext
+    const {isTopicPanelOpen, toggleTopicPanel, currentCourseName, currentCodeDesc, currentCourseCode, setcurrentCodeDesc, setcurrentCourseName, setcurrentCourseCode, currentNoWeeks, setcurrentNoWeeks, saveCurrentCourse, setisNewCoursePanelOpen, isNewCoursePanelOpen ,isDowCarousel,toggleisDowCarousel, setisDowCarousel, addDayOfWeek, currentDaysOfWeek,isCourseList, setisCourseList, isParentCourse,setisParentCourse,isDurationModal, setisDurationModal} = React.useContext(CourseContext) as Icoursecontext
+
+    // const [isDurationModal, setisDurationModal] = React.useState<boolean> (false);
 
     const parentVariant = {
         move: {
@@ -63,39 +67,41 @@ const CreateCourse = () => {
         }
     }
 
-  return (
-    <div className='flex justify-center' >
-        { 
 
-          
+
+  return (
+    <div className='flex relative justify-center' >
                       <div 
                   className='xl:w-8/12 lg:w-9/12 md:w-10/12 w-11/12 '
-                      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>)=>{
-                if(isDowCarousel && e.target.id !== 'dowCarousel' || !e){
-        
-             
-                    setisDowCarousel(false)
+                >
+
+{isDurationModal &&
+
+<motion.div
+
+initial={{
+    y:40,
+}}
+transition={{
+    type:'tween',   
+}}
+animate={{
+    y:0,
+    opacity:'50'
+}} 
+className='flex'
+>
+    <div id='durationModal' className='w-full z-20 relative flex justify-center'>
+    <DurationModal/>
+    </div>
+   
+</motion.div>
+
                 }
-            }}>
             
-                <div className='flex flex-col py-4 mx-4' >
-                    <div className='mb-4'  >
-                        {/* <div className='text-2xl bg-amber-800 font-header8 font-bold cursor-pointer flex' onClick={()=>{setisParentCourse((prev) => !prev)}} >
-                        Add Parent Course 
-                        <div>
-                            [+++]
-                        </div> 
-                        </div> */}
-
-
+                <div className={`${isDurationModal?'opacity-20':''} flex flex-col py-4 mx-4`} >
+                    <div className={` mb-4`}  >
                         <ParentCourse/>
-                        {/* {isParentCourse && 
-                        <motion.div transition={{type:'spring', stiffness:50}} initial={{y:20}} animate={{y:0}}>
-                             <ParentCourse/>
-                         </motion.div>
-                        } */}
-                       
-        
                     </div>
         
                     <div className='   text-white  font-header12 flex ' ><div className='flex'>
@@ -146,74 +152,43 @@ const CreateCourse = () => {
                     </div>
                     </div>
         
-                    <div  className='flex mt-4 flex-col'>
+                    <div  className='flex mt-4 flex-col '>
                         <div className='text-xs '>
                             description
                         </div>
-                        <textarea 
-                        placeholder='description'
-                        value={currentCodeDesc}
-                        onChange={(e)=>setcurrentCodeDesc(e.target.value)}
-                        className='w-full font-header12 text-xl bg-transparent my-1 border-b h-20' />
+
+                        <div className='border my-1'>
+                            <textarea 
+                            placeholder='description'
+                            value={currentCodeDesc}
+                            onChange={(e)=>setcurrentCodeDesc(e.target.value)}
+                            className='w-full font-header12 p-1 text-xl  bg-transparent  h-20' />
+                        </div>
+                  
         
                     </div>
         
                     <div className='flex flex-col my-4 ' >
-                        <div  className='bg-amber-800 text-white border   font-header9 flex bg-yellow-600 '>
+                        <div  className=' text-white   font-header12 flex '>
                             <div className='w-36 px-2'>
-                            DURATION
+                            DURATION AND TIME
                             </div>
                         </div>
-                      
-                      <div className='flex flex-col lg:flex-row l mt-2 mx-4 lg:items-center py-4' >
-               
-                            <div className={`text-xl ${!isDowCarousel?'w-9/12':'w-4/12'} flex items-center`}>
-                                <span className='font-bold cursor-pointer  transition-all  font-header7'>
-                                    {isDowCarousel?  
-                                    <motion.div transition={{type:'tween', duration:0.5}} initial={isDowCarousel && {y:-50}} animate={isDowCarousel && {y:10}} >
-                                          <DowCarousel/>
-                                    </motion.div>
-                                  :<div onClick={()=>toggleisDowCarousel()} className='text-4xl' > [Everyday+]</div>}
-                                  
-                                    {/* [Everyday+] */}
-                                </span>
-                                {!isDowCarousel && <span className='transition-all w-full  text-wrap'>
-                                 for the next
-                                </span>}
-                                
-                              
-                            </div>
-        
-                        <div className=' w-full' >
-                            {!isDowCarousel? 
-                            <div className={`${isDowCarousel?'lg:w-6/12 w-7/12':'lg:w-8/12  w-7/12'} flex text-xl    justify-start items-end`} >
-                            
-                            
-                                    <div>
-                                    <InputBase
-                            placeholder='[00]'
-                             className=' w-20  text-4xl bg-amber-800 font-header7  lg:mr-4 mr-4   flex justify-center'
-                            value={currentNoWeeks}
-                            onChange={(e)=>setcurrentNoWeeks(e.target.value)}
-                        />
-                                    </div>
-                   
-                            <div className='mb-3 ' >
-                                Weeks
-                            </div>
-                            </div>:<div className='text-xl ml-4 flex'>
-                                {currentDaysOfWeek.length?``:``}
-                               <DaysofWeekdisplay/>
-                               <span className='ml-2'>
-                               for 3week
-                               </span>
-                               </div>}
-                            
+
+                        <div className='flex'>
+                            <DuttonSmall
+                            icon={'set time'}
+                            handleClick={() => setisDurationModal(true)}
+                            />
                         </div>
                       
-        
-                           
-                      </div>
+                        {isDurationModal &&
+             
+                       <div>
+                            details
+                        </div>
+                        
+                        }
                         
                     </div>
         
@@ -265,7 +240,7 @@ const CreateCourse = () => {
             </div>
            
           
-        }
+
     </div>
 
     

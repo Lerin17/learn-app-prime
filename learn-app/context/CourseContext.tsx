@@ -51,6 +51,8 @@ const CourseContextProvider = (props:any) => {
 
     const [isDowCarousel, setisDowCarousel] = React.useState(false);
 
+    const [isDurationModal, setisDurationModal] = React.useState<boolean> (false);
+
     const [isParentCourse, setisParentCourse] = React.useState(false);
 
     const toggleNewCoursePanel = () => {
@@ -181,7 +183,7 @@ const CourseContextProvider = (props:any) => {
 
   return (
     <CourseContext.Provider value={{CourseObject, CoursesArray, toggleNewCoursePanel, isNewCoursePanelOpen, setisNewCoursePanelOpen, isTopicPanelOpen, toggleTopicPanel, currentCourseName,currentCodeDesc,currentCourseCode,currentNoWeeks, setcurrentCourseName, setcurrentCodeDesc, setcurrentCourseCode, setcurrentNoWeeks, saveCurrentCourse,  coursesArray, toggleisDowCarousel, isDowCarousel, setisDowCarousel, addDayOfWeek, currentDaysOfWeek, setcurrentDaysOfWeek, courseListSelectedCourse, setcourseListSelectedCourse, setisCourseList, isCourseList, isParentCourse, setisParentCourse, isCreateCourseGroupOpen, setisCreateCourseGroupOpen,currentCourseGroupName,currentCourseGroupAbv,
-currentCourseGroupDesc,currentCourseGroupCourseArray,inputCourseGroupDetails,saveCurrentCourseGroup, courseGroupArray,currentCourseGroup, setcurrentCourseGroup
+currentCourseGroupDesc,currentCourseGroupCourseArray,inputCourseGroupDetails,saveCurrentCourseGroup, courseGroupArray,currentCourseGroup, setcurrentCourseGroup,isDurationModal, setisDurationModal
      }}>
         {props.children}
     </CourseContext.Provider>

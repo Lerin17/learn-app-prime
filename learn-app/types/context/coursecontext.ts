@@ -39,6 +39,8 @@ isCreateCourseGroupOpen:boolean
  courseGroupArray:IcourseGroupObject[]
  currentCourseGroup:object
  setcurrentCourseGroup:React.Dispatch<React.SetStateAction<any>>
+ isDurationModal:boolean
+setisDurationModal:React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface IinputCourseGroupDetailsArg {
