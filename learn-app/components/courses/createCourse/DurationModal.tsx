@@ -14,39 +14,97 @@ import DurationInterface from './DurationModal/DurationInterface'
 
 const DurationModal = (props:any) => {
 
+  const getDateString = (dateObj:Date) => {
+    const InitialDateInfo = getDateInfo(dateObj)
+
+    const DateString = `${InitialDateInfo.Date} of ${InitialDateInfo.Month}, ${InitialDateInfo.Year}`
+
+    return DateString
+  }
   
 const {isDurationModal, setisDurationModal} = React.useContext(CourseContext) as Icoursecontext
 
-const {isSelectRange,getDateInfo} = React.useContext(CalendarContext) as Icalendarcontext
+const {getDateInfo} = React.useContext(CalendarContext) as Icalendarcontext
 
 const [isSelectRangeDurationModal, setisSelectRangeDurationModal] = React.useState(false);
 
-const [isSelectInitialDate, setisSelectInitialDate] = React.useState<boolean>(false);
+const [isSelectDurationStart, setisSelectDurationStart] = React.useState<boolean>(false);
 
 const [isSelectDaysOfWeeks, setisSelectDaysOfWeeks] = React.useState(false);
 
-const [maxRangeDurationModal, setmaxRangeDurationModal] = React.useState();
+const [maxRangeDurationModal, setmaxRangeDurationModal] = React.useState<Date | null>();
 
-const [minRangeDurationModal, setminRangeDurationModal] = React.useState();
+const [minRangeDurationModal, setminRangeDurationModal] = React.useState<Date | null>();
 
-const [DurationStart, setDurationStart] = React.useState<string>('4th of May, 2023');
+const [DurationStart, setDurationStart] = React.useState<TDurationStart>({text: getDateString(new Date), dateObj:null});
 
 const [Duration, setDuration] = React.useState<{
   NoWeeks:string,
   NoDays:string
-}>({NoWeeks:'3', NoDays:'5' });
+}>({NoWeeks:'0', NoDays:'0' });
 
   // type TtoggleModalOptionArg {
   //   option:'
   // }
 
+  type TCalenderValuePiece = Date | null
+
+type TCalenderValue = TCalenderValuePiece | [TCalenderValuePiece, TCalenderValuePiece]
+
+const [calenderValue, setcalenderValueOnChange] = React.useState<TCalenderValue>(new Date());
+
+  type TDurationStart = {
+    text:string | null,
+    dateObj:Date | null
+  }
+
+  React.useEffect(() => {
+    const date = Date()
+  }, []);
+
+  React.useEffect(() => {
+    if(Duration && isSelectRangeDurationModal){
+      const gettodayDate = DurationStart.dateObj? DurationStart.dateObj:new Date()
+      const getMaxDate = new Date(gettodayDate)
+      const maxDateDifference = (Number(Duration.NoWeeks) * 7) + Number(Duration.NoDays)
+
+      getMaxDate.setDate(getMaxDate.getDate() + maxDateDifference
+      )
+
+      const maxDate =  getMaxDate
+      const minDate = DurationStart.dateObj
+
+      setmaxRangeDurationModal(maxDate)
+      setminRangeDurationModal(minDate)
+    
+    if(isSelectRangeDurationModal){
+      setcalenderValueOnChange([minDate, maxDate])
+      setTimeout(() => {
+        setisSelectRangeDurationModal(false)
+      }, 200);
+    
+    }
+
+
+      console.log(minDate,maxDate, 'maxDateDifference')
+    }
+  }, [Duration]);
+
+  const updateDuration = (Value:{
+    NoWeeks:string,
+    NoDays:string
+  }) => {
+    console.log('update')
+    setDuration(Value)
+  }
+
   const toggleModalOptions = (option:'initialDate' | 'Days of week' | 'Duration') => {
     if(option === 'initialDate'){
-      if(isSelectInitialDate === true){
-        setisSelectInitialDate(false)
+      if(isSelectDurationStart === true){
+        setisSelectDurationStart(false)
         return
       }
-      setisSelectInitialDate(true)
+      setisSelectDurationStart(true)
       setisSelectRangeDurationModal(false)
       setisSelectDaysOfWeeks(false)
     }else if(option === 'Days of week'){
@@ -54,7 +112,7 @@ const [Duration, setDuration] = React.useState<{
         setisSelectDaysOfWeeks(false)
         return
       }
-      setisSelectInitialDate(false)
+      setisSelectDurationStart(false)
       setisSelectRangeDurationModal(false)
       setisSelectDaysOfWeeks(true)
     }else if(option === 'Duration'){
@@ -62,19 +120,22 @@ const [Duration, setDuration] = React.useState<{
         setisSelectRangeDurationModal(false)
         return
       }
-      setisSelectInitialDate(false)
+      setisSelectDurationStart(false)
       setisSelectRangeDurationModal(true)
       setisSelectDaysOfWeeks(false)
     }
   }
 
+
+
   const handleCalenderClick = (e:any) => {
-    if(isSelectInitialDate){
-    const InitialDateInfo =  getDateInfo(e)
+    if(isSelectDurationStart){
+    // const InitialDateInfo =  getDateInfo(e)
 
-    const formatDateInfo = () => `${InitialDateInfo.Date} of ${InitialDateInfo.Month}, ${InitialDateInfo.Year}`
+    // const formatDateInfo =  `${InitialDateInfo.Date} of ${InitialDateInfo.Month}, ${InitialDateInfo.Year}`
 
-    setDurationStart(formatDateInfo)
+
+    setDurationStart({dateObj:e, text:getDateString(e)})
       
     }
   }
@@ -108,6 +169,8 @@ const [Duration, setDuration] = React.useState<{
           minDate = {minRangeDurationModal}
           maxDate = {maxRangeDurationModal}
           handleClick = {handleCalenderClick}
+         value = {calenderValue}
+         onChange = {setcalenderValueOnChange}
           />
         </div>
 
@@ -115,8 +178,8 @@ const [Duration, setDuration] = React.useState<{
 
         <div className='hidden lg:block md:block lg:w-8/12 md:w-8/12 h-full px-4'>
 
-          <div className='flex  justify-between w-10/12'>
-            <div className={`${isSelectInitialDate?'border-b-4':''}`}>
+          <div className='flex  justify-between w-12/12 border-b'>
+            <div className={`${isSelectDurationStart?'border-b-4':''}`}>
              <DuttonAlt
                 icon={
                 'Initial date'
@@ -125,13 +188,15 @@ const [Duration, setDuration] = React.useState<{
                 />
             </div>
 
-
-               <DuttonAlt
-                icon={
-                  'Duration'
-                }
-                handleClick={() => toggleModalOptions('Duration')}
-                />
+              <div className={`${isSelectRangeDurationModal?'border-b-4':''}`}>
+                  <DuttonAlt
+                    icon={
+                      'Duration'
+                    }
+                    handleClick={() => toggleModalOptions('Duration')}
+                    />
+              </div>
+            
          
 
               <DuttonAlt
@@ -147,8 +212,9 @@ const [Duration, setDuration] = React.useState<{
                   <DurationInterface
                   DurationStart = {DurationStart}
                   Duration = {Duration}
+                  updateDuration = {updateDuration}
                   isSelectRangeDurationModal = {isSelectRangeDurationModal}
-                  isSelectInitialDate = {isSelectInitialDate} setisSelectInitialDate = {setisSelectInitialDate}
+                  isSelectDurationStart = {isSelectDurationStart} setisSelectDurationStart = {setisSelectDurationStart}
 
                   />
             

@@ -7,9 +7,10 @@ import { CalendarTileProperties } from 'react-calendar';
 // import './Calender.css'
 // import './Calendar.css';
 
-type TcalenderCom = {
+type TCalenderValuePiece = Date | null
 
-}
+type TCalenderValue = TCalenderValuePiece | [TCalenderValuePiece, TCalenderValuePiece]
+// Date | null | undefined | [Date | null, Date | null]
 
  const CalendarCom = (props:any) => {
     const {getDateInfo, setDateInfo, updateDateInfo} = React.useContext(CalendarContext) as Icalendarcontext
@@ -23,9 +24,11 @@ type TcalenderCom = {
     console.log(value, 'value')
 
     React.useEffect(() => {
-      if(props.isSelectRange && value.length){
-        if(value.length){
-          console.log(getDateInfo(value[0]) , 'valuez' , value[1])
+
+      //getMaxandMinValues in getDateInfo type
+      if(props.isSelectRange && props.value.length){
+        if(props.value.length){
+          console.log(getDateInfo(props.value[0]) , 'valuez' , value[1])
 
         }
       }
@@ -33,8 +36,10 @@ type TcalenderCom = {
 
     const getTileClassName = (e:CalendarTileProperties) => {
       console.log(e, 'tile')
-      return 'text-blue-600'
+      return 'text-black'
     }
+
+    // Function: ({ activeStartDate, date, view }) => view === 'month' && date.getDay() === 3 ? 'wednesday' : null
 
   return (
     <div>
@@ -42,15 +47,16 @@ type TcalenderCom = {
             <Calendar 
             onClickDay={(e)=>props.handleClick(e)} tileContent={'*'}  
             tileClassName={(e) => getTileClassName(e)}
-            className={` text-lg lg:rounded-l-none border-y-2 w-full mx-auto  font-header12`} onChange={onChange} value={value}
+            className={` text-lg border w-full mx-auto  font-header12`} onChange={props.onChange} value={props.value}
             selectRange = {props.isSelectRange}
-            minDate={props.minDate}
-            maxDate={props.maxDate}
+            // minDate={props.minDate}
+            // maxDate={props.maxDate}
             
             // maxDate={}
             showDoubleView ={false}
             closeCalendar
-            
+            allowPartialRange
+
             // defaultValue={value}
             />
         </div>

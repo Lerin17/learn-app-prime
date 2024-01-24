@@ -99,7 +99,7 @@ className='flex'
 
                 }
             
-                <div className={`${isDurationModal?'opacity-20':''} flex flex-col py-4 mx-4`} >
+                <div className={`${isDurationModal?'opacity-0':''} flex flex-col py-4 mx-4`} >
                     <div className={` mb-4`}  >
                         <ParentCourse/>
                     </div>
