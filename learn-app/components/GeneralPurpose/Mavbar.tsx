@@ -57,8 +57,7 @@ const Mavbar = () => {
     
     
     
-      {
-      
+      {  
       (notfication?.type == 'error-mini' || notfication?.type == 'success-mini') ?
       <motion.div
       animate={{

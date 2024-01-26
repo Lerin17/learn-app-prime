@@ -34,6 +34,8 @@ isCreateCourseGroupOpen:boolean
  currentCourseGroupAbv:string
  currentCourseGroupDesc:string
  currentCourseGroupCourseArray:Icourseobject[]
+ currentCourseStartDate:IstartDate | undefined
+setcurrentCourseStartDate:React.Dispatch<React.SetStateAction<IstartDate | undefined>>
  inputCourseGroupDetails: (Arg:IinputCourseGroupDetailsArg)=>void
  saveCurrentCourseGroup:(obj:IsaveCurrentCourseGroupArg)=>void
  courseGroupArray:IcourseGroupObject[]
@@ -41,6 +43,8 @@ isCreateCourseGroupOpen:boolean
  setcurrentCourseGroup:React.Dispatch<React.SetStateAction<any>>
  isDurationModal:boolean
 setisDurationModal:React.Dispatch<React.SetStateAction<boolean>>
+currentDuration:IcourseDuration
+setcurrentDuration:React.Dispatch<React.SetStateAction<IcourseDuration>>
 }
 
 export interface IinputCourseGroupDetailsArg {
@@ -67,13 +71,22 @@ currentCourseGroupAbv:string
 currentCourseGroupName:string
 }
 
+export interface IstartDate {
+        text:string | null,
+        dateObj:Date | null
+} 
 
+export interface IcourseDuration {
+    NoWeeks:number | null,
+    NoDays:number | null
+} 
 export interface Icourseobject {
     courseName: string
     courseCode:string
     courseDesc:string
-    NoWeeks:string
-    daysOfTheWeek:string[]
+    // NoWeeks:string
+    courseDuration:IcourseDuration
+    startDate: IstartDate 
     courseId:string 
 }
 

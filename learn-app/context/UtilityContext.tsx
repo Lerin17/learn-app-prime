@@ -55,23 +55,23 @@ const UtilityContextProvider = (props:any) => {
 
     const [currentCursorVariant, setcurrentCursorVariant] = React.useState<string>('default');
 
-    const getMousePosition = (e:any) => {
-        //  console.log(e)
-         setmousePosition({
-            x:e.clientX,
-            y:e.clientY
-         })
-    }
+    // const getMousePosition = (e:any) => {
+    //     //  console.log(e)
+    //      setmousePosition({
+    //         x:e.clientX,
+    //         y:e.clientY
+    //      })
+    // }
 
    
 
-    React.useEffect(() => {
-        window.addEventListener('mousemove', getMousePosition)
+    // React.useEffect(() => {
+    //     window.addEventListener('mousemove', getMousePosition)
 
-        return () => {
-            window.removeEventListener('mousemove', getMousePosition)
-        }
-    }, []);
+    //     return () => {
+    //         window.removeEventListener('mousemove', getMousePosition)
+    //     }
+    // }, []);
 
     const getWindowWidth = () => {
         setscreenWidth(window.innerWidth)
@@ -107,7 +107,7 @@ setcurrentCursorVariant('default')
     
 
   return (
-    <UtilityContext.Provider value={{screenWidth, mousePosition, currentCursorVariant, setcurrentCursorVariant,  cursorLeave, cursorEnter, routerLocation, navBarOptionLocation, setnavBarOptionLocation, updateNavBarOptionLocation}} >
+    <UtilityContext.Provider value={{screenWidth, currentCursorVariant, setcurrentCursorVariant,  cursorLeave, cursorEnter, routerLocation, navBarOptionLocation, setnavBarOptionLocation, updateNavBarOptionLocation}} >
         {props.children}
     </UtilityContext.Provider>
   )

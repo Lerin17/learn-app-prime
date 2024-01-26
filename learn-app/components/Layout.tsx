@@ -23,7 +23,7 @@ export const Layout = (prop:any) => {
 
   const path = useRouter().asPath
 
-const {mousePosition, currentCursorVariant, navBarOptionLocation, setnavBarOptionLocation, updateNavBarOptionLocation} = React.useContext(UtilityContext) as Iutilitycontext
+const {currentCursorVariant, navBarOptionLocation, setnavBarOptionLocation, updateNavBarOptionLocation} = React.useContext(UtilityContext) as Iutilitycontext
 
 const {isUserStudent, userData, notfication} = React.useContext(UserContext) as Iusercontext
 
@@ -34,6 +34,11 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
   const updateLocation = (data:any) => {
     setnavBarOptionLocation(data)
   }
+
+  const [mousePosition, setmousePosition] = React.useState({
+    x:0,
+    y:0
+});
 
   const {isDurationModal, setisDurationModal} = React.useContext(CourseContext) as Icoursecontext
 
@@ -98,7 +103,21 @@ const {isUserStudent, userData, notfication} = React.useContext(UserContext) as 
     }
   }
 
+  const getMousePosition = (e:any) => {
+    //  console.log(e)
+     setmousePosition({
+        x:e.clientX,
+        y:e.clientY
+     })
+}
 
+  React.useEffect(() => {
+    window.addEventListener('mousemove', getMousePosition)
+
+    return () => {
+        window.removeEventListener('mousemove', getMousePosition)
+    }
+}, []);
 
   // console.log(navBarOptionLocation, 'navbarloaction')
   

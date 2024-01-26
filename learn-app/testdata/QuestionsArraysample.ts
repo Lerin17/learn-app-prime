@@ -44,37 +44,57 @@ export const products = [
         {courseName:'Math',
         courseCode:'mat114',
         courseDesc:'some course',
-        NoWeeks:'exrrx',
+        courseDuration:{NoWeeks:0, NoDays:0},
         courseId:'tctctt',
-        daysOfTheWeek:[ 'Monday','Tuesday','Thursday','Friday']
+        daysOfTheWeek:[ 'Monday','Tuesday','Thursday','Friday'],
+        startDate: {
+          text: null,
+          dateObj: null
+  } 
       },
       {courseName:'Math',
       courseCode:'mat204',
       courseDesc:'some course',
-      NoWeeks:'exrrx',
+      courseDuration:{NoWeeks:0, NoDays:0},
       courseId:'tctcttrtgg',
-      daysOfTheWeek:[ 'Tuesday','Wednesday','Thursday','Friday']
+      daysOfTheWeek:[ 'Tuesday','Wednesday','Thursday','Friday'],
+      startDate: {
+        text: null,
+        dateObj: null
+}
     },
     {courseName:'Eng',
     courseCode:'eng244',
     courseDesc:'some course',
-    NoWeeks:'exrrx',
+    courseDuration:{NoWeeks:0, NoDays:0},
     courseId:'tctcttwzrr',
-    daysOfTheWeek:[ 'Monday','Thursday','Friday',]
+    daysOfTheWeek:[ 'Monday','Thursday','Friday',],
+    startDate: {
+      text: null,
+      dateObj: null
+}
   },
   {courseName:'Eng',
   courseCode:'eng334',
   courseDesc:'some course',
-  NoWeeks:'exrrx',
+  courseDuration:{NoWeeks:0, NoDays:0},
   courseId:'tctctxrxrt',
-  daysOfTheWeek:['Monday','Wednesday','Friday']
+  daysOfTheWeek:['Monday','Wednesday','Friday'],
+  startDate: {
+    text: null,
+    dateObj: null
+}
 },
 {courseName:'Math',
 courseCode:'mat274',
 courseDesc:'some course',
-NoWeeks:'exrrx',
+courseDuration:{NoWeeks:0, NoDays:0},
   courseId:'txfxfeectctt',
-daysOfTheWeek:[ 'Monday','Tuesday','Wednesday','Thursday']
+daysOfTheWeek:[ 'Monday','Tuesday','Wednesday','Thursday'],
+startDate: {
+  text: null,
+  dateObj: null
+}
 }
   ]
 

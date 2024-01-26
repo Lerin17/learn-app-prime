@@ -22,6 +22,9 @@ module.exports = {
       },
       animation: {
         "slideDown": "fadeSlideDown .4s ease-in-out",
+        "slideAcross": "fadeLeftToRight 2s ease-in-out infinite",
+        "slideAcrossLg": "fadeLeftToRightLg 2s ease-in-out infinite",
+        "slideAcrossMd": "fadeLeftToRightMd 2s ease-in-out infinite",
       },
 
       keyframes: (theme) => ({
@@ -37,6 +40,30 @@ module.exports = {
           opacity: '100%'
           },
         },
+        "fadeLeftToRight": {
+          "0%": { transform: "translateX(0)",
+          opacity: '0%'
+          },
+          "100%": {   transform: "translateX(-350px)" ,
+          opacity: '60%'
+          },
+        },
+        "fadeLeftToRightMd": {
+          "0%": { transform: "translateX(0)",
+          opacity: '0%'
+          },
+          "100%": {   transform: "translateX(-450px)" ,
+          opacity: '60%'
+          },
+        },
+        "fadeLeftToRightLg": {
+          "0%": { transform: "translateX(0)",
+          opacity: '0%'
+          },
+          "100%": {   transform: "translateX(-650px)" ,
+          opacity: '60%'
+          },
+        }
         
       }),
     },

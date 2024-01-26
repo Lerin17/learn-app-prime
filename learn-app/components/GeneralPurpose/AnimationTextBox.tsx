@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
 import React from 'react'
-import AnimationContainer from './AnimationContainer'
+// import AnimationContainer from './AnimationContainer'
 
 interface TAnimationTextBox {
     text:string | undefined,
     animationtype: string | undefined
+    isAnimate : Boolean
 }
 
 
@@ -13,36 +14,51 @@ const AnimationTextBox = (props:TAnimationTextBox) => {
     console.log('xx')
 
     if(props.animationtype === 'notice'){
-        return <div className='relative flex'>
-            <motion.div
-            transition={{
-                repeat:Infinity,
-                repeatDelay: 5,
-                duration:1
-            }}
+        return  <motion.div className='relative w-full flex justify-between  overflow-hidden'>
+            
+      
 
-            initial={{
-                right:'0%'
-            }}
-            animate={{
-                right:'100%',
+       <div className='text-black px-1'>
+       {props.text}
+       </div>
 
-            }}
-            className='bg-white absolute z-10 h-full w-20 blur-md '>
-
-            </motion.div>
-
-            <div>
-            {props.text}
-            </div>
-
-               
-        </div>
-    }else {
-        return <div>
+       <motion.div
+        className='bg-white  z-10 h-full  w-10 blur-md sm:animate-slideAcross md:animate-slideAcrossMd lg:animate-slideAcrossLg'>
             x
+        </motion.div>
+
+          
+   </motion.div>
+    }else{
+        return <div>
+            yx
         </div>
     }
+
+
+        // return
+        //  <motion.div className='relative flex'>
+            
+        //      <motion.div
+        //      animate={props.isAnimate && { right: '0%' }}
+
+        //      initial={{left:'0%'}}
+        //      transition={{ ease: "linear", duration: 2, repeatType:'loop' }}
+ 
+        //      className='bg-white absolute z-10 h-full w-20 blur-md '>
+ 
+        //      </motion.div>
+        
+            
+            
+
+        //     <div>
+        //     {props.text}
+        //     </div>
+
+               
+        // </motion.div>
+  
 }
 
 

@@ -10,6 +10,7 @@ import { CalendarCom } from '../../Home/CalenderCom'
 import { CalendarContext } from '../../../context/CalenderContext'
 import { Icalendarcontext } from '../../../types/context/calendarcontext'
 import DurationInterface from './DurationModal/DurationInterface'
+import { text } from 'stream/consumers'
 
 
 const DurationModal = (props:any) => {
@@ -22,7 +23,7 @@ const DurationModal = (props:any) => {
     return DateString
   }
   
-const {isDurationModal, setisDurationModal} = React.useContext(CourseContext) as Icoursecontext
+const {isDurationModal, setisDurationModal, setcurrentDaysOfWeek, currentCourseStartDate, setcurrentCourseStartDate, currentDuration, setcurrentDuration} = React.useContext(CourseContext) as Icoursecontext
 
 const {getDateInfo} = React.useContext(CalendarContext) as Icalendarcontext
 
@@ -42,6 +43,8 @@ const [Duration, setDuration] = React.useState<{
   NoWeeks:string,
   NoDays:string
 }>({NoWeeks:'0', NoDays:'0' });
+
+
 
   // type TtoggleModalOptionArg {
   //   option:'
@@ -63,39 +66,52 @@ const [calenderValue, setcalenderValueOnChange] = React.useState<TCalenderValue>
   }, []);
 
   React.useEffect(() => {
-    if(Duration && isSelectRangeDurationModal){
-      const gettodayDate = DurationStart.dateObj? DurationStart.dateObj:new Date()
-      const getMaxDate = new Date(gettodayDate)
-      const maxDateDifference = (Number(Duration.NoWeeks) * 7) + Number(Duration.NoDays)
-
-      getMaxDate.setDate(getMaxDate.getDate() + maxDateDifference
-      )
-
-      const maxDate =  getMaxDate
-      const minDate = DurationStart.dateObj
-
-      setmaxRangeDurationModal(maxDate)
-      setminRangeDurationModal(minDate)
-    
-    if(isSelectRangeDurationModal){
-      setcalenderValueOnChange([minDate, maxDate])
-      setTimeout(() => {
-        setisSelectRangeDurationModal(false)
-      }, 200);
-    
+    if(!currentCourseStartDate?.dateObj){
+      setcurrentCourseStartDate({text: getDateString(new Date), dateObj:new Date})
     }
+   
+  }, []);
 
+  React.useEffect(() => {
+    if(currentDuration && isSelectRangeDurationModal){
+      const getMinDate = currentCourseStartDate?.dateObj? currentCourseStartDate.dateObj:new Date()
+
+      if(getMinDate){
+        const getMaxDate = new Date(getMinDate)
+        const maxDateDifference = (Number(currentDuration.NoWeeks) * 7) + Number(currentDuration.NoDays)
+  
+        getMaxDate.setDate(getMaxDate.getDate() + maxDateDifference)
+  
+        const maxDate =  getMaxDate
+        const minDate = getMinDate
+  
+        setmaxRangeDurationModal(maxDate)
+        setminRangeDurationModal(minDate)
+      
+      if(isSelectRangeDurationModal){
+        setcalenderValueOnChange([minDate, maxDate])
+        // setTimeout(() => {
+        //   setisSelectRangeDurationModal(false)
+        // }, 200);
+      
+      }
 
       console.log(minDate,maxDate, 'maxDateDifference')
+      }
+      
+
+
+    
     }
-  }, [Duration]);
+  }, [currentDuration]);
 
   const updateDuration = (Value:{
-    NoWeeks:string,
-    NoDays:string
+    NoWeeks:number,
+    NoDays:number
   }) => {
     console.log('update')
-    setDuration(Value)
+    setcurrentDuration(Value)
+    // setDuration(Value)
   }
 
   const toggleModalOptions = (option:'initialDate' | 'Days of week' | 'Duration') => {
@@ -134,15 +150,15 @@ const [calenderValue, setcalenderValueOnChange] = React.useState<TCalenderValue>
 
     // const formatDateInfo =  `${InitialDateInfo.Date} of ${InitialDateInfo.Month}, ${InitialDateInfo.Year}`
 
-
-    setDurationStart({dateObj:e, text:getDateString(e)})
+      setcurrentCourseStartDate({dateObj:e, text:getDateString(e)})
+      setDurationStart({dateObj:e, text:getDateString(e)})
       
     }
   }
 
   return (
     <div
-    className=' absolute flex flex-col block w-full  z-10'>
+    className=' absolute  flex flex-col block w-full  z-10'>
 
         <div className='self-left w-fit'>
           <DuttonAlt
@@ -153,14 +169,14 @@ const [calenderValue, setcalenderValueOnChange] = React.useState<TCalenderValue>
           />
         </div>
 
-        <div className='block border blur-md w-full lg:hidden md:hidden'>
+        <div className='block blur-md w-full lg:hidden md:hidden'>
             info
         </div>
 
         <div
         style={{ 
         }}
-        className='h-72 flex  lg:flex-row md:flex-row flex-col '
+        className=' flex  lg:flex-row md:flex-row flex-col '
         >
         
         <div className=' w-fit mx-auto  '>
@@ -176,7 +192,7 @@ const [calenderValue, setcalenderValueOnChange] = React.useState<TCalenderValue>
 
       
 
-        <div className='hidden lg:block md:block lg:w-8/12 md:w-8/12 h-full px-4'>
+        <div className='hidden lg:block md:block lg:w-8/12 md:w-8/12 flex flex-col h-full px-4'>
 
           <div className='flex  justify-between w-12/12 border-b'>
             <div className={`${isSelectDurationStart?'border-b-4':''}`}>
@@ -198,25 +214,33 @@ const [calenderValue, setcalenderValueOnChange] = React.useState<TCalenderValue>
               </div>
             
          
-
-              <DuttonAlt
+            <div className={`${isSelectDaysOfWeeks?'border-b-4':''}`}>
+            <DuttonAlt
                 icon={
                   'Days of the week'
                 }
                 handleClick={() => toggleModalOptions('Days of week')}
                 />
+            </div>
+          
 
                
           </div>
-                  
-                  <DurationInterface
-                  DurationStart = {DurationStart}
-                  Duration = {Duration}
+ 
+                <div className='h-full '>
+                <DurationInterface
+                  DurationStart = {currentCourseStartDate}
+                  Duration = {currentDuration}
                   updateDuration = {updateDuration}
                   isSelectRangeDurationModal = {isSelectRangeDurationModal}
-                  isSelectDurationStart = {isSelectDurationStart} setisSelectDurationStart = {setisSelectDurationStart}
+                  isSelectDurationStart = {isSelectDurationStart}
+                  isSelectDaysOfWeeks = {isSelectDaysOfWeeks} 
+                  setisSelectDurationStart = {setisSelectDurationStart}
 
                   />
+                </div>
+                  
+              
             
         </div>
         

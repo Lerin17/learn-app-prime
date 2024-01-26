@@ -1,6 +1,6 @@
 export interface Iutilitycontext {
     screenWidth: number
-    mousePosition:any
+    // mousePosition:any
     currentCursorVariant:string
     setcurrentCursorVariant:React.Dispatch<React.SetStateAction<string>>
     cursorLeave:()=>void

@@ -8,6 +8,8 @@ import { courses } from '../testdata/QuestionsArraysample';
 
 const CourseContext = React.createContext<Icoursecontext | null>(null)
 
+import { IstartDate, IcourseDuration } from '../types/context/coursecontext';
+
 const CourseContextProvider = (props:any) => {
   //ignore, it is not used
     const [CoursesArray, setCoursesArray] = React.useState<Icourseobject[]>(courses);
@@ -21,6 +23,10 @@ const CourseContextProvider = (props:any) => {
     const [currentCodeDesc, setcurrentCodeDesc] = React.useState<string>('');
 
     const [currentNoWeeks, setcurrentNoWeeks] = React.useState<string>('');
+
+    const [currentDuration, setcurrentDuration] = React.useState<IcourseDuration>({NoDays:0, NoWeeks:0});
+
+    const [currentCourseStartDate, setcurrentCourseStartDate] = React.useState<IstartDate | undefined>({text: '', dateObj:null});
 
     const [currentDaysOfWeek, setcurrentDaysOfWeek] = React.useState<string[]>([]);
 
@@ -183,7 +189,7 @@ const CourseContextProvider = (props:any) => {
 
   return (
     <CourseContext.Provider value={{CourseObject, CoursesArray, toggleNewCoursePanel, isNewCoursePanelOpen, setisNewCoursePanelOpen, isTopicPanelOpen, toggleTopicPanel, currentCourseName,currentCodeDesc,currentCourseCode,currentNoWeeks, setcurrentCourseName, setcurrentCodeDesc, setcurrentCourseCode, setcurrentNoWeeks, saveCurrentCourse,  coursesArray, toggleisDowCarousel, isDowCarousel, setisDowCarousel, addDayOfWeek, currentDaysOfWeek, setcurrentDaysOfWeek, courseListSelectedCourse, setcourseListSelectedCourse, setisCourseList, isCourseList, isParentCourse, setisParentCourse, isCreateCourseGroupOpen, setisCreateCourseGroupOpen,currentCourseGroupName,currentCourseGroupAbv,
-currentCourseGroupDesc,currentCourseGroupCourseArray,inputCourseGroupDetails,saveCurrentCourseGroup, courseGroupArray,currentCourseGroup, setcurrentCourseGroup,isDurationModal, setisDurationModal
+currentCourseGroupDesc,currentCourseGroupCourseArray,inputCourseGroupDetails,saveCurrentCourseGroup, courseGroupArray,currentCourseGroup, setcurrentCourseGroup,isDurationModal, setisDurationModal, currentCourseStartDate, setcurrentCourseStartDate, currentDuration, setcurrentDuration
      }}>
         {props.children}
     </CourseContext.Provider>
