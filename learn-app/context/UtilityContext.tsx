@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Iutilitycontext } from '../types/context/utilitycontext';
 
-
+import { Tnotification } from '../types/context/utilitycontext';
 
 const UtilityContext = React.createContext<Iutilitycontext | null>(null)
 
@@ -14,6 +14,10 @@ const UtilityContextProvider = (props:any) => {
     const [screenWidth, setscreenWidth] = React.useState(0);
 
     const [navBarOptionLocation, setnavBarOptionLocation] = React.useState<any>();
+
+
+   
+    const [notfication, setnotfication] = React.useState<Tnotification>(null);
 
     const routerx = useRouter().asPath 
 
@@ -27,6 +31,24 @@ const UtilityContextProvider = (props:any) => {
             routerx
         )
     }, []);
+
+    let runReset:any
+
+    React.useEffect(() => {
+        if(notfication){
+          console.log(  console.log(notfication,'notiixexexxexexexexexexexxdexzf'))
+          runReset = setTimeout(() => {
+              setnotfication(null)
+          }, 4000);
+        }
+        return () => {
+          if(runReset){
+              clearTimeout(runReset)
+          }
+          
+        }
+      }, [notfication]);
+
 
     // console.log(routerx, 'Linkkkkkks')
 
@@ -107,7 +129,7 @@ setcurrentCursorVariant('default')
     
 
   return (
-    <UtilityContext.Provider value={{screenWidth, currentCursorVariant, setcurrentCursorVariant,  cursorLeave, cursorEnter, routerLocation, navBarOptionLocation, setnavBarOptionLocation, updateNavBarOptionLocation}} >
+    <UtilityContext.Provider value={{screenWidth, currentCursorVariant, setcurrentCursorVariant,  cursorLeave, cursorEnter, routerLocation, navBarOptionLocation, setnavBarOptionLocation, updateNavBarOptionLocation, notfication, setnotfication}} >
         {props.children}
     </UtilityContext.Provider>
   )

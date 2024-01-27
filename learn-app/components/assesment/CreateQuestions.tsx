@@ -268,7 +268,7 @@ const [lunch, setlunch] = React.useState('');
 
   <ReactSelect
   placeholder='Tags for Questions'
-  className='text-base focus:border-none'
+  className='text-base focus:border-none font-header6'
    options={TagsOptions}
    isMulti
        theme={(theme) => ({

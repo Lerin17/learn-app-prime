@@ -19,7 +19,7 @@ setcurrentCodeDesc:React.Dispatch<React.SetStateAction<string>>
 setcurrentCourseCode:React.Dispatch<React.SetStateAction<string>>
 setcurrentNoWeeks:React.Dispatch<React.SetStateAction<string>>
 saveCurrentCourse:({currentCourseName, currentCodeDesc, currentCourseCode}:IsaveCurrentCourseArg)=>void
-addDayOfWeek:(e:React.MouseEvent<HTMLDivElement, MouseEvent>)=>void
+
 currentDaysOfWeek:string[]
 setcurrentDaysOfWeek:React.Dispatch<React.SetStateAction<string[]>>
 courseListSelectedCourse:Icourseobject | undefined | null
@@ -45,7 +45,22 @@ setcurrentCourseStartDate:React.Dispatch<React.SetStateAction<IstartDate | undef
 setisDurationModal:React.Dispatch<React.SetStateAction<boolean>>
 currentDuration:IcourseDuration
 setcurrentDuration:React.Dispatch<React.SetStateAction<IcourseDuration>>
+// courseNotification:Tnotification
 }
+
+
+// type Tnotification = {
+//     type:'success',
+//     message:string
+//   } | {type:'error',
+//     message:string} | {
+//     type:'error-mini',
+//     message:string
+//   } | {
+//     type:'success-mini',
+//     message:string
+//   }| null
+
 
 export interface IinputCourseGroupDetailsArg {
     name:string

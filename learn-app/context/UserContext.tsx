@@ -20,13 +20,13 @@ const UserContext = React.createContext<Iusercontext | null>(null)
 
 const UserContextProvider = (props:any) => {
 
-  const {routerLocation} = React.useContext(UtilityContext) as Iutilitycontext
+  const {routerLocation, setnotfication, notfication} = React.useContext(UtilityContext) as Iutilitycontext
 
   console.log(routerLocation, 'roorrrrrrr')
 
     const [isUserStudent, setisUserStudent] = React.useState<boolean>(true);
 
-    const {notfication, setnotfication} = useNotification()
+    // const {notfication, setnotfication} = useNotification()
 
     const databaseRef = collection(database, 'Users')
 
@@ -60,7 +60,9 @@ const UserContextProvider = (props:any) => {
       packages:[],
       id:'',
       subscribers:[],
-      yourSubscriptions:[]
+      yourSubscriptions:[],
+      allCourses:[],
+      allCourseGroups:[]
     });
 
     const [isLoginPage, setisLoginPage] = React.useState<boolean>(false);
@@ -103,6 +105,8 @@ const UserContextProvider = (props:any) => {
   //   }
   //  }, [userData]);
 
+  // Usernameinput functions as the ID, should change it
+
     const addNewUser =  () => {
       setDoc(doc(databaseRef, Usernameinput) ,{name:Usernameinput, password:Userpasswordinput,
       email:Useremailinput, id:uniqid(), networks:[], packages:[], subscribers:[], yourSubscriptions:[]}).then(() => {
@@ -120,7 +124,9 @@ const Data:any = getdata.data()
         packages:[],
         id:Data.id,
         subscribers:[],
-        yourSubscriptions:[]
+        yourSubscriptions:[],
+        allCourses:Data.allCourses,
+        allCourseGroups:Data.allCourseGroups
       })
 
       setnotfication({
@@ -157,7 +163,9 @@ const Data:any = getdata.data()
               packages:Data.packages,
               id:Data.id,
               subscribers: Data.subscribers,
-              yourSubscriptions:Data.yourSubscriptions
+              yourSubscriptions:Data.yourSubscriptions,
+              allCourses:Data.allCourses,
+              allCourseGroups:Data.allCourseGroups
             })
 
             setnotfication({
@@ -376,6 +384,41 @@ const Data:any = getdata.data()
    }
 
 
+   const updateUserCourseData = async ({CourseObj, courseGroupArrayArg}:any) => {
+    if(userData.name){
+        try {
+          const userRef = doc(database, 'Users', userData.name)
+
+          await updateDoc(userRef, {
+            allCourses: arrayUnion(CourseObj)
+          })
+
+          await updateDoc(userRef, {
+            "allCourseGroups":courseGroupArrayArg
+          })
+
+          setuserData(prev => ({
+            ...prev,
+            allCourses:[...prev.allCourses, CourseObj]
+          }))
+
+          setnotfication({
+            type:'success-mini',
+            message:'package saved successfully'
+          })
+        } catch (error) {
+          setnotfication({
+            type:'error-mini',
+            message:'error saving package'
+          })
+        }
+    }else{
+      setnotfication({
+        type:'error-mini',
+        message:'Please Login'
+      })
+    }
+   }
 
 
     const saveUserPackage = async () => {
@@ -408,6 +451,10 @@ const Data:any = getdata.data()
       await updateDoc(userRef, {
         packages: arrayUnion(currentUserPackage)
       })
+
+      
+    // await  setDoc(doc(databaseRef, Usernameinput) ,{name:Usernameinput, password:Userpasswordinput,
+    //     email:Useremailinput, id:uniqid(), networks:[], packages:[], subscribers:[], yourSubscriptions:[]})
       
         
 
@@ -416,6 +463,7 @@ const Data:any = getdata.data()
               ...prev,
               packages: [...prev.packages, currentUserPackage]
             }))
+
 
             setnotfication({
               type:'success-mini',
@@ -477,7 +525,7 @@ const Data:any = getdata.data()
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput, notfication, logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeLinkInput, setsubscribeLinkInput,searchForNetwork, channelDetails, setchannelDetails, isWaiting
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput,  logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeLinkInput, setsubscribeLinkInput,searchForNetwork, channelDetails, setchannelDetails, isWaiting, updateUserCourseData
     }} >
         {props.children}
     </UserContext.Provider>

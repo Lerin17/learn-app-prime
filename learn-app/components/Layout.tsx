@@ -23,9 +23,9 @@ export const Layout = (prop:any) => {
 
   const path = useRouter().asPath
 
-const {currentCursorVariant, navBarOptionLocation, setnavBarOptionLocation, updateNavBarOptionLocation} = React.useContext(UtilityContext) as Iutilitycontext
+const {currentCursorVariant, navBarOptionLocation, setnavBarOptionLocation, updateNavBarOptionLocation, notfication} = React.useContext(UtilityContext) as Iutilitycontext
 
-const {isUserStudent, userData, notfication} = React.useContext(UserContext) as Iusercontext
+const {isUserStudent, userData} = React.useContext(UserContext) as Iusercontext
 
   const [windowHeight, setwindowHeight] = React.useState<number>();
 

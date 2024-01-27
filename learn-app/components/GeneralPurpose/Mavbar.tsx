@@ -12,13 +12,22 @@ import TextAlt from './TextAlt'
 import useNotification from '../../hooks/Notification'
 import { Iusercontext } from '../../types/context/usercontext'
 import { AnimatePresence, motion } from 'framer-motion'
+import { CourseContext } from '../../context/CourseContext'
+import { Icoursecontext } from '../../types/context/coursecontext'
+import { UtilityContext } from '../../context/UtilityContext'
+import { Iutilitycontext } from '../../types/context/utilitycontext'
 
 const Mavbar = () => {
   const {isCreateQuestionsOpen, setisCreateQuestionsOpen,    isQuestionHome, setisQuestionHome, setisQuestionList, isQuestionList, setisQuestionsTest, } = React.useContext(AssesmentContext) as Iassesmentcontext
 
-  const {isLoginPage, setisLoginPage, setisPackagesPage, notfication, setisNetworkPage} = React.useContext(UserContext) as Iusercontext
+  // const {courseNotification} = React.useContext(CourseContext) as Icoursecontext
 
-  
+  const {notfication} = React.useContext(UtilityContext) as Iutilitycontext
+
+  //IMPORTANT, i hashed out notification from use context imports
+  const {isLoginPage, setisLoginPage, setisPackagesPage, setisNetworkPage} = React.useContext(UserContext) as Iusercontext
+
+
   const returnHomeAssesment = () => {
     setisCreateQuestionsOpen(false)
     setisQuestionList(false)

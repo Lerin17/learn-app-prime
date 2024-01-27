@@ -13,7 +13,7 @@ export interface Iusercontext {
      setUseremailinput:React.Dispatch<React.SetStateAction<string>>
      Usernameinput:string
     setUsernameinput:React.Dispatch<React.SetStateAction<string>>
-    notfication:Tnotification
+    // notfication:Tnotification
     isPackagesPage:boolean
     setisPackagesPage: React.Dispatch<React.SetStateAction<boolean>>
     isCreatePackage:boolean
@@ -37,6 +37,7 @@ export interface Iusercontext {
     channelDetails: null | TchannelDetails
     setchannelDetails: React.Dispatch<React.SetStateAction<TchannelDetails | null>>
     isWaiting:boolean
+    updateUserCourseData:(CourseObject:any) => void
    
 
 }
@@ -53,6 +54,33 @@ export type Tpackage = {
   description:string
   courses:any[],
   id:string
+}
+
+export interface IstartDate {
+  text:string | null,
+  dateObj:Date | null
+} 
+
+export interface IcourseDuration {
+NoWeeks:number | null,
+NoDays:number | null
+} 
+export interface Icourseobject {
+  courseName: string
+  courseCode:string
+  courseDesc:string
+  // NoWeeks:string
+  courseDuration:IcourseDuration
+  startDate: IstartDate 
+  courseId:string 
+}
+
+export interface IcourseGroupObject {
+  courseGroupName: string,
+  courseGroupDesc:string,
+  courseGroupAbv:string,
+  courseGroupCourseArray:[]
+  courseGroupId:string
 }
 
 export type Tpackagesubscribers = {
@@ -81,4 +109,6 @@ export interface Iuserdata {
     subscribers: Tpackagesubscribers[]
     yourSubscriptions:[]
     id:string
+    allCourses:Icourseobject[]
+    allCourseGroups:IcourseGroupObject[]
 }

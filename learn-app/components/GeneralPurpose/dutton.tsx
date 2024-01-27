@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { defaultProps } from 'react-select/dist/declarations/src/Select'
 
 const dutton = () => {
   return (
@@ -10,8 +11,11 @@ const dutton = () => {
   icon: any;
   handleClick:()=>void,
   color?:string
+  noPadding?:boolean
   
  }
+
+ 
 
  const DuttonMid = (props:duttonProps) => {
   return (
@@ -51,7 +55,7 @@ const DuttonAlt = (props:duttonProps) => {
          <div 
  
 
-     className='flex text-center text-stone-300 items-center  lg:text-2xl md:text-xl text-xs hover:bg-stone-300  py-1  text-gray-300  px-1 cursor-pointer font-header12 hover:text-stone-800 transition-all'>
+     className={`flex text-center text-stone-300 items-center  lg:text-2xl md:text-xl text-xs hover:bg-stone-300  py-1  text-gray-300 ${props.noPadding?'':'px-1'}  cursor-pointer font-header12 hover:text-stone-800 transition-all`}>
       <span className='font-header9 text-stone-300' >
         [
       </span>
