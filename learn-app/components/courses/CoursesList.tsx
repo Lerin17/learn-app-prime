@@ -5,17 +5,23 @@ import { CourseContext } from '../../context/CourseContext'
 import { Icoursecontext } from '../../types/context/coursecontext'
 
 import SelectedCourseInfo from './courseList/selectedCourseInfo'
+import { UserContext } from '../../context/UserContext'
+import { Iusercontext } from '../../types/context/usercontext'
+
 
 const CoursesList = () => {
 
-  const {coursesArray, CoursesArray, setcourseListSelectedCourse, courseListSelectedCourse   } = React.useContext(CourseContext) as Icoursecontext
+  const {userData} = React.useContext(UserContext) as Iusercontext
+
+  const { coursesArray , setcourseListSelectedCourse, courseListSelectedCourse   } = React.useContext(CourseContext) as Icoursecontext
 
   // const [CourseArray, setCourseArray] = React.useState(MultiCourseArray);
+  // const coursesArray = userData.allCourses
 
   const openSingleCourse = (num:any) => {
     console.log(num, 'num')
 
-    console.log(CoursesArray)
+    // console.log(CoursesArray)
     console.log(coursesArray, 'coursesArray')
 
    const selectedCourse = coursesArray.find(item => item.courseId === num)

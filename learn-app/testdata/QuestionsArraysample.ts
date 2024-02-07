@@ -42,7 +42,7 @@ export const products = [
 
  export const courses = [
         {courseName:'Math',
-        courseCode:'mat114',
+        courseCode:'mat114D',
         courseDesc:'some course',
         courseDuration:{NoWeeks:0, NoDays:0},
         courseId:'tctctt',
@@ -50,10 +50,11 @@ export const products = [
         startDate: {
           text: null,
           dateObj: null
-  } 
+  } ,
+  // DaysOfWeek:[,'Monday','Tuesday','Wednesday']
       },
       {courseName:'Math',
-      courseCode:'mat204',
+      courseCode:'mat204D',
       courseDesc:'some course',
       courseDuration:{NoWeeks:0, NoDays:0},
       courseId:'tctcttrtgg',
@@ -61,10 +62,11 @@ export const products = [
       startDate: {
         text: null,
         dateObj: null
-}
+},
+// DaysOfWeek:[,'Monday','Tuesday','Wednesday']
     },
     {courseName:'Eng',
-    courseCode:'eng244',
+    courseCode:'eng244D',
     courseDesc:'some course',
     courseDuration:{NoWeeks:0, NoDays:0},
     courseId:'tctcttwzrr',
@@ -72,10 +74,11 @@ export const products = [
     startDate: {
       text: null,
       dateObj: null
-}
+},
+// DaysOfWeek:[,'Monday','Tuesday','Wednesday']
   },
   {courseName:'Eng',
-  courseCode:'eng334',
+  courseCode:'eng334D',
   courseDesc:'some course',
   courseDuration:{NoWeeks:0, NoDays:0},
   courseId:'tctctxrxrt',
@@ -83,10 +86,11 @@ export const products = [
   startDate: {
     text: null,
     dateObj: null
-}
+},
+// DaysOfWeek:[,'Monday','Tuesday','Wednesday']
 },
 {courseName:'Math',
-courseCode:'mat274',
+courseCode:'mat274D',
 courseDesc:'some course',
 courseDuration:{NoWeeks:0, NoDays:0},
   courseId:'txfxfeectctt',
@@ -94,7 +98,8 @@ daysOfTheWeek:[ 'Monday','Tuesday','Wednesday','Thursday'],
 startDate: {
   text: null,
   dateObj: null
-}
+},
+// DaysOfWeek:[,'Monday','Tuesday','Wednesday']
 }
   ]
 
@@ -150,6 +155,7 @@ startDate: {
     tags:['math'],
     id:'111'},
   ]
+
 
 
 

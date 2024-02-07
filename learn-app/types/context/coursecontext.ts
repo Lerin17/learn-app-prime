@@ -18,7 +18,7 @@ setcurrentCourseName:React.Dispatch<React.SetStateAction<string>>
 setcurrentCodeDesc:React.Dispatch<React.SetStateAction<string>>
 setcurrentCourseCode:React.Dispatch<React.SetStateAction<string>>
 setcurrentNoWeeks:React.Dispatch<React.SetStateAction<string>>
-saveCurrentCourse:({currentCourseName, currentCodeDesc, currentCourseCode}:IsaveCurrentCourseArg)=>void
+saveCurrentCourse:(Arg:IsaveCurrentCourseArg)=>void
 
 currentDaysOfWeek:string[]
 setcurrentDaysOfWeek:React.Dispatch<React.SetStateAction<string[]>>
@@ -77,7 +77,10 @@ export interface IsaveCurrentCourseArg {
     currentCourseName:string
     currentCodeDesc:string
     currentCourseCode:string
-    currentNoWeeks:string
+    currentDuration:IcourseDuration
+    currentCourseStartDate: IstartDate | undefined
+    currentDaysOfWeek:string[]
+    // courseId?:string | undefined
 }
 
 export interface IsaveCurrentCourseGroupArg {
@@ -102,7 +105,9 @@ export interface Icourseobject {
     // NoWeeks:string
     courseDuration:IcourseDuration
     startDate: IstartDate 
-    courseId:string 
+    courseId:string
+    daysOfTheWeek:string[]
+
 }
 
 export interface IcourseGroupObject {
@@ -111,6 +116,7 @@ export interface IcourseGroupObject {
     courseGroupAbv:string,
     courseGroupCourseArray:[]
     courseGroupId:string
+
 }
 
 

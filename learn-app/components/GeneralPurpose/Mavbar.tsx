@@ -1,4 +1,5 @@
-import {useRouter} from 'next/router'
+// import {useRouter} from 'next/router'
+
 import React from 'react'
 import { AssesmentContext } from '../../context/AssesmentContext'
 import { UserContext } from '../../context/UserContext'
@@ -16,6 +17,7 @@ import { CourseContext } from '../../context/CourseContext'
 import { Icoursecontext } from '../../types/context/coursecontext'
 import { UtilityContext } from '../../context/UtilityContext'
 import { Iutilitycontext } from '../../types/context/utilitycontext'
+import { useRouter } from 'next/router'
 
 const Mavbar = () => {
   const {isCreateQuestionsOpen, setisCreateQuestionsOpen,    isQuestionHome, setisQuestionHome, setisQuestionList, isQuestionList, setisQuestionsTest, } = React.useContext(AssesmentContext) as Iassesmentcontext

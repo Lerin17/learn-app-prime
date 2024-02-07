@@ -8,10 +8,11 @@ const CoursesHome = () => {
          
          <Link href={'/courses/courseslist'}>
          <div className='textshadow text-stone-300 hover:text-stone-800'>
-            No Courses Created Yet,
+            {/* No Courses Created Yet, */}
+            Available Course List,
             </div>
                    
-         </Link>
+         </Link>  
 
 
          <Link href={'/courses/coursegroups'}>

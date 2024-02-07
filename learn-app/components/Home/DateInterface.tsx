@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+
 import React from 'react'
 import { CalendarContext } from '../../context/CalenderContext'
 import { Icalendarcontext } from '../../types/context/calendarcontext'
@@ -20,7 +20,7 @@ export const DateInterface = () => {
 
             <div className='flex flex-col' >
                 <div className='font-header2 text-3xl text-gray-300' >
-                        {DateInfo.Month.substring(0, 3)}
+                        {/* {DateInfo.Month.substring(0, 3)} */}
                       <span className='font-header5 pl-1 font-bold' >
                         {DateInfo.Date}
                       </span>
@@ -35,11 +35,11 @@ export const DateInterface = () => {
                 </div>
             </div>
             </div>
-            <Button 
-            variant='text'
+            <button 
+
             className='text-white font-header1 hover:bg-amber-700' >
-                Create Class for {DateInfo.Day.substring(0, 4)} {DateInfo.Month} {DateInfo.Date}
-            </Button>
+                {/* Create Class for {DateInfo.Day.substring(0, 4)} {DateInfo.Month} {DateInfo.Date} */}
+            </button>
         </div>
     </div>
   )

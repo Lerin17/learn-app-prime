@@ -5,16 +5,22 @@ import { Iquestion } from '../types/context/assesmentcontext';
 import uniqid from 'uniqid'
 import { CourseContext } from './CourseContext';
 import { Icoursecontext } from '../types/context/coursecontext';
+import { UserContext } from './UserContext';
+import { Iusercontext } from '../types/context/usercontext';
 
 const {products, people, questions} = require('../testdata/QuestionsArraysample')
 
 const AssesmentContext = React.createContext< Iassesmentcontext | null>(null)
 
 const AssesmentContextProvider = (props:any) => {
+
   console.log(people, 'people')
 
-  const {coursesArray,courseGroupArray} = React.useContext(CourseContext) as Icoursecontext
+  const {courseGroupArray,  coursesArray } = React.useContext(CourseContext) as Icoursecontext
 
+  const {userData} = React.useContext(UserContext) as Iusercontext
+
+  // const coursesArray = userData.allCourses
   // console.log(coursesArray, 'jack')
 
 
@@ -105,14 +111,24 @@ console.log(TagsOptions, 'Tags')
 React.useEffect(() => {
   const AvailableCourses = coursesArray.map(item => (item.courseName))
 
-  const AvailableCourseGroups = courseGroupArray.map(item => (item.courseGroupName))
+  const AvailableCourseGroups = courseGroupArray.map(item => (item.courseGroupName)
+  )
+
+  // console.log()
 
   const getTagsOptions = [...AvailableCourses, ...AvailableCourseGroups].map(item => ({
     value:item,
     label:item
   }))
+  
 
-  setTagsOptions((prev:any) => ([...prev, ...getTagsOptions]))
+  // setTagsOptions((prev:any) => ())
+
+  if(AvailableCourseGroups || AvailableCourses){
+    setTagsOptions((prev:any) => ([ ...getTagsOptions]))
+  }  
+
+
 
 
 }, [courseGroupArray, coursesArray]);

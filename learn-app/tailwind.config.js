@@ -18,7 +18,8 @@ module.exports = {
         header9:'OBO-N',
         header10:'LEMON',
         header11:'HOUSE',
-        header12:'NUE'
+        header12:'SATOSHI'
+        // 'NUE'
       },
       animation: {
         "slideDown": "fadeSlideDown .4s ease-in-out",

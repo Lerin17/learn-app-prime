@@ -12,7 +12,7 @@ import useNotification from '../../hooks/Notification'
 
 const YourPackages = () => {
 
-  const {coursesArray, courseGroupArray} = React.useContext(CourseContext) as Icoursecontext
+  const { coursesArray , courseGroupArray} = React.useContext(CourseContext) as Icoursecontext
   
 
   const {isCreatePackage, setisCreatePackage, currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage, userPackagesArray, userData} = React.useContext(UserContext) as Iusercontext
@@ -21,6 +21,7 @@ const YourPackages = () => {
 
   const [courseSearchInput, setcourseSearchInput] = React.useState('');
 
+  // const coursesArray = userData.allCourses
   
   const getFilteredItems = () => {
 

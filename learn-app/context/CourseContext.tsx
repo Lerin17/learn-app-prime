@@ -92,11 +92,23 @@ const CourseContextProvider = (props:any) => {
 
     React.useEffect(() => {
       if(userData){
-        dispatch({type:ACTIONS.INIT_COURSEDATA, payload: userData.allCourses})
+        //loadup data on login or anyChange to online data
+        setcurrentCodeDesc('')
+        setcurrentCourseName('')
+        setcurrentCourseCode('')
+        setcurrentNoWeeks('')
+        setcurrentDuration({NoDays:null, NoWeeks:null})
+
+        setcurrentCourseGroupDesc('')
+        setcurrentCourseGroupAbv('')
+        setcurrentCourseGroupName('')
+
+        dispatch({type:ACTIONS.INIT_COURSEDATA, payload: userData})
       }
     }, [userData]);
 
     
+   
 
     // const addDayOfWeek = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     //   const dayofweek = e.target.innerText
@@ -124,11 +136,16 @@ const CourseContextProvider = (props:any) => {
     }
 
     const returnNewCourse = (payload:IsaveCurrentCourseArg) => {
+      console.log(payload, 'payload')
+
       return {
         courseName: payload.currentCourseName,
         courseCode: payload.currentCourseCode,
-        courseDesc:payload.currentCodeDesc,  
-        NoWeeks:payload.currentNoWeeks,
+        courseDesc:payload.currentCodeDesc,
+        courseDuration:payload.currentDuration,
+        startDate: payload.currentCourseStartDate,
+        daysOfTheWeek:payload.currentDaysOfWeek,
+        // NoWeeks:payload.currentNoWeeks,
         courseId: Date.now()
       }
     }
@@ -158,7 +175,7 @@ const CourseContextProvider = (props:any) => {
           case 'SAVE2':
           return {...state, courseGroupArray: [...state.courseGroupArray, returnNewCourseGroupObject(action.payload) ] }
           case 'INITCOURSEDATA':
-          return {courseGroupArray:action.payload , coursesArray: action.payload}
+          return {courseGroupArray:action.payload.allCoursesGroups , coursesArray: action.payload.allCourses}
         default:
           return state  
       }
@@ -182,6 +199,10 @@ const CourseContextProvider = (props:any) => {
 
     const [state, dispatch]:any = React.useReducer<any>(reducer, {coursesArray:[...courses], courseGroupArray:[]})
 
+  
+
+    
+
     console.log(state, 'state')
 
     const coursesArray = state.coursesArray
@@ -200,17 +221,25 @@ const CourseContextProvider = (props:any) => {
         return
       }
 
-      setcurrentCodeDesc('')
-      setcurrentCourseName('')
-      setcurrentCourseCode('')
-      setcurrentNoWeeks('')
-      setcurrentDuration({NoDays:null, NoWeeks:null})
+  const DataObj =    returnNewCourse(CourseObj)
 
-      const courseGroupArrayArg:IcourseGroupObject = state.courseGroupArray
+      updateUserCourseData({DataObj, type:'CourseUpdate'})
 
-      updateUserCourseData({CourseObj, courseGroupArrayArg})
-      dispatch({type:ACTIONS.SAVE_NEW_COURSE, payload: CourseObj})
+  
+
+      console.log(CourseObj, 'courseObj')   
+
+      // dispatch({type:ACTIONS.SAVE_NEW_COURSE, payload: CourseObj})
     }
+
+    //
+    React.useEffect(() => {
+      //Update onlineData in CourseState change
+      if(userData.name){
+        updateUserCourseData(state)
+      }
+    }, [state]);
+
 
     // const SaveCourseOnline = () => {
       
@@ -219,11 +248,23 @@ const CourseContextProvider = (props:any) => {
 
 
     const saveCurrentCourseGroup = (Obj:IsaveCurrentCourseGroupArg) => {
+
+      if(!Obj.currentCourseGroupName){
+        setnotfication( {
+          type:'error-mini',
+          message:'Please, input course group name'
+        } )
+
+        return
+      }
+
+      const DataObj =    returnNewCourseGroupObject(Obj)
+
+      updateUserCourseData({DataObj, type:'CourseUpdate'})
+
     
-      setcurrentCourseGroupDesc('')
-      setcurrentCourseGroupAbv('')
-      setcurrentCourseGroupName('')
-      dispatch({type:ACTIONS.SAVE_NEW_COURSEGROUP, payload:Obj})
+     
+      // dispatch({type:ACTIONS.SAVE_NEW_COURSEGROUP, payload:Obj})
     }
 
     

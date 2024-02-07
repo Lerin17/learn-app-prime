@@ -2,7 +2,10 @@ import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion';
 import { CourseContext } from '../../../context/CourseContext';
 import { Icoursecontext } from '../../../types/context/coursecontext';
-import { InputBase } from '@mui/material';
+
+import SelectedCourseSections from './selectedCourseMenu/courseContent';
+
+
 
 
 const SelectedCourseInfo = () => {
@@ -26,7 +29,7 @@ const SelectedCourseInfo = () => {
                 </div>
 
                 <div className='border px-2 border-dotted w-full' >
-                    <InputBase/>
+                    <input/>
                 </div>
              
         </div>)
@@ -44,7 +47,7 @@ const SelectedCourseInfo = () => {
                    </div>
                
                    <div className='bg-amber-800 px-2 text-2xl' >
-                       DURATION: {courseListSelectedCourse?.NoWeeks}
+                       DURATION: {courseListSelectedCourse?.courseDuration.NoWeeks} Weeks and {courseListSelectedCourse?.courseDuration.NoDays} Days
                    </div>
                
                    <div className='bg-amber-700 px-2 text-xl' >
@@ -104,7 +107,7 @@ return (
        </div>
    
        <div className='bg-amber-800 px-2 text-2xl' >
-           DURATION: {courseListSelectedCourse?.NoWeeks}
+           DURATION: {courseListSelectedCourse?.courseDuration.NoWeeks} Weeks and {courseListSelectedCourse?.courseDuration.NoDays} Days
        </div>
    
        <div className='bg-amber-700 px-2 text-xl' >
@@ -147,7 +150,7 @@ return (
 
   return (
     <div 
-    className=' h-full  w-8/12 border-dotted text-black bg-gradient-to-b from-amber-700 to-amber-800'
+    className=' h-full  w-8/12 flex flex-col text-black bg-gradient-to-b from-amber-700 to-amber-800'
     style={{
     height:500,
     // borderRadius: '22% 20% 25% 25% / 41% 43% 44% 46%',
@@ -174,7 +177,7 @@ return (
             />
 
             <OptionButton
-            text='topics'
+            text='Sections'
             />
 
             <OptionButton
@@ -196,17 +199,18 @@ return (
                 <AnimatePresence
                 
                 >
-                {selectedCourseInfoOption === 'topics' && 
-                <motion.div initial={{scale:0.2}} animate={{scale:1}} transition={{type:'tween', duration:0.3}} 
+                {selectedCourseInfoOption === 'Sections' && 
+                <motion.div initial={{scale:0.2}} animate={{scale:1}} transition={{type:'tween', duration:0.3}} className='h-full'
                 exit={{scale:0.2, opacity:0.4,  display:'none'}}>
-                    <TopicsComponent/>
+                    {/* <TopicsComponent/> */}
+                    <SelectedCourseSections/>
                 </motion.div>
                 }
                 </AnimatePresence>
           
 
           <AnimatePresence>
-          {selectedCourseInfoOption === 'Assesment' && <motion.div initial={{scale:0.2}} animate={{scale:1}} transition={{type:'tween', duration:0.2}} exit={{x:0.2, opacity:0.4, display:'none'}}>
+          {selectedCourseInfoOption === 'Assesment' && <motion.div  initial={{scale:0.2}} animate={{scale:1}} transition={{type:'tween', duration:0.2}} exit={{x:0.2, opacity:0.4, display:'none'}}>
                     <AssesemnetComponent/>
                 </motion.div>
                 }

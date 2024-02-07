@@ -8,14 +8,14 @@ import { async } from '@firebase/util';
 import e from 'express';
 import useNotification from '../hooks/Notification';
 
-
+import { IcourseGroupObject, Icourseobject } from '../types/context/coursecontext';
 
 import uniqid from 'uniqid';
 import { type } from 'os';
 import { UtilityContext } from './UtilityContext';
 import { Iutilitycontext } from '../types/context/utilitycontext';
 import { resolve } from 'node:path/win32';
-
+import { IsaveCurrentCourseArg } from '../types/context/coursecontext';
 const UserContext = React.createContext<Iusercontext | null>(null)
 
 const UserContextProvider = (props:any) => {
@@ -65,6 +65,8 @@ const UserContextProvider = (props:any) => {
       allCourseGroups:[]
     });
 
+    const [userID, setuserID] = React.useState<string>();
+
     const [isLoginPage, setisLoginPage] = React.useState<boolean>(false);
 
     const [isPackagesPage, setisPackagesPage] = React.useState<boolean>(false);
@@ -87,12 +89,14 @@ const UserContextProvider = (props:any) => {
 
 
    React.useEffect(() => {
-    if(userData.name){
+    if(userData.name && !userID){
       console.log(userData.name, 'exeexexexxewxexexe2xe1e')
       setnotfication({
         type:'success',
         message:'successfully logged in'
       })
+
+      setuserID(userData.name)
     }
    }, [userData]);
 
@@ -383,30 +387,126 @@ const Data:any = getdata.data()
     }
    }
 
+   interface Istate {
+    coursesArray:Icourseobject[]
+    courseGroupArray:IcourseGroupObject[]
+  }
 
-   const updateUserCourseData = async ({CourseObj, courseGroupArrayArg}:any) => {
+
+  //  const updateUserCourseData = async (state:Istate) => {
+  //   if(userData.name){
+  //     console.log(userData, 'userdata')
+  //       try {
+  //         const userRef = doc(database, 'Users', userData.name)
+
+  //         // await updateDoc(userRef, {
+  //         //   allCourses: arrayUnion(CourseObj)
+  //         // })
+
+  //         await updateDoc(userRef, {
+  //           "allCourses":state.coursesArray,
+  //           "allCourseGroups":state.courseGroupArray
+  //         }).then(() =>{
+
+  //           setuserData(prev => ({
+  //             ...prev,
+  //             allCourses:state.coursesArray,
+  //             allCourseGroups:state.courseGroupArray
+  //           }))
+
+  //         })
+
+  //         console.log(state.coursesArray, 'stateCourse')
+
+       
+
+  //         setnotfication({
+  //           type:'success-mini',
+  //           message:'package saved successfully'
+  //         })
+  //       } catch (error) {
+  //         console.log(error, 'error')
+  //         setnotfication({
+  //           type:'error-mini',
+  //           message:'error saving package'
+  //         })
+  //       }
+  //   }else{
+  //     setnotfication({
+  //       type:'error-mini',
+  //       message:'Please Login'
+  //     })
+  //   }
+  //  }
+
+  interface IupdateUserCourseDataArg {
+    DataObj:IsaveCurrentCourseArg ,
+    type:'CourseUpdate' | 'CourseGroupUpdate'
+  }
+  
+  const updateUserCourseData = async ({DataObj, type}:IupdateUserCourseDataArg) => {
     if(userData.name){
+      console.log(userData, 'userdata')
         try {
           const userRef = doc(database, 'Users', userData.name)
 
-          await updateDoc(userRef, {
-            allCourses: arrayUnion(CourseObj)
-          })
+          // await updateDoc(userRef, {
+          //   allCourses: arrayUnion(CourseObj)
+          // })
 
-          await updateDoc(userRef, {
-            "allCourseGroups":courseGroupArrayArg
-          })
+          if(type === 'CourseUpdate'){
+            await updateDoc(userRef, {
+              allCourses:arrayUnion(DataObj),
+            }).then(async () =>{
+  
+              const docSnap = await getDoc(userRef)
 
-          setuserData(prev => ({
-            ...prev,
-            allCourses:[...prev.allCourses, CourseObj]
-          }))
+              if(docSnap.exists()){
+                const Data:any = docSnap.data()
+
+                setuserData(prev => ({
+                ...prev,
+                allCourses:Data.coursesArray,
+                allCourseGroups:Data.courseGroupArray
+              }))
+              }
+              // setuserData(prev => ({
+              //   ...prev,
+              //   allCourses:state.coursesArray,
+              //   allCourseGroups:state.courseGroupArray
+              // }))
+  
+            })
+          }else if(type === 'CourseGroupUpdate'){
+            await updateDoc(userRef, {
+              allCourseGroups:arrayUnion(DataObj),
+            }).then(async () =>{
+  
+              const docSnap = await getDoc(userRef)
+
+              if(docSnap.exists()){
+                const Data:any = docSnap.data()
+
+                setuserData(prev => ({
+                ...prev,
+                allCourses:Data.coursesArray,
+                allCourseGroups:Data.courseGroupArray
+              }))
+              }
+            })
+          }
+      
+
+          // console.log(state.coursesArray, 'stateCourse')
+
+       
 
           setnotfication({
             type:'success-mini',
             message:'package saved successfully'
           })
         } catch (error) {
+          console.log(error, 'error')
           setnotfication({
             type:'error-mini',
             message:'error saving package'
@@ -419,6 +519,7 @@ const Data:any = getdata.data()
       })
     }
    }
+
 
 
     const saveUserPackage = async () => {

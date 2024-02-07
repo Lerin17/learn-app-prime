@@ -1,15 +1,15 @@
-import { Button } from '@mui/material'
+
 import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
 import { CourseContext } from '../../context/CourseContext'
 import { Icoursecontext } from '../../types/context/coursecontext'
 import CreateTopic from './createTopic'
-import InputBase from '@mui/material/InputBase'
+
 import DowCarousel from './createCourse/DowCarousel'
 import DaysofWeekdisplay from './createCourse/DaysofWeekdisplay'
 import ParentCourse from './createCourse/ParentCourse'
 
-import Select from '@mui/material/Select'
+
 import DurationModal from './createCourse/DurationModal'
 import { DuttonMid, DuttonSmall, DuttonAlt } from '../GeneralPurpose/dutton'
 
@@ -29,7 +29,7 @@ const CreateCourse = () => {
     // console.log(array2 === Array1, 'reals')
     
 
-    const {isTopicPanelOpen, toggleTopicPanel, currentCourseName, currentCodeDesc, currentCourseCode, setcurrentCodeDesc, setcurrentCourseName, setcurrentCourseCode, currentNoWeeks, setcurrentNoWeeks, saveCurrentCourse, setisNewCoursePanelOpen, isNewCoursePanelOpen ,isDowCarousel,toggleisDowCarousel, setisDowCarousel, currentDaysOfWeek,isCourseList, setisCourseList, isParentCourse,setisParentCourse,isDurationModal, setisDurationModal} = React.useContext(CourseContext) as Icoursecontext
+    const {isTopicPanelOpen, toggleTopicPanel, currentCourseName, currentCodeDesc, currentCourseCode, setcurrentCodeDesc, setcurrentCourseName, setcurrentCourseCode, currentDuration, currentNoWeeks, setcurrentNoWeeks, saveCurrentCourse, currentCourseStartDate,  setisNewCoursePanelOpen, isNewCoursePanelOpen ,isDowCarousel,toggleisDowCarousel, setisDowCarousel, currentDaysOfWeek,isCourseList, setisCourseList, isParentCourse,setisParentCourse,isDurationModal, setisDurationModal} = React.useContext(CourseContext) as Icoursecontext
 
     // const [isDurationModal, setisDurationModal] = React.useState<boolean> (false);
 
@@ -228,7 +228,7 @@ className='flex'
             <div className=' text-black border-t '> 
                         <DuttonAlt
                         icon={'SAVE'}
-                        handleClick={()=>saveCurrentCourse({currentCourseName, currentCodeDesc, currentCourseCode, currentNoWeeks})}
+                        handleClick={()=>saveCurrentCourse({currentCourseName, currentCodeDesc, currentCourseCode, currentDuration, currentCourseStartDate, currentDaysOfWeek})}
                         noPadding={true}
                         />         
                         {/* <Button onClick={()=>saveCurrentCourse({currentCourseName, currentCodeDesc, currentCourseCode, currentNoWeeks})} className='font-header8 capitalize text-black  text-4xl hover:scale-110 transition-all px-0 font-extralight' >[ <span className='px-6 text-base font-header9'>SAVE</span> ]

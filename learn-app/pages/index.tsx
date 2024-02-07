@@ -14,14 +14,19 @@ import CalendarDateTerminal from '../components/Home/CalendarTerminal'
 
 import { CourseContext } from '../context/CourseContext'
 
+
 import { Icoursecontext } from '../types/context/coursecontext'
+import { UserContext } from '../context/UserContext'
+import { Iusercontext } from '../types/context/usercontext'
 
 const Home: NextPage = (props:any) => {
 
   const gradient = new Gradient()
 
-  const {coursesArray} = React.useContext(CourseContext) as Icoursecontext
+  const {} = React.useContext(CourseContext) as Icoursecontext
+  const {userData} = React.useContext(UserContext) as Iusercontext
 
+  const coursesArray = userData.allCourses
   // // Call `initGradient` with the selector to your canvas
   // gradient.initGradient('#gradient-canvas')
   // console.log(props.content)
@@ -61,7 +66,7 @@ const Home: NextPage = (props:any) => {
                  {coursesArray.map(item => (
                   <div className='flex text-white bg-blue-500 mt-2'>
                     {item.courseName}
-                    {item.NoWeeks}
+                    {/* {item.NoWeeks} */}
                   </div>
                  ))}
                 </div>

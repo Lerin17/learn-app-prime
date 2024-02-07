@@ -72,7 +72,9 @@ export interface Icourseobject {
   // NoWeeks:string
   courseDuration:IcourseDuration
   startDate: IstartDate 
-  courseId:string 
+  courseId:string
+  daysOfTheWeek:string[]
+
 }
 
 export interface IcourseGroupObject {
@@ -109,6 +111,6 @@ export interface Iuserdata {
     subscribers: Tpackagesubscribers[]
     yourSubscriptions:[]
     id:string
-    allCourses:Icourseobject[]
+    allCourses:Icourseobject[] 
     allCourseGroups:IcourseGroupObject[]
 }
