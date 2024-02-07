@@ -1,8 +1,27 @@
 import React from 'react'
-import { Draggable, Container } from 'react-smooth-dnd'
+import { useDraggable } from '@dnd-kit/core';
+import {CSS} from '@dnd-kit/utilities';
+import { JsxElement } from 'typescript';
 // import { useDrag } from 'react-dnd';
 
-const SectionBarOptionCom = (prop:any) => {
+interface Ttpe {
+    item:{name:string, icon:any, component:JsxElement},
+    handleClick:() => void
+}
+
+const SectionBarOptionCom = (prop:Ttpe) => {
+
+        
+    const {attributes, listeners, setNodeRef, transform} = useDraggable({
+        id:prop.item.name,
+        data: {
+            name: prop.item.name,
+          }
+      });
+
+      const style = transform ? {
+        transform:  CSS.Translate.toString(transform),
+      } : undefined;
 
     
     // const [{isDragging}, drag] = useDrag(() => ({
@@ -15,14 +34,14 @@ const SectionBarOptionCom = (prop:any) => {
 
 
   return (
-    <Draggable
-    render={() => (
+
     <div
+    ref={setNodeRef} style={style} {...listeners} {...attributes}
     className={` lg:w-1/2 w-full  border`} 
     >
           <div
       
-      onClick={() => prop.setselectedOption()} className='text-white  flex flex-col p-1 border w-full  items-center'>
+      onClick={() => prop.handleClick()} className='text-white  flex flex-col p-1 border w-full  items-center'>
       <div className=' '>
             {prop.item.icon}
       </div>
@@ -33,8 +52,6 @@ const SectionBarOptionCom = (prop:any) => {
     
       </div>
     </div>
-    )}
-    />
        
          
 

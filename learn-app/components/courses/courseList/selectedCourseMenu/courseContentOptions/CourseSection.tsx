@@ -1,10 +1,22 @@
 import React from 'react'
 // import { useDrop } from 'react-dnd';
-import CourseSectionItemsCom from './CourseSection/CourseSectionItemsCom';
-import { Draggable, Container } from 'react-smooth-dnd'
+;
+
+import { Icoursecontext } from '../../../../../types/context/coursecontext';
+
+
+import { sectionOptions } from '../courseContent';
+import { useDroppable } from '@dnd-kit/core';
+import { CourseContext } from '../../../../../context/CourseContext';
+
 
 const CourseSection = (props:any) => {
-    const [currentCourseSection, setcurrentCourseSection] = React.useState<any[]>([]);
+
+    const {currentCourseSection, getSectionContent, openSelectedSectionContent} = React.useContext(CourseContext) as Icoursecontext
+
+    const {isOver, setNodeRef} = useDroppable({
+        id: 'droppable',
+      });
 
     // const [isOver, drop] = useDrop(() => ({
     //     accept:'image',
@@ -16,50 +28,16 @@ const CourseSection = (props:any) => {
     //       }),
     // }))
 
-    console.log(currentCourseSection, 'currenttruth')
+    // console.log(currentCourseSection, 'currenttruth')
 
-    const getSectionContent = (item:string) => {
-        if(item === 'singlequestion'){
-            return {
-                //Name and Question are the same thing
-                Name:'',
-                Question:'',
-                Answer:'',
-                ID:Date.now(),
-                type:item,
-                isOpen:false            
-            }
-        }else if(item === 'content'){
-            return {
-                //Name and Question are the same thing
-                Name:'',
-                Header:'',
-                ID:Date.now(),
-                TextObj:{},
-                type:item,
-                isOpen:false                  
-            }
-        }else if(item === 'multiquestion'){
-            return {
-                //Name and Question are the same thing
-                Name:'',
-                Header:'',
-                Options:[],
-                ID:Date.now(),
-                TextObj:{},
-                type:item,
-                isOpen:false                 
-            }
-        }else if(item === 'statement'){
-            return {
-                //Name and Question are the same thing
-                Name:'',
-                Header:'',
-                ID:Date.now(),
-                type:item,
-                isOpen:false            
-            }
-        }
+
+
+    const handleGetChildPayload = (index:any) => {
+        console.log(index)
+       let x = sectionOptions[index]
+       console.log(x, 'indexxxe')
+
+       return x
     }
 
   return (
@@ -73,18 +51,19 @@ const CourseSection = (props:any) => {
             />
             </div>
 
-        <Container>
-            <div className='border-t mt-4'>
+     
+            <div ref={setNodeRef} className={`border ${isOver?'border-2':''} mt-4`}>
 
             {currentCourseSection.map(item => (
-            <div>
-                <CourseSectionItemsCom
-                itemObj = {item}
-                />
+            <div onClick={() => openSelectedSectionContent(item.ID)} >
+                <div className={`${item.isOpen?'bg-green-400':''} border`}>{
+                     item.type
+                      }</div>
             </div>))}
 
             </div>
-        </Container>
+  
+        
            
             
         </div>

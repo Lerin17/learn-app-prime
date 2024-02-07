@@ -3,10 +3,35 @@ import { mySvgsIcons } from '../../../../mySVG'
 import CourseSection from './courseContentOptions/CourseSection'
 import { components } from 'react-select';
 // import DragContainer from './courseContentOptions/DragContainer';
+import { useDraggable } from '@dnd-kit/core';
+import {CSS} from '@dnd-kit/utilities';
 
 import SectionBarOptionCom from './courseContentOptions/SectionBarOptionCom';
 
-const SelectedCourseSections = () => {
+export const sectionOptions = [
+    {
+        name:'content',
+        icon:mySvgsIcons.Content,
+        component:'exexs'
+    },
+    {
+        name:'multiquestion',
+        icon:mySvgsIcons.question,
+        component:'exe'
+    },
+    {
+        name:'singlequestion',
+        icon:mySvgsIcons.question,
+        component:'exe'
+    },
+    {
+        name:'statement',
+        icon:mySvgsIcons.question,
+        component:'exe'
+    }
+]
+
+const SelectedCourseContent = () => {
 
     const [selectedOption, setselectedOption] = React.useState('objectives');
 
@@ -15,6 +40,9 @@ const SelectedCourseSections = () => {
     const updateisAnyDragging = () => {
 
     }
+
+
+    
    
 
     const options = [ 
@@ -42,28 +70,7 @@ const SelectedCourseSections = () => {
     },
     ]
 
-    const sectionOptions = [
-        {
-            name:'content',
-            icon:mySvgsIcons.Content,
-            component:'exexs'
-        },
-        {
-            name:'multiquestion',
-            icon:mySvgsIcons.question,
-            component:'exe'
-        },
-        {
-            name:'singlequestion',
-            icon:mySvgsIcons.question,
-            component:'exe'
-        },
-        {
-            name:'statement',
-            icon:mySvgsIcons.question,
-            component:'exe'
-        }
-    ]
+
 
     const getSelectedOptionComponent = options.find(item => item.name === selectedOption)
 
@@ -84,13 +91,16 @@ const SelectedCourseSections = () => {
         console.log('rexe')
     }
 
-    const sectionBarOptions = sectionOptions.map(item => (
+    const sectionBarOptions = sectionOptions.map((item:any) => (
 
 
-        <SectionBarOptionCom
+        <div>
+            <SectionBarOptionCom
         item = {item}
         handleClick = {handleSectionBarOption}
         />
+        </div>
+        
     ))
 
 
@@ -119,4 +129,4 @@ const SelectedCourseSections = () => {
   )
 }
 
-export default SelectedCourseSections
+export default SelectedCourseContent

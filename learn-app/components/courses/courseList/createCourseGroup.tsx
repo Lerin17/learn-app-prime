@@ -2,7 +2,7 @@ import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { CourseContext } from '../../../context/CourseContext'
 import { Icoursecontext } from '../../../types/context/coursecontext'
-import { InputBase } from '@mui/material'
+
 
 
 const CreateCourseGroup = () => {

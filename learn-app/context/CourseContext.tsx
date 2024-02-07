@@ -46,6 +46,9 @@ const CourseContextProvider = (props:any) => {
 
     const [currentCourseGroup, setcurrentCourseGroup] = React.useState({});
 
+    //Tracks the content of courseSections that are currently view or manipulated
+    const [currentCourseSection, setcurrentCourseSection] = React.useState<any[]>([]);
+
     // const [courseGroupArray, setcourseGroupArray] = React.useState([]);
 
     const [courseGroupObject, setcourseGroupObject] = React.useState<IcourseGroupObject>();
@@ -107,8 +110,53 @@ const CourseContextProvider = (props:any) => {
       }
     }, [userData]);
 
+    const openSelectedSectionContent = (id:number) => {
+      setcurrentCourseSection(prev => prev.map(item => (item.ID === id?{...item, isOpen:!item.isOpen}:item)))
+    }
     
-   
+    const getSectionContent = (item:string) => {
+      if(item === 'singlequestion'){
+          return {
+              //Name and Question are the same thing
+              Name:'',
+              Question:'',
+              Answer:'',
+              ID:Date.now(),
+              type:item,
+              isOpen:false            
+          }
+      }else if(item === 'content'){
+          return {
+              //Name and Question are the same thing
+              Name:'',
+              Header:'',
+              ID:Date.now(),
+              TextObj:{},
+              type:item,
+              isOpen:false                  
+          }
+      }else if(item === 'multiquestion'){
+          return {
+              //Name and Question are the same thing
+              Name:'',
+              Header:'',
+              Options:[],
+              ID:Date.now(),
+              TextObj:{},
+              type:item,
+              isOpen:false                 
+          }
+      }else if(item === 'statement'){
+          return {
+              //Name and Question are the same thing
+              Name:'',
+              Header:'',
+              ID:Date.now(),
+              type:item,
+              isOpen:false            
+          }
+      }
+  }
 
     // const addDayOfWeek = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     //   const dayofweek = e.target.innerText
@@ -277,7 +325,7 @@ const CourseContextProvider = (props:any) => {
 
   return (
     <CourseContext.Provider value={{CourseObject, CoursesArray, toggleNewCoursePanel, isNewCoursePanelOpen, setisNewCoursePanelOpen, isTopicPanelOpen, toggleTopicPanel, currentCourseName,currentCodeDesc,currentCourseCode,currentNoWeeks, setcurrentCourseName, setcurrentCodeDesc, setcurrentCourseCode, setcurrentNoWeeks, saveCurrentCourse,  coursesArray, toggleisDowCarousel, isDowCarousel, setisDowCarousel,  currentDaysOfWeek, setcurrentDaysOfWeek, courseListSelectedCourse, setcourseListSelectedCourse, setisCourseList, isCourseList, isParentCourse, setisParentCourse, isCreateCourseGroupOpen, setisCreateCourseGroupOpen,currentCourseGroupName,currentCourseGroupAbv,
-currentCourseGroupDesc,currentCourseGroupCourseArray,inputCourseGroupDetails,saveCurrentCourseGroup, courseGroupArray,currentCourseGroup, setcurrentCourseGroup,isDurationModal, setisDurationModal, currentCourseStartDate, setcurrentCourseStartDate, currentDuration, setcurrentDuration, 
+currentCourseGroupDesc,currentCourseGroupCourseArray,inputCourseGroupDetails,saveCurrentCourseGroup, courseGroupArray,currentCourseGroup, setcurrentCourseGroup,isDurationModal, setisDurationModal, currentCourseStartDate, setcurrentCourseStartDate, currentDuration, setcurrentDuration, currentCourseSection, setcurrentCourseSection, getSectionContent, openSelectedSectionContent
      }}>
         {props.children}
     </CourseContext.Provider>

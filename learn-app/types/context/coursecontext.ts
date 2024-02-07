@@ -45,6 +45,10 @@ setcurrentCourseStartDate:React.Dispatch<React.SetStateAction<IstartDate | undef
 setisDurationModal:React.Dispatch<React.SetStateAction<boolean>>
 currentDuration:IcourseDuration
 setcurrentDuration:React.Dispatch<React.SetStateAction<IcourseDuration>>
+currentCourseSection:any[]
+setcurrentCourseSection: React.Dispatch<React.SetStateAction<any[]>>
+getSectionContent:(item:string) => any
+openSelectedSectionContent:(id:number) => void
 // courseNotification:Tnotification
 }
 

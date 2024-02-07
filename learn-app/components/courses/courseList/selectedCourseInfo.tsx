@@ -3,13 +3,14 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { CourseContext } from '../../../context/CourseContext';
 import { Icoursecontext } from '../../../types/context/coursecontext';
 
-import SelectedCourseSections from './selectedCourseMenu/courseContent';
+import SelectedCourseContent from './selectedCourseMenu/courseContent';
+import { DndContext } from '@dnd-kit/core';
 
 
 
 
 const SelectedCourseInfo = () => {
-    const {setcourseListSelectedCourse, setisNewCoursePanelOpen, courseListSelectedCourse,   setisCourseList} = React.useContext(CourseContext) as Icoursecontext
+    const {setcourseListSelectedCourse, setisNewCoursePanelOpen, courseListSelectedCourse,   setisCourseList, setcurrentCourseSection, getSectionContent} = React.useContext(CourseContext) as Icoursecontext
 
     const [selectedCourseInfoOption, setselectedCourseInfoOption, ] = React.useState('basicInfo');
 
@@ -20,6 +21,19 @@ const SelectedCourseInfo = () => {
             </div>
         </div>
     }
+
+    function handleDragEnd(event:any) {
+        const {active, over} = event;
+    
+        console.log(active, 'active')
+
+        setcurrentCourseSection(prev => [ ...prev, getSectionContent(active.data.current.name)])
+        // if (over && over.data.current.accepts.includes(active.data.current.type)) {
+        //     setcurrentCourseSection(['ee'])
+        //   // do stuff
+        // }
+      }
+
 
     const NoOfWeekInput = () => {
 
@@ -63,6 +77,8 @@ const SelectedCourseInfo = () => {
         )
     }
 
+
+
     const TopicsComponent = () => {
         return (
             <motion.div transition={{type:'spring', stiffness:40}} initial={{x:20}} animate={{x:0}} >
@@ -84,6 +100,8 @@ const SelectedCourseInfo = () => {
     
         )
     }
+
+
 
     const AssesemnetComponent = () => {
         return (
@@ -148,6 +166,7 @@ return (
 
 
 
+
   return (
     <div 
     className=' h-full  w-8/12 flex flex-col text-black bg-gradient-to-b from-amber-700 to-amber-800'
@@ -203,7 +222,10 @@ return (
                 <motion.div initial={{scale:0.2}} animate={{scale:1}} transition={{type:'tween', duration:0.3}} className='h-full'
                 exit={{scale:0.2, opacity:0.4,  display:'none'}}>
                     {/* <TopicsComponent/> */}
-                    <SelectedCourseSections/>
+                    <DndContext onDragEnd={handleDragEnd}>
+                    <SelectedCourseContent/>
+                    </DndContext>
+                
                 </motion.div>
                 }
                 </AnimatePresence>

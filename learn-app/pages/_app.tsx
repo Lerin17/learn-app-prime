@@ -14,7 +14,7 @@ import { AssesmentContextProvider } from '../context/AssesmentContext'
 import { UserContextProvider } from '../context/UserContext'
 import { AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/router'
-
+import { DndContext } from '@dnd-kit/core'
 
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter().asPath
 
   return (
-
+    
          <UtilityContextProvider>
       <UserContextProvider>
       <CourseContextProvider>
