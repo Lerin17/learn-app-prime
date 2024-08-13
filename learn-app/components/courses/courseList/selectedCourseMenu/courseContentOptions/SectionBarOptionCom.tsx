@@ -21,7 +21,9 @@ const SectionBarOptionCom = (prop:Ttpe) => {
 
       const style = transform ? {
         transform:  CSS.Translate.toString(transform),
-      } : undefined;
+      } : {
+        width:'100%'
+      }
 
     
     // const [{isDragging}, drag] = useDrag(() => ({
@@ -37,11 +39,11 @@ const SectionBarOptionCom = (prop:Ttpe) => {
 
     <div
     ref={setNodeRef} style={style} {...listeners} {...attributes}
-    className={` lg:w-1/2 w-full  border`} 
+ 
     >
           <div
       
-      onClick={() => prop.handleClick()} className='text-white  flex flex-col p-1 border w-full  items-center'>
+      onClick={() => prop.handleClick()} className='text-white  flex flex-col p-1 w-full  items-center'>
       <div className=' '>
             {prop.item.icon}
       </div>

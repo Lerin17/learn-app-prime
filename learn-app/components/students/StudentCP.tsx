@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, duration } from '@mui/material'
+
 import {TiPlusOutline} from 'react-icons/ti'
 import {BiSearchAlt} from 'react-icons/bi'
 import {FaBalanceScale} from 'react-icons/fa'
@@ -22,15 +22,17 @@ const StudentCP = () => {
     const ControlPanelOptionBtn = (props:any) => {
         return (
             <div onClick={()=>setcurrentCPOP(props.text)}>                
-            <Button className={`${props.it?'text-4xl font-bold font-header6':'text-lg'} ${props.text == 'Search'?'pb-4':''} flex text-white capitalize font-header6 font-extralight`} >
+            <button className={`${props.it?'text-4xl font-bold font-header6':'text-lg'} ${props.text == 'Search'?'pb-4':''} flex text-white capitalize font-header6 font-extralight`} >
                 <BiSearchAlt/>
                     {props.text == 'Search' && <input
                     placeholder='Search'
                     className='text-white bg-black w-full'  />}
                     
                     {props.text !== 'Search'?props.text:''}
-            </Button>
-            {props.text == 'Search' &&<Button className='text-white  text-2xl  transition-all ml-10 font-header6 capitalize' > <TiArrowLeftOutline/>Advanced Search </Button>}
+            </button>
+            {props.text == 'Search' &&<button className='text-white  text-2xl  transition-all ml-10 font-header6 capitalize' > 
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-9v-9h-6v9h-9v6h9v9h6v-9h9z"/></svg>
+            Advanced Search </button>}
             </div>
         )
     }

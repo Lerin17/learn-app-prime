@@ -1,7 +1,7 @@
 // import { Interface } from "readline";
 
 export interface Isocketcontext {
-    // answerCall: () => void
+    answerCall: () => void
     // callUser: (id:any) => void
     leaveCall?: () => void | undefined
     myVideo: any,

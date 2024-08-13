@@ -28,6 +28,11 @@ export const sectionOptions = [
         name:'statement',
         icon:mySvgsIcons.question,
         component:'exe'
+    },
+    {
+        name:'blackboard',
+        icon:mySvgsIcons.BlackBoard,
+        component:'exe'
     }
 ]
 
@@ -94,7 +99,7 @@ const SelectedCourseContent = () => {
     const sectionBarOptions = sectionOptions.map((item:any) => (
 
 
-        <div>
+        <div className='border w-1/2'>
             <SectionBarOptionCom
         item = {item}
         handleClick = {handleSectionBarOption}
@@ -112,7 +117,7 @@ const SelectedCourseContent = () => {
             {sideBarOptions}
             </div>
 
-            <div className={`${selectedOption === 'sections'?'':'hidden'} flex mt-10 flex-wrap`}>
+            <div className={`${selectedOption === 'sections'?'':'hidden'} border flex mt-10 flex-wrap`}>
                 {sectionBarOptions}
             </div>
         

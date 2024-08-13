@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+React
 import React from 'react'
 import { SocketContext } from '../../context/SocketContext'
 import { Isocketcontext } from '../../types/context/socketcontext'
@@ -14,9 +14,9 @@ const {answerCall, Call, callAccepted} = React.useContext(SocketContext) as Isoc
             <div>
                 <div> {Call.name} is calling</div>
                 <div>
-                    <Button onClick={()=>answerCall()} >
+                    <button onClick={()=>answerCall()} >
                         Answer
-                    </Button>
+                    </button>
                 </div>
             </div>
         )

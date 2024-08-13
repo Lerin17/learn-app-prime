@@ -78,10 +78,10 @@ const {isUserStudent, userData} = React.useContext(UserContext) as Iusercontext
       x: mousePosition.x - 16,
       y:mousePosition.y - 16,
       backgroundColor:'#92400e',
-      height:32,
-      width:32,
+      height:20,
+      width:20,
       borderRadius:'50%',
-      
+      //width and height 32 
       
 
 
@@ -183,6 +183,7 @@ const {isUserStudent, userData} = React.useContext(UserContext) as Iusercontext
       
       }}
        className={`lg:h-screen md:h-screen  h-full bg-amber-800 ${backgroundstyle} relative`} >
+  
   
         <motion.div
         variants={cursorVariants}

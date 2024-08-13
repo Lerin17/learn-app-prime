@@ -155,7 +155,16 @@ const CourseContextProvider = (props:any) => {
               type:item,
               isOpen:false            
           }
-      }
+      }else if(item === 'blackboard'){
+        return {
+            //Name and Question are the same thing
+            Name:'',
+            Header:'',
+            ID:Date.now(),
+            type:item,
+            isOpen:false            
+        }
+    }
   }
 
     // const addDayOfWeek = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
