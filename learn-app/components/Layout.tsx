@@ -150,7 +150,9 @@ const {isUserStudent, userData} = React.useContext(UserContext) as Iusercontext
           <div>
             Select a pre created account to go through the features easily
           </div>
-          <div>
+          <div 
+          onClick={() => {console.log('ex')}}
+          >
             STUDENT
           </div>
 
@@ -162,7 +164,7 @@ const {isUserStudent, userData} = React.useContext(UserContext) as Iusercontext
   
 
   // console.log(haloLocation, 'haloLocation')
-  if(''){
+  if('rxr'){
     return (
       <div className=' paperwhite border h-screen'>
               <UserSelect/>

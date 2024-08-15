@@ -130,12 +130,13 @@ const Data:any = getdata.data()
         subscribers:[],
         yourSubscriptions:[],
         allCourses:Data.allCourses,
-        allCourseGroups:Data.allCourseGroups
+        allCourseGroups:Data.allCourseGroups,
+        
       })
 
       setnotfication({
         type:'success',
-        message:'Lerin, Welcome to Brown'
+        message:`${Data.name}, Welcome to Brown`
       })
 
     }).catch((err) => {
@@ -171,6 +172,24 @@ const Data:any = getdata.data()
               allCourses:Data.allCourses,
               allCourseGroups:Data.allCourseGroups
             })
+
+if(Data.name){
+  
+  // Store data in localStorage
+  localStorage.setItem('userName', Data.name);
+
+// Retrieve data from localStorage
+// let value = localStorage.getItem('key');
+// console.log(value); // Outputs: value
+
+// Remove data from localStorage
+// localStorage.removeItem('key');
+
+// // Clear all data from localStorage
+// localStorage.clear();
+
+}
+
 
             setnotfication({
               type:'success',

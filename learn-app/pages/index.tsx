@@ -27,6 +27,8 @@ const Home: NextPage = (props:any) => {
   const {userData} = React.useContext(UserContext) as Iusercontext
 
   const coursesArray = userData.allCourses
+
+  console.log(coursesArray, 'coursesArrayxxxx')
   // // Call `initGradient` with the selector to your canvas
   // gradient.initGradient('#gradient-canvas')
   // console.log(props.content)
@@ -63,12 +65,13 @@ const Home: NextPage = (props:any) => {
                 </div>
 
                 <div>
-                 {coursesArray.map(item => (
+                 {coursesArray? coursesArray.map(item => (
                   <div className='flex text-white bg-blue-500 mt-2'>
                     {item.courseName}
-                    {/* {item.NoWeeks} */}
                   </div>
-                 ))}
+                 )): <div>
+                  No Courses Offered
+                  </div>}
                 </div>
               </div>
             {/* <canvas id="gradient-canvas" data-transition-in /> */}
