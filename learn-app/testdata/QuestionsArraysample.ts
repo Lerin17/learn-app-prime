@@ -157,6 +157,15 @@ startDate: {
   ]
 
 
+  export const studentUsers = [
+    {name:'Simon',
+      Password:"Simon"
+    },
+    {
+      name:"Jacob", 
+      Password:"Jacob"
+    }
+  ]
 
 
-  module.exports = { products, people, questions, courses }
+  module.exports = { products, people, questions, courses, studentUsers }
