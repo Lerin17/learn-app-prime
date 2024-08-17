@@ -15,7 +15,7 @@ import { CourseContext } from '../context/CourseContext'
 import { Icoursecontext } from '../types/context/coursecontext'
 import { useRouter } from 'next/router'
 
-import { studentUsers } from '../testdata/QuestionsArraysample';
+import { studentUsers, teachersUsers } from '../testdata/QuestionsArraysample';
 
 
 export const Layout = (prop:any) => {
@@ -26,7 +26,7 @@ export const Layout = (prop:any) => {
 
 const {currentCursorVariant, navBarOptionLocation, setnavBarOptionLocation, updateNavBarOptionLocation, notfication} = React.useContext(UtilityContext) as Iutilitycontext
 
-const {isUserStudent, userData,  setUsernameinput, setUserpasswordinput, logininUser}  = React.useContext(UserContext) as Iusercontext
+const {isUserStudent, userData,  setUsernameinput, setUserpasswordinput, logininUser, Usernameinput}  = React.useContext(UserContext) as Iusercontext
 
   const [windowHeight, setwindowHeight] = React.useState<number>();
 
@@ -146,7 +146,7 @@ const {isUserStudent, userData,  setUsernameinput, setUserpasswordinput, loginin
 
 const StudentUsersSelection = studentUsers.map(item => (
   <div
-  className='p-2 m-2 bg-white flex flex-col items-center'
+  className={`p-2 m-2 bg-white flex flex-col items-center ${item.name == Usernameinput?'border-black border-2':'' }`}
   onClick={() => {
     setUsernameinput(item.name)
     setUserpasswordinput(item.Password)
@@ -162,20 +162,60 @@ const StudentUsersSelection = studentUsers.map(item => (
   </div>
 ))
 
+const TeacherUsersSelection = 
+teachersUsers.map(item => (
+  <div
+  className={`transition-all ${item.name == Usernameinput?'border-black border-2':'' } p-2 m-2 bg-white flex flex-col items-center`}
+  onClick={() => {
+    setUsernameinput(item.name)
+    setUserpasswordinput(item.Password)
+  }}>
+    <div>
+    <svg className='fill-current' width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M24 24h-24v-24h24v24zm-2-22h-20v20h20v-20zm-4.118 14.064c-2.293-.529-4.427-.993-3.394-2.945 3.146-5.942.834-9.119-2.488-9.119-3.388 0-5.643 3.299-2.488 9.119 1.064 1.963-1.15 2.427-3.394 2.945-2.048.473-2.124 1.49-2.118 3.269l.004.667h15.993l.003-.646c.007-1.792-.062-2.815-2.118-3.29z"/></svg>
+    </div>
+
+    <div className='text-4xl font-header12'>
+    {item.name}
+    </div>
+  
+  </div>
+))
+
+
+
   const UserSelect = () => 
     <div className=' h-full w-full flex justify-center '>
-        <div className='h-full w-10/12 flex flex-col items-center border-4 '>
-          <div className='p-2 text-3xl'>
-            Select a pre created account to go through the features easily
+        <div className='h-full w-10/12 flex flex-col items-center'>
+          <div className='p-2 text-3xl mt-8'>
+            Welcome, Select a pre created account to go through the features easily!
           </div>
-          <div className='flex mt-4'
+          <div className='flex flex-col items-center mt-4'
           >
-         {StudentUsersSelection}
+            <div>
+            USER ACCOUNTS
           </div>
 
-          <div>
-            TEACHER
+          <div className='flex'>
+          {StudentUsersSelection}
           </div>
+    
+          </div>
+
+          <div className='flex flex-col items-center mt-4'
+          >    
+          <div>
+            TEACHER ACCOUNTS
+          </div>
+          <div className='flex'>
+          {TeacherUsersSelection}
+          </div>
+      
+          </div>
+
+          <div onClick={() => logininUser()}>
+                Login
+              </div>
+
         </div>
     </div>
   
@@ -192,9 +232,7 @@ const StudentUsersSelection = studentUsers.map(item => (
         </motion.div>
 
               <UserSelect/>
-              <div onClick={() => logininUser()}>
-                Login
-              </div>
+              
       </div>
 
 

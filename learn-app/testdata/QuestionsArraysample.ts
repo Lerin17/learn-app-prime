@@ -167,5 +167,15 @@ startDate: {
     }
   ]
 
+  export const teachersUsers = [
+    {name:'John',
+      Password:"John"
+    },
+    {
+      name:"Unity High School", 
+      Password:"UHS"
+    }
+  ]
 
-  module.exports = { products, people, questions, courses, studentUsers }
+
+  module.exports = { products, people, questions, courses, studentUsers, teachersUser }
