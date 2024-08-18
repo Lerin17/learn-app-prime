@@ -112,8 +112,11 @@ const UserContextProvider = (props:any) => {
   // Usernameinput functions as the ID, should change it
 
     const addNewUser =  () => {
+
+      const isAdmin = false
+
       setDoc(doc(databaseRef, Usernameinput) ,{name:Usernameinput, password:Userpasswordinput,
-      email:Useremailinput, id:uniqid(), networks:[], packages:[], subscribers:[], yourSubscriptions:[]}).then(() => {
+      email:Useremailinput, id:uniqid(), networks:[], packages:[], subscribers:[], yourSubscriptions:[], isAdmin}).then(() => {
       alert('Data Sent')
     }).then(async ()=>{
       const getdata = await getDoc(doc(database, 'Users', Usernameinput))
@@ -131,6 +134,7 @@ const Data:any = getdata.data()
         yourSubscriptions:[],
         allCourses:Data.allCourses,
         allCourseGroups:Data.allCourseGroups,
+        isAdmin:Data.isAdmin?false:true
         
       })
 

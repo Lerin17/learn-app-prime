@@ -38,7 +38,7 @@ export interface Iusercontext {
     setchannelDetails: React.Dispatch<React.SetStateAction<TchannelDetails | null>>
     isWaiting:boolean
     updateUserCourseData:(CourseObject:any) => void
-   
+
 
 }
 
@@ -113,4 +113,5 @@ export interface Iuserdata {
     id:string
     allCourses:Icourseobject[] 
     allCourseGroups:IcourseGroupObject[]
+    isAdmin?:boolean
 }

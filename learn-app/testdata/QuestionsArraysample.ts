@@ -178,4 +178,4 @@ startDate: {
   ]
 
 
-  module.exports = { products, people, questions, courses, studentUsers, teachersUser }
+  module.exports = { products, people, questions, courses, studentUsers, teachersUsers }

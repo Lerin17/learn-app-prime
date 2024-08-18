@@ -54,8 +54,10 @@ const DuttonAlt = (props:duttonProps) => {
     >
          <div 
  
-
-     className={`flex text-center text-stone-300 items-center  lg:text-2xl md:text-xl text-xs hover:bg-stone-300  py-1  text-gray-300 ${props.noPadding?'':'px-1'}  cursor-pointer font-header12 hover:text-stone-800 transition-all`}>
+      style={{
+        color:props.color? 'black':''
+      }}
+     className={`flex text-center text-stone-300 items-center  lg:text-2xl md:text-xl text-xs hover:bg-stone-300  py-1  text-gray-300  ${props.noPadding?'':'px-1'}   font-header12 hover:text-stone-800 transition-all`}>
       <span className='font-header9 text-stone-300' >
         [
       </span>

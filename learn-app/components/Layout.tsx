@@ -16,6 +16,7 @@ import { Icoursecontext } from '../types/context/coursecontext'
 import { useRouter } from 'next/router'
 
 import { studentUsers, teachersUsers } from '../testdata/QuestionsArraysample';
+import { DuttonAlt } from './GeneralPurpose/dutton'
 
 
 export const Layout = (prop:any) => {
@@ -146,7 +147,7 @@ const {isUserStudent, userData,  setUsernameinput, setUserpasswordinput, loginin
 
 const StudentUsersSelection = studentUsers.map(item => (
   <div
-  className={`p-2 m-2 bg-white flex flex-col items-center ${item.name == Usernameinput?'border-black border-2':'' }`}
+  className={`transition-all ${item.name == Usernameinput?'border-black border-2':'' } p-2 m-2 bg-white flex flex-col items-center `}
   onClick={() => {
     setUsernameinput(item.name)
     setUserpasswordinput(item.Password)
@@ -185,7 +186,7 @@ teachersUsers.map(item => (
 
   const UserSelect = () => 
     <div className=' h-full w-full flex justify-center '>
-        <div className='h-full w-10/12 flex flex-col items-center'>
+        <div className='h-full w-10/12 select-none flex flex-col items-center'>
           <div className='p-2 text-3xl mt-8'>
             Welcome, Select a pre created account to go through the features easily!
           </div>
@@ -212,16 +213,22 @@ teachersUsers.map(item => (
       
           </div>
 
-          <div onClick={() => logininUser()}>
+          <DuttonAlt
+          icon={'Login'}
+          handleClick={() => logininUser()}
+          color='black'
+          />
+
+          {/* <div className='mt-4' onClick={() => logininUser()}>
                 Login
-              </div>
+              </div> */}
 
         </div>
     </div>
   
 
   // console.log(haloLocation, 'haloLocation')
-  if('rxr'){
+  if(''){
     return (
       <div className=' paperwhite border h-screen'>
           <motion.div

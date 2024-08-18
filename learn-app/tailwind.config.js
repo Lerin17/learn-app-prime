@@ -1,73 +1,37 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ["class"],
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
+  prefix: "",
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
-      fontFamily: {
-        header1: 'Chakra Petch',
-        header2: 'UPHEAVAL',
-        header3: 'ALDO',
-        header4: 'PLA',
-        header5: 'NEM',
-        header6: 'CHA',
-        header7:'OBO-B',
-        header8:'OBO-L',
-        header9:'OBO-N',
-        header10:'LEMON',
-        header11:'HOUSE',
-        header12:'SATOSHI'
-        // 'NUE'
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
       },
       animation: {
-        "slideDown": "fadeSlideDown .4s ease-in-out",
-        "slideAcross": "fadeLeftToRight 2s ease-in-out infinite",
-        "slideAcrossLg": "fadeLeftToRightLg 2s ease-in-out infinite",
-        "slideAcrossMd": "fadeLeftToRightMd 2s ease-in-out infinite",
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
-
-      keyframes: (theme) => ({
-        'fadeOut': {
-          "0%": { transform: "translateX(-100%)"},
-          "100%": {   transform: "translateX(0)" },
-        },
-        "fadeSlideDown": {
-          "0%": { transform: "translateY(-100%)",
-          opacity: '30%'
-          },
-          "100%": {   transform: "translateY(0)" ,
-          opacity: '100%'
-          },
-        },
-        "fadeLeftToRight": {
-          "0%": { transform: "translateX(0)",
-          opacity: '0%'
-          },
-          "100%": {   transform: "translateX(-350px)" ,
-          opacity: '60%'
-          },
-        },
-        "fadeLeftToRightMd": {
-          "0%": { transform: "translateX(0)",
-          opacity: '0%'
-          },
-          "100%": {   transform: "translateX(-450px)" ,
-          opacity: '60%'
-          },
-        },
-        "fadeLeftToRightLg": {
-          "0%": { transform: "translateX(0)",
-          opacity: '0%'
-          },
-          "100%": {   transform: "translateX(-650px)" ,
-          opacity: '60%'
-          },
-        }
-        
-      }),
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 }
