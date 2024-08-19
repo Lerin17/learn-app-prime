@@ -18,8 +18,14 @@ import { useRouter } from 'next/router'
 import { studentUsers, teachersUsers } from '../testdata/QuestionsArraysample';
 import { DuttonAlt } from './GeneralPurpose/dutton'
 
+import { Label } from '../@/shadowComponents/ui/label'
+import { Switch } from '../@/shadowComponents/ui/switch'
+
+
 
 export const Layout = (prop:any) => {
+
+
 
   // console.log(useRouter().asPath, 'as path')
 
@@ -256,7 +262,7 @@ teachersUsers.map(item => (
         // backgroundImage: "radial-gradient(at 77% 92%, rgb(34, 197, 94) 0, transparent 58%), radial-gradient(at 12% 12%, rgb(22, 101, 52) 0, transparent 71%), radial-gradient(at 36% 8%, rgb(22, 78, 99) 0, transparent 55%), radial-gradient(at 60% 68%, rgb(196, 181, 253) 0, transparent 93%), radial-gradient(at 67% 36%, rgb(132, 204, 22) 0, transparent 8%), radial-gradient(at 34% 34%, rgb(196, 181, 253) 0, transparent 50%)"
       
       }}
-       className={`lg:h-screen md:h-screen  h-full bg-amber-800 ${backgroundstyle} relative`} >
+       className={`lg:h-screen md:h-screen font-inter h-full bg-amber-800 ${backgroundstyle} relative`} >
   
   
         <motion.div

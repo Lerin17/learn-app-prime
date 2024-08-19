@@ -13,6 +13,8 @@ export interface Iusercontext {
      setUseremailinput:React.Dispatch<React.SetStateAction<string>>
      Usernameinput:string
     setUsernameinput:React.Dispatch<React.SetStateAction<string>>
+    isUserAdminInput:boolean
+    setisUserAdminInput: React.Dispatch<React.SetStateAction<boolean>>
     // notfication:Tnotification
     isPackagesPage:boolean
     setisPackagesPage: React.Dispatch<React.SetStateAction<boolean>>

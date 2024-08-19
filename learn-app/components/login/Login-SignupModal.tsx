@@ -4,12 +4,17 @@ import { Iusercontext } from '../../types/context/usercontext'
 import { DuttonAlt } from '../GeneralPurpose/dutton'
 import ProfilePage from './Login/ProfilePage'
 
+import { Label } from '../../@/shadowComponents/ui/label'
+import { Slider } from '../../@/shadowComponents/ui/slider'
+
+import { Switch } from '@mui/material'
 
 
 
 const Login = () => {
 
-  const {userData, setuserData, addNewUser, Useremailinput, Usernameinput, Userpasswordinput, setUseremailinput, setUserpasswordinput, setUsernameinput, notfication,  logininUser} = React.useContext(UserContext) as Iusercontext
+  const {userData, setuserData, addNewUser, Useremailinput, Usernameinput, Userpasswordinput, setUseremailinput, setUserpasswordinput, setUsernameinput, notfication,  logininUser,isUserAdminInput,
+    setisUserAdminInput} = React.useContext(UserContext) as Iusercontext
 
   const [hashedPass, sethashedPass] = React.useState<any>('');
 
@@ -106,6 +111,7 @@ const Login = () => {
         <div className='text-2xl px-1'>
           or
         </div>
+
         <div className={`${!isLoginModal?'border-b-4':''}`} >
           <DuttonAlt
           handleClick={()=>setisLoginModal(false)}
@@ -158,18 +164,42 @@ const Login = () => {
   </div>
 </div>
   
-  {!isLoginModal && <div className='flex  text-7xl border-b-2'>
-  Email
-  <div className='w-full'>
-    <input
-      value={Useremailinput}
-     onChange={(e)=>{
-      setUseremailinput(e.target.value)
-    }}
-    className='w-full focus:border-none focus:text-stone-800 transition-all text-stone-400 bg-transparent border-b-4 pl-4'
-    />
+  {!isLoginModal &&
+  
+  <div>
+     <div className='flex  text-7xl border-b-2'>
+        Email
+        <div className='w-full'>
+          <input
+            value={Useremailinput}
+          onChange={(e)=>{
+            setUseremailinput(e.target.value)
+          }}
+          className='w-full focus:border-none focus:text-stone-800 transition-all text-stone-400 bg-transparent border-b-4 pl-4'
+          />
+        </div>
+</div>
+
+
+<div className='flex text-7xl items-center'>
+
+  Student
+
+<div className='pl-4 scale-150'>
+
+<Switch
+checked = {isUserAdminInput}
+onChange={() => setisUserAdminInput(prev => !prev)}
+size='medium'
+/>
+</div>
+
+
+</div>
+
   </div>
-</div>}
+ 
+}
 
 </div>
   </div>
@@ -186,7 +216,10 @@ const Login = () => {
 
 }
 <div>
-{!userData.name && 
+
+
+  <div className='mt-4'>
+  {!userData.name && 
  <DuttonAlt
  icon={'Submit'}
  handleClick={isLoginModal?     
@@ -194,6 +227,8 @@ const Login = () => {
 }
  />
 }
+  </div>
+
  
   {/* {userData.name?
   <div>

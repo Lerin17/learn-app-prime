@@ -36,6 +36,8 @@ const UserContextProvider = (props:any) => {
 
     const [Useremailinput, setUseremailinput] = React.useState('');
 
+    const [isUserAdminInput, setisUserAdminInput] = React.useState(false);
+
     const [subscribeLinkInput, setsubscribeLinkInput] = React.useState<string>('');
 
     const [channelDetails, setchannelDetails] = React.useState<null | TchannelDetails>(null);
@@ -649,7 +651,8 @@ if(Data.name){
 
   return (
     <UserContext.Provider value={{
-        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput,  logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeLinkInput, setsubscribeLinkInput,searchForNetwork, channelDetails, setchannelDetails, isWaiting, updateUserCourseData
+        isUserStudent, setisUserStudent, addNewUser, isLoginPage, setisLoginPage, userData, setuserData, Userpasswordinput, setUserpasswordinput, Useremailinput, setUseremailinput, Usernameinput, setUsernameinput,  logininUser, isPackagesPage, setisPackagesPage, isCreatePackage, setisCreatePackage,userPackagesArray, setuserPackagesArray,currentUserPackage, setcurrentUserPackage, saveUserPackage, clearUserPackage,isNetworkPage, setisNetworkPage,isSubscriberList, setisSubscriberList, copyUserLink,subscribeLinkInput, setsubscribeLinkInput,searchForNetwork, channelDetails, setchannelDetails, isWaiting, updateUserCourseData,  isUserAdminInput,
+        setisUserAdminInput
     }} >
         {props.children}
     </UserContext.Provider>

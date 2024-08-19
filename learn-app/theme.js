@@ -1,18 +1,18 @@
 import { createTheme } from "@mui/material";
 import { blue } from "@mui/material/colors";
-import { withThemeCreator } from "@mui/styles";
+import { red } from '@mui/material/colors';
+// import { ThemeProvider, createTheme } from '@mui/material/styles';
+
 
 const theme = createTheme({
     palette: {
-        primary: {
-         main: blue[300]}
-    
+      primary: {
+        main: "#d6d3d1",
+      },
+      secondary:{
+        main: "#a3a3a3"
+      }
     },
-    myButton: {
-        background: 'red',
-        color: 'white',
-        border: '1px solid black'
-    }
-})
+  });
 
 export default theme

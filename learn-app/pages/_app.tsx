@@ -17,13 +17,20 @@ import { useRouter } from 'next/router'
 import { DndContext } from '@dnd-kit/core'
 
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+
+
+
+
 function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter().asPath
 
   return (
     
-         <UtilityContextProvider>
+    <ThemeProvider theme={theme}>
+                 <UtilityContextProvider>
       <UserContextProvider>
       <CourseContextProvider>
       <AssesmentContextProvider>
@@ -46,6 +53,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       </CourseContextProvider>
       </UserContextProvider>
       </UtilityContextProvider>
+    </ThemeProvider>
+
 
 
     
