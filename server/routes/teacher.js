@@ -18,9 +18,6 @@ router.post('/api/broadcast', async (req, res) => {
     console.log(error, 'error')
    }
 
-  
-   
-
   //  const peer = new wrtc.RTCPeerConnection(configuration)
 
 
@@ -52,8 +49,6 @@ router.post('/api/broadcast', async (req, res) => {
   //  res.json({answer, candidates})
 
   res.json(answer)
-
-
 } )
 
 

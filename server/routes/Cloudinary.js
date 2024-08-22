@@ -1,10 +1,11 @@
 // const express = require('express')
 // const product = require('../models/product')
 const router  = express.Router()
+import { v2 as cloudinary } from 'cloudinary'
 
 // const wrtc = require('wrtc')
 
-router.post('/api.cloudinary.com/v1_1/{{cloud_name}}/:resource_type/upload', async (req, res) => {
+router.post('/api.cloudinary.com/v1_1/dxjys4qpi/:resource_type/upload', async (req, res) => {
 
   const configuration = {'iceServers': [{'urls': 'turn:numb.viagenie.ca',
   'credential': 'muazkh',
@@ -13,7 +14,11 @@ router.post('/api.cloudinary.com/v1_1/{{cloud_name}}/:resource_type/upload', asy
    answer = 'john'
 
    try {
-    console.log(req.body, 'on gang')
+    cloudinary.uploader.upload(req.body.file, {
+      resource_type: req.params.resource_type
+    }).then(result => {
+      res.json({result})
+    })
    } catch (error) {
     console.log(error, 'error')
    }
